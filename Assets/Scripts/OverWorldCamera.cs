@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class OverWorldCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float zoomSize = 5;
 
     // Update is called once per frame
     void Update()
     {
-        
+        // get values if WASD was pressed in any way
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        // move the camera
+        if (Camera.current != null){
+            Camera.current.transform.Translate(new Vector3(x * 0.2f, y * 0.1f, 0.0f));
+        }
+
+        // adjusting zoom
+        // zoom in
+        if (Input.GetAxis("Mouse ScrollWheel") > 0){
+            if (zoomSize > 3){
+                zoomSize -= 1;
+            }
+        }
+        // zoom out
+        if (Input.GetAxis("Mouse ScrollWheel") < 0){
+            if (zoomSize < 15){
+                zoomSize += 1;
+            }
+        }
+        GetComponent<Camera>().orthographicSize = zoomSize;
     }
 }
