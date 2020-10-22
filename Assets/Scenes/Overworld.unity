@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 463770592}
   - component: {fileID: 463770591}
   - component: {fileID: 463770590}
+  - component: {fileID: 463770593}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -324,6 +325,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &463770593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463770589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56455e9421097d498752b32cb62e5a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044832877
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575612436}
+  - component: {fileID: 1575612437}
   m_Layer: 0
   m_Name: Generation
   m_TagString: Untagged
@@ -519,6 +533,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1575612437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575612435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d1027d62d5ec445990ec098afb8c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desertMap: {fileID: 2141299101}
+  desertTile: {fileID: 11400000, guid: 7a1b55f55d7b5bd4899558b1d5cecf5b, type: 2}
+  oasisMap: {fileID: 280809717}
+  oasisTile: {fileID: 11400000, guid: dd86c241183abdd4eb99854642294f8a, type: 2}
+  pyramidMap: {fileID: 1480087903}
+  pyramidTile: {fileID: 11400000, guid: dfef05d6221c4a04d841e04e41abf0ed, type: 2}
+  ruinsMap: {fileID: 1877889692}
+  ruins1Tile: {fileID: 11400000, guid: 9d4f2cc6db48ee04bb0642d61e9a0679, type: 2}
+  ruins2Tile: {fileID: 11400000, guid: 7b533ae1f9d04654badbdf837dcc72ae, type: 2}
+  ruins3Tile: {fileID: 11400000, guid: ba38254911ea0cb49b1f35b466f805b9, type: 2}
+  ruins4Tile: {fileID: 11400000, guid: 72dc5af5706a3554ba60a6a9bf151226, type: 2}
+  ruins5Tile: {fileID: 11400000, guid: d042b16aee56e8841bed472af2ae463d, type: 2}
 --- !u!1 &1877889689
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,8 +744,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -603776833
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

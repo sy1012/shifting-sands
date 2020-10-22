@@ -22,9 +22,13 @@ public class OverworldGeneration : MonoBehaviour
     // tile for pyramid
     public Tilemap pyramidMap;
     public Tile pyramidTile;
-    // tile for ruins
+    // tiles for ruins
     public Tilemap ruinsMap;
-    public Tile ruinsTile;
+    public Tile ruins1Tile;
+    public Tile ruins2Tile;
+    public Tile ruins3Tile;
+    public Tile ruins4Tile;
+    public Tile ruins5Tile;
 
     // size of grid, and whole overworld
     // for now 100x100
@@ -47,9 +51,6 @@ public class OverworldGeneration : MonoBehaviour
             // for every column
             for (int col = 0; col < width; col++)
             {
-                // create desrt tile for every position
-                desertMap.SetTile(new Vector3Int(-col + width / 2,
-                 -row + height / 2, 0), desertTile);
                 // center of the grid is the starting oasis
                 if (row == height / 2 && col == width / 2)
                 {
@@ -76,12 +77,44 @@ public class OverworldGeneration : MonoBehaviour
                         // ruins
                         else
                         {
-                            // create ruins tile at this position
-                            ruinsMap.SetTile(new Vector3Int(-col + width / 2,
-                             -row + height / 2, 0), ruinsTile);
+                            // decide which ruins tile to use
+                            int ruinsChoice = Random.Range(0,5);
+
+                            if (ruinsChoice == 0)
+                            {
+                                // generate ruins tile 1
+                                ruinsMap.SetTile(new Vector3Int(-col + width / 2,
+                                -row + height / 2, 0), ruins1Tile);
+                            }
+                            else if (ruinsChoice == 1){
+                                // generate ruins tile 2
+                                ruinsMap.SetTile(new Vector3Int(-col + width / 2,
+                                -row + height / 2, 0), ruins2Tile);
+                            }
+                            else if (ruinsChoice == 2)
+                            {
+                                // generate ruins tile 3
+                                ruinsMap.SetTile(new Vector3Int(-col + width / 2,
+                                -row + height / 2, 0), ruins3Tile);
+                            }
+                            else if (ruinsChoice == 3)
+                            {
+                                // generate ruins tile 4
+                                ruinsMap.SetTile(new Vector3Int(-col + width / 2,
+                                -row + height / 2, 0), ruins4Tile);
+                            }
+                            else
+                            {
+                                // generate ruins tile 5
+                                ruinsMap.SetTile(new Vector3Int(-col + width / 2,
+                                -row + height / 2, 0), ruins5Tile);
+                            }
                         }
                     }
                 }
+                // create desrt tile for every position
+                desertMap.SetTile(new Vector3Int(-col + width / 2,
+                -row + height / 2, 0), desertTile);
             }
         }
     }
