@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Character
 {
 
     public float moveSpeed = 5.0f;
@@ -14,18 +14,51 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     Vector2 movement;
     public Transform player;
-    public bool isDashButtonDown;
-    public float playerRootOfset = -0.5f;
+    private bool isDashButtonDown;
+    private bool isAttacking;
+    private bool itemDisplayed;
+    GameObject text;
+    GameObject background;
+    public float playerRootOffset = -0.5f;
+    public Weapon weaponEquiped;
 
+    private void Start()
+    {
+        itemDisplayed = false;
+        //move healthbar to a more suitable position
+        healthCanvas.transform.position = transform.position + new Vector3(0, 1f, 0);
+        dashLayerMask.value = 10;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            pickUp();
+        }
+
+        if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
+        {
+            (text, background) = DungeonMaster.getLootInRange(this.transform.position, 1)[0].GetComponent<Weapon>().Info();
+            text.transform.position = this.transform.position + new Vector3(0, 2, 0);
+            background.transform.position = this.transform.position + new Vector3(0, 2, 0);
+        }
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         // Movement Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        
+        // Make sure it hasnt died
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
 
         // Close Application on pressing "Escape"
         if (Input.GetKey("escape"))
@@ -44,6 +77,11 @@ public class PlayerMovement : MonoBehaviour
             isDashButtonDown = true;
         }
 
+        // Swing Key press
+        if (Input.GetMouseButtonDown(0))
+        {
+            isAttacking = true;
+        }
     }
 
     void FixedUpdate()
@@ -51,6 +89,11 @@ public class PlayerMovement : MonoBehaviour
         // Movement
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
+        // Move the weapon
+        if (weaponEquiped != null)
+        {
+            weaponEquiped.transform.position = this.transform.position;
+        }
 
         // Dash
         if (isDashButtonDown == true)
@@ -63,20 +106,51 @@ public class PlayerMovement : MonoBehaviour
             if (raycastHit2d.collider != null)
             {
                 dashPosition = raycastHit2d.point;
-                dashPosition = new Vector2(dashPosition.x, dashPosition.y - playerRootOfset);
-                Debug.Log(dashPosition - player.position);
+                dashPosition = new Vector2(dashPosition.x, dashPosition.y - playerRootOffset);
             }
 
             // transform.position = dashPosition;
             rb.MovePosition(dashPosition);
             isDashButtonDown = false;
         }
+
+        // attack
+        if (isAttacking && weaponEquiped != null)
+        {
+            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float angle = Mathf.Rad2Deg * Mathf.Atan((this.transform.position.y - mouse.y) / (this.transform.position.x - mouse.x));
+
+            // now convert the angle into a degrees cw of up(north) based on the current value of direction and what quadrant it is in
+            // quadrant 1
+            if (mouse.y >= this.transform.position.y && mouse.x >= this.transform.position.x) angle -= 90;
+
+            // quadrant 2
+            else if (mouse.y >= this.transform.position.y) angle += 90;
+
+            // quadrant 3
+            else if (mouse.x <= this.transform.position.x) angle += 90;
+
+            // quadrant 4
+            else angle -= 90;
+            weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
+            weaponEquiped.Attack();
+            isAttacking = false;
+        }
  
     }
 
     public Vector2 GetRoot()
     {
-        return new Vector2(transform.position.x, transform.position.y + playerRootOfset);
+        return new Vector2(transform.position.x, transform.position.y + playerRootOffset);
     }
 
+    private void pickUp()
+    {
+        List<GameObject> items = DungeonMaster.getLootInRange(this.transform.position, 1);
+        foreach (GameObject item in items)
+        {
+            DungeonMaster.loot.Remove(item);
+            Destroy(item);
+        }
+    }
 }

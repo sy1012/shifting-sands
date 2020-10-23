@@ -6,62 +6,30 @@ using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 //base enemy class
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    public int maxHealth = 100;
-    public int health;
-    public bool isMousedOver = false;
-    
-    //below are used to instantiate and manage the healthbar
-    public Canvas healthCanvasPrefab;
-    protected Canvas healthCanvas;
-    private Healthbar healthbar;
-    Camera cam;
-    RaycastHit2D[] hits;
-
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        healthCanvas = Instantiate(healthCanvasPrefab, transform.position, transform.rotation, gameObject.transform);
-        healthCanvas.sortingLayerName = "UI";
-        health = maxHealth;
-        healthbar = healthCanvas.GetComponentInChildren<Healthbar>();
-        healthbar.SetMaxHealth(maxHealth);
-        cam = Camera.main;
-    }
+    public int damage; // any Enemy inheriting this class should set these two values themselves
+    public float damageSpeed; // note this is per second
+    public float cooldown = 0;
 
     // Update is called once per frame
     void Update()
     {
         if (health <= 0)
-		{
+        {
             Destroy(gameObject);
-		}
-
-        //raycast from mouse to see if it is over the enemy - must use raycast to be able to detect when under a different collider
-        isMousedOver = false;
-        hits = Physics2D.RaycastAll(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        foreach(RaycastHit2D hit in hits)
-		{
-            if (hit.collider.name == name)
-            {
-                isMousedOver = true;
-                break;
-            }
-            else
-            {
-                isMousedOver = false;
-            }
+            LootGenerator.current.generate(this.transform.position);
         }
-		
 
+        if (cooldown >= 0) { cooldown -= Time.deltaTime; }
     }
 
-    public void TakeDamage(int damage)
+    public void OnCollisionStay2D(Collision2D collision)
     {
-        health -= damage;
-        healthbar.SetHealth(health);
+        if (collision.collider.gameObject.name == "Player" && cooldown <= 0)
+        {
+            cooldown = damageSpeed;
+            collision.collider.gameObject.GetComponent<PlayerMovement>().TakeDamage(damage);
+        }
     }
-
 }

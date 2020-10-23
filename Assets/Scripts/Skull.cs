@@ -8,6 +8,8 @@ public class Skull : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        damageSpeed = 1;
+        damage = 3;
         //move healthbar to a more suitable position
         healthCanvas.transform.position = transform.position + new Vector3(0, 0.9f, 0);
     }
