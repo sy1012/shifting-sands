@@ -30,7 +30,7 @@ public class RoomGenerator : MonoBehaviour
         }
         for(int i = doors.Count - 1; i >= 0; i--)
         {
-            doors[i].DestroyDoor();
+            Destroy(doors[i].gameObject);
         }
         if (doorHolder!=null)
         {
@@ -124,7 +124,9 @@ public class RoomGenerator : MonoBehaviour
 
     public void MakeDoor(NodeComponent nodeA, NodeComponent nodeB)
     {
-        Door newDoor = new Door(nodeA, nodeB);
+        GameObject newDoorGO = new GameObject("Door: " + nodeA.name + "-" + nodeB.name);
+        Door newDoor = newDoorGO.AddComponent<Door>();
+        newDoor.Initialize(nodeA, nodeB);
         doors.Add(newDoor);
     }
 

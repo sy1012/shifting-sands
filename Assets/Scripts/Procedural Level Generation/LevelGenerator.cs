@@ -59,10 +59,6 @@ public class LevelGenerator : MonoBehaviour
                 roomGenerator.MoveRoomsToNodes();
                 rooms = roomGenerator.rooms;
                 doors = roomGenerator.doors;
-                foreach (var door in doors)
-                {
-                    door.EnableRenderLines();
-                }
             }
         }
     }

@@ -4,34 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Door
+public class Door:MonoBehaviour
 {
     //doorA and B have to be 2 different transforms because the same door exists in 2 different prefab rooms
     private Transform doorA;
     private Transform doorB;
     private NodeComponent nodeA;
     private NodeComponent nodeB;
-    private DoorComponent dc;
-    private Transform dcTransform;
+    private LineRenderer lr;
+
     // Heading of a door by node is the direction one must walk through the door to end up at the other node
     private Dictionary<NodeComponent,char> DoorHeadingByNode;
 
-    public Door(NodeComponent NodeA, NodeComponent NodeB)
+    public void Initialize(NodeComponent NodeA, NodeComponent NodeB)
     {
         nodeA = NodeA;
         nodeB = NodeB;
-        dcTransform = new GameObject("Door: " + nodeA.name + "-" + nodeB.name).transform;
-        dcTransform.gameObject.AddComponent<DoorComponent>();
-        dc = dcTransform.GetComponent<DoorComponent>();
-        dc.SetDoor(this);
         DoorHeadingByNode = new Dictionary<NodeComponent, char>();
         FindDoorHeadings();
         //Debug.Log(nodeA.name + ": " + GetDoorHeadingByNode(nodeA) + "|-door-| " + GetDoorHeadingByNode(nodeB)+":"+ nodeB.name);
     }
+
     public Transform[] GetDoorTransforms()
     {
         return new Transform[] { doorA, doorB };
     }
+
     public NodeComponent GetNeighbourNodeOfDoorFor(NodeComponent node)
     {
         if (node == nodeA)
@@ -63,14 +61,14 @@ public class Door
     {
         if (!DoorHeadingByNode.ContainsKey(node))
         {
-            throw new ArgumentException("Given node: " + node.name +" was not related to this door:" + dcTransform.name);
+            throw new ArgumentException("Given node: " + node.name +" was not related to this door:" + transform.name);
         }
         return DoorHeadingByNode[node];
     }
 
     public void SetParent(Transform doorHolder)
     {
-        dcTransform.SetParent(doorHolder);
+        transform.SetParent(doorHolder);
     }
 
     private void FindDoorHeadings()
@@ -114,12 +112,37 @@ public class Door
             doorB = transform;
         }
     }
-    public void EnableRenderLines()
+
+    public void SetUpLineRenderer()
     {
-        dc.SetUpLineRenderer();
+        var templatesLR = FindObjectsOfType<LineRenderer>();
+        LineRenderer template = null;
+        foreach (var lr in templatesLR)
+        {
+            //Template could be null if someone renames this
+            if (lr.name == "DoorLineRenderer")
+            {
+                template = lr;
+            }
+        }
+        lr = gameObject.AddComponent<LineRenderer>();
+        lr.SetPosition(0, transform.position);
+        Transform[] doorTr = GetDoorTransforms();
+        lr.SetPosition(0, doorTr[0].transform.position);
+        lr.SetPosition(1, doorTr[1].transform.position);
+        lr.material = template.material;
+        lr.startColor = Color.cyan;
+        lr.endColor = Color.cyan;
+        lr.startWidth = 0.35f;
+        lr.endWidth = 0.35f;
     }
-    public void DestroyDoor()
+
+    public void Update()
     {
-        dc.DestroyDoor();
+        if (doorA!=null && doorB!=null && lr==null)
+        {
+            SetUpLineRenderer();
+        }
     }
+
 }
