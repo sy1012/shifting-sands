@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverWorldCamera : MonoBehaviour
 {
-    float zoomSize = 1;
+    float zoomSize = 2;
 
     // Update is called once per frame
     void Update()
@@ -14,13 +14,13 @@ public class OverWorldCamera : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         // move the camera
         if (Camera.current != null){
-            Camera.current.transform.Translate(new Vector3(x * 0.2f, y * 0.1f, 0.0f));
+            Camera.current.transform.Translate(new Vector3(x * 0.1f, y * 0.05f, 0.0f));
         }
 
         // adjusting zoom
         // zoom in
         if (Input.GetAxis("Mouse ScrollWheel") > 0){
-            if (zoomSize > 1){
+            if (zoomSize > 2){
                 zoomSize -= 1;
             }
         }

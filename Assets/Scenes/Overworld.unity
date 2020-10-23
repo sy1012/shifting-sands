@@ -557,6 +557,61 @@ MonoBehaviour:
   ruins3Tile: {fileID: 11400000, guid: ba38254911ea0cb49b1f35b466f805b9, type: 2}
   ruins4Tile: {fileID: 11400000, guid: 72dc5af5706a3554ba60a6a9bf151226, type: 2}
   ruins5Tile: {fileID: 11400000, guid: d042b16aee56e8841bed472af2ae463d, type: 2}
+--- !u!1 &1729411069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729411070}
+  - component: {fileID: 1729411071}
+  m_Layer: 0
+  m_Name: OverWorld Interaction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1729411070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729411069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1729411071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729411069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a4f86acd1d4de4eae01555fcf9f48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pyramidMap: {fileID: 1480087903}
+  oasisMap: {fileID: 280809717}
+  desertMap: {fileID: 2141299101}
+  ruinsMap: {fileID: 1877889692}
+  pyramidTile: {fileID: 11400000, guid: dfef05d6221c4a04d841e04e41abf0ed, type: 2}
+  oasisTile: {fileID: 11400000, guid: dd86c241183abdd4eb99854642294f8a, type: 2}
+  desertTile: {fileID: 11400000, guid: 7a1b55f55d7b5bd4899558b1d5cecf5b, type: 2}
+  ruins1Tile: {fileID: 11400000, guid: 9d4f2cc6db48ee04bb0642d61e9a0679, type: 2}
+  ruins2Tile: {fileID: 11400000, guid: 7b533ae1f9d04654badbdf837dcc72ae, type: 2}
+  ruins3Tile: {fileID: 11400000, guid: ba38254911ea0cb49b1f35b466f805b9, type: 2}
+  ruins4Tile: {fileID: 11400000, guid: 72dc5af5706a3554ba60a6a9bf151226, type: 2}
+  ruins5Tile: {fileID: 11400000, guid: d042b16aee56e8841bed472af2ae463d, type: 2}
 --- !u!1 &1877889689
 GameObject:
   m_ObjectHideFlags: 0
