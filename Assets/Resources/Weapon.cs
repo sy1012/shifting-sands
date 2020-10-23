@@ -64,8 +64,8 @@ public class Weapon : MonoBehaviour
         this.text.fontSize = 4;
         this.text.color = Color.black;
         this.text.alignment = TextAlignmentOptions.Midline;
-        this.text.sortingOrder = 4;
-        this.background.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        this.text.sortingOrder = 11;
+        this.background.GetComponent<SpriteRenderer>().sortingOrder = 11;
 
         // set up the SpriteRenderer and BoxCollider2d
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
@@ -119,5 +119,13 @@ public class Weapon : MonoBehaviour
         text.gameObject.SetActive(true);
         background.SetActive(true);
         return (text.gameObject, background);
+    }
+
+    public void DestroyInfo()
+    {
+        if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
+        else initialized = true;
+        text.gameObject.SetActive(false);
+        background.SetActive(false);
     }
 }
