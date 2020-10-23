@@ -16,16 +16,19 @@ public class Enemy : MonoBehaviour
     public Canvas healthCanvasPrefab;
     protected Canvas healthCanvas;
     private Healthbar healthbar;
+    Camera cam;
+    RaycastHit2D[] hits;
 
-    
 
     // Start is called before the first frame update
     void Awake()
     {
         healthCanvas = Instantiate(healthCanvasPrefab, transform.position, transform.rotation, gameObject.transform);
+        healthCanvas.sortingLayerName = "UI";
         health = maxHealth;
         healthbar = healthCanvas.GetComponentInChildren<Healthbar>();
         healthbar.SetMaxHealth(maxHealth);
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -36,6 +39,23 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
 		}
 
+        //raycast from mouse to see if it is over the enemy - must use raycast to be able to detect when under a different collider
+        isMousedOver = false;
+        hits = Physics2D.RaycastAll(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        foreach(RaycastHit2D hit in hits)
+		{
+            if (hit.collider.name == name)
+            {
+                isMousedOver = true;
+                break;
+            }
+            else
+            {
+                isMousedOver = false;
+            }
+        }
+		
+
     }
 
     public void TakeDamage(int damage)
@@ -44,23 +64,4 @@ public class Enemy : MonoBehaviour
         healthbar.SetHealth(health);
     }
 
-    private void OnMouseDown()
-    {
-        /* For testing healthbar
-        if (Input.GetMouseButtonDown(0))
-        {
-            TakeDamage(10);
-        }
-        */
-    }
-
-    private void OnMouseOver()
-	{
-        isMousedOver = true;  
-	}
-
-	private void OnMouseExit()
-	{
-        isMousedOver = false;
-	}
 }
