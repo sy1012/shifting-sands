@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d55c0ed7c9584c49a9632c9fb4dcddd, type: 3}
+  m_Name: LargeFloor
+  m_EditorClassIdentifier: 
+  instructions:
+  - 3
+  - 1
+  - ???
+  - 2
+  - ???
+  - ???
+  rules:
+  - {fileID: 7478871445448567255, guid: c85332eecf761514ea4aaa15599283d2, type: 3}
+  - {fileID: 8457801761711774852, guid: c633c1e68e11cbd46b4d4c3ca45fe0e0, type: 3}
+  - {fileID: 8164173359518907009, guid: a9037a53b77bd4448ad68597dcfd032d, type: 3}
+  - {fileID: 1094846854199330344, guid: b02718590a5be83478c22ceb4520f3a2, type: 3}
