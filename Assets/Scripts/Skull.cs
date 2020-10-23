@@ -9,7 +9,7 @@ public class Skull : Enemy
     void Start()
     {
         //move healthbar to a more suitable position
-        healthCanvas.transform.position = transform.position + new Vector3(0, 0.9f, 0);
+        healthCanvas.transform.position = transform.position + new Vector3(0, 1.1f, 0);
     }
 
 }
