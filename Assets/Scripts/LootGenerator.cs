@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class LootGenerator
 {
+    private static WeaponData woodSword;
     private static LootGenerator _current;
     public static LootGenerator current
     {
         get
         {
-            if (_current == null) { _current = new LootGenerator(); }
+            if (_current == null) { _current = new LootGenerator(); Start(); }
             return _current;
         }
     }
 
-    // ACTUAL GENERATION WONT REQUIRE PASSING A REFERENCE TO ITEM TO GENERATE
-    public void generate(Vector2 position, ItemData item)
+    static void Start()
+    {
+        
+        woodSword = Resources.Load<WeaponData>("Weapons/WoodenTrainingSword");
+    }
+
+    public void generate(Vector2 position)
     {
         // THIS IS A MOCKUP, ACTUAL ITEM GENERATION WONT BE THIS SIMPLE
-        GameObject.Instantiate(item, position, Quaternion.identity);
+        GameObject item = new GameObject("lootDrop");
+        DungeonMaster.loot.Add(item);
+        item.AddComponent<Weapon>().data = woodSword;
+        item.transform.position = position;
     }
 }

@@ -6,61 +6,35 @@ using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 //base enemy class
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    public int maxHealth = 100;
-    public int health;
-    public bool isMousedOver = false;
-    
-    //below are used to instantiate and manage the healthbar
-    public Canvas healthCanvasPrefab;
-    protected Canvas healthCanvas;
-    private Healthbar healthbar;
-
-    
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        healthCanvas = Instantiate(healthCanvasPrefab, transform.position, transform.rotation, gameObject.transform);
-        health = maxHealth;
-        healthbar = healthCanvas.GetComponentInChildren<Healthbar>();
-        healthbar.SetMaxHealth(maxHealth);
-    }
+    public int damage; // any Enemy inheriting this class should set these two values themselves
+    public float damageSpeed; // note this is per second
+    public float cooldown = 0;
 
     // Update is called once per frame
     void Update()
     {
         if (health <= 0)
-		{
-            Destroy(gameObject);
-		}
-
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        healthbar.SetHealth(health);
-    }
-
-    private void OnMouseDown()
-    {
-        /* For testing healthbar
-        if (Input.GetMouseButtonDown(0))
         {
-            TakeDamage(10);
+            Destroy(gameObject);
         }
-        */
+
+        if (cooldown >= 0) { cooldown -= Time.deltaTime; }
     }
 
-    private void OnMouseOver()
-	{
-        isMousedOver = true;  
-	}
 
-	private void OnMouseExit()
-	{
-        isMousedOver = false;
-	}
+    public void OnDestroy()
+    {
+        LootGenerator.current.generate(this.transform.position);
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.name == "Player" && cooldown <= 0)
+        {
+            cooldown = damageSpeed;
+            collision.collider.gameObject.GetComponent<PlayerMovement>().TakeDamage(damage);
+        }
+    }
 }
