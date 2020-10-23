@@ -14,6 +14,7 @@ public class Healthbar : MonoBehaviour
     {
         canvasTransform = GetComponentInParent<RectTransform>(); //RectTransform of the UI Canvas
         character = GetComponentInParent<Character>();
+        canvasTransform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
     }
 
     public void SetMaxHealth(int health)
@@ -34,11 +35,11 @@ public class Healthbar : MonoBehaviour
         //Enlarge healthbar when enemy moused over
         if (character.isMousedOver)
         {
-            canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(1.5f, 1.5f, 1.5f), 10 * Time.deltaTime);
+            canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(0.5f, 0.5f, 0.5f), 10 * Time.deltaTime);
         }
         else
         {
-            canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(1f, 1f, 1f), 10 * Time.deltaTime);
+            canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(0.3f, 0.3f, 0.3f), 10 * Time.deltaTime);
         }
     }
 

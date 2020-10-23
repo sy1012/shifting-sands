@@ -18,15 +18,10 @@ public class Enemy : Character
         if (health <= 0)
         {
             Destroy(gameObject);
+            LootGenerator.current.generate(this.transform.position);
         }
 
         if (cooldown >= 0) { cooldown -= Time.deltaTime; }
-    }
-
-
-    public void OnDestroy()
-    {
-        LootGenerator.current.generate(this.transform.position);
     }
 
     public void OnCollisionStay2D(Collision2D collision)
