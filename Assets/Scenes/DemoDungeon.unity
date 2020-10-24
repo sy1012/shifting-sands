@@ -15774,6 +15774,7 @@ GameObject:
   - component: {fileID: 1679639070}
   - component: {fileID: 1679639069}
   - component: {fileID: 1679639068}
+  - component: {fileID: 1679639067}
   - component: {fileID: 1679639066}
   - component: {fileID: 1679639072}
   m_Layer: 8
@@ -15802,7 +15803,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1679639068
+--- !u!114 &1679639067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15810,6 +15811,26 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679639065}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064fec5e9ddf2bb4289219c77904c67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  rb: {fileID: 1679639069}
+  animator: {fileID: 1679639066}
+  playerRootOffset: -0.5
+  weaponEquiped: {fileID: 1319833418}
+  speed: 5
+--- !u!114 &1679639068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679639065}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5ec44ed895af834e8e8e0fd17f0ad6e, type: 3}
   m_Name: 

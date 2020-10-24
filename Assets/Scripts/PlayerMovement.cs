@@ -20,6 +20,8 @@ public class PlayerMovement : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public Weapon weaponEquiped;
+    KeyCode interactKey = KeyCode.E;
+    private bool isInTransition;
 
     private void Start()
     {
@@ -31,7 +33,7 @@ public class PlayerMovement : Character
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(interactKey))
         {
             pickUp();
         }
@@ -143,6 +145,15 @@ public class PlayerMovement : Character
             isAttacking = false;
         }
  
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Door>() && Input.GetKeyDown(interactKey))
+        {
+            EventManager.TriggerDoorEntered(collision.GetComponent<Door>());
+            isInTransition = true;
+        }
     }
 
     public Vector2 GetRoot()
