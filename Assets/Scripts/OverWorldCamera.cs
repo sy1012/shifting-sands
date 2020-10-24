@@ -14,7 +14,7 @@ public class OverWorldCamera : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         // move the camera
         if (Camera.current != null){
-            Camera.current.transform.Translate(new Vector3(x * 0.01f, y * 0.01f, 0.0f));
+            Camera.current.transform.Translate(new Vector3(x * 0.03f, y * 0.03f, 0.0f));
         }
 
         // adjusting zoom
