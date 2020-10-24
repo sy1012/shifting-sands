@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GraphGrammars;
+using System;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class LevelGenerator : MonoBehaviour
                 graphGenerator.StepThroughGenerateGraph(graph);
                 graphComponent.UpdateToGraph(graph);
                 SolveFDG_Recipe();
+                graphComponent.SnapToGrid();
                 roomGenerator.Refresh();
                 roomGenerator.MakeDoors();
                 roomGenerator.MakeRooms();
@@ -62,6 +64,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
     }
+
 
     private void SolveFDG_Recipe()
     {

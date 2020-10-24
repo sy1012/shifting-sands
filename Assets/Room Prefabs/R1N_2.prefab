@@ -738,7 +738,7 @@ GameObject:
   - component: {fileID: 952790763435175958}
   - component: {fileID: 6294154232749982944}
   - component: {fileID: 1014276825641833329}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: WallsAndObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 6926621804516872421}
   - component: {fileID: 6926621804516872422}
   m_Layer: 0
-  m_Name: Room1N_2
+  m_Name: R1N_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

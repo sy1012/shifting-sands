@@ -84,6 +84,16 @@ public class GraphComponent : MonoBehaviour
         }
     }
 
+    public void SnapToGrid()
+    {
+        foreach (var nc in ncList)
+        {
+            nc.transform.position = new Vector3((int)nc.transform.position.x
+                , (int)nc.transform.position.y
+                , (int)nc.transform.position.z);
+        }
+    }
+
     public void UpdateToGraph(Graph graph)
     {
         if (ncList == null)

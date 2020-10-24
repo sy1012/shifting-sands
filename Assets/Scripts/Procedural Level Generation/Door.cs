@@ -7,7 +7,9 @@ using UnityEngine;
 public class Door:MonoBehaviour
 {
     //doorA and B have to be 2 different transforms because the same door exists in 2 different prefab rooms
+    [SerializeField]
     private Transform doorA;
+    [SerializeField]
     private Transform doorB;
     private NodeComponent nodeA;
     private NodeComponent nodeB;
@@ -15,6 +17,8 @@ public class Door:MonoBehaviour
 
     // Heading of a door by node is the direction one must walk through the door to end up at the other node
     private Dictionary<NodeComponent,char> DoorHeadingByNode;
+
+    public bool renderDoorConnection;
 
     public void Initialize(NodeComponent NodeA, NodeComponent NodeB)
     {
@@ -137,11 +141,22 @@ public class Door:MonoBehaviour
         lr.endWidth = 0.35f;
     }
 
+    public void Awake()
+    {
+
+    }
     public void Update()
     {
-        if (doorA!=null && doorB!=null && lr==null)
+        if (renderDoorConnection)
         {
-            SetUpLineRenderer();
+            if (GetComponent<LineRenderer>())
+            {
+                Destroy(GetComponent<LineRenderer>());
+            }
+            if (renderDoorConnection)
+            {
+                SetUpLineRenderer();
+            }
         }
     }
 
