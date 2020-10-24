@@ -16,7 +16,6 @@ public class PlayerMovement : Character
     public Transform player;
     private bool isDashButtonDown;
     private bool isAttacking;
-    private bool itemDisplayed;
     GameObject text;
     GameObject background;
     public float playerRootOffset = -0.5f;
@@ -24,7 +23,6 @@ public class PlayerMovement : Character
 
     private void Start()
     {
-        itemDisplayed = false;
         //move healthbar to a more suitable position
         healthCanvas.transform.position = transform.position + new Vector3(0, 1f, 0);
         dashLayerMask.value = 10;
@@ -43,6 +41,14 @@ public class PlayerMovement : Character
             (text, background) = DungeonMaster.getLootInRange(this.transform.position, 1)[0].GetComponent<Weapon>().Info();
             text.transform.position = this.transform.position + new Vector3(0, 2, 0);
             background.transform.position = this.transform.position + new Vector3(0, 2, 0);
+        }
+        if (DungeonMaster.getLootOuttaRange(this.transform.position, 1).Count != 0)
+        {
+            List<GameObject> loot = DungeonMaster.getLootOuttaRange(this.transform.position, 1);
+            foreach (GameObject item in loot)
+            {
+                item.GetComponent<Weapon>().DestroyInfo();
+            }
         }
 
         if (health <= 0)
