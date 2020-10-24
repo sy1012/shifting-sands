@@ -141,7 +141,8 @@ public class RollState : State
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
-
+        var spriteRenderer = psm.transform.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.cyan/4;
         while (tick<dashTime)
         {
             Vector3 dashPosition = psm.transform.position + keyInputV3 * dashAmount/segments;
@@ -159,6 +160,7 @@ public class RollState : State
             yield return new WaitForSeconds(dashTime/segments);
             tick += dashTime / segments;
         }
+        spriteRenderer.color = new Color(255,255,255,255);
         psm.SetState(new NormalState(psm));
         yield break;
     }
