@@ -20,6 +20,7 @@ public class PlayerStateMachine : MonoBehaviour
     public StateEnum currentState;
     public float speed;
 
+    //Change state. This is used by states to change the players current state. Always call states Enter() routine. Enum is just for debugging.
     public void SetState(State newstate)
     {
         currentState = newstate.stateEnum;
@@ -33,6 +34,7 @@ public class PlayerStateMachine : MonoBehaviour
         SetState(new NormalState(this));
     }
 
+    //Try to get input from player here consistently
     public Vector2 GetArrowKeysDirectionalInput()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -40,11 +42,13 @@ public class PlayerStateMachine : MonoBehaviour
         return new Vector2(x, y).normalized;
     }
 
+
     public void MoveCharacter(Vector2 heading, float speed)
     {
         rb.MovePosition(rb.position + heading * speed * Time.fixedDeltaTime);
     }
 
+    //Apply Normal movement of the player based on arrow keys
     public void NormalMovement()
     {
         Vector2 input = GetArrowKeysDirectionalInput();
@@ -53,6 +57,7 @@ public class PlayerStateMachine : MonoBehaviour
         animator.SetFloat("Speed", input.sqrMagnitude);
         MoveCharacter(GetArrowKeysDirectionalInput(), speed);
     }
+    //Fraction of normal movement. e.g. post roll, or hit
     public void NormalMovementFraction(float fraction)
     {
         Vector2 input = GetArrowKeysDirectionalInput();
@@ -66,6 +71,8 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         //State Specific Behaviour
+
+        //Handle Input
         if (Input.GetKeyDown(interactKey))
         {
             StartCoroutine(state.Interact());
@@ -73,18 +80,20 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (Input.GetKeyDown(rollKey))
         {
-            StartCoroutine(state.Roll());
+            StartCoroutine(state.OnRoll());
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Change State to Attack");
-            StartCoroutine(state.Attack());
+            StartCoroutine(state.OnAttack());
         }
 
         state.Execute();
 
         //Global Player State Behaviour
+
+        //Handle Loot
         if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
         {
             (text, background) = DungeonMaster.getLootInRange(this.transform.position, 1)[0].GetComponent<Weapon>().Info();
@@ -101,6 +110,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
 
     }
+    // Get the world position of the characters feet, the place he is standing. This is determined by an offset from the transform center
     public Vector2 GetRoot()
     {
         return new Vector2(transform.position.x, transform.position.y + playerRootOffset);
