@@ -32,7 +32,7 @@ public class TransitionState : State
         bool atNextDoor = false;
         while (!atNextDoor)
         {
-            psm.MoveCharacter(target - psm.transform.position, 2f);
+            psm.MoveCharacter(target - psm.transform.position, 15f);
             if ((target - psm.transform.position).magnitude < 0.2f)
             {
                 atNextDoor = true;
