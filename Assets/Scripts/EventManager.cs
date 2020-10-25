@@ -8,7 +8,7 @@ public static class EventManager
     public delegate void GameEvent(EventArgs e);
     public static event GameEvent DoorEntered;
     // Start is called before the first frame update
-    public static void TriggerDoorEntered(Door door)
+    public static void TriggerDoorEntered(DoorComponent door)
     {
         if (DoorEntered != null)
         {

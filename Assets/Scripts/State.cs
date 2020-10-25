@@ -9,7 +9,8 @@ public enum StateEnum
     //Just for debugging because Unity cannot serialize abstract states
     Normal,
     Roll,
-    Attack
+    Attack,
+    Transition
 }
 /// <summary>
 /// Abstract class for all states. Add new behaviours declarations here and implement in a concrete state
@@ -49,10 +50,15 @@ public  abstract class State
     {
         yield break;
     }
+    public virtual void HandleTrigger(Collider2D collision)
+    {
+        return;
+    }
     public override String ToString()
     {
         return "State";
     }
+
 }
 public class NormalState : State
 {
@@ -88,6 +94,22 @@ public class NormalState : State
         {
             DungeonMaster.loot.Remove(item);
             yield return null;
+        }
+    }
+
+    public override void HandleTrigger(Collider2D collision)
+    {
+        //Door Trigger and Player Inputs to go to next room
+        if (Input.GetKeyDown(KeyCode.E) && collision.GetComponent<DoorComponent>())
+        {
+            var dc = collision.GetComponent<DoorComponent>();
+            //Does nothing right now, but might be useful later
+            EventManager.TriggerDoorEntered(dc);
+            //Make new transition state, set it up with the doors involved, set state to the Transition
+            var transition = new TransitionState(psm);
+            transition.startDoor = collision.transform;
+            transition.endDoor = dc.GetSisterDoor();
+            psm.SetState(transition);
         }
     }
 

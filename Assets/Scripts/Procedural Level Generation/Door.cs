@@ -115,6 +115,8 @@ public class Door:MonoBehaviour
         {
             doorB = transform;
         }
+        //hook up transforms door component (mostly empty but useful as a reference back to this door upon player trigger)
+        transform.GetComponent<DoorComponent>().SetDoor(this);
     }
 
     public void SetUpLineRenderer()

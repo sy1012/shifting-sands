@@ -5,25 +5,18 @@ using UnityEngine;
 
 public class DoorComponent : MonoBehaviour
 {
-    private Door door;
+    public Door door;
 
+    public Transform GetSisterDoor()
+    {
+        //One of these will be this transfomr
+        Transform[] doorTransforms = door.GetDoorTransforms();
+        return doorTransforms[0] == transform ? doorTransforms[1] : doorTransforms[0]; 
+    }
     public void SetDoor(Door ownerDoor)
     {
         door = ownerDoor;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void DestroyDoor()
     {
         Destroy(gameObject);

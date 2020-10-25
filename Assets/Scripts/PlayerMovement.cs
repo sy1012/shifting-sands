@@ -147,14 +147,7 @@ public class PlayerMovement : Character
  
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Door>() && Input.GetKeyDown(interactKey))
-        {
-            EventManager.TriggerDoorEntered(collision.GetComponent<Door>());
-            isInTransition = true;
-        }
-    }
+
 
     public Vector2 GetRoot()
     {

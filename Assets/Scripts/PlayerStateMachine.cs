@@ -15,8 +15,9 @@ public class PlayerStateMachine : MonoBehaviour
     KeyCode interactKey = KeyCode.E;
     KeyCode rollKey = KeyCode.Space;
     
-
+    //!!The Behavioural State of the Player!!
     public State state;
+    // Debugging representation of state
     public StateEnum currentState;
     public float speed;
 
@@ -114,5 +115,10 @@ public class PlayerStateMachine : MonoBehaviour
     public Vector2 GetRoot()
     {
         return new Vector2(transform.position.x, transform.position.y + playerRootOffset);
+    }
+    //  Handle Triggers
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        state.HandleTrigger(collision);
     }
 }
