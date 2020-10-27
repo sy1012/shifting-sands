@@ -56,6 +56,14 @@ public class PlayerMovement : Character
             Destroy(gameObject);
         }
 
+        // For Animator Idle State
+        if(movement != Vector2.zero)
+		{
+            animator.SetFloat("PrevHorizontal", movement.x);
+            animator.SetFloat("PrevVertical", movement.y);
+		}
+        
+
         // Movement Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
