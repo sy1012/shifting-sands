@@ -108,6 +108,7 @@ public class Pyramid : MonoBehaviour
 
             }
 
+            //make sure the pyramid was actually placed on the map
             if (!onMap)
             {
                 transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
