@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class Oasis : MonoBehaviour
 {
-
-    private float radius = 4f;
-    private int maxPyramids = 5;
-    private int minPyramids = 3;
+    public Perimeter radVisualize;
+    public Perimeter circle;
+    public float radius = 4f;
     public bool generated = false;
+    public Pyramid pyramidPrefab;
+    public List<Pyramid> pyramids = new List<Pyramid>();
+
+    private void Start()
+    {
+        circle = Instantiate(radVisualize, transform);
+        circle.transform.localScale = new Vector3(radius * 2 / 5, radius * 2 / 5, 1);
+
+        generatePyramids();
+    }
 
     public float getRadius()
     {
@@ -21,21 +30,12 @@ public class Oasis : MonoBehaviour
         radius = rad;
     }
 
-    public int getMaxPyramids()
+    public void generatePyramids()
     {
-        return maxPyramids;
-    }
-    public int getMinPyramids()
-    {
-        return minPyramids;
-    }
-    public void setMaxPyramids(int max)
-    {
-        maxPyramids = max;
-    }
-    public void setMinPyramids(int min)
-    {
-        minPyramids = min;
+        pyramids.Add(Instantiate(pyramidPrefab, transform.position + (Vector3)Random.insideUnitCircle * radius, transform.rotation));
+        pyramids[pyramids.Count - 1].setParentOasis(this);
+        pyramids[pyramids.Count - 1].reposition();
+        
     }
 
 }

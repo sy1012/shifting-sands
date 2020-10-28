@@ -371,6 +371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: oasis
       objectReference: {fileID: 0}
+    - target: {fileID: 2344872266743754267, guid: 062bf1fd439fe9c41ba6a0e17fbcce9d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5223385617891357901, guid: 062bf1fd439fe9c41ba6a0e17fbcce9d, type: 3}
       propertyPath: radius
       value: 4
