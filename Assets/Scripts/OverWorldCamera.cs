@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverWorldCamera : MonoBehaviour
 {
-    float zoomSize = 2;
+    float zoomSize = 8;
 
     // Update is called once per frame
     void Update()
@@ -26,7 +26,7 @@ public class OverWorldCamera : MonoBehaviour
         }
         // zoom out
         if (Input.GetAxis("Mouse ScrollWheel") < 0){
-            if (zoomSize < 5){
+            if (zoomSize < 10){
                 zoomSize += 1;
             }
         }
