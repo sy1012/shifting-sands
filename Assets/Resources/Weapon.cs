@@ -79,7 +79,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if (!initialized) { Initialize(); }
+        if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
         if (this.coolDown > 0)
         {  
             this.coolDown -= Time.deltaTime;
@@ -115,7 +115,7 @@ public class Weapon : MonoBehaviour
 
     public (GameObject, GameObject) Info()
     {
-        if (!initialized) { Initialize(); }
+        if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
         text.gameObject.SetActive(true);
         background.SetActive(true);
         return (text.gameObject, background);
