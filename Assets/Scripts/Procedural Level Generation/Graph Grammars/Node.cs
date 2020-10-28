@@ -147,6 +147,42 @@ namespace GraphGrammars
             return new KeyNode(name, position);
         }
     }
+    public class CurseNode: Node
+    {
+        public CurseNode(string _name)
+        {
+            base.symbol = Symbol.Curse;
+            name = _name+":Curse";
+        }
+
+        public CurseNode(string _name, Vector2 position) : base(_name, position)
+        {
+            symbol = Symbol.Curse;
+        }
+
+        public override Node Copy()
+        {
+            return new CurseNode(name, position);
+        }
+    }
+    public class RelicNode : Node
+    {
+        public RelicNode(string _name)
+        {
+            base.symbol = Symbol.Relic;
+            name = _name + ":Relic";
+        }
+
+        public RelicNode(string _name, Vector2 position) : base(_name, position)
+        {
+            symbol = Symbol.Relic;
+        }
+
+        public override Node Copy()
+        {
+            return new RelicNode(name, position);
+        }
+    }
     // t:terminal , NT: non terminal
-    public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock}
+    public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock,Curse,Relic}
 }
