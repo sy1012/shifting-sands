@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pyramidPrefab: {fileID: 8857799296077590688, guid: 4d8f86d258fcc2f4d9e49f6d6454b802, type: 3}
+  oasisPrefab: {fileID: 5223385617891357901, guid: 062bf1fd439fe9c41ba6a0e17fbcce9d, type: 3}
 --- !u!1 &798826532
 GameObject:
   m_ObjectHideFlags: 0
