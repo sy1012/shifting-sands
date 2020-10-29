@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverWorldCamera : MonoBehaviour
 {
-    float zoomSize = 18;
+    float zoomSize = 19;
     private Vector2 minPos = new Vector2 (-5, -5);
     private Vector2 maxPos = new Vector2 (5, 5);
 
@@ -28,7 +28,7 @@ public class OverWorldCamera : MonoBehaviour
         }
         // zoom out
         if (Input.GetAxis("Mouse ScrollWheel") < 0){
-            if (zoomSize < 18){
+            if (zoomSize < 19){
                 zoomSize += 1;
             }
         }
@@ -42,8 +42,8 @@ public class OverWorldCamera : MonoBehaviour
         float aspect = Camera.main.aspect;
 
 
-        clampMovement.x = Mathf.Clamp(clampMovement.x, -32f + CamSize * aspect, 32 - CamSize * aspect);
-        clampMovement.y = Mathf.Clamp(clampMovement.y, -18f + CamSize, 18 - CamSize);
+        clampMovement.x = Mathf.Clamp(clampMovement.x, -33f + CamSize * aspect, 35f - CamSize * aspect);
+        clampMovement.y = Mathf.Clamp(clampMovement.y, -18.9f + CamSize, 19.1f - CamSize);
 
         transform.position = clampMovement;
     }

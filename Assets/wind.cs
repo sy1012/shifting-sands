@@ -5,21 +5,30 @@ using UnityEngine;
 public class wind : MonoBehaviour
 {
     public Animator animator;
-    private int wait = 0;
+    private bool waiting = false;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator RandomWait()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("windblow"))
-        { 
-            transform.position = new Vector3(Random.Range(-20, 21), Random.Range(-15, 16), 0);
-            animator.Play("windblow");
-            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        yield return new WaitForSeconds(Random.Range(0.1f, 2f));
+        this.transform.position = new Vector3(Random.Range(-20, 21), Random.Range(-15, 16), 0);
+        this.animator.Play("windblow");
+        waiting = false;
+    }
+
+        // Update is called once per frame
+        void Update()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("windblow") && !waiting)
+        {
+            waiting = true;
+            transform.position = new Vector3(-50, -50, 0);
+            StartCoroutine("RandomWait");
         }
 
     }
