@@ -49,36 +49,53 @@ public class Pyramid : MonoBehaviour
     {
 
         //check for oasis collisions
-        try
+        if (count >= 100)
         {
+            parentOasis.pyramids.Remove(this);
+            Destroy(gameObject);
+            return;
+        }
+        Collider2D[] overlaps = Physics2D.OverlapCircleAll(transform.position, 1f);
 
-            if(count >= 1000)
+        foreach (Collider2D overlap in overlaps)
+        {
+            if (overlap.gameObject.GetComponent<Oasis>() != null)
             {
-                parentOasis.pyramids.Remove(this);
-                Destroy(gameObject);
+                transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
+                Reposition(count + 1);
                 return;
             }
-            Collider2D[] overlaps = Physics2D.OverlapCircleAll(transform.position, 1f);
+        }
 
-            foreach (Collider2D overlap in overlaps)
+        //check that pyramids are not too close to each other
+        overlaps = Physics2D.OverlapCircleAll(transform.position, 2.5f);
+        Physics2D.SyncTransforms();
+
+        foreach (Collider2D overlap in overlaps)
+        {
+            if (overlap.gameObject.GetComponent<Pyramid>() != null)
             {
-                if (overlap.gameObject.GetComponent<Oasis>() != null)
+                if (overlap.gameObject != this.gameObject)
                 {
-                    transform.position = parentOasis.transform.position + (Vector3) UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
+                    transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
                     Reposition(count + 1);
                     return;
                 }
             }
+        }
 
-            //check that pyramids are not too close to each other
-            overlaps = Physics2D.OverlapCircleAll(transform.position, 2.5f);
-            Physics2D.SyncTransforms();
+        //ensure that new pyramids are outside of previously discovered oasis radii
 
-            foreach (Collider2D overlap in overlaps)
+        overlaps = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+
+        bool onMap = false;
+
+        foreach (Collider2D overlap in overlaps)
+        {
+            if (overlap.gameObject.GetComponent<Perimeter>() != null)
             {
-                if (overlap.gameObject.GetComponent<Pyramid>() != null)
+                if (overlap.transform != parentOasis.circle.transform)
                 {
-                    if (overlap.gameObject != this.gameObject)
                     {
                         transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
                         Reposition(count + 1);
@@ -87,47 +104,21 @@ public class Pyramid : MonoBehaviour
                 }
             }
 
-            //ensure that new pyramids are outside of previously discovered oasis radii
-
-            overlaps = Physics2D.OverlapCircleAll(transform.position, 0.1f);
-
-            bool onMap = false;
-
-            foreach (Collider2D overlap in overlaps)
+            if (overlap.gameObject.GetComponent<PyramidManager>() != null)
             {
-                if (overlap.gameObject.GetComponent<Perimeter>() != null)
-                {
-                    if (overlap.transform != parentOasis.circle.transform)
-                    {
-                        {
-                            transform.position = parentOasis.transform.position + (Vector3) UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
-                            Reposition(count + 1);
-                            return;
-                        }
-                    }
-                }
-
-                if (overlap.gameObject.GetComponent<PyramidManager>() != null)
-                {
-                    onMap = true;
-                }
-
-
+                onMap = true;
             }
 
-            //make sure the pyramid was actually placed on the map
-            if (!onMap)
-            {
-                transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
-                Reposition(count + 1);
-                return;
-            }
 
         }
-        catch (StackOverflowException)
+
+        //make sure the pyramid was actually placed on the map
+        if (!onMap)
         {
-            parentOasis.pyramids.Remove(this);
-            Destroy(gameObject);
+            transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
+            Reposition(count + 1);
+            return;
         }
+
     }
 }
