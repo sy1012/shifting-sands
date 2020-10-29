@@ -19,7 +19,7 @@ public class PyramidManager : MonoBehaviour
         }
     }
 
-    public void newOasis(Vector2 position, float radius)
+    public void NewOasis(Vector2 position, float radius)
     {
         oases.Add(Instantiate(oasisPrefab, position, Quaternion.identity));
         oases[oases.Count - 1].setRadius(radius);

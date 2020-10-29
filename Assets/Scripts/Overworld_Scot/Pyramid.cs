@@ -16,15 +16,15 @@ public class Pyramid : MonoBehaviour
         pyramidManager = FindObjectOfType<PyramidManager>();
     }
 
-    public void setParentOasis(Oasis parent)
+    public void SetParentOasis(Oasis parent)
     {
         parentOasis = parent;
     }
 
     //for testing of transformation into a new oasis
-    private void transformToOasis()
+    private void TransformToOasis()
     {
-        pyramidManager.newOasis(transform.position, 6f);
+        pyramidManager.NewOasis(transform.position, 6f);
         Destroy(gameObject);
     }
 
@@ -38,19 +38,26 @@ public class Pyramid : MonoBehaviour
             {
             if (hit.collider == GetComponent<Collider2D>())
                 {
-                    transformToOasis();
+                    TransformToOasis();
                 }
             }
             
         }
     }
 
-    public void reposition()
+    public void Reposition(int count = 0)
     {
 
         //check for oasis collisions
         try
         {
+
+            if(count >= 1000)
+            {
+                parentOasis.pyramids.Remove(this);
+                Destroy(gameObject);
+                return;
+            }
             Collider2D[] overlaps = Physics2D.OverlapCircleAll(transform.position, 1f);
 
             foreach (Collider2D overlap in overlaps)
@@ -58,7 +65,7 @@ public class Pyramid : MonoBehaviour
                 if (overlap.gameObject.GetComponent<Oasis>() != null)
                 {
                     transform.position = parentOasis.transform.position + (Vector3) UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
-                    reposition();
+                    Reposition(count + 1);
                     return;
                 }
             }
@@ -74,7 +81,7 @@ public class Pyramid : MonoBehaviour
                     if (overlap.gameObject != this.gameObject)
                     {
                         transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
-                        reposition();
+                        Reposition(count + 1);
                         return;
                     }
                 }
@@ -94,7 +101,7 @@ public class Pyramid : MonoBehaviour
                     {
                         {
                             transform.position = parentOasis.transform.position + (Vector3) UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
-                            reposition();
+                            Reposition(count + 1);
                             return;
                         }
                     }
@@ -112,16 +119,14 @@ public class Pyramid : MonoBehaviour
             if (!onMap)
             {
                 transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
-                reposition();
+                Reposition(count + 1);
                 return;
             }
-
-
-
 
         }
         catch (StackOverflowException)
         {
+            parentOasis.pyramids.Remove(this);
             Destroy(gameObject);
         }
     }

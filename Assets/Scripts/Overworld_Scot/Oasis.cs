@@ -43,8 +43,8 @@ public class Oasis : MonoBehaviour
         for(int i = 1; i <= numPyrmaids; i++)
         {
             pyramids.Add(Instantiate(pyramidPrefab, transform.position + (Vector3)Random.insideUnitCircle * radius * 0.85f, transform.rotation));
-            pyramids[pyramids.Count - 1].setParentOasis(this);
-            pyramids[pyramids.Count - 1].reposition();
+            pyramids[pyramids.Count - 1].SetParentOasis(this);
+            pyramids[pyramids.Count - 1].Reposition();
         }
 
         
