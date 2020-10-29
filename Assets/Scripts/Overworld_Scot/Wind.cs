@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class wind : MonoBehaviour
+public class Wind : MonoBehaviour
 {
     public Animator animator;
     private bool waiting = false;

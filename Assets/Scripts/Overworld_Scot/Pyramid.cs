@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pyramid : MonoBehaviour
+public class Pyramid : MapNode
 {
 
     private Oasis parentOasis;
