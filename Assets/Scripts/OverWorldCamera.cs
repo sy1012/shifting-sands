@@ -28,7 +28,7 @@ public class OverWorldCamera : MonoBehaviour
         }
         // zoom out
         if (Input.GetAxis("Mouse ScrollWheel") < 0){
-            if (zoomSize < 16){
+            if (zoomSize < 18){
                 zoomSize += 1;
             }
         }
@@ -42,7 +42,7 @@ public class OverWorldCamera : MonoBehaviour
         float aspect = Camera.main.aspect;
 
 
-        clampMovement.x = Mathf.Clamp(clampMovement.x, -30f + CamSize * aspect, 30 - CamSize * aspect);
+        clampMovement.x = Mathf.Clamp(clampMovement.x, -32f + CamSize * aspect, 32 - CamSize * aspect);
         clampMovement.y = Mathf.Clamp(clampMovement.y, -18f + CamSize, 18 - CamSize);
 
         transform.position = clampMovement;
