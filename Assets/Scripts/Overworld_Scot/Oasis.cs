@@ -5,7 +5,7 @@ using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Oasis : MapNode
+public class Oasis : MonoBehaviour
 {
     public Perimeter radVisualize;
     public Perimeter circle;

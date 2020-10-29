@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class MapNode : MonoBehaviour
 {
-    public MapNode upNode;
-    public MapNode downNode;
-    public MapNode leftNode;
-    public MapNode rightNode;
+    public List<MapNode> connections = new List<MapNode>();
+
 
     // Start is called before the first frame update
     void Start()
