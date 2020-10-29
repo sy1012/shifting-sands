@@ -20,6 +20,8 @@ public class PlayerMovement : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public Weapon weaponEquiped;
+    KeyCode interactKey = KeyCode.E;
+    private bool isInTransition;
 
     private void Start()
     {
@@ -31,7 +33,7 @@ public class PlayerMovement : Character
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(interactKey))
         {
             pickUp();
         }
@@ -153,6 +155,8 @@ public class PlayerMovement : Character
         }
  
     }
+
+
 
     public Vector2 GetRoot()
     {

@@ -25,12 +25,17 @@ public class Character : MonoBehaviour
         isMousedOver = true;
     }
 
+    private void Update()
+    {
+
+    }
+
     private void OnMouseExit()
     {
         isMousedOver = false;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Collision2D collision)
     {
         health -= damage;
         healthbar.SetHealth(health);
