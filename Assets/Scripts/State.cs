@@ -159,7 +159,7 @@ public class AttackState : State
         else angle -= 90;
         psm.weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
         psm.weaponEquiped.Attack();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         psm.SetState(new NormalState(psm));
     }
     public override void Execute()
