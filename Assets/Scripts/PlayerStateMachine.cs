@@ -153,4 +153,8 @@ public class PlayerStateMachine : Character
     {
         state.HandleTrigger(collision);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        state.HandleTrigger(collision);
+    }
 }

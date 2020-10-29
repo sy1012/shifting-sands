@@ -230,7 +230,7 @@ public class RollState : State
 }
 public class HitState:State
 {
-    float stunTime = 0.5f;
+    float stunTime = 0.35f;
     float invincibleTime = 0.5f;
     int damageTaking;
     Collision2D hitCollision;
