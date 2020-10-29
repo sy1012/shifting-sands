@@ -26,7 +26,7 @@ public class TransitionState : State
             yield return null;
         }
         //Step two, turn off renderer and move to next door
-        var r = psm.GetComponent<SpriteRenderer>();
+        var r = psm.spriteRenderer;
         r.enabled = false;
         target = endDoor.position;
         bool atNextDoor = false;

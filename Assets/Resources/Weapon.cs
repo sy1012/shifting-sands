@@ -110,7 +110,7 @@ public class Weapon : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.GetComponent<Character>() != null) collision.collider.GetComponent<Character>().TakeDamage(this.damage);
+        if (collision.collider.GetComponent<Character>() != null) collision.collider.GetComponent<Character>().TakeDamage(this.damage,collision);
     }
 
     public (GameObject, GameObject) Info()

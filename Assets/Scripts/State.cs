@@ -10,6 +10,7 @@ public enum StateEnum
     Normal,
     Roll,
     Attack,
+    Hit,
     Transition
 }
 /// <summary>
@@ -50,6 +51,10 @@ public  abstract class State
     {
         yield break;
     }
+    public virtual IEnumerator OnHit(int damage, Collision2D collision)
+    {
+        yield break;
+    }
     public virtual void HandleTrigger(Collider2D collision)
     {
         return;
@@ -69,7 +74,7 @@ public class NormalState : State
 
     public override void Execute()
     {
-        psm.NormalMovement();     
+        psm.NormalMovement();
     }
 
     public override IEnumerator OnAttack()
@@ -83,6 +88,12 @@ public class NormalState : State
     {
         //new roll
         psm.SetState(new RollState(psm));
+        yield break;
+    }
+
+    public override IEnumerator OnHit(int damage, Collision2D collision)
+    {
+        psm.SetState(new HitState(psm,damage,collision));
         yield break;
     }
 
@@ -184,7 +195,7 @@ public class RollState : State
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
         //Change the color for a cool effect
-        var spriteRenderer = psm.transform.GetComponent<SpriteRenderer>();
+        var spriteRenderer = psm.spriteRenderer;
         spriteRenderer.color = Color.cyan/4;
         //Start dash loop. Continue dashing each timestep until we go x dash segments or hit a wall. The advantage of a couroutine is we get behaviour over time
         //and only need to call Enter() once. Once done change state back to Normal 
@@ -216,5 +227,33 @@ public class RollState : State
     {
         return base.ToString() + " Roll";
     }
+}
+public class HitState:State
+{
+    float stunTime = 0.5f;
+    float invincibleTime = 0.5f;
+    int damageTaking;
+    Collision2D hitCollision;
+    public HitState(PlayerStateMachine playerStateMachine, int damage, Collision2D collision):base(playerStateMachine)
+    {
+        damageTaking = damage;
+        hitCollision = collision;
+        psm.currentState = StateEnum.Hit;
+    }
+    public override IEnumerator Enter()
+    {
+        psm.animator.SetTrigger("hit");
+        psm.health -= damageTaking;
+        var healthbar = psm.GetComponentInChildren<Healthbar>();
+        Vector3 dir = hitCollision.transform.position - psm.transform.position;
+        dir = dir.normalized;
+        //Vector3 target = psm.transform.position - dir*damageTaking / 4;
+        healthbar.SetHealth(psm.health);
+        yield return new WaitForSeconds(stunTime);
+        psm.InvincibleTime = invincibleTime;
+        psm.SetState(new NormalState(psm));
+        yield break;
+    }
+
 }
 
