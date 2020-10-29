@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverWorldCamera : MonoBehaviour
 {
-    float zoomSize = 8;
+    float zoomSize = 18;
     private Vector2 minPos = new Vector2 (-5, -5);
     private Vector2 maxPos = new Vector2 (5, 5);
 
