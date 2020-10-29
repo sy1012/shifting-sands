@@ -19,24 +19,15 @@ public class Weapon : MonoBehaviour
     private SpriteRenderer sr;           // Quick Reference to the Sprite Renderer attached to this object  
     private new BoxCollider2D collider;  // Quick Reference to the collider attached to this object  
     private string itemName;             // Name of the item
-    private bool initialized;            // The weapon has to be initialized before use 
     private TextMeshPro text;
     private GameObject background;
     public string description;           // description of the item
-
-    private void Start()
-    {
-        initialized = false;
-    }
 
     // item needs to be set up but only after the Data has been added
     void Initialize()
     {
         //TEMP FOR MILSTONE
         this.transform.localScale = new Vector2(4f, 4f);
-
-        // make sure not to call this fn multiple times
-        initialized = true;
 
         // set up all the initial values for this weapon
         this.description = data.description;
@@ -124,7 +115,6 @@ public class Weapon : MonoBehaviour
     public void DestroyInfo()
     {
         if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
-        else initialized = true;
         text.gameObject.SetActive(false);
         background.SetActive(false);
     }
