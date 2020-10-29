@@ -7,9 +7,6 @@ public class Oasis : MonoBehaviour
     public Perimeter radVisualize;
     public Perimeter circle;
 
-    public SpriteMask lineMaskPrefab;
-    private SpriteMask lineMask;
-
     public float radius = 6f;
     public bool generated = false;
     public Pyramid pyramidPrefab;
@@ -18,12 +15,7 @@ public class Oasis : MonoBehaviour
     private void Start()
     {
         circle = Instantiate(radVisualize, transform);
-        circle.transform.localScale = new Vector3(radius * 2 / 5, radius * 2 / 5, 1);
-
-        lineMask = Instantiate(lineMaskPrefab, transform);
-        lineMask.transform.localScale = circle.transform.localScale * 0.99f;
-
-
+        circle.oasis = this;
         generatePyramids();
     }
 
