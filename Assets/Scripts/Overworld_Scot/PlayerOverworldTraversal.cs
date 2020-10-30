@@ -21,10 +21,6 @@ public class PlayerOverworldTraversal : MonoBehaviour
         oasisGraph = mapManager.oasisGraph;
         currentNode = (OasisNode)mapManager.oasisGraph.GetNodes[0];
         caravan = FindObjectOfType<Caravan>();
-        if(caravan != null)
-		{
-            Debug.Log("caravan found");
-		}
     }
 
     // Update is called once per frame
