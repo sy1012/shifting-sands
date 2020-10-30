@@ -8,9 +8,11 @@ public class PlayerOverworldTraversal : MonoBehaviour
     public Graph oasisGraph;
     MapManager mapManager;
 
-    OasisNode currentNode;
+    public OasisNode currentNode;
 
     OasisNode destinationNode;
+
+    Caravan caravan;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,11 @@ public class PlayerOverworldTraversal : MonoBehaviour
         mapManager = FindObjectOfType<MapManager>();
         oasisGraph = mapManager.oasisGraph;
         currentNode = (OasisNode)mapManager.oasisGraph.GetNodes[0];
-
+        caravan = FindObjectOfType<Caravan>();
+        if(caravan != null)
+		{
+            Debug.Log("caravan found");
+		}
     }
 
     // Update is called once per frame
@@ -34,10 +40,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
                 {
                     destinationNode = hit.collider.gameObject.GetComponent<Oasis>().oasisNode;
                     List<Node> nodePath = graphTraversal(mapManager.oasisGraph, currentNode, destinationNode);
-                    foreach(Node node in nodePath)
-                    {
-                        Debug.Log(node);
-                    }
+                    caravan.path = nodePath;
                 }
             }
 

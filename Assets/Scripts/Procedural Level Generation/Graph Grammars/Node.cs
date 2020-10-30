@@ -194,6 +194,11 @@ namespace GraphGrammars
             
         }
 
+        public Oasis getOasis()
+		{
+            return oasis;
+		}
+
         public override Node Copy()
         {
             return new OasisNode(name, oasis);
