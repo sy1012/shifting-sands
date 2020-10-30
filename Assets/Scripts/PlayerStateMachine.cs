@@ -100,7 +100,6 @@ public class PlayerStateMachine : Character
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Change State to Attack");
             StartCoroutine(state.OnAttack());
         }
 
@@ -117,20 +116,22 @@ public class PlayerStateMachine : Character
         InvincibleTime -= Time.deltaTime;
 
         //Handle Loot
-        //if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
-        //{
-        //    //(text, background) = DungeonMaster.getLootInRange(this.transform.position, 1)[0].GetComponent<Weapon>().Info();
-        //    text.transform.position = this.transform.position + new Vector3(0, 2, 0);
-        //    background.transform.position = this.transform.position + new Vector3(0, 2, 0);
-        //}
-        //if (DungeonMaster.getLootOuttaRange(this.transform.position, 1).Count != 0)
-        //{
-        //    List<GameObject> loot = DungeonMaster.getLootOuttaRange(this.transform.position, 1);
-        //    foreach (GameObject item in loot)
-        //    {
-        //        item.GetComponent<Weapon>()?.DestroyInfo();
-        //    }
-        //}
+        if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
+        {
+            List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 1);
+            foreach (GameObject item in loot)
+            {
+                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().CreateInfoPopUp();
+            }
+        }
+        if (DungeonMaster.getLootOuttaRange(this.transform.position, 1).Count != 0)
+        {
+            List<GameObject> loot = DungeonMaster.getLootOuttaRange(this.transform.position, 1);
+            foreach (GameObject item in loot)
+            {
+                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().DestroyInfoPopUp();
+            }
+        }
 
     }
 

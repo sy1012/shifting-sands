@@ -6,12 +6,6 @@ public class DungeonMaster
 {
     public static List<GameObject> loot = new List<GameObject>();
 
-    // Start is called before the first frame update
-    static void Start()
-    {
-        loot = new List<GameObject>();
-    }
-
     public static List<GameObject> getLootInRange(Vector2 position, float range) {
         List<GameObject> stuff = new List<GameObject>();
         foreach (GameObject item in loot)

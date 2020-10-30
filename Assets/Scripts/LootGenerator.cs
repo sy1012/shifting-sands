@@ -23,15 +23,6 @@ public class LootGenerator
     private static List<float> dropRate1;
 
     private static int dungeonLevel = 0;
-    private static LootGenerator _current;
-    public static LootGenerator current
-    {
-        get
-        {
-            if (_current == null) { _current = new LootGenerator(); Start(); }
-            return _current;
-        }
-    }
 
     static void Start()
     {
@@ -80,11 +71,13 @@ public class LootGenerator
         // What quality of items will we be pulling from
         if (quality == 0) { dropQuality = dropQuality0; dropRate = dropRate0; }
         else if (quality == 1) { dropQuality = dropQuality1; dropRate = dropRate1; }
+
         // figure out how many items should drop
         float randomNumberOfDrops = Random.Range(0f, 1f);
         int count = 0;
         while (dropRate.Count-1 >= count && randomNumberOfDrops >= dropRate[count]) { count += 1; }  
         int numberOfDrops = count;
+
         // figure out what exact items will drop
         while (numberOfDrops > 0)
         {
@@ -109,9 +102,9 @@ public class LootGenerator
         {
             GameObject drop = new GameObject("lootDrop");
             DungeonMaster.loot.Add(drop);
-            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<Weapon>().data = woodSword; }
+            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<Weapon>().data = (WeaponData)item; drop.GetComponent<Weapon>().Dropped(); }
             else if (item.itemType is ItemTypes.Type.consumable) { } // TODO
-            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<SpriteRenderer>().sprite = item.sprite; } // TODO
+            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<Item>().data = item; drop.GetComponent<Item>().Dropped(); }
             drop.transform.position = position;
         }
     }
