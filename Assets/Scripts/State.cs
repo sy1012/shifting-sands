@@ -103,7 +103,7 @@ public class NormalState : State
         List<GameObject> items = DungeonMaster.getLootInRange(psm.transform.position, 1);
         foreach (GameObject item in items)
         {
-            DungeonMaster.loot.Remove(item);
+            item.GetComponent<ItemArchtype>().PickedUp();
             yield return null;
         }
     }

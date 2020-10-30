@@ -183,6 +183,22 @@ namespace GraphGrammars
             return new RelicNode(name, position);
         }
     }
+
+    public class OasisNode : Node
+    {
+        Oasis oasis;
+        public OasisNode(string _name, Oasis myOasis)
+        {
+            name = _name;
+            oasis = myOasis;
+            
+        }
+
+        public override Node Copy()
+        {
+            return new OasisNode(name, oasis);
+        }
+    }
     // t:terminal , NT: non terminal
     public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock,Curse,Relic}
 }

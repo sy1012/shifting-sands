@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerMovement : Character
 {
@@ -40,16 +41,20 @@ public class PlayerMovement : Character
 
         if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
         {
-            (text, background) = DungeonMaster.getLootInRange(this.transform.position, 1)[0].GetComponent<Weapon>().Info();
-            text.transform.position = this.transform.position + new Vector3(0, 2, 0);
-            background.transform.position = this.transform.position + new Vector3(0, 2, 0);
+            List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 1);
+            foreach (GameObject item in loot)
+            {
+                Debug.Log("Hello");
+                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().CreateInfoPopUp();
+            }
         }
         if (DungeonMaster.getLootOuttaRange(this.transform.position, 1).Count != 0)
         {
-            List<GameObject> loot = DungeonMaster.getLootOuttaRange(this.transform.position, 1);
+            List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 1);
             foreach (GameObject item in loot)
             {
-                item.GetComponent<Weapon>().DestroyInfo();
+                Debug.Log("Hello");
+                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().DestroyInfoPopUp();
             }
         }
 

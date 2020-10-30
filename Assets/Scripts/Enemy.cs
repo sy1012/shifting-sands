@@ -18,7 +18,7 @@ public class Enemy : Character
         if (health <= 0)
         {
             Destroy(gameObject);
-            LootGenerator.current.generate(this.transform.position);
+            LootGenerator.Generate(this.transform.position, 0);
         }
 
         if (cooldown >= 0) { cooldown -= Time.deltaTime; }
