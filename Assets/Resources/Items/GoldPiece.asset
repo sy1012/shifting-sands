@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b956cd09ba6f3499fa29f372775cae, type: 3}
   m_Name: GoldPiece
   m_EditorClassIdentifier: 
+  scrollOffset: {x: 0, y: 2.03}
+  spriteScaling: {x: 0.2, y: 0.2}
+  relativeWeight: 0.8
+  sprite: {fileID: 21300000, guid: ea2c4cb6f8ef1784dbb181ab4085eb4d, type: 3}
+  itemType: 0
   itemName: Gold
   value: 1
   recipe: []
