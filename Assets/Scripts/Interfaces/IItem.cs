@@ -9,4 +9,6 @@
     void CreateInfoPopUp();
 
     void DestroyInfoPopUp();
+
+    void Initialize();
 }

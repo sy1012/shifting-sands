@@ -32,8 +32,6 @@ public static class ScrollTextFormatter
         float ySize = sr.sprite.bounds.size.y;
         float targetRatio = ySize / xSize;
         float area = (xSize/(xSize+ySize) * (ySize / (xSize + ySize)));
-        Debug.Log(area);
-        Debug.Log(sr.sprite.bounds.size.y);
 
         textComponent.fontSize = 4;
         textComponent.text = text;

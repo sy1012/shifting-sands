@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : ItemArchtype
 {
-    public new WeaponData data;
+    public WeaponData data;
     public ItemTypes.Type type;          // What type of item is this (hint its a weapon)
 
     private Sprite[] spriteAnimation;    // Animation to play when attacking

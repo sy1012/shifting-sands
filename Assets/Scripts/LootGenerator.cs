@@ -101,6 +101,7 @@ public class LootGenerator
         foreach (ItemData item in items)
         {
             GameObject drop = new GameObject("lootDrop");
+            //GameObject.Destroy(drop.GetComponent<SpriteRenderer>());
             DungeonMaster.loot.Add(drop);
             if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<Weapon>().data = (WeaponData)item; drop.GetComponent<Weapon>().Dropped(); }
             else if (item.itemType is ItemTypes.Type.consumable) { } // TODO
