@@ -24,7 +24,7 @@ public class Pyramid : MonoBehaviour
     private void TransformToOasis()
     {
         //spawn a new oasis where pyramid is and get rid of the pyramid
-        pyramidManager.NewOasis(transform.position, 6f);
+        pyramidManager.NewOasis(transform.position, 6f, parentOasis);
         Destroy(gameObject);
     }
 

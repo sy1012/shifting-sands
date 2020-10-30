@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GraphGrammars;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor.Timeline;
@@ -10,6 +11,10 @@ public class Oasis : MonoBehaviour
     //The circle that shows the radius you can travel from an oasis
     public Perimeter radVisualize;
     public Perimeter circle;
+
+    public OasisNode oasisNode;
+
+
 
     public float radius = 6f;
 
