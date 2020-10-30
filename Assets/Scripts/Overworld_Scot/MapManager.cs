@@ -10,6 +10,7 @@ public class MapManager : MonoBehaviour
     public Oasis oasisPrefab;
     private List<Oasis> oases = new List<Oasis>();
     public Graph oasisGraph = new Graph("oasisGraph");
+    public LineRenderer pathPrefab;
 
     private Oasis currentOasis;
 
@@ -36,15 +37,37 @@ public class MapManager : MonoBehaviour
     {
         Oasis newOasis = Instantiate(oasisPrefab, position, Quaternion.identity);
         oases.Add(newOasis);
-        oases[oases.Count - 1].setRadius(radius);
+        newOasis.setRadius(radius);
 
-        OasisNode node = new OasisNode(oases[oases.Count -1].transform.name + oases.Count, oases[oases.Count - 1]);
+        OasisNode node = new OasisNode(newOasis.transform.name + oases.Count, newOasis);
         oasisGraph.AddNode(node);
-        oases[oases.Count - 1].oasisNode = node;
+        newOasis.oasisNode = node;
 
         oasisGraph.AddConnection(node, parent.oasisNode);
-        
-        if(newOasesHandler != null)
+
+        LineRenderer path = Instantiate(pathPrefab);
+        Vector3[] points = new Vector3[2];
+        points[0] = (Vector3)parent.transform.position;
+        points[1] = (Vector3)newOasis.transform.position;
+        path.startWidth = 0.1f;
+        path.endWidth = 0.1f;
+        path.SetPositions(points);
+        /* Would need to implement a breadth first search to make this work
+         * Collider2D[] overlaps = Physics2D.OverlapCircleAll(newOasis.transform.position, newOasis.radius);
+        foreach(Collider2D overlap in overlaps)
+		{
+            if(overlap.transform != newOasis.transform && overlap.transform.gameObject.GetComponent<Oasis>() != null)
+			{
+                Oasis sibling = overlap.transform.gameObject.GetComponent<Oasis>();
+
+				if (!oasisGraph.GetAdjByNode(node).GetAdj().Contains(sibling.oasisNode))
+				{
+                    oasisGraph.AddConnection(node, sibling.oasisNode);
+                }
+            }
+		}*/
+
+        if (newOasesHandler != null)
         {
             newOasesHandler(this, EventArgs.Empty);
         }
