@@ -24,6 +24,7 @@ public class Oasis : MonoBehaviour
     //Pyramid for spawning
     public Pyramid pyramidPrefab;
     public List<Pyramid> pyramids = new List<Pyramid>();
+    public LineRenderer newLine;
 
     private void Start()
     {
@@ -33,6 +34,14 @@ public class Oasis : MonoBehaviour
 
         //create pyramids
         generatePyramids();
+    }
+
+    private void Update()
+    {
+        if (newLine != null && newLine.GetPosition(1) != transform.position)
+        {
+            newLine.SetPosition(1, Vector2.MoveTowards(newLine.GetPosition(1), transform.position, 10f * Time.deltaTime));
+        }
     }
 
     public float getRadius()

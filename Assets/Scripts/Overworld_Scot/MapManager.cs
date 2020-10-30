@@ -45,14 +45,18 @@ public class MapManager : MonoBehaviour
 
         oasisGraph.AddConnection(node, parent.oasisNode);
 
+        //create a line between the new oasis and its parent
         LineRenderer path = Instantiate(pathPrefab);
         Vector3[] points = new Vector3[2];
         points[0] = (Vector3)parent.transform.position;
-        points[1] = (Vector3)newOasis.transform.position;
+        points[1] = points[0];
         path.startWidth = 0.2f;
         path.endWidth = 0.2f;
         path.SetPositions(points);
-        /* Would need to implement a breadth first search to make this work
+        newOasis.newLine = path;
+
+
+        /* Would need to implement a breadth first search to make this work, or else the caravan takes illogical paths
          * Collider2D[] overlaps = Physics2D.OverlapCircleAll(newOasis.transform.position, newOasis.radius);
         foreach(Collider2D overlap in overlaps)
 		{
