@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 447954128ad0d2e4293a7b01dd2fddf2, type: 3}
-  m_Name: WoodenTrainingSword
+  m_Name: Khopesh
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 2}
+  scrollOffset: {x: 0, y: 0}
   spriteScaling: {x: 1, y: 1}
   relativeWeight: 10
-  sprite: {fileID: 21300000, guid: bde303a6ffe1a30468976f56951666dd, type: 3}
+  sprite: {fileID: 0}
   itemType: 1
-  itemName: Wooden Training Sword
-  value: 0
+  itemName: Khopesh
+  value: 100
   recipe: []
-  scroll: {fileID: 21300000, guid: 72f8485d8dde52d488ca739a6affad05, type: 3}
-  description: A basic Sword. Press E to pick up
-  spriteAnimation:
-  - {fileID: 21300000, guid: bde303a6ffe1a30468976f56951666dd, type: 3}
-  speed: 0.25
-  hitBoxSize: {x: 0.3, y: 0.5}
+  scroll: {fileID: 0}
+  description: Khopesh
+  spriteAnimation: []
+  speed: 0.4
+  hitBoxSize: {x: 0.4, y: 0.5}
   damage: 50

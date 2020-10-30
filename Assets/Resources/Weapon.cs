@@ -59,7 +59,7 @@ public class Weapon : ItemArchtype
                 sr.sprite = sprite;
                 this.coolDown = 0;
             }
-            else if (this.currentFrame != Mathf.Round(((this.speed - this.coolDown) / this.speed) * (spriteAnimation.Length - 1)))
+            else if (this.currentFrame != Mathf.Round(((this.speed - this.coolDown) / this.speed) * (spriteAnimation.Length - 1))&&spriteAnimation.Length!=0)
             {
                 currentFrame += 1;  //it could of only ever change upwards
                 this.sr.sprite = spriteAnimation[currentFrame];
@@ -74,7 +74,15 @@ public class Weapon : ItemArchtype
             this.collider.enabled = true;
             this.coolDown = speed;
             currentFrame = 0;
-            this.sr.sprite = spriteAnimation[0];
+            Animator animator = transform.GetComponent<Animator>();
+            if (spriteAnimation.Length != 0)
+            {
+                this.sr.sprite = spriteAnimation[0];
+            }
+            else if (animator != null)
+            {
+                animator.SetTrigger("Attack");
+            }
         }
     }
 

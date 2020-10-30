@@ -173,6 +173,7 @@ public class AttackState : State
         // quadrant 4
         else angle -= 90;
         psm.weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
+        psm.weaponEquiped.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
         psm.weaponEquiped.Attack();
         yield return new WaitForSeconds(0.5f);
         psm.SetState(new NormalState(psm));
