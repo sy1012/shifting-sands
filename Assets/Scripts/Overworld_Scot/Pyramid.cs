@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class Pyramid : MonoBehaviour
 {
-
+    
     private Oasis parentOasis;
-    public Oasis oasis;
-    private PyramidManager pyramidManager;
+    private MapManager pyramidManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        pyramidManager = FindObjectOfType<PyramidManager>();
+        pyramidManager = FindObjectOfType<MapManager>();
     }
 
     public void SetParentOasis(Oasis parent)
@@ -24,12 +23,14 @@ public class Pyramid : MonoBehaviour
     //for testing of transformation into a new oasis
     private void TransformToOasis()
     {
+        //spawn a new oasis where pyramid is and get rid of the pyramid
         pyramidManager.NewOasis(transform.position, 6f);
         Destroy(gameObject);
     }
 
     private void Update()
     {
+        //for testing transformation into oasis, click pyramid to simulate beating the dungeon
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -45,23 +46,31 @@ public class Pyramid : MonoBehaviour
         }
     }
 
+    //Find a suitable position for the pyramid
     public void Reposition(int count = 0)
     {
 
         //check for oasis collisions
+
+        //if it can't find a suitable spot after 100 iterations, assume it doesn't exist and abort
         if (count >= 100)
         {
             parentOasis.pyramids.Remove(this);
             Destroy(gameObject);
             return;
         }
+
+        //Circlecast to find what the pyramid is close to
         Collider2D[] overlaps = Physics2D.OverlapCircleAll(transform.position, 1f);
 
         foreach (Collider2D overlap in overlaps)
         {
+            //check each overlap to see if it is an oasis -blocks below act the same but with different check radii and targets
             if (overlap.gameObject.GetComponent<Oasis>() != null)
             {
                 transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;
+                
+                //if too close, try again
                 Reposition(count + 1);
                 return;
             }
@@ -88,6 +97,7 @@ public class Pyramid : MonoBehaviour
 
         overlaps = Physics2D.OverlapCircleAll(transform.position, 0.1f);
 
+        //check that the pyramid has spawned inbounds
         bool onMap = false;
 
         foreach (Collider2D overlap in overlaps)
@@ -104,7 +114,7 @@ public class Pyramid : MonoBehaviour
                 }
             }
 
-            if (overlap.gameObject.GetComponent<PyramidManager>() != null)
+            if (overlap.gameObject.GetComponent<MapManager>() != null)
             {
                 onMap = true;
             }
@@ -112,7 +122,7 @@ public class Pyramid : MonoBehaviour
 
         }
 
-        //make sure the pyramid was actually placed on the map
+        //if pyramid is off the map try again
         if (!onMap)
         {
             transform.position = parentOasis.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * parentOasis.radius * 0.85f;

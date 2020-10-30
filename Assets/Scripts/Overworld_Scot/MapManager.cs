@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PyramidManager : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
     public Pyramid pyramidPrefab;
     public Oasis oasisPrefab;

@@ -7,12 +7,7 @@ public class Wind : MonoBehaviour
     public Animator animator;
     private bool waiting = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    //wait a random amount of time offscreen so that wind gusts are not synced
     IEnumerator RandomWait()
     {
         yield return new WaitForSeconds(Random.Range(0.1f, 2f));
@@ -24,9 +19,11 @@ public class Wind : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
+        //check if the animation has ended
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("windblow") && !waiting)
         {
             waiting = true;
+            //move offscreen to reuse the object
             transform.position = new Vector3(-50, -50, 0);
             StartCoroutine("RandomWait");
         }

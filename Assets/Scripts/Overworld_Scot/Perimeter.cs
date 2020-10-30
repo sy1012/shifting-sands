@@ -12,7 +12,10 @@ public class Perimeter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //make it small when first created
         transform.localScale = new Vector3(0.1f, 0.1f, 1);
+
+        //spawn a sprite mask as well to allow circles to overlap and combine
         lineMask = Instantiate(lineMaskPrefab, oasis.transform);
         lineMask.transform.localScale = transform.localScale;
     }
@@ -20,6 +23,7 @@ public class Perimeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //lerp size of the circle until it reaches the intended size
 		if (!grown)
 		{
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(oasis.radius * 2 / 5, oasis.radius * 2 / 5, 1), 10f * Time.deltaTime);
@@ -30,6 +34,7 @@ public class Perimeter : MonoBehaviour
 			}
         }
 
+        //rotate the circle at a constant rate
         transform.Rotate(0, 0, 25 * Time.deltaTime);
         lineMask.transform.Rotate(0, 0, 25 * Time.deltaTime);
     }
