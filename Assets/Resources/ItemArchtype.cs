@@ -19,7 +19,7 @@ public class ItemArchtype : MonoBehaviour, IItem
     // Start is called before the first frame update
     public virtual void Initialize()
     {
-
+        Debug.Log("werong one");
     }
 
     public void PickedUp()
@@ -50,7 +50,7 @@ public class ItemArchtype : MonoBehaviour, IItem
     public void CreateInfoPopUp()
     {
         if (this.sr == null) { Initialize(); }
-        if (this.background == null) { (this.text, this.background) = ScrollTextFormatter.CreateAssetsFromScratch(this.description, this.scroll); Debug.Log("Creation Occured");  }
+        if (this.background == null) { (this.text, this.background) = ScrollTextFormatter.CreateAssetsFromScratch(this.description, this.scroll);  }
         else
         {
             text.gameObject.SetActive(true);
@@ -63,7 +63,10 @@ public class ItemArchtype : MonoBehaviour, IItem
     public void DestroyInfoPopUp()
     {
         if (this.sr == null) { Initialize(); }
-        text.gameObject.SetActive(false);
-        background.SetActive(false);
+        if (text != null)
+        {
+            text.gameObject.SetActive(false);
+            background.SetActive(false);
+        }
     }
 }

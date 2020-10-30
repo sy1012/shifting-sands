@@ -19,8 +19,8 @@ public class Item : ItemArchtype
         this.itemName = data.itemName;          // Name of the ite
         this.description = data.description;    // description of the item
 
-        this.gameObject.AddComponent<SpriteRenderer>();
         this.sr = this.GetComponent<SpriteRenderer>();
+        if (sr == null) sr = this.gameObject.AddComponent<SpriteRenderer>();
         this.sr.sprite = data.sprite;
         this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
