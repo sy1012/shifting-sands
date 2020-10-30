@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 712518795}
   - component: {fileID: 712518797}
   - component: {fileID: 712518798}
+  - component: {fileID: 712518799}
   m_Layer: 0
   m_Name: map
   m_TagString: Untagged
@@ -561,6 +562,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pyramidPrefab: {fileID: 8857799296077590688, guid: 4d8f86d258fcc2f4d9e49f6d6454b802, type: 3}
   oasisPrefab: {fileID: 5223385617891357901, guid: 062bf1fd439fe9c41ba6a0e17fbcce9d, type: 3}
+  oasisGraph:
+    name: oasisGraph
+    nodes: []
+    adjList: []
+    symbols: 
 --- !u!61 &712518798
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -587,6 +593,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.666777, y: 7.225891}
   m_EdgeRadius: 0
+--- !u!114 &712518799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712518794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1881cbbefa65904a879db4645c64d70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oasisGraph:
+    name: 
+    nodes: []
+    adjList: []
+    symbols: 
 --- !u!1001 &781131772
 PrefabInstance:
   m_ObjectHideFlags: 0
