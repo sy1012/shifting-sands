@@ -105,9 +105,10 @@ public class PlayerStateMachine : Character
             StartCoroutine(state.OnAttack());
         }
 
+        //Every state has an execute method. May be empty.
         state.Execute();
 
-        //Global Player State Behaviour
+        //Global Player State Behaviour. Independant of state player logic goes here!
 
         //Handle Death
         if (health <= 0)
@@ -115,6 +116,7 @@ public class PlayerStateMachine : Character
             Destroy(gameObject);
         }
 
+        //Lower invincibility time
         InvincibleTime -= Time.deltaTime;
 
         //Handle Loot
@@ -137,7 +139,8 @@ public class PlayerStateMachine : Character
 
     }
 
-    //Sync Up Trigger Data so that it can be reliable accesses within Update cycle
+    //  Sync Up Trigger Data so that it can be reliable accesses within Update cycle. 
+    //  Accessor for Trigger Colliders the player is currently in
     public List<Collider2D> GetTriggerCollisions { get { return triggerCollisions; } }
     List<Collider2D> triggerCollisions;
     bool onTriggerStay;

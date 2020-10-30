@@ -4,6 +4,10 @@ using UnityEngine;
 public class Entrance : Interactable
 {
     GameObject interactor;
+    /// <summary>
+    /// Start a coroutine that after x seconds (alloted time for leaving animation). An exit dungeon event is fired.
+    /// </summary>
+    /// <param name="interactor"></param>
     public override void Interact(GameObject interactor)
     {
         this.interactor = interactor;
@@ -12,50 +16,12 @@ public class Entrance : Interactable
 
     IEnumerator LeaveDungeon()
     {
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(1f);
         EndInteraction(interactor);
     }
 
     public override void EndInteraction(GameObject interactor)
     {
-        Debug.Log("Trigger Exit Dungeon");
+        EventManager.TriggerDungeonExit();
     }
 }
-
-/*
-[CustomEditor(typeof(RoomGenerator))]
-public class RoomGeneratorEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        RoomGenerator roomGenerator = (RoomGenerator)target;
-        if (GUILayout.Button("Test 'Make Doors'"))
-        {
-            roomGenerator.MakeDoors();
-        }
-        if (GUILayout.Button("Test 'Make Rooms'"))
-        {
-            roomGenerator.MakeDoors();
-            roomGenerator.MakeRooms();
-            roomGenerator.MoveRoomsToNodes();
-        }
-        if (GUILayout.Button("Test 'Door Tree'"))
-        {
-            roomGenerator.MakeDoors();
-            NodeComponent node = Selection.gameObjects[0].GetComponent<NodeComponent>();
-            DoorT doorT = new DoorT(roomGenerator.GetNodeDoors(node),node);
-            if (doorT == null)
-            {
-                throw new ArgumentException("Tree of doors not made");
-            }
-            Stack<Door> orderedDoors = DoorT.ToOrderedStack(doorT,null);
-            while (orderedDoors.Count != 0)
-            {
-                var doort = orderedDoors.Pop();
-                Debug.Log(doort.GetNeighbourNodeOfDoorFor(node).transform.name);
-            }
-        }
-    }
-}
-*/

@@ -1,54 +1,31 @@
 ﻿using UnityEngine;
-//using UnityEditor;
+
+/// <summary>
+/// Abstact monobehaviour with the Interaction prototypes. You can Interact with objects that have a component that inherites this.
+/// TODO. Turn into interface so that object can "have a interactable" instead of "is a interactable". Maybe we want players to be interactable?
+/// </summary>
 public abstract class Interactable:MonoBehaviour
 {
+    // Not used yet
     protected int priority;
+    // Not used yet
     protected KeyCode key;
+    /// <summary>
+    /// Interface in which a interactor interacts with the interactable.
+    /// </summary>
+    /// <param name="interactor"></param>
     public virtual void Interact(GameObject interactor)
     {
         return;
     }
 
+    /// <summary>
+    /// Interface in which a interactor ends and interaction with the interactable
+    /// Optional
+    /// </summary>
+    /// <param name="interactor"></param>
     public virtual void EndInteraction(GameObject interactor)
     {
         return;
     }
 }
-
-/*
-[CustomEditor(typeof(RoomGenerator))]
-public class RoomGeneratorEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        RoomGenerator roomGenerator = (RoomGenerator)target;
-        if (GUILayout.Button("Test 'Make Doors'"))
-        {
-            roomGenerator.MakeDoors();
-        }
-        if (GUILayout.Button("Test 'Make Rooms'"))
-        {
-            roomGenerator.MakeDoors();
-            roomGenerator.MakeRooms();
-            roomGenerator.MoveRoomsToNodes();
-        }
-        if (GUILayout.Button("Test 'Door Tree'"))
-        {
-            roomGenerator.MakeDoors();
-            NodeComponent node = Selection.gameObjects[0].GetComponent<NodeComponent>();
-            DoorT doorT = new DoorT(roomGenerator.GetNodeDoors(node),node);
-            if (doorT == null)
-            {
-                throw new ArgumentException("Tree of doors not made");
-            }
-            Stack<Door> orderedDoors = DoorT.ToOrderedStack(doorT,null);
-            while (orderedDoors.Count != 0)
-            {
-                var doort = orderedDoors.Pop();
-                Debug.Log(doort.GetNeighbourNodeOfDoorFor(node).transform.name);
-            }
-        }
-    }
-}
-*/
