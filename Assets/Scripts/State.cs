@@ -177,14 +177,17 @@ public class AttackState : State
         psm.weaponEquiped.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
         psm.weaponEquiped.Attack();
         //Set player to look in the direction attacking
-        psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
         psm.animator.SetFloat("PrevVertical", atkHeading.y);
-        psm.animator.SetFloat("Speed", 0);
+        psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
+        psm.animator.SetFloat("Vertical", atkHeading.y);
+        psm.animator.SetFloat("Horizontal", atkHeading.x);
         yield return new WaitForSeconds(0.5f);
         psm.SetState(new NormalState(psm));
     }
     public override void Execute()
     {
+        psm.animator.SetFloat("Speed", psm.GetArrowKeysDirectionalInput().sqrMagnitude);
+        psm.MoveCharacter(psm.GetArrowKeysDirectionalInput(), psm.speed/4);
     }
     public override string ToString()
     {
