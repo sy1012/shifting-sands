@@ -151,6 +151,7 @@ public class PlayerStateMachine : Character
     //  Handle Triggers
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //Debug.Log("TriggerStay");
         state.HandleTrigger(collision);
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour,IHealable
 {
     public bool isMousedOver = false;
     public int maxHealth = 100;
@@ -38,6 +38,13 @@ public class Character : MonoBehaviour
     public virtual void TakeDamage(int damage, Collision2D collision)
     {
         health -= damage;
+        healthbar.SetHealth(health);
+    }
+
+    public void Heal(int amount)
+    {
+        
+        health+=amount;
         healthbar.SetHealth(health);
     }
 }

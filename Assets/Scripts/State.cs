@@ -111,7 +111,7 @@ public class NormalState : State
     public override void HandleTrigger(Collider2D collision)
     {
         //Door Trigger and Player Inputs to go to next room
-        if (Input.GetKeyDown(KeyCode.E) && collision.GetComponent<DoorComponent>())
+        if (Input.GetKeyUp(KeyCode.E) && collision.GetComponent<DoorComponent>())
         {
             var dc = collision.GetComponent<DoorComponent>();
             //Does nothing right now, but might be useful later
@@ -121,6 +121,15 @@ public class NormalState : State
             transition.startDoor = collision.transform;
             transition.endDoor = dc.GetSisterDoor();
             psm.SetState(transition);
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            var interactable = collision.GetComponent<Interactable>();
+            if (interactable!=null)
+            {
+                interactable.Interact(psm.gameObject);
+                Debug.Log("Interact");
+            }
         }
     }
 
