@@ -158,6 +158,7 @@ public class AttackState : State
     public override IEnumerator Enter()
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 atkHeading = (mouse - psm.transform.position);
         float angle = Mathf.Rad2Deg * Mathf.Atan((psm.transform.position.y - mouse.y) / (psm.transform.position.x - mouse.x));
 
         // now convert the angle into a degrees cw of up(north) based on the current value of direction and what quadrant it is in
@@ -175,13 +176,15 @@ public class AttackState : State
         psm.weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
         psm.weaponEquiped.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
         psm.weaponEquiped.Attack();
+        //Set player to look in the direction attacking
+        psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
+        psm.animator.SetFloat("PrevVertical", atkHeading.y);
+        psm.animator.SetFloat("Speed", 0);
         yield return new WaitForSeconds(0.5f);
         psm.SetState(new NormalState(psm));
     }
     public override void Execute()
     {
-        //Allow partial movement during an attack state
-        psm.NormalMovementFraction(0.5f);
     }
     public override string ToString()
     {
