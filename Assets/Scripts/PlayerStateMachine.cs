@@ -22,6 +22,7 @@ public class PlayerStateMachine : Character
     public StateEnum currentState;
     public float speed;
     private float invincibleTime;
+    private bool onTriggerStay2D;
 
     public float InvincibleTime { get => invincibleTime; set => invincibleTime = value; }
 
@@ -41,6 +42,7 @@ public class PlayerStateMachine : Character
         //move healthbar to a more suitable position
         healthCanvas.transform.position = transform.position + new Vector3(0, 1f, 0);
         dashLayerMask.value = 10;
+        triggerCollisions = new List<Collider2D>();
     }
 
     //Try to get input from player here consistently
@@ -135,6 +137,24 @@ public class PlayerStateMachine : Character
 
     }
 
+    //Sync Up Trigger Data so that it can be reliable accesses within Update cycle
+    public List<Collider2D> GetTriggerCollisions { get { return triggerCollisions; } }
+    List<Collider2D> triggerCollisions;
+    bool onTriggerStay;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        onTriggerStay = true;
+        triggerCollisions.Add(collision);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        triggerCollisions.Remove(collision);
+        if (triggerCollisions.Count<=0)
+        {
+            onTriggerStay = false;
+        }
+    }
+
 
     public override void TakeDamage(int damage, Collision2D collision)
     {
@@ -150,13 +170,4 @@ public class PlayerStateMachine : Character
         return new Vector2(transform.position.x, transform.position.y + playerRootOffset);
     }
     //  Handle Triggers
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //Debug.Log("TriggerStay");
-        state.HandleTrigger(collision);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        state.HandleTrigger(collision);
-    }
 }

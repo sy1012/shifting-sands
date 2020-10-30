@@ -106,10 +106,35 @@ public class NormalState : State
             item.GetComponent<ItemArchtype>().PickedUp();
             yield return null;
         }
+        var triggerCollisions = new List<Collider2D>(psm.GetTriggerCollisions);
+        foreach (var collision in triggerCollisions)
+        {
+            Interactable interactable = collision.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                interactable.Interact(psm.gameObject);
+                yield return null;
+            }
+            var dc = collision.GetComponent<DoorComponent>();
+            if (dc != null)
+            {
+                //Does nothing right now, but might be useful later
+                EventManager.TriggerDoorEntered(dc);
+                //Make new transition state, set it up with the doors involved, set state to the Transition
+                var transition = new TransitionState(psm);
+                transition.startDoor = collision.transform;
+                transition.endDoor = dc.GetSisterDoor();
+                psm.SetState(transition);
+                yield return null;
+            }
+
+        }
+        yield return null;
     }
 
     public override void HandleTrigger(Collider2D collision)
     {
+        Debug.Log("Handle Trigger Time: " + Time.deltaTime);
         //Door Trigger and Player Inputs to go to next room
         if (Input.GetKeyUp(KeyCode.E) && collision.GetComponent<DoorComponent>())
         {
@@ -122,13 +147,13 @@ public class NormalState : State
             transition.endDoor = dc.GetSisterDoor();
             psm.SetState(transition);
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.B))
         {
+            Debug.Log("Interact");
             var interactable = collision.GetComponent<Interactable>();
             if (interactable!=null)
             {
                 interactable.Interact(psm.gameObject);
-                Debug.Log("Interact");
             }
         }
     }

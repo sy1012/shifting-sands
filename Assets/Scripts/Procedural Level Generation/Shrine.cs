@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 //using UnityEditor;
 public class Shrine : Interactable
 {
@@ -7,6 +8,7 @@ public class Shrine : Interactable
         IHealable target = interactor.GetComponent<IHealable>();
         if(target == null) { return; }
         target.Heal(10);
+        Debug.Log("Heal " + interactor.name);
     }
 }
 
