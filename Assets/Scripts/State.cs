@@ -274,6 +274,8 @@ public class HitState:State
     }
     public override IEnumerator Enter()
     {
+        // play player hit sound effect
+        SoundManager.current.PlayPlayerHit();
         psm.animator.SetTrigger("hit");
         psm.health -= damageTaking;
         var healthbar = psm.GetComponentInChildren<Healthbar>();

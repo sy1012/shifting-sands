@@ -38,6 +38,12 @@ public class SoundManager : MonoBehaviour
     private AudioClip Enemy14;
     private AudioClip Enemy15;
 
+    // player hit
+    private AudioClip PlayerHit1;
+
+    // enemy hit
+    private AudioClip EnemyHit1;
+
     // to allow use in other scripts
     public static SoundManager current;
 
@@ -75,6 +81,64 @@ public class SoundManager : MonoBehaviour
         Enemy13 = Resources.Load<AudioClip>("SFX/mnstr13");
         Enemy14 = Resources.Load<AudioClip>("SFX/mnstr14");
         Enemy15 = Resources.Load<AudioClip>("SFX/mnstr15");
+
+        // player hit
+        PlayerHit1 = Resources.Load<AudioClip>("SFX/playerHit1");
+
+        // enemy hit
+        EnemyHit1 = Resources.Load<AudioClip>("SFX/enemyHit1");
+    }
+
+    
+
+    // play dungeon ambiance
+    public void PlayDungeonAmbiance(){
+
+    }
+
+    // play desert wind on overworld
+    public void PlayDesertWind(){
+
+    }
+
+    // play any one of enemy movement sound effects
+    public void PlayEnemyMovement(){
+
+    }
+
+    // play any one of player movement sound effects
+    public void PlayPlayerMovement(){
+
+    }
+
+    // play any one of shrine sound effects
+    public void PlayShrine(){
+
+    }
+
+    // play any one of dash sound effects
+    public void PlayDash(){
+
+    }
+
+    // play any one of wall hit sound effects
+    public void PlayWall(){
+
+    }
+
+    // play any one of breakable sound effects
+    public void PlayBreakable(){
+
+    }
+
+    // play any one of enemy hit sound effects
+    public void PlayEnemyHit(){
+        SoundPlayer.PlayOneShot(EnemyHit1);
+    }
+
+    // play any one of player hit sound effects
+    public void PlayPlayerHit(){
+        SoundPlayer.PlayOneShot(PlayerHit1);
     }
 
     // play any one of swing sound effects
