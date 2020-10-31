@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour
     public Graph oasisGraph = new Graph("oasisGraph");
     public LineRenderer pathPrefab;
 
-    private Oasis currentOasis;
+    public Oasis currentOasis;
 
 
     public static event EventHandler<EventArgs> newOasesHandler;

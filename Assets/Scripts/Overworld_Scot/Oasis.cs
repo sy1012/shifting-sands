@@ -92,8 +92,8 @@ public class Oasis : MonoBehaviour
         {
             //create within travel radius
             pyramids.Add(Instantiate(pyramidPrefab, transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * radius * 0.85f, transform.rotation));
-            pyramids[i].SetParentOasis(this);
-            pyramids[i].Reposition(); //check to make sure it is in a valid spot
+            pyramids[pyramids.Count - 1].SetParentOasis(this);
+            pyramids[pyramids.Count - 1].Reposition(); //check to make sure it is in a valid spot
 
             if (pyramids.Count == i + 1)
             {

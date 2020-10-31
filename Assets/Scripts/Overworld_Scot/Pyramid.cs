@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphGrammars;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,12 @@ public class Pyramid : MonoBehaviour
     private Oasis parentOasis;
     private MapManager pyramidManager;
     bool mousedOver = false;
-
+    private PlayerOverworldTraversal overworldTraversal;
     // Start is called before the first frame update
     void Start()
     {
         pyramidManager = FindObjectOfType<MapManager>();
+        overworldTraversal = FindObjectOfType<PlayerOverworldTraversal>();
     }
 
     public void SetParentOasis(Oasis parent)
@@ -42,7 +44,7 @@ public class Pyramid : MonoBehaviour
             if (hit.collider == GetComponent<Collider2D>())
                 {        
                     //for testing transformation into oasis, rightclick pyramid to simulate beating the dungeon
-                    if (Input.GetMouseButtonDown(1))
+                    if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this) && Input.GetMouseButtonDown(1))
                     {
                         TransformToOasis();
                     }
@@ -51,7 +53,7 @@ public class Pyramid : MonoBehaviour
                 }
                 mousedOver = false;
             }
-            if (mousedOver)
+            if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this) && mousedOver)
             {
                 transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.8f, 0.8f), 5 * Time.deltaTime);
             }

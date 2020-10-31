@@ -7,7 +7,7 @@ public class Caravan : MonoBehaviour
 {
     Vector2 targetposition;
     public List<Node> path;
-    public Node currentNode;
+    public OasisNode currentNode;
     PlayerOverworldTraversal traversal;
 
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class Caravan : MonoBehaviour
     {
         if(path.Count != 0)
 		{
-            currentNode = path[0];
+            currentNode = (OasisNode)path[0];
             traversal.currentNode = (OasisNode)currentNode;
             if (transform.position != ((OasisNode)path[0]).getOasis().transform.position)
             {
