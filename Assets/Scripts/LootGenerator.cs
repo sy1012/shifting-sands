@@ -100,6 +100,8 @@ public class LootGenerator
     {
         foreach (ItemData item in items)
         {
+            // play coins sound effect
+            SoundManager.current.PlayCoins();
             GameObject drop = new GameObject("lootDrop");
             //GameObject.Destroy(drop.GetComponent<SpriteRenderer>());
             DungeonMaster.loot.Add(drop);

@@ -131,6 +131,8 @@ public class NormalState : State
             var dc = collision.GetComponent<DoorComponent>();
             if (dc != null)
             {
+                // play door sound
+                SoundManager.current.PlayDoor();
                 //Does nothing right now, but might be useful later
                 EventManager.TriggerDoorEntered(dc);
                 //Make new transition state, set it up with the doors involved, set state to the Transition
@@ -163,6 +165,7 @@ public class AttackState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
+        // play swing sound
         SoundManager.current.PlaySwing();
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 atkHeading = (mouse - psm.transform.position);
