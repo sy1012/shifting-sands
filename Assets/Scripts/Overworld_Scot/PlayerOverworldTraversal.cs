@@ -19,8 +19,11 @@ public class PlayerOverworldTraversal : MonoBehaviour
     {
         mapManager = FindObjectOfType<MapManager>();
         oasisGraph = mapManager.oasisGraph;
-        currentNode = (OasisNode)mapManager.oasisGraph.GetNodes[0];
+        currentNode = mapManager.currentOasis.oasisNode;
+        destinationNode = currentNode;
         caravan = FindObjectOfType<Caravan>();
+        List<Node> nodePath = graphTraversal(mapManager.oasisGraph, currentNode, destinationNode);
+        caravan.path = nodePath;
     }
 
     // Update is called once per frame

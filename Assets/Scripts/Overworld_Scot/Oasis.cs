@@ -46,11 +46,15 @@ public class Oasis : MonoBehaviour
 
     private void Update()
     {
+
+        //Scale linerenderers out to other Oases
         if (newLine != null && newLine.GetPosition(1) != transform.position)
         {
             newLine.SetPosition(1, Vector2.MoveTowards(newLine.GetPosition(1), transform.position, 10f * Time.deltaTime));
         }
 
+
+        //scale linerenders out to pyramids if caravan is at this oasis
         if (caravan.currentNode == oasisNode)
         {
             for (int i = 0; i < pyramidLines.Count; i++)

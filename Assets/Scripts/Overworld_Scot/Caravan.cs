@@ -14,6 +14,7 @@ public class Caravan : MonoBehaviour
     void Start()
     {
         traversal = FindObjectOfType<PlayerOverworldTraversal>();
+        currentNode = traversal.currentNode;
     }
 
     // Update is called once per frame
