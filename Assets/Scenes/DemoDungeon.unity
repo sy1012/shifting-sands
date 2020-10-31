@@ -3625,7 +3625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACAn+tNaLviUAIAAPgEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVEtz2jAQ/iuMzqVjaGhCb615pAdCJqSTiy9CWmMNsuTRI0Ay/PeuZBu7LhfW3367++3D/iRC2QqY02ZtBN9oDuTHiASbfBl1zkc404NWO/EBLedNcFcEEo2cF+qERnwSwqwuwRnBfqqDDOQEQa9Erk255AdItXUW4ZxKC+gy2oVohdDniJzxbzwPIRe0pvfB+kBrnoyuaDJQDkxHnbXMllfTvGKSlhXwoLljT270aVITFfbTcIJ2pqUUthFD3KWKzaa0sh5bQQIXFJuLCpKvUwQKEIfChYz98G2eW3CNLEMvC2FwSnVe8kvXoyupPdba3qn0UUIyvYuy6qyb/wjjSXTnRpePbeFJEoq4QrDjC70wal1vuH140WmfxBmdqDzSvYS3AtSTXhvtFUenMz6EegvTRfd46y0tgB07vJY6AH3VDX24odDDNbZ/TqUo93GUdzWwkzqOPB4AGFzObxQcz8M2KRANKv5YeKWH/h01jpUw1qGr6VIFeXvtTaCSFRph9My7VBsFEW00V6CodJdnzOKGKxz4elUHnhUNL0xTu/G178EgJMIdP0kGrmd9uu3KFvq0AVtsvZNCQSc6OJ5wTKlWqr6w/kjasJ03OWW9sIMX/N/LIt/5PKcz/HGe7x9myTifz1n+jSYP9xPEkpzE0xMK+6TyuRbajAeXprrkCs+s/Y6M1oZW8dq5oae1+Ch1X6BQud4xA6C2dYqbcjBYBV9MvuQCJ7QD54SK+yafGZGaHYFnt5pZbHV5doZmXZaMVOJdu4BkJI1fjoxcyfUvUEsDBBQAAAgIAACAn+tWsHXJawAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrSSWYplWqIpEKSkpCVZmBropllaJqcZJxpYmBsCxQzSlGKB6ksqC1L9EnNTIXoCEksy0jLzUjLz0vXcizJT3EFGK8XWAgBQSwECLQAUAAAICAAAgJ/rTWi74lACAAD4BAAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAgJ/rVrB1yWsAAAB4AAAACQAkAAAAAAAAAAAAAACdAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAFMDAAAAAA==
+    dataString: UEsDBBQAAAgIAACQn+tNaLviUAIAAPgEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVEtz2jAQ/iuMzqVjaGhCb615pAdCJqSTiy9CWmMNsuTRI0Ay/PeuZBu7LhfW3367++3D/iRC2QqY02ZtBN9oDuTHiASbfBl1zkc404NWO/EBLedNcFcEEo2cF+qERnwSwqwuwRnBfqqDDOQEQa9Erk255AdItXUW4ZxKC+gy2oVohdDniJzxbzwPIRe0pvfB+kBrnoyuaDJQDkxHnbXMllfTvGKSlhXwoLljT270aVITFfbTcIJ2pqUUthFD3KWKzaa0sh5bQQIXFJuLCpKvUwQKEIfChYz98G2eW3CNLEMvC2FwSnVe8kvXoyupPdba3qn0UUIyvYuy6qyb/wjjSXTnRpePbeFJEoq4QrDjC70wal1vuH140WmfxBmdqDzSvYS3AtSTXhvtFUenMz6EegvTRfd46y0tgB07vJY6AH3VDX24odDDNbZ/TqUo93GUdzWwkzqOPB4AGFzObxQcz8M2KRANKv5YeKWH/h01jpUw1qGr6VIFeXvtTaCSFRph9My7VBsFEW00V6CodJdnzOKGKxz4elUHnhUNL0xTu/G178EgJMIdP0kGrmd9uu3KFvq0AVtsvZNCQSc6OJ5wTKlWqr6w/kjasJ03OWW9sIMX/N/LIt/5PKcz/HGe7x9myTifz1n+jSYP9xPEkpzE0xMK+6TyuRbajAeXprrkCs+s/Y6M1oZW8dq5oae1+Ch1X6BQud4xA6C2dYqbcjBYBV9MvuQCJ7QD54SK+yafGZGaHYFnt5pZbHV5doZmXZaMVOJdu4BkJI1fjoxcyfUvUEsDBBQAAAgIAACQn+tWsHXJawAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrSSWYplWqIpEKSkpCVZmBropllaJqcZJxpYmBsCxQzSlGKB6ksqC1L9EnNTIXoCEksy0jLzUjLz0vXcizJT3EFGK8XWAgBQSwECLQAUAAAICAAAkJ/rTWi74lACAAD4BAAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAkJ/rVrB1yWsAAAB4AAAACQAkAAAAAAAAAAAAAACdAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAFMDAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -3744,6 +3744,58 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &426993642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426993644}
+  - component: {fileID: 426993643}
+  m_Layer: 8
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &426993643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426993642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51cc94fe1118aa4c9bb27e09c66d9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: c85711dbdf0e2124e984e7223ff7bebe, type: 2}
+  quality: 0
+  health: 0
+  sprite: {fileID: 0}
+  destructionAnimation: []
+  beingHitAnimation: []
+  animator: {fileID: 0}
+  sr: {fileID: 0}
+  bc: {fileID: 0}
+--- !u!4 &426993644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426993642}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.95, y: -6.69, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452888861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4665,6 +4717,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4753,6 +4806,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9295f2423420f664c9128afd58d19891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &528025735
 GameObject:
   m_ObjectHideFlags: 0
@@ -4876,6 +4941,58 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &529839839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 529839841}
+  - component: {fileID: 529839840}
+  m_Layer: 8
+  m_Name: Crate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &529839840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529839839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51cc94fe1118aa4c9bb27e09c66d9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 925d9b91f96a61042b3bbd78364d70af, type: 2}
+  quality: 0
+  health: 0
+  sprite: {fileID: 0}
+  destructionAnimation: []
+  beingHitAnimation: []
+  animator: {fileID: 0}
+  sr: {fileID: 0}
+  bc: {fileID: 0}
+--- !u!4 &529839841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529839839}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.56, y: -5.55, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &532629018
 GameObject:
   m_ObjectHideFlags: 0
