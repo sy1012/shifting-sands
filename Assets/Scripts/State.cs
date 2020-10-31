@@ -55,6 +55,10 @@ public  abstract class State
     {
         yield break;
     }
+    public virtual IEnumerator Inventory()
+    {
+        yield break;
+    }
     public virtual void HandleTrigger(Collider2D collision)
     {
         return;
@@ -110,6 +114,7 @@ public class NormalState : State
             item.GetComponent<ItemArchtype>().PickedUp();
             yield return null;
         }
+        
         //Interact with objects with Interactable 
         var triggerCollisions = new List<Collider2D>(psm.GetTriggerCollisions);
         foreach (var collision in triggerCollisions)

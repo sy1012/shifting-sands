@@ -14,6 +14,7 @@ public class PlayerStateMachine : Character
     public float playerRootOffset = -0.5f;
     public Weapon weaponEquiped;
     KeyCode interactKey = KeyCode.E;
+    KeyCode InventoryKey = KeyCode.I;
     KeyCode rollKey = KeyCode.Space;
     
     //!!The Behavioural State of the Player!!
@@ -91,6 +92,11 @@ public class PlayerStateMachine : Character
 
         //Handle Input
         if (Input.GetKeyDown(interactKey))
+        {
+            StartCoroutine(state.Interact());
+        }
+
+        if (Input.GetKeyDown(InventoryKey))
         {
             StartCoroutine(state.Interact());
         }

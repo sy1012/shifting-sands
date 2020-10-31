@@ -50,7 +50,7 @@ public class ItemArchtype : MonoBehaviour, IItem
     public void CreateInfoPopUp()
     {
         if (this.sr == null) { Initialize(); }
-        if (this.background == null) { (this.text, this.background) = ScrollTextFormatter.CreateAssetsFromScratch(this.description, this.scroll);  }
+        if (this.background == null) { (this.text, this.background) = ScrollTextFormatter.CreateAssetsFromScratch(this.description, this.scroll); }
         else
         {
             text.gameObject.SetActive(true);

@@ -8,10 +8,12 @@ public static class EventManager
     public delegate void GameEvent(EventArgs e);
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
+    public static event EventHandler onOpenInventory;
+    public static event EventHandler onCloseInventory;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
-    // Start is called before the first frame update
+
     public static void TriggerDoorEntered(DoorComponent door)
     {
         Debug.Log("Door Entered");
@@ -34,5 +36,15 @@ public static class EventManager
     public static void TriggerDungeonGenerated()
     {
         onDungeonGenerated?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnOpenInventory()
+    {
+        onOpenInventory?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnCloseInventory()
+    {
+        onCloseInventory?.Invoke(null, EventArgs.Empty);
     }
 }
