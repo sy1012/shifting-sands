@@ -8,19 +8,14 @@ using UnityEngine.UIElements;
 //base enemy class
 public class Enemy : Character
 {
-    public int damage; // any Enemy inheriting this class should set these two values themselves
+    public int quality; // WHat tier are the drops from this enemy?
+    public int damage;  // any Enemy inheriting this class should set these two values themselves
     public float damageSpeed; // note this is per second
     public float cooldown = 0;
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-            LootGenerator.Generate(this.transform.position, 0);
-        }
-
         if (cooldown >= 0) { cooldown -= Time.deltaTime; }
     }
 
@@ -31,5 +26,10 @@ public class Enemy : Character
             cooldown = damageSpeed;
             collision.collider.gameObject.GetComponent<Character>().TakeDamage(damage,collision);
         }
+    }
+
+    public void OnDestroy()
+    {
+        LootGenerator.Generate(this.transform.position, quality);
     }
 }
