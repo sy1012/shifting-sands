@@ -20,6 +20,7 @@ public enum StateEnum
 /// </summary>
 public  abstract class State
 {
+
     protected PlayerStateMachine psm;
     public StateEnum stateEnum;
     public State(PlayerStateMachine playerStateMachine)
@@ -162,6 +163,7 @@ public class AttackState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
+        SoundManager.current.PlaySwing();
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 atkHeading = (mouse - psm.transform.position);
         float angle = Mathf.Rad2Deg * Mathf.Atan((psm.transform.position.y - mouse.y) / (psm.transform.position.x - mouse.x));
