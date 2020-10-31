@@ -7,7 +7,7 @@ public class Caravan : MonoBehaviour
 {
     Vector2 targetposition;
     public List<Node> path;
-    Node currentNode;
+    public Node currentNode;
     PlayerOverworldTraversal traversal;
 
     // Start is called before the first frame update
