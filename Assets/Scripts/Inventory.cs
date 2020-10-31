@@ -11,39 +11,43 @@ public static class Inventory
     private static List<GameObject> inventory;
 
     // Start is called before the first frame update
-    public static void Start()
-    {
-        // load the sprites and put them into their objects
-        inventoryBackgroundSprite = Resources.Load<Sprite>("Sprites/InventoryBackground");
-        inventorySlotSprite = Resources.Load<Sprite>("Sprites/InventorySlot");
-
-
+    public static void Initialize()
+    { 
+        // How large should the inventory be on the Viewport?
+        const float VIEWPERCENT = 0.8f;
 
         // Scale the images for this resolution
-        
+        Debug.Log(Camera.main.orthographicSize);
+        //Camera.main.ViewportToScreenPoint(VIEWPERCENT * Camera.main.orthographicSize * 2, VIEWPERCENT);
 
         EventManager.onOpenInventory += OpenInventory();
         EventManager.onCloseInventory += CloseInventory();
+
+        //Initialize stuff
+        inventory = new List<GameObject>();
+        inventoryBackgroundSprite = Resources.Load<Sprite>("Sprites/InventoryBackground");
+        inventorySlotSprite = Resources.Load<Sprite>("Sprites/InventorySlot");
     }
 
     private static EventHandler OpenInventory()
     {
+        if (inventory == null) { Initialize(); }
         return null;
     }
 
     private static EventHandler CloseInventory()
     {
+        if (inventory == null) { Initialize(); }
         return null;
     }
 
-    private static void addToInventory()
+    public static void AddToInventory()
     {
-
+        if (inventory == null) { Initialize(); }
     }
 
-    // Update is called once per frame
-    public static void Update()
+    public static void RemoveFromInventory()
     {
-        
+        if (inventory == null) { Initialize(); }
     }
 }
