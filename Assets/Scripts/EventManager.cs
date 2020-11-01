@@ -9,7 +9,6 @@ public static class EventManager
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
 
-    public static event EventHandler onInventoryInteraction;
     public static event EventHandler onOpenInventory;
     public static event EventHandler onCloseInventory;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
@@ -56,10 +55,6 @@ public static class EventManager
         OnPlayerHit?.Invoke(EventArgs.Empty);
 
     }
-    public static void TriggerOnInventoryInteraction()
-    {
-        onInventoryInteraction?.Invoke(null, EventArgs.Empty);
-
-    }
+  
 }
 
