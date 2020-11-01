@@ -283,10 +283,13 @@ public class HitState:State
         dir = dir.normalized;
         //Vector3 target = psm.transform.position - dir*damageTaking / 4;
         healthbar.SetHealth(psm.health);
+        // Triggers the OnPlayerHit event
+        EventManager.TriggerOnPlayerHit();
         yield return new WaitForSeconds(stunTime);
         psm.InvincibleTime = invincibleTime;
         psm.SetState(new NormalState(psm));
         yield break;
+
     }
 
 }

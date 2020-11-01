@@ -17,7 +17,7 @@ public class DungeonCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         if(transform.position != target.position)
         {

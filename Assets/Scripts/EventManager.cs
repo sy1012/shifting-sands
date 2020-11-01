@@ -8,9 +8,10 @@ public static class EventManager
     public delegate void GameEvent(EventArgs e);
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
-    public static event EventHandler onOpenInventory;
-    public static event EventHandler onCloseInventory;
+    public static event EventHandler OnOpenInventory;
+    public static event EventHandler OnCloseInventory;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
+    public static event GameEvent OnPlayerHit;
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
 
@@ -40,11 +41,16 @@ public static class EventManager
 
     public static void TriggerOnOpenInventory()
     {
-        onOpenInventory?.Invoke(null, EventArgs.Empty);
+        OnOpenInventory?.Invoke(null, EventArgs.Empty);
     }
 
     public static void TriggerOnCloseInventory()
     {
-        onCloseInventory?.Invoke(null, EventArgs.Empty);
+        OnCloseInventory?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnPlayerHit()
+    {
+        OnPlayerHit?.Invoke(EventArgs.Empty);
     }
 }
