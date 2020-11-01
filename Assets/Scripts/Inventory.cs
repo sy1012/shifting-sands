@@ -22,8 +22,8 @@ public static class Inventory
         // Scale the images for this resolution
         
 
-        EventManager.OnOpenInventory += OpenInventory();
-        EventManager.OnCloseInventory += CloseInventory();
+        EventManager.onOpenInventory += OpenInventory();
+        EventManager.onCloseInventory += CloseInventory();
     }
 
     private static EventHandler OpenInventory()
