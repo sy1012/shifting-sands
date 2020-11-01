@@ -20,9 +20,6 @@ public class Weapon : ItemArchtype
     // item needs to be set up but only after the Data has been added
     public override void Initialize()
     {
-        // DEBUGGING
-        //Inventory.AddToInventory();
-
         // set up all the initial values for this weapon
         this.scrollOffset = data.scrollOffset;
         this.transform.localScale = data.spriteScaling;
