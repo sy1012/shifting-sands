@@ -102,6 +102,12 @@ public class NormalState : State
         yield break;
     }
 
+    public override IEnumerator Inventory()
+    {
+        EventManager.TriggerOnInventoryInteraction();
+        yield break;
+    }
+
     /// <summary>
     /// A coroutine that runs to handle the Player interaction with items and objects.
     /// </summary>
