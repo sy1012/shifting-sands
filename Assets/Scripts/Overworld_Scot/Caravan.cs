@@ -52,7 +52,6 @@ public class Caravan : MonoBehaviour
                 enterPyramid.transform.localScale = Vector2.Lerp(enterPyramid.transform.localScale, new Vector2(1000, 1000), Time.deltaTime / 8);
                 enterPyramid.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
                 fadeRenderer.color = new Color(0, 0, 0, fadeRenderer.color.a + 1f * Time.deltaTime);
-                Debug.Log(fadeRenderer.color.a);
             }
         }
         
