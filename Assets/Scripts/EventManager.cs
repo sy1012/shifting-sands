@@ -13,6 +13,8 @@ public static class EventManager
     public static event EventHandler onCloseInventory;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
     public static event GameEvent OnPlayerHit;
+    public static event GameEvent OnCastFireball;
+
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
 
@@ -59,6 +61,11 @@ public static class EventManager
     public static void TriggerOnInventoryInteraction()
     {
         onInventoryInteraction?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnCastFireball()
+    {
+        OnCastFireball?.Invoke(EventArgs.Empty);
     }
   
 }

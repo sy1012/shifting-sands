@@ -104,6 +104,7 @@ public class PlayerMovement : Character
         {
             isAttacking = true;
         }
+
     }
 
     void FixedUpdate()
