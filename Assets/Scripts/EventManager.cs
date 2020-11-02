@@ -6,40 +6,30 @@ using UnityEngine;
 public static class EventManager
 {
     public delegate void GameEvent(EventArgs e);
-    public static event GameEvent onDoorEntered;
-    public static event GameEvent onExitDungeon;
-    public static event EventHandler onPlayerMovement;
-    public static event EventHandler<onEnemyEventArgs> onEnemyMovement;
-    public class onEnemyEventArgs : EventArgs { public string enemyName; }
+    public static event GameEvent DoorEntered;
+    public static event GameEvent OnExitDungeon;
+    public static event EventHandler onInventoryInteraction;
     public static event EventHandler onOpenInventory;
     public static event EventHandler onCloseInventory;
-    public static event EventHandler onPlayerHit;
-    public static event EventHandler<onEnemyEventArgs> onEnemyHit;
-    public static event EventHandler onPlayerHealed;
-    public static event EventHandler onPlayerDashed;
-    public static event EventHandler onWallHit;
-    public static event EventHandler onAttack;
-    public static event EventHandler onCoinsDrop;
-    public static event EventHandler onOtherLootDrop;
-    public static event EventHandler<onEnemyEventArgs> onEnemyMakesSound;
-    public static event EventHandler<onBreakableDestroyedEventArgs> onBreakableDestroyed;
-    public class onBreakableDestroyedEventArgs : EventArgs { public string breakableName; }
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
+    public static event GameEvent OnPlayerHit;
+    public static event GameEvent OnCastFireball;
+
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
 
     public static void TriggerDoorEntered(DoorComponent door)
     {
         Debug.Log("Door Entered");
-        if (onDoorEntered != null)
+        if (DoorEntered != null)
         {
-            onDoorEntered(EventArgs.Empty);
+            DoorEntered(EventArgs.Empty);
         }
     }
 
     public static void TriggerDungeonExit()
     {
-        onExitDungeon?.Invoke(EventArgs.Empty);
+        OnExitDungeon?.Invoke(EventArgs.Empty);
         Debug.Log("Exit Dungeon Event");
     }
     public static void TriggerEnteringDungeon(int dungeonLevel)
@@ -64,52 +54,19 @@ public static class EventManager
 
     public static void TriggerOnPlayerHit()
     {
-        onPlayerHit?.Invoke(null, EventArgs.Empty);
-    }
+        OnPlayerHit?.Invoke(EventArgs.Empty);
 
-    public static void TriggerOnEnemeyHit(string enemyName)
-    {
-        onEnemyHit?.Invoke(null, new onEnemyEventArgs { enemyName = enemyName });
-    }
-
-    public static void TriggerOnPlayerHealed()
-    {
-        onPlayerHealed?.Invoke(null, EventArgs.Empty);
-    }
-
-    public static void TriggerOnPlayerDashed()
-    {
-        onPlayerDashed?.Invoke(null, EventArgs.Empty);
-    }
-
-    public static void TriggerOnCoinsDrop()
-    {
-        onCoinsDrop?.Invoke(null, EventArgs.Empty);
-    }
-
-    public static void TriggerOnAttack()
-    {
-        onAttack?.Invoke(null, EventArgs.Empty);
-    }
-
-    public static void TriggerOnOtherLootDrop()
-    {
-        onOtherLootDrop?.Invoke(null, EventArgs.Empty);
-    }
-
-    public static void TriggerOnEnemyMakesSound(string enemyName)
-    {
-        onEnemyMakesSound?.Invoke(null, new onEnemyEventArgs { enemyName = enemyName });
     }
     
-
-    public static void TriggerOnEnemyMovement(string enemyName)
+    public static void TriggerOnInventoryInteraction()
     {
-        onEnemyMovement?.Invoke(null, new onEnemyEventArgs { enemyName = enemyName });
+        onInventoryInteraction?.Invoke(null, EventArgs.Empty);
     }
 
-    public static void TriggerOnBreakableDestroyed(string enemyName)
+    public static void TriggerOnCastFireball()
     {
-        onEnemyMovement?.Invoke(null, new onEnemyEventArgs { enemyName = enemyName });
+        OnCastFireball?.Invoke(EventArgs.Empty);
     }
+  
 }
+
