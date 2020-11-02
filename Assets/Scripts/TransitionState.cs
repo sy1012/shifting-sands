@@ -51,6 +51,12 @@ public class TransitionState : State
             }
             yield return null;
         }
+
+        Room newRoom = endDoor.GetComponentInParent<Room>();
+        if(newRoom != null)
+        {
+            psm.SetRoom(newRoom);
+        }
         TurnOnColliders();
         r.enabled = true;
         psm.SetState(new NormalState(psm));
