@@ -104,6 +104,7 @@ public class Oasis : MonoBehaviour
             pyramids[pyramids.Count - 1].SetParentOasis(this);
             pyramids[pyramids.Count - 1].Reposition(); //check to make sure it is in a valid spot
 
+            //create a line if a new pyramid was successfully generated
             if (pyramids.Count > pyramidLines.Count)
             {
                 pyramidLines.Add(Instantiate(pyramidLinePrefab));
@@ -120,8 +121,10 @@ public class Oasis : MonoBehaviour
         }
     }
 
+    //add pyramids from other oases to this oasis
     public void addExistingPyramid(Pyramid pyramid)
     {
+        //check that the pyramid doesnt already belong to this oasis
         if (!pyramids.Contains(pyramid))
         {
             pyramids.Add(pyramid);

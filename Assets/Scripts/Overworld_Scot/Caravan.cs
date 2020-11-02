@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Caravan : MonoBehaviour
 {
@@ -9,12 +10,17 @@ public class Caravan : MonoBehaviour
     public List<Node> path;
     public OasisNode currentNode;
     PlayerOverworldTraversal traversal;
+    public bool entering = false;
+    public Pyramid enterPyramid;
+    public GameObject fade;
+    SpriteRenderer fadeRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         traversal = FindObjectOfType<PlayerOverworldTraversal>();
         currentNode = traversal.currentNode;
+        fadeRenderer = fade.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -31,6 +37,22 @@ public class Caravan : MonoBehaviour
 			else
 			{
                 path.RemoveAt(0);
+            }
+        }
+
+        if(entering)
+        {
+            if(fadeRenderer.color.a > 1)
+            {
+                SceneManager.LoadScene("DemoDungeon");
+            }
+            transform.position = Vector2.MoveTowards(transform.position, enterPyramid.transform.position, 10f * Time.deltaTime);
+            if (transform.position == enterPyramid.transform.position)
+            {
+                enterPyramid.transform.localScale = Vector2.Lerp(enterPyramid.transform.localScale, new Vector2(1000, 1000), Time.deltaTime / 8);
+                enterPyramid.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+                fadeRenderer.color = new Color(0, 0, 0, fadeRenderer.color.a + 1f * Time.deltaTime);
+                Debug.Log(fadeRenderer.color.a);
             }
         }
         

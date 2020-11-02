@@ -12,7 +12,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
 
     OasisNode destinationNode;
 
-    Caravan caravan;
+    public Caravan caravan;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +44,12 @@ public class PlayerOverworldTraversal : MonoBehaviour
             }
 
         }
+    }
+
+    public void EnterPyramid(Pyramid pyramid)
+    {
+        caravan.entering = true;
+        caravan.enterPyramid = pyramid;
     }
 
     List<Node> graphTraversal(Graph graph, Node root, OasisNode destination)

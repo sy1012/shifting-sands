@@ -1,4 +1,5 @@
 ﻿using GraphGrammars;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ public class Pyramid : MonoBehaviour
         pyramidManager.NewOasis(transform.position, 6f, parentOasis, this);
         foreach (Oasis oasis in pyramidManager.oases)
         {
+            //remove all references to the pyramid
             if (oasis.pyramids.Contains(this))
             {
                 oasis.pyramidLines.RemoveAt(oasis.pyramids.IndexOf(this));
@@ -52,15 +54,24 @@ public class Pyramid : MonoBehaviour
             if (hit.collider == GetComponent<Collider2D>())
                 {        
                     //for testing transformation into oasis, rightclick pyramid to simulate beating the dungeon
-                    if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this) && Input.GetMouseButtonDown(1))
+                    if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this))
                     {
-                        TransformToOasis();
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            overworldTraversal.EnterPyramid(this);
+                        }
+                        else if (Input.GetMouseButtonDown(1))
+                        {
+                            TransformToOasis();
+                        }
+                        
                     }
                     mousedOver = true;
                     break;
                 }
                 mousedOver = false;
             }
+            //scale pyramid when moused over
             if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this) && mousedOver)
             {
                 transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.8f, 0.8f), 5 * Time.deltaTime);

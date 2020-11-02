@@ -58,6 +58,7 @@ public class MapManager : MonoBehaviour
                     oasisGraph.AddConnection(node, sibling.oasisNode);
                 }
             }
+            //add relationship to pyramids as well
             if (overlap.transform.gameObject.GetComponent<Pyramid>() != null && overlap.transform.gameObject.GetComponent<Pyramid>() != parentPyramid)
             {
                 Pyramid pyramid = overlap.transform.gameObject.GetComponent<Pyramid>();
