@@ -38,7 +38,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<Oasis>() != null)
                 {
                     destinationNode = hit.collider.gameObject.GetComponent<Oasis>().oasisNode;
-                    List<Node> nodePath = graphTraversal(mapManager.oasisGraph, currentNode, destinationNode);
+                    List<Node> nodePath = BFSPath(mapManager.oasisGraph, currentNode, destinationNode);
                     caravan.path = nodePath;
                 }
             }
@@ -85,5 +85,40 @@ public class PlayerOverworldTraversal : MonoBehaviour
             return null;
         }
     }
+
+    public List<Node> BFSPath(Graph graph, Node start, Node destination)
+    {
+        var previous = new Dictionary<Node, Node>();
+
+        var queue = new Queue<Node>();
+        queue.Enqueue(start);
+
+        while (queue.Count > 0)
+        {
+            var vertex = queue.Dequeue();
+            foreach (var neighbor in graph.GetAdjByNode(vertex).GetAdj())
+            {
+                if (previous.ContainsKey(neighbor))
+                    continue;
+
+                previous[neighbor] = vertex;
+                queue.Enqueue(neighbor);
+            }
+        }
+
+        var path = new List<Node>();
+
+        var current = destination;
+        while (!current.Equals(start))
+        {
+            path.Add(current);
+            current = previous[current];
+        };
+
+        path.Add(start);
+        path.Reverse();
+
+        return path;
+    }   
 
 }

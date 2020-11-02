@@ -16,7 +16,8 @@ public class Oasis : MonoBehaviour
 
     public LineRenderer pyramidLinePrefab;
 
-
+    public List<Oasis> oases = new List<Oasis>();
+    public List<LineRenderer> oasisLines = new List<LineRenderer>();
 
     public float radius = 6f;
 
@@ -26,7 +27,8 @@ public class Oasis : MonoBehaviour
     //Pyramid for spawning
     public Pyramid pyramidPrefab;
     public List<Pyramid> pyramids = new List<Pyramid>();
-    public LineRenderer newLine;
+    public Dictionary<Pyramid, LineRenderer> pyramidDict = new Dictionary<Pyramid, LineRenderer>();
+    
 
     public List<LineRenderer> pyramidLines = new List<LineRenderer>();
     private Caravan caravan;
@@ -48,30 +50,33 @@ public class Oasis : MonoBehaviour
     {
 
         //Scale linerenderers out to other Oases
-        if (newLine != null && newLine.GetPosition(1) != transform.position)
+        for (int i = 0; i < oasisLines.Count; i++)
         {
-            newLine.SetPosition(1, Vector2.MoveTowards(newLine.GetPosition(1), transform.position, 10f * Time.deltaTime));
+            if (oasisLines[i] != null && oasisLines[i].GetPosition(1) != transform.position)
+            {
+                oasisLines[i].SetPosition(1, Vector2.MoveTowards(oasisLines[i].GetPosition(1), transform.position, 10f * Time.deltaTime));
+            }
         }
 
 
         //scale linerenders out to pyramids if caravan is at this oasis
         if (caravan.currentNode == oasisNode)
         {
-            for (int i = 0; i < pyramidLines.Count; i++)
+            foreach(LineRenderer line in pyramidLines)
             {
-                if (pyramidLines[i] != null && pyramidLines[i].GetPosition(1) != pyramids[i].transform.position)
+                if (line.GetPosition(1) != pyramids[pyramidLines.IndexOf(line)].transform.position)
                 {
-                    pyramidLines[i].SetPosition(1, Vector2.MoveTowards(pyramidLines[i].GetPosition(1), pyramids[i].transform.position, 10f * Time.deltaTime));
+                    line.SetPosition(1, Vector2.MoveTowards(line.GetPosition(1), pyramids[pyramidLines.IndexOf(line)].transform.position, 10f * Time.deltaTime));
                 }
             }
         }
 		else
 		{
-            for (int i = 0; i < pyramidLines.Count; i++)
+            foreach (LineRenderer line in pyramidLines)
             {
-                if (pyramidLines[i] != null && pyramidLines[i].GetPosition(1) != transform.position)
+                if (line.GetPosition(1) != transform.position)
                 {
-                    pyramidLines[i].SetPosition(1, Vector2.MoveTowards(pyramidLines[i].GetPosition(1), transform.position, 10f * Time.deltaTime));
+                    line.SetPosition(1, Vector2.MoveTowards(line.GetPosition(1), transform.position, 10f * Time.deltaTime));
                 }
             }
         }
@@ -92,24 +97,42 @@ public class Oasis : MonoBehaviour
     {
         // generate between 1 and 3 pyramids
         int numPyramids = UnityEngine.Random.Range(1, 4);
-        for(int i = 0; i < numPyramids; i++)
+        for (int i = 0; i < numPyramids; i++)
         {
             //create within travel radius
             pyramids.Add(Instantiate(pyramidPrefab, transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * radius * 0.85f, transform.rotation));
             pyramids[pyramids.Count - 1].SetParentOasis(this);
             pyramids[pyramids.Count - 1].Reposition(); //check to make sure it is in a valid spot
 
-            if (pyramids.Count == i + 1)
+            if (pyramids.Count > pyramidLines.Count)
             {
                 pyramidLines.Add(Instantiate(pyramidLinePrefab));
 
                 Vector3[] points = new Vector3[2];
                 points[0] = (Vector3)transform.position;
                 points[1] = points[0];
-                pyramidLines[i].startWidth = 0.2f;
-                pyramidLines[i].endWidth = 0.2f;
-                pyramidLines[i].SetPositions(points);
+                pyramidLines[pyramidLines.Count - 1].startWidth = 0.2f;
+                pyramidLines[pyramidLines.Count - 1].endWidth = 0.2f;
+                pyramidLines[pyramidLines.Count - 1].SetPositions(points);
             }
+            
+
+        }
+    }
+
+    public void addExistingPyramid(Pyramid pyramid)
+    {
+        if (!pyramids.Contains(pyramid))
+        {
+            pyramids.Add(pyramid);
+            pyramidLines.Add(Instantiate(pyramidLinePrefab));
+
+            Vector3[] points = new Vector3[2];
+            points[0] = (Vector3)transform.position;
+            points[1] = points[0];
+            pyramidLines[pyramidLines.Count - 1].startWidth = 0.2f;
+            pyramidLines[pyramidLines.Count - 1].endWidth = 0.2f;
+            pyramidLines[pyramidLines.Count - 1].SetPositions(points);
         }
     }
 
