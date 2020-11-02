@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorComponent : MonoBehaviour
+public class DoorComponent : Interactable
 {
     public Door door;
 

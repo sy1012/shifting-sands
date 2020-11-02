@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 //using UnityEditor;
 using System;
@@ -166,6 +165,7 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 }
+
 
 /// <summary>
 /// A bianary tree of doors sorted by angle. Extend to sort by whatever you need

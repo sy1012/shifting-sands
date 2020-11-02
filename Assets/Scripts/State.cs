@@ -20,6 +20,7 @@ public enum StateEnum
 /// </summary>
 public  abstract class State
 {
+
     protected PlayerStateMachine psm;
     public StateEnum stateEnum;
     public State(PlayerStateMachine playerStateMachine)
@@ -52,6 +53,10 @@ public  abstract class State
         yield break;
     }
     public virtual IEnumerator OnHit(int damage, Collision2D collision)
+    {
+        yield break;
+    }
+    public virtual IEnumerator Inventory()
     {
         yield break;
     }
@@ -97,6 +102,16 @@ public class NormalState : State
         yield break;
     }
 
+    public override IEnumerator Inventory()
+    {
+        EventManager.TriggerOnInventoryInteraction();
+        yield break;
+    }
+
+    /// <summary>
+    /// A coroutine that runs to handle the Player interaction with items and objects.
+    /// </summary>
+    /// <returns></returns>
     public override IEnumerator Interact()
     {
         //Interact with items
@@ -106,22 +121,36 @@ public class NormalState : State
             item.GetComponent<ItemArchtype>().PickedUp();
             yield return null;
         }
-    }
-
-    public override void HandleTrigger(Collider2D collision)
-    {
-        //Door Trigger and Player Inputs to go to next room
-        if (Input.GetKeyDown(KeyCode.E) && collision.GetComponent<DoorComponent>())
+        
+        //Interact with objects with Interactable 
+        var triggerCollisions = new List<Collider2D>(psm.GetTriggerCollisions);
+        foreach (var collision in triggerCollisions)
         {
+            Interactable interactable = collision.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                //Delegate to the Interactable
+                interactable.Interact(psm.gameObject);
+                yield return null;
+            }
+            // Door Trigger Logic
             var dc = collision.GetComponent<DoorComponent>();
-            //Does nothing right now, but might be useful later
-            EventManager.TriggerDoorEntered(dc);
-            //Make new transition state, set it up with the doors involved, set state to the Transition
-            var transition = new TransitionState(psm);
-            transition.startDoor = collision.transform;
-            transition.endDoor = dc.GetSisterDoor();
-            psm.SetState(transition);
+            if (dc != null)
+            {
+                // play door sound
+                SoundManager.current.PlayDoor();
+                //Does nothing right now, but might be useful later
+                EventManager.TriggerDoorEntered(dc);
+                //Make new transition state, set it up with the doors involved, set state to the Transition
+                var transition = new TransitionState(psm);
+                transition.startDoor = collision.transform;
+                transition.endDoor = dc.GetSisterDoor();
+                psm.SetState(transition);
+                yield return null;
+            }
+
         }
+        yield return null;
     }
 
     public override string ToString()
@@ -142,7 +171,10 @@ public class AttackState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
+        // play swing sound
+        SoundManager.current.PlaySwing();
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 atkHeading = (mouse - psm.transform.position);
         float angle = Mathf.Rad2Deg * Mathf.Atan((psm.transform.position.y - mouse.y) / (psm.transform.position.x - mouse.x));
 
         // now convert the angle into a degrees cw of up(north) based on the current value of direction and what quadrant it is in
@@ -158,14 +190,20 @@ public class AttackState : State
         // quadrant 4
         else angle -= 90;
         psm.weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
+        psm.weaponEquiped.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
         psm.weaponEquiped.Attack();
+        //Set player to look in the direction attacking
+        psm.animator.SetFloat("PrevVertical", atkHeading.y);
+        psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
+        psm.animator.SetFloat("Vertical", atkHeading.y);
+        psm.animator.SetFloat("Horizontal", atkHeading.x);
         yield return new WaitForSeconds(0.5f);
         psm.SetState(new NormalState(psm));
     }
     public override void Execute()
     {
-        //Allow partial movement during an attack state
-        psm.NormalMovementFraction(0.5f);
+        psm.animator.SetFloat("Speed", psm.GetArrowKeysDirectionalInput().sqrMagnitude);
+        psm.MoveCharacter(psm.GetArrowKeysDirectionalInput(), psm.speed/4);
     }
     public override string ToString()
     {
@@ -242,6 +280,8 @@ public class HitState:State
     }
     public override IEnumerator Enter()
     {
+        // play player hit sound effect
+        SoundManager.current.PlayPlayerHit();
         psm.animator.SetTrigger("hit");
         psm.health -= damageTaking;
         var healthbar = psm.GetComponentInChildren<Healthbar>();
@@ -249,10 +289,13 @@ public class HitState:State
         dir = dir.normalized;
         //Vector3 target = psm.transform.position - dir*damageTaking / 4;
         healthbar.SetHealth(psm.health);
+        // Triggers the OnPlayerHit event
+        EventManager.TriggerOnPlayerHit();
         yield return new WaitForSeconds(stunTime);
         psm.InvincibleTime = invincibleTime;
         psm.SetState(new NormalState(psm));
         yield break;
+
     }
 
 }
