@@ -14,6 +14,7 @@ public static class EventManager
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
     public static event GameEvent OnPlayerHit;
     public static event GameEvent OnCastFireball;
+    public static event GameEvent onAttack;
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
@@ -66,6 +67,11 @@ public static class EventManager
     public static void TriggerOnCastFireball()
     {
         OnCastFireball?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnAttack()
+    {
+        onAttack?.Invoke(EventArgs.Empty);
     }
   
 }

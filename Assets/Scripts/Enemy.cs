@@ -17,13 +17,6 @@ public class Enemy : Character
     void Update()
     {
         if (cooldown >= 0) { cooldown -= Time.deltaTime; }
-
-        // rare chance to play an enemy sound effect
-        int x = Random.Range(0, 10001);
-        if (x == 0){
-            // play enemy sound effect
-            SoundManager.current.PlayEnemy();
-        }
     }
 
     public void OnCollisionStay2D(Collision2D collision)
