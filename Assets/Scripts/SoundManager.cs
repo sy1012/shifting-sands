@@ -53,40 +53,40 @@ public class SoundManager : MonoBehaviour
         SoundPlayer = this.gameObject.AddComponent<AudioSource>();
 
         // swings
-        Swing1 = Resources.Load<AudioClip>("SFX/swing");
-        Swing2 = Resources.Load<AudioClip>("SFX/swing2");
-        Swing3 = Resources.Load<AudioClip>("SFX/swing3");
+        Swing1 = Resources.Load<AudioClip>("SFX/Player/swing");
+        Swing2 = Resources.Load<AudioClip>("SFX/Player/swing2");
+        Swing3 = Resources.Load<AudioClip>("SFX/Player/swing3");
 
         // door
-        Door = Resources.Load<AudioClip>("SFX/door");
+        Door = Resources.Load<AudioClip>("SFX/Object/door");
 
         // coins
-        Coin1 = Resources.Load<AudioClip>("SFX/coin");
-        Coin2 = Resources.Load<AudioClip>("SFX/coin2");
-        Coin3 = Resources.Load<AudioClip>("SFX/coin3");
+        Coin1 = Resources.Load<AudioClip>("SFX/Object/coin");
+        Coin2 = Resources.Load<AudioClip>("SFX/Object/coin2");
+        Coin3 = Resources.Load<AudioClip>("SFX/Object/coin3");
 
         // enemies
-        Enemy1 = Resources.Load<AudioClip>("SFX/mnstr1");
-        Enemy2 = Resources.Load<AudioClip>("SFX/mnstr2");
-        Enemy3 = Resources.Load<AudioClip>("SFX/mnstr3");
-        Enemy4 = Resources.Load<AudioClip>("SFX/mnstr4");
-        Enemy5 = Resources.Load<AudioClip>("SFX/mnstr5");
-        Enemy6 = Resources.Load<AudioClip>("SFX/mnstr6");
-        Enemy7 = Resources.Load<AudioClip>("SFX/mnstr7");
-        Enemy8 = Resources.Load<AudioClip>("SFX/mnstr8");
-        Enemy9 = Resources.Load<AudioClip>("SFX/mnstr9");
-        Enemy10 = Resources.Load<AudioClip>("SFX/mnstr10");
-        Enemy11 = Resources.Load<AudioClip>("SFX/mnstr11");
-        Enemy12 = Resources.Load<AudioClip>("SFX/mnstr12");
-        Enemy13 = Resources.Load<AudioClip>("SFX/mnstr13");
-        Enemy14 = Resources.Load<AudioClip>("SFX/mnstr14");
-        Enemy15 = Resources.Load<AudioClip>("SFX/mnstr15");
+        Enemy1 = Resources.Load<AudioClip>("SFX/Enemy/mnstr1");
+        Enemy2 = Resources.Load<AudioClip>("SFX/Enemy/mnstr2");
+        Enemy3 = Resources.Load<AudioClip>("SFX/Enemy/mnstr3");
+        Enemy4 = Resources.Load<AudioClip>("SFX/Enemy/mnstr4");
+        Enemy5 = Resources.Load<AudioClip>("SFX/Enemy/mnstr5");
+        Enemy6 = Resources.Load<AudioClip>("SFX/Enemy/mnstr6");
+        Enemy7 = Resources.Load<AudioClip>("SFX/Enemy/mnstr7");
+        Enemy8 = Resources.Load<AudioClip>("SFX/Enemy/mnstr8");
+        Enemy9 = Resources.Load<AudioClip>("SFX/Enemy/mnstr9");
+        Enemy10 = Resources.Load<AudioClip>("SFX/Enemy/mnstr10");
+        Enemy11 = Resources.Load<AudioClip>("SFX/Enemy/mnstr11");
+        Enemy12 = Resources.Load<AudioClip>("SFX/Enemy/mnstr12");
+        Enemy13 = Resources.Load<AudioClip>("SFX/Enemy/mnstr13");
+        Enemy14 = Resources.Load<AudioClip>("SFX/Enemy/mnstr14");
+        Enemy15 = Resources.Load<AudioClip>("SFX/Enemy/mnstr15");
 
         // player hit
-        PlayerHit1 = Resources.Load<AudioClip>("SFX/playerHit1");
+        PlayerHit1 = Resources.Load<AudioClip>("SFX/Player/playerHit1");
 
         // enemy hit
-        EnemyHit1 = Resources.Load<AudioClip>("SFX/enemyHit1");
+        EnemyHit1 = Resources.Load<AudioClip>("SFX/Enemy/enemyHit1");
     }
 
     
@@ -98,6 +98,11 @@ public class SoundManager : MonoBehaviour
 
     // play desert wind on overworld
     public void PlayDesertWind(){
+
+    }
+    
+    // play caravan music
+    public void PlayCaravan(){
 
     }
 
