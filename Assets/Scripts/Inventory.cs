@@ -28,6 +28,8 @@ public static class Inventory
 
     private static EventHandler OpenInventory()
     {
+        // display the inventory sprite
+
         return null;
     }
 
