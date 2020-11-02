@@ -8,10 +8,11 @@ public class MapManager : MonoBehaviour
 {
     public Pyramid pyramidPrefab;
     public Oasis oasisPrefab;
-    private List<Oasis> oases = new List<Oasis>();
+    public List<Oasis> oases = new List<Oasis>();
     public Graph oasisGraph = new Graph("oasisGraph");
+    public LineRenderer pathPrefab;
 
-    private Oasis currentOasis;
+    public Oasis currentOasis;
 
 
     public static event EventHandler<EventArgs> newOasesHandler;
@@ -32,19 +33,57 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public void NewOasis(Vector2 position, float radius, Oasis parent)
+    public void NewOasis(Vector2 position, float radius, Oasis parent, Pyramid parentPyramid)
     {
         Oasis newOasis = Instantiate(oasisPrefab, position, Quaternion.identity);
         oases.Add(newOasis);
-        oases[oases.Count - 1].setRadius(radius);
+        newOasis.setRadius(radius);
 
-        OasisNode node = new OasisNode(oases[oases.Count -1].transform.name + oases.Count, oases[oases.Count - 1]);
+        OasisNode node = new OasisNode(newOasis.transform.name + oases.Count, newOasis);
         oasisGraph.AddNode(node);
-        oases[oases.Count - 1].oasisNode = node;
+        newOasis.oasisNode = node;
 
         oasisGraph.AddConnection(node, parent.oasisNode);
-        
-        if(newOasesHandler != null)
+
+        // Add other oases in the radius to connections
+        Collider2D[] overlaps = Physics2D.OverlapCircleAll(newOasis.transform.position, newOasis.radius * 0.8f);
+        foreach(Collider2D overlap in overlaps)
+		{
+            if(overlap.transform != newOasis.transform && overlap.transform.gameObject.GetComponent<Oasis>() != null)
+			{
+                Oasis sibling = overlap.transform.gameObject.GetComponent<Oasis>();
+
+				if (!oasisGraph.GetAdjByNode(node).GetAdj().Contains(sibling.oasisNode))
+				{
+                    oasisGraph.AddConnection(node, sibling.oasisNode);
+                }
+            }
+            //add relationship to pyramids as well
+            if (overlap.transform.gameObject.GetComponent<Pyramid>() != null && overlap.transform.gameObject.GetComponent<Pyramid>() != parentPyramid)
+            {
+                Pyramid pyramid = overlap.transform.gameObject.GetComponent<Pyramid>();
+
+                newOasis.addExistingPyramid(pyramid);
+
+            }
+        }
+
+        //create a line between the new oasis and its parent/nearby siblings
+        foreach(Node nearbyNode in oasisGraph.GetAdjByNode(newOasis.oasisNode).GetAdj())
+        {
+            newOasis.oases.Add(((OasisNode)nearbyNode).getOasis());
+            LineRenderer path = Instantiate(pathPrefab);
+            Vector3[] points = new Vector3[2];
+            points[0] = (Vector3)((OasisNode)nearbyNode).getOasis().transform.position;
+            points[1] = points[0];
+            path.startWidth = 0.2f;
+            path.endWidth = 0.2f;
+            path.SetPositions(points);
+            newOasis.oasisLines.Add(path);
+        }
+
+
+        if (newOasesHandler != null)
         {
             newOasesHandler(this, EventArgs.Empty);
         }

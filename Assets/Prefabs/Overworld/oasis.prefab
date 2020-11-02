@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 94e1bca3b0e7f9d4ebf7ef86dcfda2f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,10 +98,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radVisualize: {fileID: -6746410278268257677, guid: 8304d31d4b0c22344905f3889c58a3de, type: 3}
   circle: {fileID: 0}
+  pyramidLinePrefab: {fileID: 4603880920107688456, guid: e57077d945dcfbf478111c4303e82490, type: 3}
   radius: 4
   generated: 0
   pyramidPrefab: {fileID: 8857799296077590688, guid: 4d8f86d258fcc2f4d9e49f6d6454b802, type: 3}
   pyramids: []
+  newLine: {fileID: 0}
 --- !u!61 &1259524354245890630
 BoxCollider2D:
   m_ObjectHideFlags: 0

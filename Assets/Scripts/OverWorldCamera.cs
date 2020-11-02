@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class OverWorldCamera : MonoBehaviour
 {
-    float zoomSize = 19;
-    private Vector2 minPos = new Vector2 (-5, -5);
-    private Vector2 maxPos = new Vector2 (5, 5);
+    float zoomSize = 10;
+    Caravan follow;
 
-    // Update is called once per frame
-    void Update()
+	private void Start()
+	{
+        follow = FindObjectOfType<Caravan>();
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         // get values if WASD was pressed in any way
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         // move the camera
         if (Camera.current != null){
-            Camera.current.transform.Translate(new Vector3(x * 0.03f, y * 0.03f, 0.0f));
+            Camera.current.transform.Translate(follow.transform.position);
         }
 
         // adjusting zoom
         // zoom in
+        /*
         if (Input.GetAxis("Mouse ScrollWheel") > 0){
             if (zoomSize > 6){
                 zoomSize -= 1;
@@ -31,7 +36,7 @@ public class OverWorldCamera : MonoBehaviour
             if (zoomSize < 19){
                 zoomSize += 1;
             }
-        }
+        }*/
         GetComponent<Camera>().orthographicSize = zoomSize;
     }
 
