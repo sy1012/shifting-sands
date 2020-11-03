@@ -37,6 +37,7 @@ public class Character : MonoBehaviour, IHealable, IDamagable
 
     public virtual void TakeDamage(int damage, Collision2D collision)
     {
+        
         health -= damage;
         healthbar.SetHealth(health);
     }
@@ -49,8 +50,10 @@ public class Character : MonoBehaviour, IHealable, IDamagable
 
     public virtual void TakeDamage(int damage)
     {
+        Debug.Log("Hello");
         this.health -= damage;
         if (this.health <= 0) { Destroy(this.gameObject); }
+        healthbar.SetHealth(health);
     }
 
     public virtual void OnDestroy()

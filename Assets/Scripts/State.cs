@@ -115,9 +115,10 @@ public class NormalState : State
     public override IEnumerator Interact()
     {
         //Interact with items
-        List<GameObject> items = DungeonMaster.getLootInRange(psm.transform.position, 1);
+        List<GameObject> items = DungeonMaster.getLootInRange(psm.transform.position, 1.5f);
         foreach (GameObject item in items)
         {
+            if (item.GetComponent<Item>() != null && item.GetComponent<Item>().data.itemName == "Coin") { Camera.main.GetComponent<Inventory>().PickUpCoin(1); GameObject.Destroy(item); }
             item.GetComponent<ItemArchtype>().PickedUp();
             yield return null;
         }

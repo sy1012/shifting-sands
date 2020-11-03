@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   scrollOffset: {x: 0, y: 1}
-  spriteScaling: {x: 0.1, y: 0.1}
-  relativeWeight: 0
-  sprite: {fileID: 21300000, guid: 4cf1c68c3922f8440bea93e8c6aeb99e, type: 3}
+  spriteScaling: {x: 0.5, y: 0.5}
+  relativeWeight: 8
+  sprite: {fileID: 5683078269820987994, guid: c49cac0fcc01c464c8e27f5779831436, type: 3}
+  frame: {fileID: 21300000, guid: a7c4ded6a3bf5de45b975125af3af56a, type: 3}
   itemType: 0
   itemName: Stick
   value: 0
@@ -26,3 +27,4 @@ MonoBehaviour:
   speed: 0.2
   hitBoxSize: {x: 0.3, y: 0.3}
   damage: 10
+  knockback: 0

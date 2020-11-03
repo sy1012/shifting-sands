@@ -9,6 +9,7 @@ public class ItemData : ScriptableObject
     public Vector2 spriteScaling;
     public float relativeWeight;      // How far should they fall when being dropped
     public Sprite sprite;             // this weapons resting sprite
+    public Sprite frame;              // this weapons resting sprite
     public ItemTypes.Type itemType;   // Type of the item
     public string itemName;           // name of this item
     public int value;                 // How much could this be sold for

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : ItemArchtype
 {
-    public WeaponData data;
+    public new WeaponData data;
     public ItemTypes.Type type;          // What type of item is this (hint its a weapon)
 
     private Sprite[] spriteAnimation;    // Animation to play when attacking
@@ -15,7 +15,7 @@ public class Weapon : ItemArchtype
     private int damage;                  // how much damage does it do upon hitting something
     private int currentFrame;            // If we are in the animation, what frame is it
     private new BoxCollider2D collider;  // Quick Reference to the collider attached to this object  
-    private new Animator animator;
+    private Animator animator;
 
     // item needs to be set up but only after the Data has been added
     public override void Initialize()
@@ -40,15 +40,16 @@ public class Weapon : ItemArchtype
 
         // set up the SpriteRenderer, BoxCollider2d and Animator
         //this.animator = this.gameObject.AddComponent<Animator>();
-        this.sr = this.gameObject.AddComponent<SpriteRenderer>();
-        this.sr.sortingLayerName = "Player";
-        this.sr.sprite = sprite;
+        //this.sr = this.gameObject.AddComponent<SpriteRenderer>();
+        //this.sr.sortingLayerName = "Player";
+        //this.sr.sprite = sprite;
         this.collider = this.gameObject.AddComponent<BoxCollider2D>();
         this.collider.size = hitBoxSize;
         this.collider.offset = new Vector2(0, hitBoxSize.y / 2);
         this.collider.enabled = false;
         this.collider.isTrigger = true;
-        this.gameObject.AddComponent<Rigidbody2D>().gravityScale = 0;
+        if (this.gameObject.GetComponent<Rigidbody2D>() != null) { this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0; }
+        else this.gameObject.AddComponent<Rigidbody2D>().gravityScale = 0;
     }
 
     void Update()
@@ -90,9 +91,20 @@ public class Weapon : ItemArchtype
         }
     }
 
+    public override void PickedUp()
+    {
+        if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
+        DungeonMaster.loot.Remove(this.gameObject);
+        Debug.Log(this.data);
+        Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
+        Destroy(background);
+        Destroy(text);
+        Destroy(this.gameObject);
+        // ADD TO INVENTORY OR WHATEVER HERE
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject);
         if (collision.gameObject.GetComponent<IDamagable>() != null && collision.gameObject.GetComponent<PlayerStateMachine>() == null) collision.gameObject.GetComponent<IDamagable>().TakeDamage(this.damage);
     }
 }

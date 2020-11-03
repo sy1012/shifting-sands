@@ -6,7 +6,7 @@ public class LootGenerator
 {
     private static WeaponData woodSword;
     private static WeaponData stick;
-    private static ItemData gold;
+    private static ItemData silver;
 
     private static List<float> dropQuality0;
     private static List<float> dropQuality1;
@@ -29,12 +29,12 @@ public class LootGenerator
     {
         /* These variables control what rarity an item is for any tier it is present in, (tier, rarity) */
         List<(int, int)> woodSwords = new List<(int, int)> { (1, 2), (2, 2) };
-        List<(int, int)> gold1 = new List<(int, int)> { (1, 1), (2, 1)};
+        List<(int, int)> silver1 = new List<(int, int)> { (1, 1), (2, 1)};
         List<(int, int)> gold5 = new List<(int, int)> { (1, 2), (2, 1)};
         List<(int, int)> sticks = new List<(int, int)> { (1, 2), (2, 1) };
 
         /* These variables are used to control drop chances of classes of items for a particular quality */
-        dropQuality0 = new List<float> { 0.0f, 0.8f };
+        dropQuality0 = new List<float> { 0.0f, 1.1f };
         dropQuality1 = new List<float> { 0.0f, 0.2f, 0.7f };
 
         /* These variables are used to control drop numbers for a particular quality */
@@ -55,15 +55,15 @@ public class LootGenerator
         };
 
         woodSword = Resources.Load<WeaponData>("Weapons/WoodenTrainingSword");
-        gold = Resources.Load<ItemData>("Items/GoldPiece");
+        silver = Resources.Load<ItemData>("Items/SilverPiece");
         stick = Resources.Load<WeaponData>("Weapons/Stick");
 
         /* set up the tier Lists */
-        firstTierUncommon.Add(woodSword);
-        firstTierCommon.Add(gold);
-        thisTierCommon.Add(gold);
+        //firstTierUncommon.Add(woodSword);
+        firstTierCommon.Add(silver);
+        thisTierCommon.Add(silver);
         thisTierCommon.Add(stick);
-        thisTierUncommon.Add(woodSword);
+        //thisTierUncommon.Add(woodSword);
     }
 
     private static List<ItemData> GenerateDropsList(int quality)
