@@ -14,6 +14,11 @@ public static class EventManager
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
     public static event GameEvent OnPlayerHit;
     public static event GameEvent OnCastFireball;
+    public static event GameEvent onAttack;
+    public static event GameEvent onFireballCollision;
+    public static event GameEvent onPlayerMovement;
+    public static event GameEvent onUseShrine;
+    public static event GameEvent onDash;
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
@@ -67,6 +72,31 @@ public static class EventManager
     {
         OnCastFireball?.Invoke(EventArgs.Empty);
     }
-  
+
+    public static void TriggerOnAttack()
+    {
+        onAttack?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnFireballCollison()
+    {
+        onFireballCollision?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnPlayerMovement()
+    {
+        onPlayerMovement?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnUseShrine()
+    {
+        onUseShrine?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnDash()
+    {
+        onDash?.Invoke(EventArgs.Empty);
+    }
+
 }
 

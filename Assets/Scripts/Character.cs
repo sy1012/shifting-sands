@@ -41,21 +41,20 @@ public class Character : MonoBehaviour, IHealable, IDamagable
         health -= damage;
         healthbar.SetHealth(health);
     }
-
-    public void Heal(int amount)
-    {
-        health+=amount;
-        healthbar.SetHealth(health);
-    }
-
     public virtual void TakeDamage(int damage)
     {
-        Debug.Log("Hello");
         this.health -= damage;
         if (this.health <= 0) { Destroy(this.gameObject); }
         healthbar.SetHealth(health);
     }
-
+    public void Heal(int amount)
+    {
+        // trigger shrine usage sound effect
+        EventManager.TriggerOnUseShrine();
+        health+=amount;
+        healthbar.SetHealth(health);
+    }
+    
     public virtual void OnDestroy()
     {
         return;
