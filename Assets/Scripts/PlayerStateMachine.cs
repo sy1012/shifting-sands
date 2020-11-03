@@ -35,6 +35,8 @@ public class PlayerStateMachine : Character
         StartCoroutine(newstate.Enter());
     }
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,16 @@ public class PlayerStateMachine : Character
         return new Vector2(x, y).normalized;
     }
 
+    public Room currentRoom;
+    internal void SetRoom(Room newRoom)
+    {
+        currentRoom = newRoom;
+    }
+
+    internal Room GetRoom()
+    {
+        return currentRoom;
+    }
 
     public void MoveCharacter(Vector2 heading, float speed)
     {
