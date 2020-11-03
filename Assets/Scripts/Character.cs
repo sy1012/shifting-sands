@@ -40,7 +40,12 @@ public class Character : MonoBehaviour, IHealable, IDamagable
         health -= damage;
         healthbar.SetHealth(health);
     }
-
+    public virtual void TakeDamage(int damage)
+    {
+        this.health -= damage;
+        if (this.health <= 0) { Destroy(this.gameObject); }
+        healthbar.SetHealth(health);
+    }
     public void Heal(int amount)
     {
         // trigger shrine usage sound effect
@@ -49,11 +54,6 @@ public class Character : MonoBehaviour, IHealable, IDamagable
         healthbar.SetHealth(health);
     }
 
-    public virtual void TakeDamage(int damage)
-    {
-        this.health -= damage;
-        if (this.health <= 0) { Destroy(this.gameObject); }
-    }
 
     public virtual void OnDestroy()
     {

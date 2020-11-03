@@ -17394,6 +17394,7 @@ MonoBehaviour:
   speed: 10
   cam: {fileID: 519420031}
   mousePos: {x: 0, y: 0}
+  coolDown1: 2
 --- !u!1 &1760817100
 GameObject:
   m_ObjectHideFlags: 0
@@ -22450,11 +22451,6 @@ Transform:
   m_Father: {fileID: 1528533746}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1926629488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2022992065126582983, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
-  m_PrefabInstance: {fileID: 1343036029}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1936762018
 GameObject:
   m_ObjectHideFlags: 0
@@ -25443,11 +25439,11 @@ PrefabInstance:
     - target: {fileID: 7408489527691097509, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
       propertyPath: room
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1842405849}
     - target: {fileID: 7408489527691097509, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1926629488}
+      objectReference: {fileID: 96976489}
     - target: {fileID: 7408489527691097512, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
       propertyPath: target
       value: 
