@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fireball : MonoBehaviour
+public class AbilityManager : MonoBehaviour
 {
 
     public Transform firePoint;
@@ -12,6 +12,11 @@ public class fireball : MonoBehaviour
     // public Rigidbody2D rb;
     public Camera cam;
     public Vector2 mousePos;
+    
+    // Ability 1
+    [Header("Ability 1")]
+    public float coolDown1 = 2f;
+    private float nextFireTime1 = 0f;
     private bool isUsingAbility1;
 
     // Update is called once per frame
@@ -19,10 +24,17 @@ public class fireball : MonoBehaviour
     {
         
         // Ability1 Button or Fireball Pressed
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Time.time > nextFireTime1)
         {
-            isUsingAbility1 = true;
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                isUsingAbility1 = true;
+                nextFireTime1 = Time.time + coolDown1;
+            }
         }
+
+        // For ability 2 chk isUsing Ability 1 etc
+    
     }
 
     private void FixedUpdate()
@@ -44,8 +56,9 @@ public class fireball : MonoBehaviour
             rb.velocity = dir.normalized * speed;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             rb.rotation = angle;
+            // Reset the is UsingAbility1
             isUsingAbility1 = false;
-            Destroy(fireball, 1);
+            
         }
     }
 }

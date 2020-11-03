@@ -15,7 +15,12 @@ public class PlayerMovement : Character
     public Animator animator;
     Vector2 movement;
     public Transform player;
+
+    [Header("Dash")]
+    private float dashCoolDown = 2f;
+    private float nextDashTime = 0f;
     private bool isDashButtonDown;
+
     private bool isAttacking;
     GameObject text;
     GameObject background;
@@ -94,9 +99,13 @@ public class PlayerMovement : Character
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         // Dash Key press
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Time.time > nextDashTime)
         {
-            isDashButtonDown = true;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isDashButtonDown = true;
+                nextDashTime = Time.time + dashCoolDown;
+            }
         }
 
         // Swing Key press
