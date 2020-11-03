@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4802416187455780891}
   - component: {fileID: 1577505332123409518}
   - component: {fileID: 3939381209776630648}
-  m_Layer: 8
+  - component: {fileID: 6832817009383514905}
+  m_Layer: 14
   m_Name: fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.019433498, y: 0.006479025}
+  m_Offset: {x: -0.1774528, y: 0.006479025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -129,5 +130,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1815763, y: 0.81870127}
+  m_Size: {x: 0.86553764, y: 0.81870127}
   m_EdgeRadius: 0
+--- !u!114 &6832817009383514905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415255399047042295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c627f64c46d1e5419315b793ef1abf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 1195645871915285880, guid: f0454963a03e6d84e8c872736f4fccac, type: 3}
