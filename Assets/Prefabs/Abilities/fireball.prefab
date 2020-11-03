@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1774528, y: 0.006479025}
+  m_Offset: {x: 0.046702325, y: -0.0043296814}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.86553764, y: 0.81870127}
+  m_Size: {x: 0.4172274, y: 0.26745415}
   m_EdgeRadius: 0
 --- !u!114 &6832817009383514905
 MonoBehaviour:
@@ -145,3 +145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 1195645871915285880, guid: f0454963a03e6d84e8c872736f4fccac, type: 3}
+  fireballDamage: 50
