@@ -379,12 +379,17 @@ public class SoundManager : MonoBehaviour
         EventManager.onAttack += PlaySwing;
         EventManager.OnPlayerHit += PlayPlayerHit;
         EventManager.DoorEntered += PlayDoor;
+        EventManager.OnCastFireball += PlayFireball;
+        EventManager.onFireballCollision += PlayMagicExplosion;
+        EventManager.onPlayerMovement += PlayPlayerMovement;
+        EventManager.onUseShrine += PlayShrine;
+        EventManager.onDash += PlayDash;
     }
 
     
 
     // play dungeon ambiance
-    private void PlayDungeonAmbiance(System.EventArgs e){
+    private void PlayDungeonAmbiance(object sender, EventManager.onEnteringDungeonEventArgs e){
         SoundPlayer.PlayOneShot(DungeonMusic);
     }
 

@@ -20,6 +20,9 @@ public class fireball : MonoBehaviour
         // You can have a Hit Effect
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 
+        // trigger explosion sounds
+        EventManager.TriggerOnFireballCollison();
+
         // Destrying the Fireball
         Destroy(gameObject);
 

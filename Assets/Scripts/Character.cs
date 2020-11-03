@@ -43,6 +43,8 @@ public class Character : MonoBehaviour, IHealable, IDamagable
 
     public void Heal(int amount)
     {
+        // trigger shrine usage sound effect
+        EventManager.TriggerOnUseShrine();
         health+=amount;
         healthbar.SetHealth(health);
     }

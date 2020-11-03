@@ -230,6 +230,8 @@ public class RollState : State
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
+        // trigger on dash event
+        EventManager.TriggerOnDash();
         //Change the color for a cool effect
         var spriteRenderer = psm.spriteRenderer;
         spriteRenderer.color = Color.cyan/4;
