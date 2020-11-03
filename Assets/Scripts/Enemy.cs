@@ -14,7 +14,7 @@ public class Enemy : Character
     public float cooldown = 0;
 
     // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
         if (cooldown >= 0) { cooldown -= Time.deltaTime; }
     }

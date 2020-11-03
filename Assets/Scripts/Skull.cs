@@ -29,6 +29,14 @@ public class Skull : Enemy
 
     private void Update()
     {
+        if (room == null)
+        {
+            throw new System.Exception("The Skull enemy:" + transform.name + "'s room is Null. Set Skull's room.");
+        }
+        if (psm == null)
+        {
+            throw new System.Exception("The Skull enemy:" + transform.name + "'s target player is Null");
+        }
         if(room.Equals(psm.GetRoom()))
         {
             destination.target = Player;
