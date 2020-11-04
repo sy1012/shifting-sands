@@ -17371,7 +17371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746857441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: -0.04, y: 0, z: 0}
   m_LocalScale: {x: 1.525, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 96976489}
@@ -17393,7 +17393,7 @@ MonoBehaviour:
   fireballPrefab: {fileID: 1415255399047042295, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
   speed: 10
   cam: {fileID: 519420031}
-  mousePos: {x: 0, y: 0}
+  mousePos: {x: 0, y: 0, z: 0}
   coolDown1: 2
 --- !u!1 &1760817100
 GameObject:

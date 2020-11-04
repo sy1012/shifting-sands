@@ -8,10 +8,11 @@ public class AbilityManager : MonoBehaviour
 
     public Transform firePoint;
     public GameObject fireballPrefab;
-    public float speed = 10f;
+    public float speed = 20f;
     // public Rigidbody2D rb;
     public Camera cam;
-    public Vector2 mousePos;
+    public Vector3 mousePos;
+    private Vector3 dir;
     
     // Ability 1
     [Header("Ability 1")]
@@ -44,18 +45,33 @@ public class AbilityManager : MonoBehaviour
         {
             // Trigger the Event for others
             EventManager.TriggerOnCastFireball();
-            
+
+
+            // Get Mouse Position
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            // Calculate Direction with firepoint Position
+            dir = mousePos - firePoint.position;
+            // Using a spawnpoint so firePoint position doesn't keep changing
+            Vector3 spawnnPoint = firePoint.position + dir.normalized;
+
+
             // Get the fireball's transform
-            GameObject fireball = Instantiate(fireballPrefab, firePoint.position, firePoint.rotation);
+            GameObject fireball = Instantiate(fireballPrefab, spawnnPoint, firePoint.rotation);
             Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
             
             // Get Mouse Position
-            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePosV2 = cam.ScreenToWorldPoint(Input.mousePosition);
             // Calculate Direction
-            Vector2 dir = mousePos - rb.position;
-            rb.velocity = dir.normalized * speed;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Vector2 dir2 = mousePosV2 - rb.position;
+            rb.velocity = dir2.normalized * speed;
+            float angle = Mathf.Atan2(dir2.y, dir2.x) * Mathf.Rad2Deg;
+            
+            // Testing the Angle
+            Debug.Log(dir.normalized);
+            Debug.Log(dir.magnitude);
+            // Debug.Log(dir2.normalized);
             rb.rotation = angle;
+            
             // Reset the is UsingAbility1
             isUsingAbility1 = false;
             
