@@ -43,7 +43,15 @@ public class Character : MonoBehaviour, IHealable, IDamagable
     public virtual void TakeDamage(int damage)
     {
         this.health -= damage;
-        if (this.health <= 0) { Destroy(this.gameObject); }
+        if (this.health <= 0)
+        {
+            if(gameObject.GetComponent<Enemy>() != null)
+			{
+                gameObject.GetComponent<Enemy>().generateLoot();
+
+            }
+            Destroy(this.gameObject);
+        }
         healthbar.SetHealth(health);
     }
     public void Heal(int amount)
