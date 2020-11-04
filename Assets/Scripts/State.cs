@@ -221,7 +221,7 @@ public class RollState : State
     public override IEnumerator Enter()
     {
         float dashAmount = 3f;//in units
-        float dashTime = 0.05f;//in seconds
+        float dashTime = 0.2f;//in seconds
         int segments = 6;//amount of splits for dash
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
