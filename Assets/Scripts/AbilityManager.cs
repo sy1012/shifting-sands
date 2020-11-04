@@ -50,29 +50,21 @@ public class AbilityManager : MonoBehaviour
 
             // Get Mouse Position
             mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Vector3 firePos = firePoint.position;
+            firePos.z = 0;
             // Calculate Direction with firepoint Position
-            dir = mousePos - firePoint.position;
+            dir = (mousePos - firePoint.position).normalized;
+            
             // Using a spawnpoint so firePoint position doesn't keep changing
-            Vector3 spawnnPoint = firePoint.position + (dir * 3f)/ Vector3.Magnitude(dir);
+            Vector3 spawnnPoint = firePos + dir;
 
 
             // Get the fireball's transform
             GameObject fireball = Instantiate(fireballPrefab, spawnnPoint, firePoint.rotation);
             Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
-            
-            // Get Mouse Position
-            Vector2 mousePosV2 = cam.ScreenToWorldPoint(Input.mousePosition);
-            // Calculate Direction
-            Vector2 dir2 = mousePosV2 - rb.position;
-            rb.velocity = dir2.normalized * speed;
-            float angle = Mathf.Atan2(dir2.y, dir2.x) * Mathf.Rad2Deg;
-            
-            // Testing the Angle
-            Debug.Log(dir.normalized);
-            Debug.Log(dir.magnitude);
-            // Debug.Log(dir2.normalized);
-            rb.rotation = angle;
-            
+
+            fireball.transform.right = dir;
             // Reset the is UsingAbility1
             isUsingAbility1 = false;
             
