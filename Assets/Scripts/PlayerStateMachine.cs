@@ -13,9 +13,9 @@ public class PlayerStateMachine : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public Weapon weaponEquiped;
-    KeyCode interactKey = KeyCode.E;
+    KeyCode interactKey = KeyCode.F;
     KeyCode InventoryKey = KeyCode.V;
-    KeyCode rollKey = KeyCode.Space;
+    KeyCode dashKey = KeyCode.Space;
 
     // Dash Cooldown
     private float dashCoolDown = 2f;
@@ -120,7 +120,7 @@ public class PlayerStateMachine : Character
         // Dash Input with a CD
         if (Time.time > nextDashTime)
         {
-            if (Input.GetKeyDown(rollKey))
+            if (Input.GetKeyDown(dashKey))
             {
                 StartCoroutine(state.OnRoll());
                 nextDashTime = Time.time + dashCoolDown;

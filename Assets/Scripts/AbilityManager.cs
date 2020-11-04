@@ -8,7 +8,7 @@ public class AbilityManager : MonoBehaviour
 
     public Transform firePoint;
     public GameObject fireballPrefab;
-    public float speed = 20f;
+    public float speed = 5f;
     // public Rigidbody2D rb;
     public Camera cam;
     public Vector3 mousePos;
@@ -27,7 +27,7 @@ public class AbilityManager : MonoBehaviour
         // Ability1 Button or Fireball Pressed
         if (Time.time > nextFireTime1)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 isUsingAbility1 = true;
                 nextFireTime1 = Time.time + coolDown1;
@@ -35,6 +35,7 @@ public class AbilityManager : MonoBehaviour
         }
 
         // For ability 2 chk isUsing Ability 1 etc
+        // Also array of prefabs for the abilities...
     
     }
 
@@ -52,7 +53,7 @@ public class AbilityManager : MonoBehaviour
             // Calculate Direction with firepoint Position
             dir = mousePos - firePoint.position;
             // Using a spawnpoint so firePoint position doesn't keep changing
-            Vector3 spawnnPoint = firePoint.position + dir.normalized;
+            Vector3 spawnnPoint = firePoint.position + (dir * 3f)/ Vector3.Magnitude(dir);
 
 
             // Get the fireball's transform
