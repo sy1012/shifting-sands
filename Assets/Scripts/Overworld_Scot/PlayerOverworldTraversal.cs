@@ -40,6 +40,10 @@ public class PlayerOverworldTraversal : MonoBehaviour
                     destinationNode = hit.collider.gameObject.GetComponent<Oasis>().oasisNode;
                     List<Node> nodePath = BFSPath(mapManager.oasisGraph, currentNode, destinationNode);
                     caravan.path = nodePath;
+                    foreach(Follower follower in caravan.followers)
+                    {
+                        follower.path = new List<Node>(nodePath);
+                    }
                 }
             }
 
