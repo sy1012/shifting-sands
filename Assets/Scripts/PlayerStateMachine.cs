@@ -18,7 +18,7 @@ public class PlayerStateMachine : Character
     KeyCode dashKey = KeyCode.Space;
 
     // Dash Cooldown
-    private float dashCoolDown = 2f;
+    private float dashCoolDown = 1f;
     private float nextDashTime = 0f;
 
     //!!The Behavioural State of the Player!!
