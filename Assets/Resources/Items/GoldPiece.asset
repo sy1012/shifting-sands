@@ -20,5 +20,5 @@ MonoBehaviour:
   itemName: Gold
   value: 1
   recipe: []
-  scroll: {fileID: 0}
+  scroll: {fileID: 21300000, guid: 5f62003953bf1fb41ae7a4ba5a1f34c6, type: 3}
   description: The currency of this world.
