@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GraphGrammars;
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +10,13 @@ public class Pyramid : MonoBehaviour
     
     private Oasis parentOasis;
     private MapManager pyramidManager;
-
+    bool mousedOver = false;
+    private PlayerOverworldTraversal overworldTraversal;
     // Start is called before the first frame update
     void Start()
     {
         pyramidManager = FindObjectOfType<MapManager>();
+        overworldTraversal = FindObjectOfType<PlayerOverworldTraversal>();
     }
 
     public void SetParentOasis(Oasis parent)
@@ -24,25 +28,60 @@ public class Pyramid : MonoBehaviour
     private void TransformToOasis()
     {
         //spawn a new oasis where pyramid is and get rid of the pyramid
-        pyramidManager.NewOasis(transform.position, 6f, parentOasis);
+        pyramidManager.NewOasis(transform.position, 6f, parentOasis, this);
+        foreach (Oasis oasis in pyramidManager.oases)
+        {
+            //remove all references to the pyramid
+            if (oasis.pyramids.Contains(this))
+            {
+                oasis.pyramidLines.RemoveAt(oasis.pyramids.IndexOf(this));
+                oasis.pyramids.Remove(this);
+            }
+            
+        }
+        
         Destroy(gameObject);
     }
 
     private void Update()
     {
-        //for testing transformation into oasis, click pyramid to simulate beating the dungeon
-        if (Input.GetMouseButtonDown(0))
+        
         {
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
             foreach (RaycastHit2D hit in hits)
             {
             if (hit.collider == GetComponent<Collider2D>())
-                {
-                    TransformToOasis();
+                {        
+                    //for testing transformation into oasis, rightclick pyramid to simulate beating the dungeon
+                    if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this))
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            overworldTraversal.EnterPyramid(this);
+                        }
+                        else if (Input.GetMouseButtonDown(1))
+                        {
+                            TransformToOasis();
+                        }
+                        
+                    }
+                    mousedOver = true;
+                    break;
                 }
+                mousedOver = false;
             }
-            
+            //scale pyramid when moused over
+            if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this) && mousedOver)
+            {
+                transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.8f, 0.8f), 5 * Time.deltaTime);
+            }
+            else
+            {
+                transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.5f, 0.5f), 5 * Time.deltaTime);
+
+            }
+
         }
     }
 

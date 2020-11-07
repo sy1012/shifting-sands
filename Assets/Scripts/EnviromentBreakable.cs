@@ -34,12 +34,16 @@ public class EnviromentBreakable : MonoBehaviour, IDamagable
 
     public virtual void OnDestroy()
     {
-        LootGenerator.Generate(this.transform.position, quality);
+        return;
     }
 
     public void TakeDamage(int damage)
     {
         this.health -= damage;
-        if (this.health <= 0) { Destroy(this.gameObject); }
+        if (this.health <= 0) 
+        {
+            LootGenerator.Generate(this.transform.position, quality);
+            Destroy(this.gameObject); 
+        }
     }
 }

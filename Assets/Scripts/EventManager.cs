@@ -8,9 +8,18 @@ public static class EventManager
     public delegate void GameEvent(EventArgs e);
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
+    public static event EventHandler onInventoryInteraction;
     public static event EventHandler onOpenInventory;
     public static event EventHandler onCloseInventory;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
+    public static event GameEvent OnPlayerHit;
+    public static event GameEvent OnCastFireball;
+    public static event GameEvent onAttack;
+    public static event GameEvent onFireballCollision;
+    public static event GameEvent onPlayerMovement;
+    public static event GameEvent onUseShrine;
+    public static event GameEvent onDash;
+
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public static event GameEvent onDungeonGenerated;
 
@@ -47,4 +56,47 @@ public static class EventManager
     {
         onCloseInventory?.Invoke(null, EventArgs.Empty);
     }
+
+    public static void TriggerOnPlayerHit()
+    {
+        OnPlayerHit?.Invoke(EventArgs.Empty);
+
+    }
+    
+    public static void TriggerOnInventoryInteraction()
+    {
+        onInventoryInteraction?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnCastFireball()
+    {
+        OnCastFireball?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnAttack()
+    {
+        onAttack?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnFireballCollison()
+    {
+        onFireballCollision?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnPlayerMovement()
+    {
+        onPlayerMovement?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnUseShrine()
+    {
+        onUseShrine?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnDash()
+    {
+        onDash?.Invoke(EventArgs.Empty);
+    }
+
 }
+

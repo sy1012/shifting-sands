@@ -13,10 +13,14 @@ public class PlayerStateMachine : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public Weapon weaponEquiped;
-    KeyCode interactKey = KeyCode.E;
-    KeyCode InventoryKey = KeyCode.I;
-    KeyCode rollKey = KeyCode.Space;
-    
+    KeyCode interactKey = KeyCode.F;
+    KeyCode InventoryKey = KeyCode.V;
+    KeyCode dashKey = KeyCode.Space;
+
+    // Dash Cooldown
+    private float dashCoolDown = 1f;
+    private float nextDashTime = 0f;
+
     //!!The Behavioural State of the Player!!
     public State state;
     // Debugging representation of state
@@ -34,6 +38,8 @@ public class PlayerStateMachine : Character
         state = newstate;
         StartCoroutine(newstate.Enter());
     }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +60,16 @@ public class PlayerStateMachine : Character
         return new Vector2(x, y).normalized;
     }
 
+    public Room currentRoom;
+    internal void SetRoom(Room newRoom)
+    {
+        currentRoom = newRoom;
+    }
+
+    internal Room GetRoom()
+    {
+        return currentRoom;
+    }
 
     public void MoveCharacter(Vector2 heading, float speed)
     {
@@ -98,13 +114,19 @@ public class PlayerStateMachine : Character
 
         if (Input.GetKeyDown(InventoryKey))
         {
-            StartCoroutine(state.Interact());
+            StartCoroutine(state.Inventory());
         }
 
-        if (Input.GetKeyDown(rollKey))
+        // Dash Input with a CD
+        if (Time.time > nextDashTime)
         {
-            StartCoroutine(state.OnRoll());
+            if (Input.GetKeyDown(dashKey))
+            {
+                StartCoroutine(state.OnRoll());
+                nextDashTime = Time.time + dashCoolDown;
+            }
         }
+
 
         if (Input.GetMouseButtonDown(0))
         {

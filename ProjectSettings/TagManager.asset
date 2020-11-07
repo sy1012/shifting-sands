@@ -19,6 +19,8 @@ TagManager:
   - Loot
   - Breakables
   - Interactable
+  - Projectiles
+  - Enemy
   - Lighting
   - 
   - 
@@ -43,4 +45,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1487748499
+    locked: 0
+  - name: Abilities
+    uniqueID: 2914878679
     locked: 0

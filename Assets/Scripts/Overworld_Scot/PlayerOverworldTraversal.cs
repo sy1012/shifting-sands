@@ -8,17 +8,22 @@ public class PlayerOverworldTraversal : MonoBehaviour
     public Graph oasisGraph;
     MapManager mapManager;
 
-    OasisNode currentNode;
+    public OasisNode currentNode;
 
     OasisNode destinationNode;
+
+    public Caravan caravan;
 
     // Start is called before the first frame update
     void Start()
     {
         mapManager = FindObjectOfType<MapManager>();
         oasisGraph = mapManager.oasisGraph;
-        currentNode = (OasisNode)mapManager.oasisGraph.GetNodes[0];
-
+        currentNode = mapManager.currentOasis.oasisNode;
+        destinationNode = currentNode;
+        caravan = FindObjectOfType<Caravan>();
+        List<Node> nodePath = graphTraversal(mapManager.oasisGraph, currentNode, destinationNode);
+        caravan.path = nodePath;
     }
 
     // Update is called once per frame
@@ -33,15 +38,18 @@ public class PlayerOverworldTraversal : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<Oasis>() != null)
                 {
                     destinationNode = hit.collider.gameObject.GetComponent<Oasis>().oasisNode;
-                    List<Node> nodePath = graphTraversal(mapManager.oasisGraph, currentNode, destinationNode);
-                    foreach(Node node in nodePath)
-                    {
-                        Debug.Log(node);
-                    }
+                    List<Node> nodePath = BFSPath(mapManager.oasisGraph, currentNode, destinationNode);
+                    caravan.path = nodePath;
                 }
             }
 
         }
+    }
+
+    public void EnterPyramid(Pyramid pyramid)
+    {
+        caravan.entering = true;
+        caravan.enterPyramid = pyramid;
     }
 
     List<Node> graphTraversal(Graph graph, Node root, OasisNode destination)
@@ -83,5 +91,40 @@ public class PlayerOverworldTraversal : MonoBehaviour
             return null;
         }
     }
+
+    public List<Node> BFSPath(Graph graph, Node start, Node destination)
+    {
+        var previous = new Dictionary<Node, Node>();
+
+        var queue = new Queue<Node>();
+        queue.Enqueue(start);
+
+        while (queue.Count > 0)
+        {
+            var vertex = queue.Dequeue();
+            foreach (var neighbor in graph.GetAdjByNode(vertex).GetAdj())
+            {
+                if (previous.ContainsKey(neighbor))
+                    continue;
+
+                previous[neighbor] = vertex;
+                queue.Enqueue(neighbor);
+            }
+        }
+
+        var path = new List<Node>();
+
+        var current = destination;
+        while (!current.Equals(start))
+        {
+            path.Add(current);
+            current = previous[current];
+        };
+
+        path.Add(start);
+        path.Reverse();
+
+        return path;
+    }   
 
 }

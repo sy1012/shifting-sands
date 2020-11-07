@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: GoldPiece
   m_EditorClassIdentifier: 
   scrollOffset: {x: 0, y: 2.03}
-  spriteScaling: {x: 0.2, y: 0.2}
-  relativeWeight: 0.8
+  spriteScaling: {x: 0.3, y: 0.3}
+  relativeWeight: 20
   sprite: {fileID: 21300000, guid: ea2c4cb6f8ef1784dbb181ab4085eb4d, type: 3}
   itemType: 0
   itemName: Gold
   value: 1
   recipe: []
-  scroll: {fileID: 21300000, guid: be3c369df59dccf46bbe5b90df654c3e, type: 3}
+  scroll: {fileID: 0}
   description: The currency of this world.

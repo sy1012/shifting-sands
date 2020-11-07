@@ -40,18 +40,28 @@ public class Character : MonoBehaviour, IHealable, IDamagable
         health -= damage;
         healthbar.SetHealth(health);
     }
+    public virtual void TakeDamage(int damage)
+    {
+        this.health -= damage;
+        if (this.health <= 0)
+        {
+            if(gameObject.GetComponent<Enemy>() != null)
+			{
+                gameObject.GetComponent<Enemy>().generateLoot();
 
+            }
+            Destroy(this.gameObject);
+        }
+        healthbar.SetHealth(health);
+    }
     public void Heal(int amount)
     {
+        // trigger shrine usage sound effect
+        EventManager.TriggerOnUseShrine();
         health+=amount;
         healthbar.SetHealth(health);
     }
 
-    public virtual void TakeDamage(int damage)
-    {
-        this.health -= damage;
-        if (this.health <= 0) { Destroy(this.gameObject); }
-    }
 
     public virtual void OnDestroy()
     {
