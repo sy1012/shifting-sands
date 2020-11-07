@@ -50,17 +50,17 @@ public class ForceDirectedGraph : MonoBehaviour
                 //Debug.Log(otherNodePos + "" + nodePos);
                 Vector2 dir = (otherNodePos - nodePos).normalized;
                 float dist = (otherNodePos - nodePos).magnitude;
-                fr += dir * kr / (dist*dist);
+                fr += dir * kr / (dist * dist);
             }
             NodeToForce.Add(node, fs - fr);
         }
         // Move Nodes with total forces
-        
+
         foreach (KeyValuePair<NodeComponent, Vector2> kvp in NodeToForce)
         {
             kvp.Key.transform.position = kvp.Key.transform.position + new Vector3(kvp.Value.x, kvp.Value.y, 0);
         }
-        
+
     }
 
     public void SolveForceDrivenGraph(float _neutralLength, float _ks, float _kr)
@@ -69,6 +69,35 @@ public class ForceDirectedGraph : MonoBehaviour
         ks = _ks;
         kr = _kr;
         SolveForceDrivenGraph();
+    }
+
+    //Carefully tuned recipe for fdg. Alter at own risk or make another.
+    public void SolveFDG_Recipe()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            SolveForceDrivenGraph(1f, 0.2f, 0.4f);
+        }
+        for (int i = 0; i < 15; i++)
+        {
+            SolveForceDrivenGraph(0.9f, 0.3f, 0.5f);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            SolveForceDrivenGraph(6f, 0.2f, 1f);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            SolveForceDrivenGraph(14f, 0.2f, 50f);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            SolveForceDrivenGraph(18f, 0.2f, 500f);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            SolveForceDrivenGraph(24f, 0.2f, 1300f);
+        }
     }
 
     // Update is called once per frame

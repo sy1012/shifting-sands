@@ -19,9 +19,9 @@ public static class EventManager
     public static event GameEvent onPlayerMovement;
     public static event GameEvent onUseShrine;
     public static event GameEvent onDash;
+    public static event GameEvent onDungeonGenerated;
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
-    public static event GameEvent onDungeonGenerated;
 
     public static void TriggerDoorEntered(DoorComponent door)
     {
@@ -30,6 +30,12 @@ public static class EventManager
         {
             DoorEntered(EventArgs.Empty);
         }
+    }
+
+    public static void TriggerDungeonGenerated(DungeonGenArgs e)
+    {
+        onDungeonGenerated?.Invoke(e);
+        Debug.Log("Dungeon Generated");
     }
 
     public static void TriggerDungeonExit()
