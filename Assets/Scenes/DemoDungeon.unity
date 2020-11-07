@@ -5809,6 +5809,7 @@ MonoBehaviour:
   - {fileID: 331180235}
   - {fileID: 1050085684}
   - {fileID: 938169279}
+  debuggingMode: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -18948,6 +18949,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 96976485, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1746857443, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: cam
       value: 
