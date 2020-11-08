@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DoorBrush
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_Tile: {fileID: 0}
+  - m_Tile: {fileID: 11400000, guid: 0bb199b09a3e66a47a389b60deab15c7, type: 2}
     m_Matrix:
       e00: 1
       e01: 0
@@ -36,4 +36,4 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
-  m_Prefab: {fileID: 6064839750256527816, guid: f5dc21ed1860a6a40ba354420032daf9, type: 3}
+  m_Prefab: {fileID: 377917537541708728, guid: 699dcb55f58907d48819231d2621fff6, type: 3}
