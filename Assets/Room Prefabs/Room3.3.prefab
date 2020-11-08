@@ -405,22 +405,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 479d5fc2eb0887048a54a8f90fab5bf1, type: 3}
-    - target: {fileID: 3172103245951217335, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3172103245951217335, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3172103245951217335, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3172103245951217335, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
-      propertyPath: m_Color.a
-      value: 0.21568628
-      objectReference: {fileID: 0}
     - target: {fileID: 3930286009045046274, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -443,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5894289244723539802, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_Name
-      value: Room3.4
+      value: Room3.3
       objectReference: {fileID: 0}
     - target: {fileID: 7273963258188965664, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_LocalPosition.x

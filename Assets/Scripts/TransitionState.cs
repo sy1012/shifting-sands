@@ -13,12 +13,20 @@ public class TransitionState : State
     {
         //Step one, move through door, turn off coliders
         Vector3 target;
+        if (startDoor == null)
+        {
+            throw new System.Exception("start door should not be null");
+        }
+        if (endDoor == null)
+        {
+            throw new System.Exception("end door should not be null");
+        }
         target = startDoor.position;
         TurnOffColliders();
         bool goneThroughDoor = false;
         while (!goneThroughDoor)
         {
-            psm.MoveCharacter(target - psm.transform.position, 4f);
+            psm.MoveCharacter(target - psm.transform.position, 3f);
             if ((target - psm.transform.position).magnitude <0.2f)
             {
                 goneThroughDoor = true;
@@ -32,20 +40,22 @@ public class TransitionState : State
         bool atNextDoor = false;
         while (!atNextDoor)
         {
+            Debug.Log("Not at next door" + (target - psm.transform.position).magnitude);
             psm.MoveCharacter(target - psm.transform.position, 15f);
-            if ((target - psm.transform.position).magnitude < 0.2f)
+            if ((target - psm.transform.position).magnitude < 0.02f)
             {
                 atNextDoor = true;
             }
             yield return null;
         }
         //Step three, move into room, turn colliders back on. Keep dungeoneering
-        target = endDoor.position - endDoor.up;
+        target = endDoor.position - endDoor.up*1.5f;
         bool inRoom = false;
         while (!inRoom)
         {
+            Debug.Log("Not in room" + (target - psm.transform.position).magnitude);
             psm.MoveCharacter(target - psm.transform.position, 4f);
-            if ((target - psm.transform.position).magnitude < 0.2f)
+            if ((target - psm.transform.position).magnitude < 0.02f)
             {
                 inRoom = true;
             }

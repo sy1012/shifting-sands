@@ -39,10 +39,11 @@ public class ImageToTile : MonoBehaviour
         {
             transform.localPosition = -Rotate((int)transform.localPosition.x, (int)transform.localPosition.y);
         }
-        GenerateLevel();
+        GenerateRoom();
+        //spriteRenderer.enabled = false;
     }
 
-    private void GenerateLevel()
+    private void GenerateRoom()
     {
         for (int x = 0; x < map.width; x++)
         {
