@@ -28,8 +28,8 @@ public class Enemy : Character
         }
     }
 
-    public void OnDestroy()
-    {
+    public void generateLoot()
+	{
         LootGenerator.Generate(this.transform.position, quality);
     }
 }

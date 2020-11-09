@@ -13,10 +13,14 @@ public class PlayerStateMachine : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public Weapon weaponEquiped;
-    KeyCode interactKey = KeyCode.E;
+    KeyCode interactKey = KeyCode.F;
     KeyCode InventoryKey = KeyCode.V;
-    KeyCode rollKey = KeyCode.Space;
-    
+    KeyCode dashKey = KeyCode.Space;
+
+    // Dash Cooldown
+    private float dashCoolDown = 1f;
+    private float nextDashTime = 0f;
+
     //!!The Behavioural State of the Player!!
     public State state;
     // Debugging representation of state
@@ -113,10 +117,16 @@ public class PlayerStateMachine : Character
             StartCoroutine(state.Inventory());
         }
 
-        if (Input.GetKeyDown(rollKey))
+        // Dash Input with a CD
+        if (Time.time > nextDashTime)
         {
-            StartCoroutine(state.OnRoll());
+            if (Input.GetKeyDown(dashKey))
+            {
+                StartCoroutine(state.OnRoll());
+                nextDashTime = Time.time + dashCoolDown;
+            }
         }
+
 
         if (Input.GetMouseButtonDown(0))
         {

@@ -21,5 +21,5 @@ MonoBehaviour:
   itemName: Silver
   value: 1
   recipe: []
-  scroll: {fileID: 21300000, guid: be3c369df59dccf46bbe5b90df654c3e, type: 3}
+  scroll: {fileID: 0}
   description: The currency of this world.

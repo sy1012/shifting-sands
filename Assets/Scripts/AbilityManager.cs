@@ -8,10 +8,11 @@ public class AbilityManager : MonoBehaviour
 
     public Transform firePoint;
     public GameObject fireballPrefab;
-    public float speed = 10f;
+    public float speed = 5f;
     // public Rigidbody2D rb;
     public Camera cam;
-    public Vector2 mousePos;
+    public Vector3 mousePos;
+    private Vector3 dir;
     
     // Ability 1
     [Header("Ability 1")]
@@ -26,7 +27,7 @@ public class AbilityManager : MonoBehaviour
         // Ability1 Button or Fireball Pressed
         if (Time.time > nextFireTime1)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 isUsingAbility1 = true;
                 nextFireTime1 = Time.time + coolDown1;
@@ -34,6 +35,7 @@ public class AbilityManager : MonoBehaviour
         }
 
         // For ability 2 chk isUsing Ability 1 etc
+        // Also array of prefabs for the abilities...
     
     }
 
@@ -44,18 +46,25 @@ public class AbilityManager : MonoBehaviour
         {
             // Trigger the Event for others
             EventManager.TriggerOnCastFireball();
-            
-            // Get the fireball's transform
-            GameObject fireball = Instantiate(fireballPrefab, firePoint.position, firePoint.rotation);
-            Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
-            
+
+
             // Get Mouse Position
             mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            // Calculate Direction
-            Vector2 dir = mousePos - rb.position;
-            rb.velocity = dir.normalized * speed;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            rb.rotation = angle;
+            mousePos.z = 0;
+            Vector3 firePos = firePoint.position;
+            firePos.z = 0;
+            // Calculate Direction with firepoint Position
+            dir = (mousePos - firePoint.position).normalized;
+            
+            // Using a spawnpoint so firePoint position doesn't keep changing
+            Vector3 spawnnPoint = firePos + dir;
+
+
+            // Get the fireball's transform
+            GameObject fireball = Instantiate(fireballPrefab, spawnnPoint, firePoint.rotation);
+            Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+
+            fireball.transform.right = dir;
             // Reset the is UsingAbility1
             isUsingAbility1 = false;
             

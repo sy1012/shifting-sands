@@ -14,9 +14,6 @@ public class MapManager : MonoBehaviour
 
     public Oasis currentOasis;
 
-
-    public static event EventHandler<EventArgs> newOasesHandler;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,6 +28,7 @@ public class MapManager : MonoBehaviour
             
             currentOasis = oasis;
         }
+        EventManager.TriggerOnOverworldStart();
     }
 
     public void NewOasis(Vector2 position, float radius, Oasis parent, Pyramid parentPyramid)
@@ -44,6 +42,8 @@ public class MapManager : MonoBehaviour
         newOasis.oasisNode = node;
 
         oasisGraph.AddConnection(node, parent.oasisNode);
+
+        EventManager.TriggerOnNewOasis();
 
         // Add other oases in the radius to connections
         Collider2D[] overlaps = Physics2D.OverlapCircleAll(newOasis.transform.position, newOasis.radius * 0.8f);
@@ -81,13 +81,6 @@ public class MapManager : MonoBehaviour
             path.SetPositions(points);
             newOasis.oasisLines.Add(path);
         }
-
-
-        if (newOasesHandler != null)
-        {
-            newOasesHandler(this, EventArgs.Empty);
-        }
-
 
     }
 

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -137,6 +136,11 @@ public class Oasis : MonoBehaviour
             pyramidLines[pyramidLines.Count - 1].endWidth = 0.2f;
             pyramidLines[pyramidLines.Count - 1].SetPositions(points);
         }
+    }
+
+    public void addNearbyOases()
+    {
+
     }
 
 }

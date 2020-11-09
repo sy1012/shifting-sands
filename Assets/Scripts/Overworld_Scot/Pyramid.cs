@@ -58,6 +58,7 @@ public class Pyramid : MonoBehaviour
                     {
                         if (Input.GetMouseButtonDown(0))
                         {
+                            EventManager.TriggerOnPyramidClicked();
                             overworldTraversal.EnterPyramid(this);
                         }
                         else if (Input.GetMouseButtonDown(1))

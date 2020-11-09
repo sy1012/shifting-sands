@@ -7,6 +7,12 @@ public class fireball : MonoBehaviour
     // Hit effect for later
     public GameObject hitEffect;
     public int fireballDamage = 50;
+    public int speed =1;
+
+    public void Update()
+    {
+        transform.position = transform.position + transform.right * speed * Time.deltaTime;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
