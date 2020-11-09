@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityManager : MonoBehaviour
+public class Ability : MonoBehaviour
 {
 
     public Transform firePoint;
@@ -19,6 +19,14 @@ public class AbilityManager : MonoBehaviour
     public float coolDown1 = 2f;
     private float nextFireTime1 = 0f;
     private bool isUsingAbility1;
+
+    private void Start()
+    {
+        if (cam==null)
+        {
+            cam = Camera.current;
+        }
+    }
 
     // Update is called once per frame
     void Update()
