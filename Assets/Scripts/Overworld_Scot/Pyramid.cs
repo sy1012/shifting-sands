@@ -28,7 +28,7 @@ public class Pyramid : MonoBehaviour
     private void TransformToOasis()
     {
         //spawn a new oasis where pyramid is and get rid of the pyramid
-        pyramidManager.NewOasis(transform.position, 6f, parentOasis, this);
+        pyramidManager.NewOasis(transform.position, 6f, this);
         foreach (Oasis oasis in pyramidManager.oases)
         {
             //remove all references to the pyramid
@@ -36,6 +36,7 @@ public class Pyramid : MonoBehaviour
             {
                 oasis.pyramidLines.RemoveAt(oasis.pyramids.IndexOf(this));
                 oasis.pyramids.Remove(this);
+                pyramidManager.pyramids.Remove(this);
             }
             
         }

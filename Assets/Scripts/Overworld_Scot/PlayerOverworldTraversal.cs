@@ -10,7 +10,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
 
     public OasisNode currentNode;
 
-    OasisNode destinationNode;
+    public OasisNode destinationNode;
 
     public Caravan caravan;
 
