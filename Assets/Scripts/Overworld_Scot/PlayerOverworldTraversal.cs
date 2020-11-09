@@ -29,6 +29,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for oasis being clicked on
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -37,12 +38,14 @@ public class PlayerOverworldTraversal : MonoBehaviour
             {
                 if (hit.collider.gameObject.GetComponent<Oasis>() != null)
                 {
+                    EventManager.TriggerOnOasisClicked();
                     destinationNode = hit.collider.gameObject.GetComponent<Oasis>().oasisNode;
                     List<Node> nodePath = BFSPath(mapManager.oasisGraph, currentNode, destinationNode);
                     caravan.path = nodePath;
                     foreach(Follower follower in caravan.followers)
                     {
                         follower.path = new List<Node>(nodePath);
+                        follower.path.RemoveAt(0);
                     }
                 }
             }

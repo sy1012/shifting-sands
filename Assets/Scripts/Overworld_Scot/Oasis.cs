@@ -138,4 +138,9 @@ public class Oasis : MonoBehaviour
         }
     }
 
+    public void addNearbyOases()
+    {
+
+    }
+
 }
