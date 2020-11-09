@@ -73,7 +73,7 @@ public class LevelGenerator : MonoBehaviour
         graphGenerator.ResetForNewGeneration();
     }
 
-    public void MakeNewDungeon()
+    public bool MakeNewDungeon()
     {
         InitializeNewDungeon();
         int i = 0; //safe guard
@@ -92,8 +92,10 @@ public class LevelGenerator : MonoBehaviour
             i++;
         }
         //TODO Quality check dungeon
+
         //Let everyone else know Dungeon skeleton has been made
         EventManager.TriggerDungeonGenerated(new DungeonGenArgs(doors, rooms, graph));
+        return true;
     }
 
     private void OnDisable()
