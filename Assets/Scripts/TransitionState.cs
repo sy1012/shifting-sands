@@ -26,22 +26,20 @@ public class TransitionState : State
         bool goneThroughDoor = false;
         while (!goneThroughDoor)
         {
-            psm.MoveCharacter(target - psm.transform.position, 5f);
-            if ((target - psm.transform.position).magnitude <0.2f)
+            psm.MoveCharacter(target - psm.transform.position, 4f);
+            if ((target - psm.transform.position).magnitude <0.1f)
             {
                 goneThroughDoor = true;
             }
             yield return null;
         }
         //Step two, turn off renderer and move to next door
-        var r = psm.spriteRenderer;
-        r.enabled = false;
         target = endDoor.position;
         bool atNextDoor = false;
         while (!atNextDoor)
         {
             Debug.Log("Not at next door" + (target - psm.transform.position).magnitude);
-            psm.MoveCharacter(target - psm.transform.position, 15f);
+            psm.MoveCharacter(target - psm.transform.position, 12f);
             if ((target - psm.transform.position).magnitude < 0.2f)
             {
                 atNextDoor = true;
@@ -54,7 +52,7 @@ public class TransitionState : State
         while (!inRoom)
         {
             Debug.Log("Not in room" + (target - psm.transform.position).magnitude);
-            psm.MoveCharacter(target - psm.transform.position, 5f);
+            psm.MoveCharacter(target - psm.transform.position, 4f);
             if ((target - psm.transform.position).magnitude < 0.1f)
             {
                 inRoom = true;
@@ -68,7 +66,6 @@ public class TransitionState : State
             psm.SetRoom(newRoom);
         }
         TurnOnColliders();
-        r.enabled = true;
         psm.SetState(new NormalState(psm));
     }
     public void TurnOffColliders()
