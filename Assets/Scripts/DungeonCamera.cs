@@ -13,13 +13,13 @@ public class DungeonCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 70;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position != target.position)
+        if (transform.position != target.position)
         {
             Vector3 targetposition = new Vector3(target.position.x, target.position.y, transform.position.z);
             targetposition.x = Mathf.Clamp(targetposition.x, minPos.x, maxPos.x);

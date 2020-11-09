@@ -45,7 +45,6 @@ public class ItemArchtype : MonoBehaviour, IItem
         this.GetComponent<Rigidbody2D>().AddForce(force);
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
         this.GetComponent<Rigidbody2D>().drag = relativeWeight;
-        Debug.Log(sprite);
         this.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 

@@ -4806,6 +4806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotWorldUnits: 0
+  slotHovered: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -25457,11 +25458,11 @@ PrefabInstance:
     - target: {fileID: 7408489527691097509, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 96976489}
+      objectReference: {fileID: 0}
     - target: {fileID: 7408489527691097512, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 96976489}
+      objectReference: {fileID: 0}
     - target: {fileID: 7408489527691097513, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5

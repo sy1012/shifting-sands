@@ -6,7 +6,6 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-
     private Sprite inventoryBackgroundSprite;
     private Sprite inventorySlotSprite;
     private GameObject inventoryBackground;
@@ -21,12 +20,13 @@ public class Inventory : MonoBehaviour
     private bool inventoryOpen;
     private bool mouseDown;
     public float slotWorldUnits;  // controls how large each slot of the inventory should be in world units
+    private GameObject held;
+    private Slot slotClicked;
+    public Slot slotHovered;
 
     // Start is called before the first frame update
     public void Start()
     {
-        Debug.Log(Camera.main.GetComponent<Inventory>());
-
         // How large should the inventory be on the Viewport?
         const float VIEWPERCENT = 0.95f;
 
@@ -144,24 +144,54 @@ public class Inventory : MonoBehaviour
     {
         if (inventoryOpen)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
-                Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                int closest = 0;
-                float closestDistance = 10000f;
-                int i = 0;
-                while (i < slots.Count - 1)
+                if (held != null)
                 {
-                    if (Mathf.Sqrt(Mathf.Pow(slots[i].transform.position.x - mouse.x, 2) + Mathf.Pow(slots[i].transform.position.y - mouse.y, 2)) < closestDistance)
-                    {
-                        closestDistance = Mathf.Sqrt(Mathf.Pow(slots[i].transform.position.x - mouse.x, 2) + Mathf.Pow(slots[i].transform.position.y - mouse.y, 2));
-                        closest = i;
-                    }
-                    i += 1;
+                    Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    held.transform.position = mouse;
                 }
-
             }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (slotClicked != null)
+                {
+                    slotClicked.Released();
+                    if (slotHovered != null)
+                    {
+                        ItemData temp = slotHovered.RetrieveData();
+                        slotHovered.AssignData(slotClicked.RetrieveData());
+                        slotClicked.AssignData(temp);
+                    }
+                    slotClicked = null;
+                    held= null;
+                }           
+            }
+
+            //if (Input.GetMouseButtonDown(0))
+            //{ 
+            //    Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //    int closest = 0;
+            //    float closestDistance = 10000f;
+            //    int i = 0;
+            //    while (i < slots.Count - 1)
+            //    {
+            //        if (Mathf.Sqrt(Mathf.Pow(slots[i].transform.position.x - mouse.x, 2) + Mathf.Pow(slots[i].transform.position.y - mouse.y, 2)) < closestDistance)
+            //        {
+            //            closestDistance = Mathf.Sqrt(Mathf.Pow(slots[i].transform.position.x - mouse.x, 2) + Mathf.Pow(slots[i].transform.position.y - mouse.y, 2));
+            //            closest = i;
+            //        }
+            //        i += 1;
+            //    }
+            //}
         }
+    }
+
+    public void SetHeld(Slot slot, GameObject item)
+    {
+        this.held = item;
+        slotClicked = slot;
     }
 
     private void TriggerInventory(object sender, EventArgs e)

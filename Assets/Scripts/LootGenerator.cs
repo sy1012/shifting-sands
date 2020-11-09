@@ -61,7 +61,7 @@ public class LootGenerator
         /* set up the tier Lists */
         //firstTierUncommon.Add(woodSword);
         firstTierCommon.Add(silver);
-        thisTierCommon.Add(silver);
+        //thisTierCommon.Add(silver);
         thisTierCommon.Add(stick);
         //thisTierUncommon.Add(woodSword);
     }

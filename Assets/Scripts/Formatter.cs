@@ -73,7 +73,6 @@ public static class Formatter
         float spriteScalerY = sprite.bounds.size.y;
         sr.sortingOrder = layerOrder;
         sr.sortingLayerName = "Player";
-        Debug.Log(size);
         obj.transform.localScale = new Vector2(1/spriteScalerX * size.x, 1/spriteScalerY * size.y);
         return obj;
     }
