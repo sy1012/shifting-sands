@@ -126,6 +126,12 @@ public class MapManager : MonoBehaviour
             }
         }
 
+        while (player.followers.Count > 0)
+        {
+            Destroy(player.followers[0].gameObject);
+            player.followers.RemoveAt(0);
+        }
+
         LineRenderer[] lines = FindObjectsOfType<LineRenderer>();
         for(int i = 0; i < lines.Length; i++)
         {
@@ -182,6 +188,11 @@ public class MapManager : MonoBehaviour
             follower.path.Clear();
         }
 
+        for (int i = 0; i < loadedData.numCamels; i++)
+        {
+            Follower camel = Instantiate(player.camelPrefab);
+            camel.transform.position = new Vector2(loadedData.camelPositions[i, 0], loadedData.camelPositions[i, 1]);
+        }
 
     }
 

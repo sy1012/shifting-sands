@@ -19,7 +19,9 @@ public class Follower : MonoBehaviour
         if(leader.followers[0] != this)
         {
             next = leader.followers[leader.followers.IndexOf(this) - 1];
+            transform.position = next.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         }
+
 
     }
 

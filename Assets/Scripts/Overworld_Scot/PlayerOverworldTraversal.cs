@@ -45,7 +45,6 @@ public class PlayerOverworldTraversal : MonoBehaviour
                     foreach(Follower follower in caravan.followers)
                     {
                         follower.path = new List<Node>(nodePath);
-                        follower.path.RemoveAt(0);
                     }
                 }
             }
