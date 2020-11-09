@@ -34,6 +34,7 @@ public  abstract class State
     }
     public virtual void Execute()
     {
+
     }
     public virtual IEnumerator Interact()
     {
@@ -75,11 +76,30 @@ public class NormalState : State
     public NormalState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
     {
         stateEnum = StateEnum.Normal;
+
     }
 
     public override void Execute()
     {
         psm.NormalMovement();
+        //Check if player has moved into door trigger area
+        // Door Trigger Logic
+        var triggerCollisions = new List<Collider2D>(psm.GetTriggerCollisions);
+        foreach (var collision in triggerCollisions)
+        {
+            var dc = collision.GetComponent<DoorComponent>();
+            if (dc != null)
+            {
+                //Does nothing right now, but might be useful later
+                EventManager.TriggerDoorEntered(dc);
+                //Make new transition state, set it up with the doors involved, set state to the Transition
+                var transition = new TransitionState(psm);
+                transition.startDoor = collision.transform;
+                transition.endDoor = dc.GetSisterDoor();
+                psm.SetState(transition);
+                return;
+            }
+        }
     }
 
     public override IEnumerator OnAttack()
@@ -133,19 +153,7 @@ public class NormalState : State
                 interactable.Interact(psm.gameObject);
                 yield return null;
             }
-            // Door Trigger Logic
-            var dc = collision.GetComponent<DoorComponent>();
-            if (dc != null)
-            {
-                //Does nothing right now, but might be useful later
-                EventManager.TriggerDoorEntered(dc);
-                //Make new transition state, set it up with the doors involved, set state to the Transition
-                var transition = new TransitionState(psm);
-                transition.startDoor = collision.transform;
-                transition.endDoor = dc.GetSisterDoor();
-                psm.SetState(transition);
-                yield return null;
-            }
+
 
         }
         yield return null;

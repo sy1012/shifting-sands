@@ -13,46 +13,19 @@ MonoBehaviour:
   m_Name: RoomPicker
   m_EditorClassIdentifier: 
   OneDoorRooms:
-  - {fileID: 6926621804516872420, guid: 1321b54a581e3934f84dd512bdf19c1d, type: 3}
-  - {fileID: 6926621804516872420, guid: dc529c1fdb75e584699232f702ea2824, type: 3}
+  - {fileID: 8258062586857101258, guid: b2eb1b8c124ac7245b19a4b5ad58cb9c, type: 3}
   TwoDoorRooms:
-  - {fileID: 5419609769855991379, guid: d5af979e9e786cf4c81fd7bd59c54fe3, type: 3}
-  - {fileID: 6926621804516872420, guid: 7f6223bbad382bf42ba0c33979d1232d, type: 3}
-  - {fileID: 5419609769855991379, guid: d015ff1bfc15cb74ab328f2ef4d535f2, type: 3}
-  - {fileID: 5419609769855991379, guid: 00dc39bda28114849ac6a6d9a335b47a, type: 3}
-  - {fileID: 5419609769855991379, guid: 907edb55f7e0ba34d9d3fb320cfcfebf, type: 3}
-  - {fileID: 6926621804516872420, guid: 8e5a31044cad9084eac77f82fb7e19fd, type: 3}
+  - {fileID: 8258062586857101258, guid: 55036d3843fb8ca4e917486a00c6bdf9, type: 3}
+  - {fileID: 3546358555485036293, guid: 3da6572c9cd86f14c8974be40d1de583, type: 3}
+  - {fileID: 1054894786360866217, guid: 0cbc55dbdf4046349948b0957bd3e144, type: 3}
+  - {fileID: 1054894786360866217, guid: c37b879cf957dff46802dd792255c3b7, type: 3}
+  - {fileID: 1054894786360866217, guid: 37dc2a53583041a428b461f8a35feb8a, type: 3}
   ThreeDoorRooms:
-  - {fileID: 5419609769855991379, guid: a7c5aeeb83b938643b4a0e33fe1e8e9d, type: 3}
-  - {fileID: 5419609769855991379, guid: e9f322b326891d8449293aa9e3c34fdb, type: 3}
-  - {fileID: 5419609769855991379, guid: 9b6cedaf79463e54fbcd5f75de95a9d1, type: 3}
-  - {fileID: 5419609769855991379, guid: 2b07030ff1c8d6a48be30716323a9503, type: 3}
-  - {fileID: 5419609769855991379, guid: bb49bbd3b3f983c4191cc81fc14493a0, type: 3}
+  - {fileID: 1054894786360866217, guid: 3ce61b59530374e4abafa035d29d2c85, type: 3}
+  - {fileID: 1054894786360866217, guid: 34f179f5020028746bda54aa648d7ab8, type: 3}
+  - {fileID: 1054894786360866217, guid: 81bb363f1befb804fa514b1fbe1ad9e8, type: 3}
+  - {fileID: 1054894786360866217, guid: f2337fd7960e88949a6daee33dac7961, type: 3}
   FourDoorRooms:
-  - {fileID: 6926621804516872420, guid: 66b3726841ef89c4dba9721ab902aaf4, type: 3}
-  - {fileID: 6926621804516872420, guid: 9618761668797be4cb054bc90a4e746b, type: 3}
-  - {fileID: 6926621804516872420, guid: ec6c0530ceb857640bf9b2f804a04345, type: 3}
-  - {fileID: 6926621804516872420, guid: d67ecce5afe62584ea2207f71b4d5814, type: 3}
-  - {fileID: 6926621804516872420, guid: 8abc404efcca95445a3d30b7560d1ffb, type: 3}
-  oneDoorCodes:
-  - N
-  - N
-  twoDoorCodes:
-  - NS
-  - NS
-  - NN
-  - NS
-  - ES
-  - NE
-  threeDoorCodes:
-  - NES
-  - NNE
-  - NNS
-  - NNW
-  - NES
-  fourDoorCodes:
-  - NESW
-  - NNSS
-  - NSSW
-  - NESS
-  - NNEW
+  - {fileID: 1054894786360866217, guid: e8bbe97be3e912540a8e1994b1ee21bb, type: 3}
+  - {fileID: 1054894786360866217, guid: f8708a14c3fbc7345ad4900ad431e837, type: 3}
+  - {fileID: 1054894786360866217, guid: ecb475460a0f082489cf36338c9a2eab, type: 3}
