@@ -26,7 +26,7 @@ public class TransitionState : State
         bool goneThroughDoor = false;
         while (!goneThroughDoor)
         {
-            psm.MoveCharacter(target - psm.transform.position, 3f);
+            psm.MoveCharacter(target - psm.transform.position, 5f);
             if ((target - psm.transform.position).magnitude <0.2f)
             {
                 goneThroughDoor = true;
@@ -42,7 +42,7 @@ public class TransitionState : State
         {
             Debug.Log("Not at next door" + (target - psm.transform.position).magnitude);
             psm.MoveCharacter(target - psm.transform.position, 15f);
-            if ((target - psm.transform.position).magnitude < 0.02f)
+            if ((target - psm.transform.position).magnitude < 0.2f)
             {
                 atNextDoor = true;
             }
@@ -54,8 +54,8 @@ public class TransitionState : State
         while (!inRoom)
         {
             Debug.Log("Not in room" + (target - psm.transform.position).magnitude);
-            psm.MoveCharacter(target - psm.transform.position, 4f);
-            if ((target - psm.transform.position).magnitude < 0.02f)
+            psm.MoveCharacter(target - psm.transform.position, 5f);
+            if ((target - psm.transform.position).magnitude < 0.1f)
             {
                 inRoom = true;
             }
