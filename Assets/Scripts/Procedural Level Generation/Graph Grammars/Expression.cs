@@ -65,6 +65,14 @@ namespace GraphGrammars {
                     case Symbol.Lock:
                         newNode = new LockNode("Lock");
                         break;
+                    case Symbol.Encounter:
+                        var nc2 = (EncounterNodeComponent)nodeComponent;
+                        newNode = new EncounterNode("Encounter",nc2.Difficulty);
+                        break;
+                    case Symbol.Treasure:
+                        var nc3 = (TreasureNodeComponent)nodeComponent;
+                        newNode = new TreasureNode("Treasure",nc3.Value);
+                        break;
                     default:
                         throw new System.Exception("Node Component not assigned proper symbol");
                 }

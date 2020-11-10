@@ -47,7 +47,7 @@ public class RoomGenerator : MonoBehaviour
         roomHolder = new GameObject("Room Holder").transform;
         rooms = new List<Transform>();
         _levelRoomByNode = new Dictionary<NodeComponent, Transform>();
-        foreach (var node in gc.ncList)
+        foreach (var node in gc.RoomNodeComponents())
         {
             MakeRoom(node);
         }
@@ -136,7 +136,7 @@ public class RoomGenerator : MonoBehaviour
     {
         doors = new List<Door>();
         doorHolder = new GameObject("Door Holder").transform;
-        foreach (var edge in gc.GetEdges())
+        foreach (var edge in gc.GetRoomEdges())
         {
             MakeDoor(edge[0], edge[1]);
         }
