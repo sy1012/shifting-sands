@@ -8,7 +8,7 @@ public class Weapon : ItemArchtype
     public WeaponData data;
     public ItemTypes.Type type;          // What type of item is this (hint its a weapon)
 
-    private Sprite[] spriteAnimation;    // Animation to play when attacking
+    //private Sprite[] spriteAnimation;    // Animation to play when attacking
     private float speed;                 // Speed at which the weapon attacks in seconds
     private Vector2 hitBoxSize;          // The size of the hit box to be created when attacking
     private float coolDown;              // How long before we can swing again after completing a swing
@@ -25,7 +25,8 @@ public class Weapon : ItemArchtype
         this.transform.localScale = data.spriteScaling;
         this.relativeWeight = data.relativeWeight;
         this.description = data.description;
-        this.spriteAnimation = data.spriteAnimation;
+        animator = this.transform.parent.GetComponent<Animator>();
+        //this.spriteAnimation = data.spriteAnimation;
         this.sprite = data.sprite;
         this.speed = data.speed;
         this.hitBoxSize = data.hitBoxSize;
@@ -51,43 +52,43 @@ public class Weapon : ItemArchtype
         this.gameObject.AddComponent<Rigidbody2D>().gravityScale = 0;
     }
 
-    void Update()
-    {
-        if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
-        if (this.coolDown > 0)
-        {  
-            this.coolDown -= Time.deltaTime;
-            if (this.coolDown <= 0) // check if we are done the attack
-            {
-                this.collider.enabled = false;
-                sr.sprite = sprite;
-                this.coolDown = 0;
-            }
-            else if (this.currentFrame != Mathf.Round(((this.speed - this.coolDown) / this.speed) * (spriteAnimation.Length - 1))&&spriteAnimation.Length!=0)
-            {
-                currentFrame += 1;  //it could of only ever change upwards
-                this.sr.sprite = spriteAnimation[currentFrame];
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
+    //    if (this.coolDown > 0)
+    //    {  
+    //        this.coolDown -= Time.deltaTime;
+    //        if (this.coolDown <= 0) // check if we are done the attack
+    //        {
+    //            this.collider.enabled = false;
+    //            sr.sprite = sprite;
+    //            this.coolDown = 0;
+    //        }
+    //        else if (this.currentFrame != Mathf.Round(((this.speed - this.coolDown) / this.speed) * (spriteAnimation.Length - 1))&&spriteAnimation.Length!=0)
+    //        {
+    //            currentFrame += 1;  //it could of only ever change upwards
+    //            this.sr.sprite = spriteAnimation[currentFrame];
+    //        }
+    //    }
+    //}
 
     public void Attack()
     {
-        if (this.coolDown <= 0)
-        {
-            this.collider.enabled = true;
-            this.coolDown = speed;
-            currentFrame = 0;
-            Animator animator = transform.GetComponent<Animator>();
-            if (spriteAnimation.Length != 0)
-            {
-                this.sr.sprite = spriteAnimation[0];
-            }
-            else if (animator != null)
-            {
-                animator.SetTrigger("Attack");
-            }
-        }
+        //if (this.coolDown <= 0)
+        //{
+        //    this.collider.enabled = true;
+        //    this.coolDown = speed;
+        //    currentFrame = 0;
+        //    Animator animator = transform.GetComponent<Animator>();
+        //    if (spriteAnimation.Length != 0)
+        //    {
+        //        this.sr.sprite = spriteAnimation[0];
+        //    }
+        //    else if (animator != null)
+        //    {
+        //        animator.SetTrigger("Attack");
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
