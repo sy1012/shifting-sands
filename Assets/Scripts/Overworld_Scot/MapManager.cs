@@ -36,6 +36,11 @@ public class MapManager : MonoBehaviour
         player = FindObjectOfType<Caravan>();
     }
 
+    private void Start()
+    {
+        LoadOverworld();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
@@ -46,6 +51,11 @@ public class MapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadOverworld();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            SaveSystem.DeleteOverworld();
         }
     }
 
@@ -112,86 +122,90 @@ public class MapManager : MonoBehaviour
     {
         OverworldData loadedData = SaveSystem.LoadOverworld();
 
-        foreach (Oasis oasis in oases)
+        if (loadedData != null)
         {
-            while (oasis.oasisLines.Count > 0)
+            foreach (Oasis oasis in oases)
             {
-                Destroy(oasis.oasisLines[0].gameObject);
-                oasis.oasisLines.RemoveAt(0);
+                while (oasis.oasisLines.Count > 0)
+                {
+                    Destroy(oasis.oasisLines[0].gameObject);
+                    oasis.oasisLines.RemoveAt(0);
+                }
+                while (oasis.pyramidLines.Count > 0)
+                {
+                    Destroy(oasis.pyramidLines[0].gameObject);
+                    oasis.pyramidLines.RemoveAt(0);
+                }
             }
-            while (oasis.pyramidLines.Count > 0)
+
+            while (player.followers.Count > 0)
             {
-                Destroy(oasis.pyramidLines[0].gameObject);
-                oasis.pyramidLines.RemoveAt(0);
+                Destroy(player.followers[0].gameObject);
+                player.followers.RemoveAt(0);
             }
-        }
 
-        while (player.followers.Count > 0)
-        {
-            Destroy(player.followers[0].gameObject);
-            player.followers.RemoveAt(0);
-        }
-
-        LineRenderer[] lines = FindObjectsOfType<LineRenderer>();
-        for(int i = 0; i < lines.Length; i++)
-        {
-            Destroy(lines[i].gameObject);
-        }
-
-
-        while (oases.Count > 0)
-        {
-            Destroy(oases[0].gameObject);
-            oases.RemoveAt(0);
-        }
-
-        while (pyramids.Count > 0)
-        {
-            Destroy(pyramids[0].gameObject);
-            pyramids.RemoveAt(0);
-        }
-
-        oasisGraph = new Graph("oasisGraph");
-
-        for (int i = 0; i < loadedData.numOases; i++)
-        {
-            oases.Add(Instantiate(oasisPrefab, new Vector2(loadedData.oasisPositions[i, 0], loadedData.oasisPositions[i, 1]), Quaternion.identity));
-            oases[oases.Count - 1].generated = true;
-            OasisNode node = new OasisNode(oases[oases.Count - 1].transform.name + oases.Count, oases[oases.Count - 1]);
-            oasisGraph.AddNode(node);
-            oases[oases.Count - 1].oasisNode = node;
-            if(i == loadedData.currentOasisIndex)
+            LineRenderer[] lines = FindObjectsOfType<LineRenderer>();
+            for (int i = 0; i < lines.Length; i++)
             {
-                currentOasis = oases[oases.Count - 1];
-                player.currentNode = node;
-                player.traversal.currentNode = node;
-                player.traversal.destinationNode = node;
+                Destroy(lines[i].gameObject);
             }
-        }
 
-        for (int i = 0; i < loadedData.numPyramids; i++)
-        {
-            pyramids.Add(Instantiate(pyramidPrefab, new Vector2(loadedData.pyramidPositions[i, 0], loadedData.pyramidPositions[i, 1]), Quaternion.identity));
-        }
 
-        foreach (Oasis oasis in oases)
-        {
-            BuildRelationships(oasis);
-        }
+            while (oases.Count > 0)
+            {
+                Destroy(oases[0].gameObject);
+                oases.RemoveAt(0);
+            }
 
-        player.transform.position = new Vector2(loadedData.playerPosition[0], loadedData.playerPosition[1]);
-        
-        player.path.Clear();
+            while (pyramids.Count > 0)
+            {
+                Destroy(pyramids[0].gameObject);
+                pyramids.RemoveAt(0);
+            }
 
-        foreach(Follower follower in player.followers)
-        {
-            follower.path.Clear();
-        }
+            oasisGraph = new Graph("oasisGraph");
 
-        for (int i = 0; i < loadedData.numCamels; i++)
-        {
-            Follower camel = Instantiate(player.camelPrefab);
-            camel.transform.position = new Vector2(loadedData.camelPositions[i, 0], loadedData.camelPositions[i, 1]);
+            for (int i = 0; i < loadedData.numOases; i++)
+            {
+                oases.Add(Instantiate(oasisPrefab, new Vector2(loadedData.oasisPositions[i, 0], loadedData.oasisPositions[i, 1]), Quaternion.identity));
+                oases[oases.Count - 1].generated = true;
+                OasisNode node = new OasisNode(oases[oases.Count - 1].transform.name + oases.Count, oases[oases.Count - 1]);
+                oasisGraph.AddNode(node);
+                oases[oases.Count - 1].oasisNode = node;
+                if (i == loadedData.currentOasisIndex)
+                {
+                    currentOasis = oases[oases.Count - 1];
+                    player.currentNode = node;
+                    player.traversal.currentNode = node;
+                    player.traversal.destinationNode = node;
+                }
+            }
+
+            for (int i = 0; i < loadedData.numPyramids; i++)
+            {
+                pyramids.Add(Instantiate(pyramidPrefab, new Vector2(loadedData.pyramidPositions[i, 0], loadedData.pyramidPositions[i, 1]), Quaternion.identity));
+            }
+
+            foreach (Oasis oasis in oases)
+            {
+                BuildRelationships(oasis);
+            }
+
+            player.transform.position = new Vector2(loadedData.playerPosition[0], loadedData.playerPosition[1]);
+
+            player.path.Clear();
+
+            foreach (Follower follower in player.followers)
+            {
+                follower.path.Clear();
+            }
+
+            for (int i = 0; i < loadedData.numCamels; i++)
+            {
+                Follower camel = Instantiate(player.camelPrefab);
+                camel.transform.position = new Vector2(loadedData.camelPositions[i, 0], loadedData.camelPositions[i, 1]);
+            }
+
         }
 
     }

@@ -36,4 +36,13 @@ public static class SaveSystem
         }
     }
 
+    public static void DeleteOverworld()
+    {
+        string path = Application.persistentDataPath + "/overworld.sav";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+    }
+
 }
