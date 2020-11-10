@@ -9,7 +9,7 @@ public class Caravan : MonoBehaviour
     Vector2 targetposition;
     public List<Node> path;
     public OasisNode currentNode;
-    PlayerOverworldTraversal traversal;
+    public PlayerOverworldTraversal traversal;
     public bool entering = false;
     public Pyramid enterPyramid;
     public GameObject fade;
