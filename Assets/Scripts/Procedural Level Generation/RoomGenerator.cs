@@ -12,7 +12,7 @@ public class RoomGenerator : MonoBehaviour
     public List<Door> doors;
     private Transform doorHolder;
     private Transform roomHolder;
-    
+
     // A table of Node to Node To Direction of Door. e.g. Room A's door to Room B faces "S" for south.
     [SerializeField]
     private Dictionary<NodeComponent, Transform> _levelRoomByNode;
@@ -23,19 +23,19 @@ public class RoomGenerator : MonoBehaviour
     }
     public void Refresh()
     {
-        for (int i = rooms.Count-1; i >= 0; i--)
+        for (int i = rooms.Count - 1; i >= 0; i--)
         {
             Destroy(rooms[i].gameObject);
         }
-        for(int i = doors.Count - 1; i >= 0; i--)
+        for (int i = doors.Count - 1; i >= 0; i--)
         {
             Destroy(doors[i].gameObject);
         }
-        if (doorHolder!=null)
+        if (doorHolder != null)
         {
             Destroy(doorHolder.gameObject);
         }
-        if (roomHolder!=null)
+        if (roomHolder != null)
         {
             Destroy(roomHolder.gameObject);
         }
@@ -55,12 +55,12 @@ public class RoomGenerator : MonoBehaviour
 
     public GameObject MakeRoom(NodeComponent node)
     {
-        
+
         List<Door> roomDoors = GetNodeDoors(node);
-        DoorT doorTree = new DoorT(roomDoors,node);
-        GameObject newRoom = roomPicker.GetRoomMatch(DoorT.ToOrderedStack(doorTree,null),node);
+        DoorT doorTree = new DoorT(roomDoors, node);
+        GameObject newRoom = roomPicker.GetRoomMatch(DoorT.ToOrderedStack(doorTree, null), node);
         newRoom.name = "Room :" + node.name;
-        if (newRoom!=null)
+        if (newRoom != null)
         {
             rooms.Add(newRoom.transform);
             _levelRoomByNode.Add(node, newRoom.transform);
@@ -81,7 +81,7 @@ public class RoomGenerator : MonoBehaviour
 
         newRoom.GetComponent<Room>().MatchUpDoors(orderedDoors);
 
-        
+
         return null;
     }
 
@@ -102,9 +102,9 @@ public class RoomGenerator : MonoBehaviour
             }
         }
         //Sanity check
-        if (roomDoors.Count==0)
+        if (roomDoors.Count == 0)
         {
-            throw new ArgumentException("Node does not have any connection! : " + node.name );
+            throw new ArgumentException("Node does not have any connection! : " + node.name);
         }
         return roomDoors;
     }
@@ -192,7 +192,7 @@ public class DoorT
         while (doorStack.Count != 0)
         {
             top = doorStack.Pop();
-            AddByAngle(this, new DoorT(top, getAngleOfDoorToSisterNode(top, ownerNode),ownerNode));
+            AddByAngle(this, new DoorT(top, getAngleOfDoorToSisterNode(top, ownerNode), ownerNode));
         }
 
     }
@@ -276,9 +276,9 @@ public class DoorT
         }
         else
         {
-            PrintInOrder(doorTree.left,owner);
+            PrintInOrder(doorTree.left, owner);
             Debug.Log(doorTree.door.GetNeighbourNodeOfDoorFor(owner).transform.name + " angle of: " + doorTree.angle);
-            PrintInOrder(doorTree.right,owner);
+            PrintInOrder(doorTree.right, owner);
         }
     }
     public static Stack<Door> ToOrderedStack(DoorT doorT, Stack<Door> ordered)
@@ -293,9 +293,9 @@ public class DoorT
         }
         else
         {
-            ToOrderedStack(doorT.right,ordered);
+            ToOrderedStack(doorT.right, ordered);
             ordered.Push(doorT.door);
-            ToOrderedStack(doorT.left,ordered);
+            ToOrderedStack(doorT.left, ordered);
             return ordered;
         }
     }
@@ -318,41 +318,3 @@ public class DoorT
         }
     }
 }
-
-/*
-[CustomEditor(typeof(RoomGenerator))]
-public class RoomGeneratorEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        RoomGenerator roomGenerator = (RoomGenerator)target;
-        if (GUILayout.Button("Test 'Make Doors'"))
-        {
-            roomGenerator.MakeDoors();
-        }
-        if (GUILayout.Button("Test 'Make Rooms'"))
-        {
-            roomGenerator.MakeDoors();
-            roomGenerator.MakeRooms();
-            roomGenerator.MoveRoomsToNodes();
-        }
-        if (GUILayout.Button("Test 'Door Tree'"))
-        {
-            roomGenerator.MakeDoors();
-            NodeComponent node = Selection.gameObjects[0].GetComponent<NodeComponent>();
-            DoorT doorT = new DoorT(roomGenerator.GetNodeDoors(node),node);
-            if (doorT == null)
-            {
-                throw new ArgumentException("Tree of doors not made");
-            }
-            Stack<Door> orderedDoors = DoorT.ToOrderedStack(doorT,null);
-            while (orderedDoors.Count != 0)
-            {
-                var doort = orderedDoors.Pop();
-                Debug.Log(doort.GetNeighbourNodeOfDoorFor(node).transform.name);
-            }
-        }
-    }
-}
-*/

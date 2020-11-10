@@ -34,6 +34,7 @@ public  abstract class State
     }
     public virtual void Execute()
     {
+
     }
     public virtual IEnumerator Interact()
     {
@@ -75,11 +76,30 @@ public class NormalState : State
     public NormalState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
     {
         stateEnum = StateEnum.Normal;
+
     }
 
     public override void Execute()
     {
         psm.NormalMovement();
+        //Check if player has moved into door trigger area
+        // Door Trigger Logic
+        var triggerCollisions = new List<Collider2D>(psm.GetTriggerCollisions);
+        foreach (var collision in triggerCollisions)
+        {
+            var dc = collision.GetComponent<DoorComponent>();
+            if (dc != null)
+            {
+                //Does nothing right now, but might be useful later
+                EventManager.TriggerDoorEntered(dc);
+                //Make new transition state, set it up with the doors involved, set state to the Transition
+                var transition = new TransitionState(psm);
+                transition.startDoor = collision.transform;
+                transition.endDoor = dc.GetSisterDoor();
+                psm.SetState(transition);
+                return;
+            }
+        }
     }
 
     public override IEnumerator OnAttack()
@@ -133,19 +153,7 @@ public class NormalState : State
                 interactable.Interact(psm.gameObject);
                 yield return null;
             }
-            // Door Trigger Logic
-            var dc = collision.GetComponent<DoorComponent>();
-            if (dc != null)
-            {
-                //Does nothing right now, but might be useful later
-                EventManager.TriggerDoorEntered(dc);
-                //Make new transition state, set it up with the doors involved, set state to the Transition
-                var transition = new TransitionState(psm);
-                transition.startDoor = collision.transform;
-                transition.endDoor = dc.GetSisterDoor();
-                psm.SetState(transition);
-                yield return null;
-            }
+
 
         }
         yield return null;
@@ -187,9 +195,9 @@ public class AttackState : State
 
         // quadrant 4
         else angle -= 90;
-        psm.weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
-        psm.weaponEquiped.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
-        psm.weaponEquiped.Attack();
+        psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+        psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
+        psm.GetWeapon.Attack();
         //Set player to look in the direction attacking
         psm.animator.SetFloat("PrevVertical", atkHeading.y);
         psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
@@ -225,7 +233,7 @@ public class RollState : State
     public override IEnumerator Enter()
     {
         float dashAmount = 3f;//in units
-        float dashTime = 0.05f;//in seconds
+        float dashTime = 0.2f;//in seconds
         int segments = 6;//amount of splits for dash
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
