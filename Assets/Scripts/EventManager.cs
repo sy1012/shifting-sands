@@ -20,6 +20,10 @@ public static class EventManager
     public static event GameEvent onUseShrine;
     public static event GameEvent onDash;
     public static event GameEvent onDungeonGenerated;
+    public static event EventHandler onOverworldStart;
+    public static event EventHandler onNewOasis;
+    public static event EventHandler onOasisClicked;
+    public static event EventHandler onPyramidClicked;
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
 
@@ -102,6 +106,26 @@ public static class EventManager
     public static void TriggerOnDash()
     {
         onDash?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnOverworldStart()
+    {
+        onOverworldStart?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnNewOasis()
+    {
+        onNewOasis?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnOasisClicked()
+    {
+        onOasisClicked?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnPyramidClicked()
+    {
+        onPyramidClicked?.Invoke(null, EventArgs.Empty);
     }
 
 }

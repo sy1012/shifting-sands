@@ -14,6 +14,9 @@ public class Caravan : MonoBehaviour
     public Pyramid enterPyramid;
     public GameObject fade;
     SpriteRenderer fadeRenderer;
+    public List<Follower> followers = new List<Follower>();
+
+    public Follower camelPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,10 @@ public class Caravan : MonoBehaviour
                 fadeRenderer.color = new Color(0, 0, 0, fadeRenderer.color.a + 1f * Time.deltaTime);
             }
         }
-        
+
+        if(Input.GetKeyDown(KeyCode.E)){
+            Instantiate(camelPrefab);
+        }
+
     }
 }
