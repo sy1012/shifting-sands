@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1840004624045820701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1840004624045820771}
+  - component: {fileID: 1840004624045820700}
+  m_Layer: 0
+  m_Name: Lv 1 Encounter Factory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1840004624045820771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840004624045820701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.8540208, y: -2.0475633, z: -6.455113}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1840004624045820700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840004624045820701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a4dbde85feb91479c42333f78e306a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficulty: 1
+  EncounterPool:
+  - EncounterDescription:
+    - prefab: {fileID: 7408489527691097514, guid: db8c0bdd3b5bc974b92c53a0afdfb72a, type: 3}
+      diceRoll:
+        dieSides: 6
+        Count: 1
+  - EncounterDescription:
+    - prefab: {fileID: 3833411449492328990, guid: 9fa5f4115c9529841ae57458102280f1, type: 3}
+      diceRoll:
+        dieSides: 4
+        Count: 3
+  - EncounterDescription:
+    - prefab: {fileID: 568382389312279836, guid: 7f08239374a958c4c8fa359d145ea77f, type: 3}
+      diceRoll:
+        dieSides: 2
+        Count: 1
+    - prefab: {fileID: 3833411449492328990, guid: 9fa5f4115c9529841ae57458102280f1, type: 3}
+      diceRoll:
+        dieSides: 2
+        Count: 2
+  - EncounterDescription:
+    - prefab: {fileID: 5967142386578456989, guid: e2899b55f879f0843be7b64b3a9a20fe, type: 3}
+      diceRoll:
+        dieSides: 2
+        Count: 3
+    - prefab: {fileID: 3833411449492328990, guid: 9fa5f4115c9529841ae57458102280f1, type: 3}
+      diceRoll:
+        dieSides: 2
+        Count: 3

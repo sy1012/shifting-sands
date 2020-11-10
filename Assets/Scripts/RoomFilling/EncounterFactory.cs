@@ -4,11 +4,16 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+
     public class EncounterFactory:MonoBehaviour
     {
         public int difficulty = 1;
         [SerializeField]
         public List<Encounter> EncounterPool;
+        private void Start()
+        {
+            GetEncounter();
+        }
         public List<MonoBehaviour> GetEncounter()
         {
             int j = UnityEngine.Random.Range(0, EncounterPool.Count);
