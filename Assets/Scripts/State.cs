@@ -195,9 +195,9 @@ public class AttackState : State
 
         // quadrant 4
         else angle -= 90;
-        psm.weaponEquiped.transform.rotation = Quaternion.Euler(0, 0, angle);
-        psm.weaponEquiped.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
-        psm.weaponEquiped.Attack();
+        psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+        psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
+        psm.GetWeapon.Attack();
         //Set player to look in the direction attacking
         psm.animator.SetFloat("PrevVertical", atkHeading.y);
         psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
