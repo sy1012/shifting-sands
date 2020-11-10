@@ -205,5 +205,5 @@ namespace GraphGrammars
         }
     }
     // t:terminal , NT: non terminal
-    public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock,Curse,Relic}
+    public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock,Curse,Relic,Encounter,Treasure}
 }
