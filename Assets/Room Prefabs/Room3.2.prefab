@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 573213353481199051}
     - target: {fileID: 7627660811624736171, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: doorHeadings
-      value: NNE
+      value: NNS
       objectReference: {fileID: 0}
     - target: {fileID: 7627660811624736171, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: doorTransforms.Array.data[2]
