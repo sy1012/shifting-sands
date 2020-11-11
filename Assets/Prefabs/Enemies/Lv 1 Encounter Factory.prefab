@@ -55,6 +55,10 @@ MonoBehaviour:
       diceRoll:
         dieSides: 4
         Count: 3
+    - prefab: {fileID: 568382389312279836, guid: 7f08239374a958c4c8fa359d145ea77f, type: 3}
+      diceRoll:
+        dieSides: 2
+        Count: 1
   - EncounterDescription:
     - prefab: {fileID: 568382389312279836, guid: 7f08239374a958c4c8fa359d145ea77f, type: 3}
       diceRoll:
