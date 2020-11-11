@@ -38,7 +38,9 @@ public class ItemArchtype : MonoBehaviour, IItem
 
     public void Dropped()
     {
-        if (this.sr == null) { this.gameObject.AddComponent<SpriteRenderer>(); }
+        this.sr = this.gameObject.AddComponent<SpriteRenderer>();
+        this.sr.sortingLayerName = "Player";
+        this.sr.sprite = sprite;
         if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
         if (this.sprite == null) { Initialize(); }
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));

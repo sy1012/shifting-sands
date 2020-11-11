@@ -13,7 +13,7 @@ public class Character : MonoBehaviour, IHealable, IDamagable
     private Healthbar healthbar;
 
     // Start is called before the first frame update
-    void Awake()
+    protected virtual void Awake()
     {
         healthCanvas = Instantiate(healthCanvasPrefab, transform.position, transform.rotation, gameObject.transform);
         health = maxHealth;

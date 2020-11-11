@@ -47,7 +47,8 @@ public class Caravan : MonoBehaviour
         {
             if(fadeRenderer.color.a > 1)
             {
-                SceneManager.LoadScene("DemoDungeon");
+                SceneManager.LoadScene("Dungeon");
+                //SceneManager.LoadScene("DemoDungeon");
             }
             transform.position = Vector2.MoveTowards(transform.position, enterPyramid.transform.position, 10f * Time.deltaTime);
             if (transform.position == enterPyramid.transform.position)

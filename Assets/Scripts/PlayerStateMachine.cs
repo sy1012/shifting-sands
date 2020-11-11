@@ -12,7 +12,8 @@ public class PlayerStateMachine : Character
     GameObject text;
     GameObject background;
     public float playerRootOffset = -0.5f;
-    public Weapon weaponEquiped;
+    public EquipmentManager equipment;
+    public Weapon GetWeapon { get => equipment.Weapon; }
     KeyCode interactKey = KeyCode.F;
     KeyCode InventoryKey = KeyCode.V;
     KeyCode dashKey = KeyCode.Space;
@@ -31,6 +32,12 @@ public class PlayerStateMachine : Character
 
     public float InvincibleTime { get => invincibleTime; set => invincibleTime = value; }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        EventManager.onDungeonGenerated += EnterDungeon;
+    }
+
     //Change state. This is used by states to change the players current state. Always call states Enter() routine. Enum is just for debugging.
     public void SetState(State newstate)
     {
@@ -39,7 +46,12 @@ public class PlayerStateMachine : Character
         StartCoroutine(newstate.Enter());
     }
 
-
+    private void EnterDungeon(EventArgs e)
+    {
+        DungeonGenArgs de = e as DungeonGenArgs;
+        Transform entrance = LevelUtils.FindEntrance(de.Graph, de.Rooms);
+        transform.position = entrance.position;
+    }
 
     // Start is called before the first frame update
     void Start()

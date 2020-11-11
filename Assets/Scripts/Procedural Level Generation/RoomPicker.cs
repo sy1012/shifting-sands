@@ -12,10 +12,6 @@ public class RoomPicker : ScriptableObject
     public List<GameObject> ThreeDoorRooms;
     public List<GameObject> FourDoorRooms;
 
-    public List<string> oneDoorCodes;
-    public List<string> twoDoorCodes;
-    public List<string> threeDoorCodes;
-    public List<string> fourDoorCodes;
 
     public GameObject GetRoomMatch(Stack<Door> doors, NodeComponent node)
     {
@@ -36,26 +32,30 @@ public class RoomPicker : ScriptableObject
         if (n==1)
         {
             objectPool = OneDoorRooms;
-            roomPool = oneDoorCodes;
+
         }
         else if (n==2)
         {
             objectPool = TwoDoorRooms;
-            roomPool = twoDoorCodes;
         }
         else if (n == 3)
         {
             objectPool = ThreeDoorRooms;
-            roomPool = threeDoorCodes;
         }
         else if (n == 4)
         {
             objectPool = FourDoorRooms;
-            roomPool = fourDoorCodes;
+        }
+
+        roomPool = new List<string>();
+        foreach (var obj in objectPool)
+        {
+            roomPool.Add(obj.GetComponent<Room>().doorHeadings);
         }
         if (objectPool.Count != roomPool.Count)
         {
-            Debug.Log("Warning. Picker headings list do not match room prefab list");
+            Debug.Log("Error. Picker headings list do not match room prefab list");
+            return null;
         }
         float rotation = 0;
         List<GameObject> canidates = new List<GameObject>() ;

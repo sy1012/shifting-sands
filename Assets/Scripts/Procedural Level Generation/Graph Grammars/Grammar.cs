@@ -15,7 +15,9 @@ namespace GraphGrammars
             {
                 return false;
             }
+
             SinglePushOut(isomorphAssignments, graph, rule.GetLeftHandExpression().Graph, rule.GetRightHandExpression().Graph);
+
             Debug.Log(" Rule: " + rule.transform.name);
             //Debug.Log(graph.ToString());
             return true;
@@ -161,7 +163,7 @@ namespace GraphGrammars
             List<List<Node>> allIsos = new List<List<Node>>();
             if (Search(graph,subgraph,assignments,possible_assignments,allIsos))
             {
-                Debug.Log(assignmentToString(allIsos));
+                //Display all iso mathces Debug.Log(assignmentToString(allIsos));
                 return allIsos[UnityEngine.Random.Range(0,allIsos.Count)];
             }
             return null;

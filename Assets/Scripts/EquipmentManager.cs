@@ -17,7 +17,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void Start()
     {
-        
+        if (Weapon != null) { weapon = Weapon.gameObject; }
     }
 
     public void AddWeapon(WeaponData newWeapon)

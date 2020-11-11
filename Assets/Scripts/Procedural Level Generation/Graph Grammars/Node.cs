@@ -32,7 +32,7 @@ namespace GraphGrammars
 
         public override string ToString()
         {
-            return name +": "+ GetHashCode().ToString().Substring(7);
+            return name +": "+ GetHashCode().ToString().Substring(6);
         }
 
         public virtual Node Copy()

@@ -13,26 +13,33 @@ public class TransitionState : State
     {
         //Step one, move through door, turn off coliders
         Vector3 target;
+        if (startDoor == null)
+        {
+            throw new System.Exception("start door should not be null");
+        }
+        if (endDoor == null)
+        {
+            throw new System.Exception("end door should not be null");
+        }
         target = startDoor.position;
         TurnOffColliders();
         bool goneThroughDoor = false;
         while (!goneThroughDoor)
         {
             psm.MoveCharacter(target - psm.transform.position, 4f);
-            if ((target - psm.transform.position).magnitude <0.2f)
+            if ((target - psm.transform.position).magnitude <0.05f)
             {
                 goneThroughDoor = true;
             }
             yield return null;
         }
         //Step two, turn off renderer and move to next door
-        var r = psm.spriteRenderer;
-        r.enabled = false;
         target = endDoor.position;
         bool atNextDoor = false;
         while (!atNextDoor)
         {
-            psm.MoveCharacter(target - psm.transform.position, 15f);
+            Debug.Log("Not at next door" + (target - psm.transform.position).magnitude);
+            psm.MoveCharacter(target - psm.transform.position, 12f);
             if ((target - psm.transform.position).magnitude < 0.2f)
             {
                 atNextDoor = true;
@@ -40,12 +47,13 @@ public class TransitionState : State
             yield return null;
         }
         //Step three, move into room, turn colliders back on. Keep dungeoneering
-        target = endDoor.position - endDoor.up;
+        target = endDoor.position - endDoor.up*1.5f;
         bool inRoom = false;
         while (!inRoom)
         {
+            Debug.Log("Not in room" + (target - psm.transform.position).magnitude);
             psm.MoveCharacter(target - psm.transform.position, 4f);
-            if ((target - psm.transform.position).magnitude < 0.2f)
+            if ((target - psm.transform.position).magnitude < 0.1f)
             {
                 inRoom = true;
             }
@@ -58,7 +66,6 @@ public class TransitionState : State
             psm.SetRoom(newRoom);
         }
         TurnOnColliders();
-        r.enabled = true;
         psm.SetState(new NormalState(psm));
     }
     public void TurnOffColliders()
