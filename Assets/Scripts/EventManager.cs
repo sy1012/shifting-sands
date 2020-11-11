@@ -89,7 +89,6 @@ public static class EventManager
     public static void TriggerOnPlayerHit()
     {
         OnPlayerHit?.Invoke(EventArgs.Empty);
-
     }
     
     public static void TriggerOnInventoryInteraction()

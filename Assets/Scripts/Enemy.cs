@@ -36,10 +36,10 @@ public class Enemy : Character
 
     public void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.name == "Player" && cooldown <= 0)
+        if (collision.collider.transform == Player && cooldown <= 0)
         {
             cooldown = damageSpeed;
-            collision.collider.gameObject.GetComponent<Character>().TakeDamage(damage);
+            psm.TakeDamage(damage,collision);
         }
     }
 

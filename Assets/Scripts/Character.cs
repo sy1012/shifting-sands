@@ -7,6 +7,7 @@ public class Character : MonoBehaviour, IHealable, IDamagable
     public bool isMousedOver = false;
     public int maxHealth = 100;
     public int health;
+    public int weight = 3;
     //below are used to instantiate and manage the healthbar
     public Canvas healthCanvasPrefab;
     protected Canvas healthCanvas;
@@ -37,9 +38,14 @@ public class Character : MonoBehaviour, IHealable, IDamagable
 
     public virtual void TakeDamage(int damage, Collision2D collision)
     {
-        
-        health -= damage;
-        healthbar.SetHealth(health);
+        //Knockback
+        Vector2 colliderPos = new Vector2(collision.transform.position.x, collision.transform.position.y);
+        Vector2 chacterPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 pushBackDir = (chacterPos - colliderPos).normalized;
+        Vector2 pushBackVector = pushBackDir / weight;
+        transform.position += new Vector3(pushBackVector.x,pushBackVector.y,0);
+        //Take damage
+        TakeDamage(damage);
     }
     public virtual void TakeDamage(int damage)
     {
