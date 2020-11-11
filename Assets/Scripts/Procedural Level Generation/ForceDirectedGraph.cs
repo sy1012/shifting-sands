@@ -24,7 +24,7 @@ public class ForceDirectedGraph : MonoBehaviour
     public void SolveForceDrivenGraph()
     {
         Dictionary<NodeComponent, Vector2> NodeToForce = new Dictionary<NodeComponent, Vector2>();
-        foreach (var node in graphComponent.ncList)
+        foreach (var node in graphComponent.RoomNodeComponents())
         {
             //Calculate Applied Forces
             Vector2 fs = Vector2.zero;
@@ -33,18 +33,23 @@ public class ForceDirectedGraph : MonoBehaviour
             //Calculate Spring Force with other Connected Nodes
             foreach (var neighbour in node.neighbours)
             {
+                if (neighbour is EncounterNodeComponent || neighbour is TreasureNodeComponent)
+                {
+                    // Dont act on non room nodes
+                    continue;
+                }
                 // Find spring force for this neighbour
                 Vector2 neighbourPos = new Vector2(neighbour.transform.position.x, neighbour.transform.position.y);
                 Vector2 dir = (neighbourPos - nodePos).normalized;
                 fs += dir * ks * ((neighbourPos - nodePos).magnitude - neutralLength);
             }
-            //Calculate Repulsion Forces with all other nodes
-            foreach (var otherNode in graphComponent.ncList)
+            //Calculate Repulsion Forces with all other room nodes
+            foreach (var otherNode in graphComponent.RoomNodeComponents())
             {
                 if (node.transform == otherNode.transform || node.neighbours.Contains(otherNode))
                 {
                     continue;
-                    //Don't act on self
+                    //Don't act repulse self or neighbours
                 }
                 Vector2 otherNodePos = new Vector2(otherNode.transform.position.x, otherNode.transform.position.y);
                 //Debug.Log(otherNodePos + "" + nodePos);

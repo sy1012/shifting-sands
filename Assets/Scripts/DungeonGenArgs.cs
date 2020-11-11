@@ -6,15 +6,17 @@ using UnityEngine;
 
 public class DungeonGenArgs:EventArgs
 {
+    public LevelGenerator generator;
     List<Door> doors;
     List<Transform> rooms;
     Graph graph;
 
-    public DungeonGenArgs(List<Door> doors, List<Transform> rooms, Graph graph)
+    public DungeonGenArgs(LevelGenerator sender,List<Door> doors, List<Transform> rooms, Graph graph)
     {
         this.doors = doors;
         this.rooms = rooms;
         this.graph = graph;
+        generator = sender;
     }
 
     public List<Door> Doors { get => doors; set => doors = value; }

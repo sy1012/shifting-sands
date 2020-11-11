@@ -31,6 +31,8 @@ public class Oasis : MonoBehaviour
 
     public List<LineRenderer> pyramidLines = new List<LineRenderer>();
     private Caravan caravan;
+    private MapManager mapManager;
+
 
     private void Start()
     {
@@ -39,9 +41,14 @@ public class Oasis : MonoBehaviour
         circle.oasis = this;
 
         caravan = FindObjectOfType<Caravan>();
+        mapManager = FindObjectOfType<MapManager>();
 
         //create pyramids
-        generatePyramids();
+        if (!generated)
+        {
+            generatePyramids();
+        }
+        
 
     }
 
@@ -114,6 +121,8 @@ public class Oasis : MonoBehaviour
                 pyramidLines[pyramidLines.Count - 1].startWidth = 0.2f;
                 pyramidLines[pyramidLines.Count - 1].endWidth = 0.2f;
                 pyramidLines[pyramidLines.Count - 1].SetPositions(points);
+
+                mapManager.pyramids.Add(pyramids[pyramids.Count - 1]);
             }
             
 

@@ -15,6 +15,18 @@ public class GraphComponent : MonoBehaviour
      * */
     [SerializeField]
     public List<NodeComponent> ncList;
+    public List<NodeComponent> RoomNodeComponents()
+    {
+        var roomNodes = new List<NodeComponent>();
+        foreach (var nc in ncList)
+        {
+            if (!(nc.symbol == Symbol.Encounter || nc.symbol == Symbol.Treasure))
+            {
+                roomNodes.Add(nc);
+            }
+        }
+        return roomNodes;
+    }
     public int Size()
     {
         return ncList.Count;
@@ -38,6 +50,31 @@ public class GraphComponent : MonoBehaviour
     {
         fromNode.AddNeighbour(toNode);
         toNode.AddNeighbour(fromNode);
+    }
+
+    /// <summary>
+    /// GetEdges without any edges to non room nodes
+    /// </summary>
+    /// <returns></returns>
+    public List<List<NodeComponent>> GetRoomEdges()
+    {
+        List<List<NodeComponent>> edgesToRemove = new List<List<NodeComponent>>();
+        List<List<NodeComponent>> edges = GetEdges();
+        foreach (var edge in edges)
+        {
+            foreach (var vert in edge)
+            {
+                if (vert.symbol == Symbol.Encounter || vert.symbol== Symbol.Treasure)
+                {
+                    edgesToRemove.Add(edge);
+                }
+            }
+        }
+        foreach (var edgeToRem in edgesToRemove)
+        {
+            edges.Remove(edgeToRem);
+        }
+        return edges;
     }
 
     /// <summary>
@@ -131,7 +168,25 @@ public class GraphComponent : MonoBehaviour
             if (!assigned)
             {
                 Transform newNC = new GameObject(n.ToString()).transform;
-                var nc = newNC.gameObject.AddComponent<NodeComponent>();
+                NodeComponent nc;
+                switch (n.GetSymbol)
+                {
+                    case Symbol.Encounter:
+                        var nc2 = newNC.gameObject.AddComponent<EncounterNodeComponent>();
+                        var n2 = (EncounterNode)n;
+                        nc2.Difficulty = n2.difficulty;
+                        nc = nc2;
+                        break;
+                    case Symbol.Treasure:
+                        var nc3 = newNC.gameObject.AddComponent<TreasureNodeComponent>();
+                        var n3 = (TreasureNode)n;
+                        nc3.Value = n3.value;
+                        nc = nc3;
+                        break;
+                    default:
+                        nc = newNC.gameObject.AddComponent<NodeComponent>();
+                        break;
+                }
                 newNC.transform.position = deletedNodesCentroid + new Vector3(n.Position.x, n.Position.y, 0);
                 ncList.Add(newNC.GetComponent<NodeComponent>());
                 nc.AssignNode(n);

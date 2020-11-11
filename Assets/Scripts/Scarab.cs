@@ -7,15 +7,6 @@ using UnityEngine;
 public class Scarab : Enemy
 {
 
-    [SerializeField]
-    private Room room;
-    [SerializeField]
-    private AIDestinationSetter destination;
-    [SerializeField]
-    private Transform Player;
-    private PlayerStateMachine psm;
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +14,7 @@ public class Scarab : Enemy
         damage = 1;
         //move healthbar to a more suitable position
         healthCanvas.transform.position = transform.position + new Vector3(0, 0.5f, 0);
-        psm = Player.GetComponent<PlayerStateMachine>();
-        
+        base.Start();
     }
 
     private void Update()

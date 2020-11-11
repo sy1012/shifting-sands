@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7408489527691097509}
   - component: {fileID: 7408489527691097510}
   m_Layer: 8
-  m_Name: Skull
+  m_Name: skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7408489527691097516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.15, y: -2.15, z: -3.739751}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7408489528431082808}
@@ -147,9 +147,13 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   healthCanvasPrefab: {fileID: 5570061624185154329, guid: 639cf5f9e4e52c14dab334bb49afea26, type: 3}
+  destination: {fileID: 7408489527691097512}
+  Player: {fileID: 0}
+  quality: 0
   damage: 0
   damageSpeed: 0
   cooldown: 0
+  room: {fileID: 0}
 --- !u!50 &7408489527691097510
 Rigidbody2D:
   serializedVersion: 4

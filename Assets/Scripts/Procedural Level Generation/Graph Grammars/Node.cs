@@ -115,13 +115,13 @@ namespace GraphGrammars
     {
         public LockNode(string _name)
         {
-            base.symbol = Symbol.NT;
+            base.symbol = Symbol.Lock;
             name = _name;
         }
 
         public LockNode(string _name, Vector2 position) : base(_name, position)
         {
-            symbol = Symbol.NT;
+            symbol = Symbol.Lock;
         }
 
         public override Node Copy()
@@ -133,13 +133,13 @@ namespace GraphGrammars
     {
         public KeyNode(string _name)
         {
-            base.symbol = Symbol.NT;
+            base.symbol = Symbol.Key;
             name = _name;
         }
 
         public KeyNode(string _name, Vector2 position) : base(_name, position)
         {
-            symbol = Symbol.NT;
+            symbol = Symbol.Key;
         }
 
         public override Node Copy()
@@ -204,6 +204,48 @@ namespace GraphGrammars
             return new OasisNode(name, oasis);
         }
     }
+    public class EncounterNode : Node
+    {
+        public int difficulty;
+        public EncounterNode(string _name,int difficulty)
+        {
+            base.symbol = Symbol.Encounter;
+            name = _name;
+            this.difficulty = difficulty;
+        }
+
+        public EncounterNode(string _name, Vector2 position , int difficulty) : base(_name, position)
+        {
+            symbol = Symbol.Encounter;
+            this.difficulty = difficulty;
+        }
+
+        public override Node Copy()
+        {
+            return new EncounterNode(name, position, difficulty);
+        }
+    }
+    public class TreasureNode : Node
+    {
+        public int value;
+        public TreasureNode(string _name, int value)
+        {
+            base.symbol = Symbol.Treasure;
+            name = _name;
+            this.value = value;
+        }
+
+        public TreasureNode(string _name, Vector2 position, int value) : base(_name, position)
+        {
+            this.value = value;
+            symbol = Symbol.Treasure;
+        }
+
+        public override Node Copy()
+        {
+            return new TreasureNode(name, position,value);
+        }
+    }
     // t:terminal , NT: non terminal
-    public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock,Curse,Relic}
+    public enum Symbol { t ,Entrance,Goal,NT,Start,Key,Lock,Curse,Relic,Encounter,Treasure}
 }

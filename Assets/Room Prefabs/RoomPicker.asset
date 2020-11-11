@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OneDoorRooms:
   - {fileID: 8258062586857101258, guid: b2eb1b8c124ac7245b19a4b5ad58cb9c, type: 3}
+  - {fileID: 8258062586857101258, guid: 1354f01075eccee48ac83a4d28b83b84, type: 3}
   TwoDoorRooms:
   - {fileID: 8258062586857101258, guid: 55036d3843fb8ca4e917486a00c6bdf9, type: 3}
   - {fileID: 3546358555485036293, guid: 3da6572c9cd86f14c8974be40d1de583, type: 3}
   - {fileID: 1054894786360866217, guid: 0cbc55dbdf4046349948b0957bd3e144, type: 3}
   - {fileID: 1054894786360866217, guid: c37b879cf957dff46802dd792255c3b7, type: 3}
   - {fileID: 1054894786360866217, guid: 37dc2a53583041a428b461f8a35feb8a, type: 3}
+  - {fileID: 1054894786360866217, guid: 51df5a73d7fef9b4d9e34ab9d36ae31f, type: 3}
   ThreeDoorRooms:
   - {fileID: 1054894786360866217, guid: 3ce61b59530374e4abafa035d29d2c85, type: 3}
   - {fileID: 1054894786360866217, guid: 34f179f5020028746bda54aa648d7ab8, type: 3}

@@ -50,7 +50,12 @@ public class PlayerStateMachine : Character
     {
         DungeonGenArgs de = e as DungeonGenArgs;
         Transform entrance = LevelUtils.FindEntrance(de.Graph, de.Rooms);
-        transform.position = entrance.position;
+        Room entranceRoom = entrance.GetComponent<Room>();
+        entranceRoom.PlaceObject(this);
+        //offset down so player is in front of ladder and ZERO Z position
+        transform.position -= Vector3.up;
+        //No parent
+        transform.SetParent(null);
     }
 
     // Start is called before the first frame update

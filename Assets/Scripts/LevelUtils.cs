@@ -35,4 +35,34 @@ public static class LevelUtils
         }
         throw new System.Exception("No matching entrance found between graph entrance and rooms list");
     }
+    public static Transform FindGoal(Graph g, List<Transform> rooms)
+    {
+        Node exit = null;
+        //Linear search for entrance node
+        foreach (var node in g.GetNodes)
+        {
+            if (node.GetSymbol == Symbol.Goal)
+            {
+                exit = node;
+            }
+        }
+        if (exit == null)
+        {
+            throw new System.Exception("Error. No entrance node found in graph");
+        }
+        //Find transform that matches node
+        Room curRoom;
+        foreach (var room in rooms)
+        {
+            curRoom = room.GetComponent<Room>();
+            //Sanity check
+            if (curRoom == null) { throw new System.Exception("Transform should have a room. Does it's children?"); }
+            if (curRoom.RoomNode.AssignedNode == exit)
+            {
+                return curRoom.transform;
+            }
+
+        }
+        throw new System.Exception("No matching entrance found between graph entrance and rooms list");
+    }
 }
