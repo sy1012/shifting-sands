@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemArchtype : MonoBehaviour, IItem
 {
-    //public ItemData data;
+    public ItemData data;
     protected Vector2 scrollOffset;
     protected float relativeWeight;
     protected Sprite sprite;               // This weapons resting sprite
@@ -21,28 +21,46 @@ public class ItemArchtype : MonoBehaviour, IItem
     // Start is called before the first frame update
     public virtual void Initialize()
     {
-        Debug.Log("wrong one");
+        //this.scrollOffset = data.scrollOffset;
+        //this.transform.localScale = data.spriteScaling;
+        //this.scroll = data.scroll;
+        //this.relativeWeight = data.relativeWeight;  // How much should this item move when it is dropped
+        //this.sprite = data.sprite;              // This weapons resting sprite
+        //this.value = data.value;                // How much could this be sold for
+        //this.recipe = data.recipe;              // List of items that could be put together to make this item
+        ////this.sr = this.gameObject.AddComponent<SpriteRenderer>();      // Quick Reference to the Sprite Renderer attached to this object  
+        //this.itemName = data.itemName;          // Name of the ite
+        //this.description = data.description;    // description of the item
+
+        ////this.sr = this.GetComponent<SpriteRenderer>();
+        ////if (sr == null) sr = this.gameObject.AddComponent<SpriteRenderer>();
+        ////this.sr.sprite = data.sprite;
+        ////this.sr.sortingLayerName = "Player";
+        //this.gameObject.AddComponent<BoxCollider2D>();
     }
 
     public virtual void PickedUp()
     {
-        if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
+        //if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
         DungeonMaster.loot.Remove(this.gameObject);
         //Debug.Log(this.data);
         //Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
-        Destroy(background);
-        Destroy(text);
-        Destroy (this.gameObject);
+        //Destroy(background);
+        //Destroy(text);
+        
+        Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
+        Destroy(this.gameObject);
         // ADD TO INVENTORY OR WHATEVER HERE
     }
 
     public void Dropped()
     {
+        Debug.Log("hey");
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
         this.sr.sortingLayerName = "Player";
-        this.sr.sprite = sprite;
+        this.sr.sprite = data.sprite;
+        this.gameObject.AddComponent<BoxCollider2D>();
         if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
-        if (this.sprite == null) { Initialize(); }
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));
         this.GetComponent<Rigidbody2D>().AddForce(force);
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -57,25 +75,18 @@ public class ItemArchtype : MonoBehaviour, IItem
 
     public virtual void CreateInfoPopUp()
     {
-        if (this.sprite == null) { Initialize(); }
-        if (this.background == null) { (this.text, this.background) = Formatter.CreateAssetsFromScratch(this.description, this.scroll); }
-        else
-        {
-            text.gameObject.SetActive(true);
-            background.SetActive(true);
-        }
-        if (this.GetComponent<RectTransform>() != null)
-        {
-            Debug.Log("hello");
-            if (background.GetComponent<RectTransform>() == null) { background.AddComponent <RectTransform>(); }
-            text.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
-            background.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
-        }
-        else
-        {
-            text.transform.position = (Vector2)this.transform.position + scrollOffset;
-            background.transform.position = (Vector2)this.transform.position + scrollOffset;
-        } 
+        //if (this.sprite == null) { Initialize(); }
+        if (this.background == null) { (this.text, this.background) = Formatter.CreateAssetsFromScratch(data.description, data.scroll); }
+        text.gameObject.SetActive(true);
+        background.SetActive(true);
+        //if (this.GetComponent<RectTransform>() != null)
+        //{
+        //    if (background.GetComponent<RectTransform>() == null) { background.AddComponent <RectTransform>(); }
+        //    text.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
+        //    background.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
+        //}
+        text.transform.position = (Vector2)this.transform.position + scrollOffset;
+        background.transform.position = (Vector2)this.transform.position + scrollOffset;
     }
 
     public void DestroyInfoPopUp()

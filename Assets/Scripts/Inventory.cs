@@ -27,6 +27,8 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        Debug.Log("WHere am I");
+        Debug.Log(this.gameObject.name);
         // How large should the inventory be on the Viewport?
         const float VIEWPERCENT = 0.95f;
 
@@ -57,12 +59,12 @@ public class Inventory : MonoBehaviour
         float worldUnitsTall = screenUpperRight.y - screenLowerLeft.y;
         inventoryBackground.transform.localScale = new Vector2(1/xScale * worldUnitsWide, 1/yScale * worldUnitsTall);
 
-        slotWorldUnits = (screenUpperRight.x - screenLowerLeft.x) / 9;
+        slotWorldUnits = (screenUpperRight.x - screenLowerLeft.x) / 15;
         float slotScale = 1 / inventorySlotSprite.bounds.size.x * slotWorldUnits;
         float coinScale = (1 / coinSprite.bounds.size.x * (screenUpperRight.x - screenLowerLeft.x) / 9);
 
         // what Size is each block
-        float BLOCKSIZE = 0.2f;
+        float BLOCKSIZE = 0.1f;
         float GRIDSIZE = (Camera.main.ViewportToWorldPoint(new Vector2(0, BLOCKSIZE)).y - Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y) * 2;
 
         // Make the two equipment slots and the coin display and text
@@ -196,6 +198,7 @@ public class Inventory : MonoBehaviour
 
     private void TriggerInventory(object sender, EventArgs e)
     {
+        Debug.Log("HOW");
         if (inventoryOpen) CloseInventory();
         else OpenInventory();
     }
@@ -231,7 +234,6 @@ public class Inventory : MonoBehaviour
     public bool AddToInventory(ItemData data)
     {
         int i = 3;
-        Debug.Log(slots[1]);
         while (i <= slots.Count-1 && slots[i].GetComponent<Slot>().occupied)
         {
             i += 1;

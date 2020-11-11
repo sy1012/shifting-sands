@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LootGenerator
+public static class LootGenerator
 {
+    private static int initialized = 1;
     private static WeaponData woodSword;
     private static WeaponData stick;
     private static ItemData silver;
@@ -27,6 +28,9 @@ public class LootGenerator
 
     static void Start()
     {
+        initialized = 0;
+        Debug.Log("start ran");
+
         /* These variables control what rarity an item is for any tier it is present in, (tier, rarity) */
         List<(int, int)> woodSwords = new List<(int, int)> { (1, 2), (2, 2) };
         List<(int, int)> silver1 = new List<(int, int)> { (1, 1), (2, 1)};
@@ -56,7 +60,7 @@ public class LootGenerator
 
         woodSword = Resources.Load<WeaponData>("Weapons/WoodenTrainingSword");
         silver = Resources.Load<ItemData>("Items/SilverPiece");
-        stick = Resources.Load<WeaponData>("Weapons/Stick");
+        stick = Resources.Load<WeaponData>("Weapons/Spear");
 
         /* set up the tier Lists */
         //firstTierUncommon.Add(woodSword);
@@ -96,27 +100,28 @@ public class LootGenerator
             else { item = thisTierExotic[Random.Range(0, thisTierExotic.Count - 1)]; }
             dropped.Add(item);  
         }
-
+        Debug.Log(dropped[0]);
         return dropped;
     }
 
     private static void InstantiateDrops(Vector2 position, List<ItemData> items)
     {
+        if (items[0] == null) { return; }
         foreach (ItemData item in items)
         {
             GameObject drop = new GameObject("lootDrop");
             //GameObject.Destroy(drop.GetComponent<SpriteRenderer>());
             DungeonMaster.loot.Add(drop);
-            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<Weapon>().data = (WeaponData)item; drop.GetComponent<Weapon>().Dropped(); }
+            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<ItemArchtype>().data = (ItemData)item; drop.GetComponent<ItemArchtype>().Dropped(); }
             else if (item.itemType is ItemTypes.Type.consumable) { } // TODO
-            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<Item>().data = item; drop.GetComponent<Item>().Dropped(); }
+            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<ItemArchtype>().data = item; drop.GetComponent<ItemArchtype>().Dropped(); }
             drop.transform.position = position;
         }
     }
 
     public static void Generate(Vector2 position, int quality)
     {
-        Start();
+        if (initialized == 1) { Start(); }
         List<ItemData> items = GenerateDropsList(quality);
         InstantiateDrops(position, items);
     }

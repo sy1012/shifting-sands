@@ -196,16 +196,20 @@ public class AttackState : State
 
         // quadrant 4
         else angle -= 90;
-        psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
-        psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
-        psm.GetWeapon.Attack();
-        //Set player to look in the direction attacking
-        psm.animator.SetFloat("PrevVertical", atkHeading.y);
-        psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
-        psm.animator.SetFloat("Vertical", atkHeading.y);
-        psm.animator.SetFloat("Horizontal", atkHeading.x);
-        yield return new WaitForSeconds(0.5f);
-        psm.SetState(new NormalState(psm));
+
+        if (psm.GetWeapon != null)
+        {
+            psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+            psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
+            psm.GetWeapon.Attack();
+            //Set player to look in the direction attacking
+            psm.animator.SetFloat("PrevVertical", atkHeading.y);
+            psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
+            psm.animator.SetFloat("Vertical", atkHeading.y);
+            psm.animator.SetFloat("Horizontal", atkHeading.x);
+            yield return new WaitForSeconds(0.5f);
+            psm.SetState(new NormalState(psm));
+        }
     }
     public override void Execute()
     {

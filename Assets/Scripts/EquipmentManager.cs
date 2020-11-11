@@ -4,54 +4,61 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject weapon;
-    [SerializeField]
-    GameObject armor;
-    [SerializeField]
-    GameObject ability;
+    private WeaponData weaponEquipped;
+    public GameObject weaponObject;
+    //[SerializeField]
+    //GameObject weapon;
+    //[SerializeField]
+    //GameObject armor;
+    //[SerializeField]
+    //GameObject ability;
 
-    public Weapon Weapon { get => weapon.GetComponent<Weapon>(); }
-    public GameObject Armor { get => armor;}
-    public GameObject Ability { get => ability;}
+    //public Weapon Weapon { get => weapon.GetComponent<Weapon>(); }
+    //public GameObject Armor { get => armor;}
+    //public GameObject Ability { get => ability;}
 
     public void Start()
     {
-        if (Weapon != null) { weapon = Weapon.gameObject; }
+        if (weaponEquipped != null) { SetWeapon(weaponEquipped); }
     }
 
-    public void AddWeapon(WeaponData newWeapon)
+    public void SetWeapon(WeaponData newWeapon)
     {
         //Destroy old copy of weapon if any
-        if (Weapon != null)
-        {
-            Destroy(Weapon);
-        }
+        //if (Weapon != null)
+        //{
+        //    Destroy(Weapon);
+        //}
         ////Position COPY of weapon and parent it
         //Instantiate(newWeapon, transform.position, Quaternion.identity, transform);
-        this.weapon.GetComponent<Weapon>().data = newWeapon;
-        this.weapon.GetComponent<Weapon>().Initialize();
+        this.weaponObject.GetComponent<Weapon>().data = newWeapon;
+        this.weaponObject.GetComponent<Weapon>().Initialize();
     }
-    public void AddArmor(GameObject armor)
-    {
 
-        //Set up reference
-        this.armor = armor;
-    }
-    public void AddAbility(GameObject newAbility)
+    public Weapon GetWeapon()
     {
-        //Check if has a weapon component
-        Ability a = newAbility.GetComponent<Ability>();
-        if (a == null)
-        {//Not a ability
-            return;
-        }
-        if (newAbility != null)
-        {
-            Destroy(newAbility);
-        }
-        Instantiate(newAbility, transform.position, Quaternion.identity, transform);
-        this.ability = newAbility;
+        return weaponObject.GetComponent<Weapon>();
     }
+    //public void AddArmor(GameObject armor)
+    //{
+
+    //    //Set up reference
+    //    this.armor = armor;
+    //}
+    //public void AddAbility(GameObject newAbility)
+    //{
+    //    //Check if has a weapon component
+    //    Ability a = newAbility.GetComponent<Ability>();
+    //    if (a == null)
+    //    {//Not a ability
+    //        return;
+    //    }
+    //    if (newAbility != null)
+    //    {
+    //        Destroy(newAbility);
+    //    }
+    //    Instantiate(newAbility, transform.position, Quaternion.identity, transform);
+    //    this.ability = newAbility;
+    //}
 
 }

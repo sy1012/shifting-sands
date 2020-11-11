@@ -13,7 +13,7 @@ public class PlayerStateMachine : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public EquipmentManager equipment;
-    public Weapon GetWeapon { get => equipment.Weapon; }
+    public Weapon GetWeapon { get => equipment.GetWeapon(); }
     KeyCode interactKey = KeyCode.F;
     KeyCode InventoryKey = KeyCode.V;
     KeyCode dashKey = KeyCode.Space;

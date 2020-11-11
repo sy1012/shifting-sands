@@ -3,27 +3,32 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Weapon : ItemArchtype
+public class Weapon : MonoBehaviour
 {
     public new WeaponData data;
     public ItemTypes.Type type;          // What type of item is this (hint its a weapon)
 
 
-    //private Sprite[] spriteAnimation;    // Animation to play when attacking
+    //private Sprite[] spriteAnimation;  // Animation to play when attacking
     private float speed;                 // Speed at which the weapon attacks in seconds
     private Vector2 hitBoxSize;          // The size of the hit box to be created when attacking
     private float coolDown;              // How long before we can swing again after completing a swing
     private int damage;                  // how much damage does it do upon hitting something
-<<<<<<< HEAD
-    private int currentFrame;            // If we are in the animation, what frame is it
-    private new BoxCollider2D collider;  // Quick Reference to the collider attached to this object  
-    private Animator animator;
-=======
     private new BoxCollider2D collider;  // Quick Reference to the collider attached to this object 
->>>>>>> Items
+    protected Vector2 scrollOffset;
+    protected float relativeWeight;
+    protected Sprite sprite;               // This weapons resting sprite
+    protected int value;                   // How much could this be sold for
+    protected List<ItemData> recipe;       // List of items that could be put together to make this item
+    protected SpriteRenderer sr;           // Quick Reference to the Sprite Renderer attached to this object  
+    protected string itemName;             // Name of the item
+    protected GameObject text;
+    protected GameObject background;
+    public string description;             // description of the item
+    public Sprite scroll;
 
     // item needs to be set up but only after the Data has been added
-    public override void Initialize()
+    public void Initialize()
     {
         // set up all the initial values for this weapon
         this.scrollOffset = data.scrollOffset;
@@ -47,19 +52,10 @@ public class Weapon : ItemArchtype
             this.transform.parent.GetComponent<Animator>().speed = 1/speed;
         }
 
-<<<<<<< HEAD
-        // set up the SpriteRenderer, BoxCollider2d and Animator
-        //this.animator = this.gameObject.AddComponent<Animator>();
-        //this.sr = this.gameObject.AddComponent<SpriteRenderer>();
-        //this.sr.sortingLayerName = "Player";
-        //this.sr.sprite = sprite;
-        this.collider = this.gameObject.AddComponent<BoxCollider2D>();
-=======
         // set up the SpriteRenderer, BoxCollider2d, and rigidbody
         
         if (this.GetComponent<BoxCollider2D>() != null) { this.collider = this.GetComponent<BoxCollider2D>(); }
         else { this.collider = this.gameObject.AddComponent<BoxCollider2D>(); }
->>>>>>> Items
         this.collider.size = hitBoxSize;
         this.collider.offset = new Vector2(0, hitBoxSize.y / 2);
         this.collider.enabled = false;
@@ -70,7 +66,7 @@ public class Weapon : ItemArchtype
 
     void FixedUpdate()
     {
-        if (this.collider == null) { Initialize(); }
+        if (this.collider == null && this.data != null) { Initialize(); }
         if (this.coolDown > 0)
         {
             this.coolDown -= Time.deltaTime;
@@ -93,21 +89,6 @@ public class Weapon : ItemArchtype
             this.coolDown = speed;
         }
     }
-
-<<<<<<< HEAD
-    public override void PickedUp()
-    {
-        if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
-        DungeonMaster.loot.Remove(this.gameObject);
-        Debug.Log(this.data);
-        Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
-        Destroy(background);
-        Destroy(text);
-        Destroy(this.gameObject);
-        // ADD TO INVENTORY OR WHATEVER HERE
-    }
-=======
->>>>>>> Items
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
