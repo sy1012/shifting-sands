@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
         float coinScale = (1 / coinSprite.bounds.size.x * (screenUpperRight.x - screenLowerLeft.x) / 9);
 
         // what Size is each block
-        float BLOCKSIZE = 0.1f;
+        float BLOCKSIZE = 0.2f;
         float GRIDSIZE = (Camera.main.ViewportToWorldPoint(new Vector2(0, BLOCKSIZE)).y - Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y) * 2;
 
         // Make the two equipment slots and the coin display and text
