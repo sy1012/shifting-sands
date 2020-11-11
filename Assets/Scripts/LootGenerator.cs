@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LootGenerator
+public static class LootGenerator
 {
+    private static int initialized = 1;
     private static WeaponData woodSword;
     private static WeaponData stick;
-    private static ItemData gold;
+    private static ItemData silver;
 
     private static List<float> dropQuality0;
     private static List<float> dropQuality1;
@@ -27,14 +28,17 @@ public class LootGenerator
 
     static void Start()
     {
+        initialized = 0;
+        Debug.Log("start ran");
+
         /* These variables control what rarity an item is for any tier it is present in, (tier, rarity) */
         List<(int, int)> woodSwords = new List<(int, int)> { (1, 2), (2, 2) };
-        List<(int, int)> gold1 = new List<(int, int)> { (1, 1), (2, 1)};
+        List<(int, int)> silver1 = new List<(int, int)> { (1, 1), (2, 1)};
         List<(int, int)> gold5 = new List<(int, int)> { (1, 2), (2, 1)};
         List<(int, int)> sticks = new List<(int, int)> { (1, 2), (2, 1) };
 
         /* These variables are used to control drop chances of classes of items for a particular quality */
-        dropQuality0 = new List<float> { 0.0f, 0.8f };
+        dropQuality0 = new List<float> { 0.0f, 1.1f };
         dropQuality1 = new List<float> { 0.0f, 0.2f, 0.7f };
 
         /* These variables are used to control drop numbers for a particular quality */
@@ -55,15 +59,15 @@ public class LootGenerator
         };
 
         woodSword = Resources.Load<WeaponData>("Weapons/WoodenTrainingSword");
-        gold = Resources.Load<ItemData>("Items/GoldPiece");
-        stick = Resources.Load<WeaponData>("Weapons/Stick");
+        silver = Resources.Load<ItemData>("Items/SilverPiece");
+        stick = Resources.Load<WeaponData>("Weapons/Spear");
 
         /* set up the tier Lists */
-        firstTierUncommon.Add(woodSword);
-        firstTierCommon.Add(gold);
-        thisTierCommon.Add(gold);
+        //firstTierUncommon.Add(woodSword);
+        firstTierCommon.Add(silver);
+        //thisTierCommon.Add(silver);
         thisTierCommon.Add(stick);
-        thisTierUncommon.Add(woodSword);
+        //thisTierUncommon.Add(woodSword);
     }
 
     private static List<ItemData> GenerateDropsList(int quality)
@@ -96,27 +100,28 @@ public class LootGenerator
             else { item = thisTierExotic[Random.Range(0, thisTierExotic.Count - 1)]; }
             dropped.Add(item);  
         }
-
+        Debug.Log(dropped[0]);
         return dropped;
     }
 
     private static void InstantiateDrops(Vector2 position, List<ItemData> items)
     {
+        if (items[0] == null) { return; }
         foreach (ItemData item in items)
         {
             GameObject drop = new GameObject("lootDrop");
             //GameObject.Destroy(drop.GetComponent<SpriteRenderer>());
             DungeonMaster.loot.Add(drop);
-            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<Weapon>().data = (WeaponData)item; drop.GetComponent<Weapon>().Dropped(); }
+            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<ItemArchtype>().data = (ItemData)item; drop.GetComponent<ItemArchtype>().Dropped(); }
             else if (item.itemType is ItemTypes.Type.consumable) { } // TODO
-            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<Item>().data = item; drop.GetComponent<Item>().Dropped(); }
+            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<ItemArchtype>().data = item; drop.GetComponent<ItemArchtype>().Dropped(); }
             drop.transform.position = position;
         }
     }
 
     public static void Generate(Vector2 position, int quality)
     {
-        Start();
+        if (initialized == 1) { Start(); }
         List<ItemData> items = GenerateDropsList(quality);
         InstantiateDrops(position, items);
     }

@@ -39,7 +39,7 @@ public class Enemy : Character
         if (collision.collider.gameObject.name == "Player" && cooldown <= 0)
         {
             cooldown = damageSpeed;
-            collision.collider.gameObject.GetComponent<Character>().TakeDamage(damage,collision);
+            collision.collider.gameObject.GetComponent<Character>().TakeDamage(damage);
         }
     }
 

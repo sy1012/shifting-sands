@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 447954128ad0d2e4293a7b01dd2fddf2, type: 3}
-  m_Name: Stick
+  m_Name: Spear
   m_EditorClassIdentifier: 
   scrollOffset: {x: 0, y: 1}
-  spriteScaling: {x: 0.1, y: 0.1}
+  spriteScaling: {x: 1, y: 1}
   relativeWeight: 15
-  sprite: {fileID: 21300000, guid: 4cf1c68c3922f8440bea93e8c6aeb99e, type: 3}
-  itemType: 0
-  itemName: Stick
+  sprite: {fileID: 21300000, guid: fda02a0069f3c6244bc4b1d0fcac9884, type: 3}
+  frame: {fileID: 0}
+  itemType: 1
+  itemName: Spear
   value: 0
   recipe: []
   scroll: {fileID: 21300000, guid: 5f62003953bf1fb41ae7a4ba5a1f34c6, type: 3}
   description: A plain stick
-  spriteAnimation: []
-  speed: 0.2
-  hitBoxSize: {x: 0.3, y: 0.3}
+  animationNumber: 1
+  speed: 0.5
+  hitBoxSize: {x: 1, y: 1}
   damage: 10
   knockback: 0

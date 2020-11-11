@@ -135,9 +135,10 @@ public class NormalState : State
     public override IEnumerator Interact()
     {
         //Interact with items
-        List<GameObject> items = DungeonMaster.getLootInRange(psm.transform.position, 1);
+        List<GameObject> items = DungeonMaster.getLootInRange(psm.transform.position, 1.5f);
         foreach (GameObject item in items)
         {
+            if (item.GetComponent<Item>() != null && item.GetComponent<Item>().data.itemName == "Coin") { Camera.main.GetComponent<Inventory>().PickUpCoin(1); GameObject.Destroy(item); }
             item.GetComponent<ItemArchtype>().PickedUp();
             yield return null;
         }
@@ -177,32 +178,40 @@ public class AttackState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
-        // trigger attack event
-        EventManager.TriggerOnAttack();
-        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 atkHeading = (mouse - psm.transform.position);
-        float angle = Mathf.Rad2Deg * Mathf.Atan((psm.transform.position.y - mouse.y) / (psm.transform.position.x - mouse.x));
+        if (psm.GetWeapon != null)
+        {
+            // trigger attack event
+            EventManager.TriggerOnAttack();
+            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 atkHeading = (mouse - psm.transform.position);
+            float angle = Mathf.Rad2Deg * Mathf.Atan((psm.transform.position.y - mouse.y) / (psm.transform.position.x - mouse.x));
 
-        // now convert the angle into a degrees cw of up(north) based on the current value of direction and what quadrant it is in
-        // quadrant 1
-        if (mouse.y >= psm.transform.position.y && mouse.x >= psm.transform.position.x) angle -= 90;
+            // now convert the angle into a degrees cw of up(north) based on the current value of direction and what quadrant it is in
+            // quadrant 1
+            if (mouse.y >= psm.transform.position.y && mouse.x >= psm.transform.position.x) angle -= 90;
 
-        // quadrant 2
-        else if (mouse.y >= psm.transform.position.y) angle += 90;
+            // quadrant 2
+            else if (mouse.y >= psm.transform.position.y) angle += 90;
 
-        // quadrant 3
-        else if (mouse.x <= psm.transform.position.x) angle += 90;
+            // quadrant 3
+            else if (mouse.x <= psm.transform.position.x) angle += 90;
 
-        // quadrant 4
-        else angle -= 90;
-        psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
-        psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
-        psm.GetWeapon.Attack();
-        //Set player to look in the direction attacking
-        psm.animator.SetFloat("PrevVertical", atkHeading.y);
-        psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
-        psm.animator.SetFloat("Vertical", atkHeading.y);
-        psm.animator.SetFloat("Horizontal", atkHeading.x);
+            // quadrant 4
+            else angle -= 90;
+
+            if (psm.GetWeapon != null)
+            {
+                psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+                psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
+                psm.GetWeapon.Attack();
+                //Set player to look in the direction attacking
+                psm.animator.SetFloat("PrevVertical", atkHeading.y);
+                psm.animator.SetFloat("PrevHorizontal", atkHeading.x);
+                psm.animator.SetFloat("Vertical", atkHeading.y);
+                psm.animator.SetFloat("Horizontal", atkHeading.x);
+
+            }
+        }
         yield return new WaitForSeconds(0.5f);
         psm.SetState(new NormalState(psm));
     }
