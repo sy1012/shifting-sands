@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   scrollOffset: {x: 0, y: 1}
-  spriteScaling: {x: 0.1, y: 0.1}
+  spriteScaling: {x: 0.2, y: 0.2}
   relativeWeight: 15
   sprite: {fileID: 21300000, guid: 4cf1c68c3922f8440bea93e8c6aeb99e, type: 3}
   itemType: 0
@@ -22,8 +22,8 @@ MonoBehaviour:
   recipe: []
   scroll: {fileID: 21300000, guid: 5f62003953bf1fb41ae7a4ba5a1f34c6, type: 3}
   description: A plain stick
-  spriteAnimation: []
-  speed: 0.2
-  hitBoxSize: {x: 0.3, y: 0.3}
+  animationNumber: 1
+  speed: 1.5
+  hitBoxSize: {x: 1, y: 1}
   damage: 10
   knockback: 0

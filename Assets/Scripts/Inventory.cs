@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
         inventorySlotSprite = Resources.Load<Sprite>("Sprites/InventorySlot");
         inventoryBackground = new GameObject("Inventory");
         inventoryBackground.AddComponent<SpriteRenderer>().sprite = inventoryBackgroundSprite;
-        inventoryBackground.AddComponent<RectTransform>().parent = Camera.main.transform;
+        inventoryBackground.AddComponent<RectTransform>().SetParent(Camera.main.transform);
         inventoryBackground.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         inventoryBackground.SetActive(false);
         inventoryBackground.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
         GameObject slot = new GameObject("Weapon Inventory Slot");
         slot.transform.localScale = new Vector2(slotScale, slotScale);
         slot.AddComponent<SpriteRenderer>().sprite = inventorySlotSprite;
-        slot.AddComponent<RectTransform>().parent = this.transform;
+        slot.AddComponent<RectTransform>().SetParent(this.transform);
         slot.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1 * GRIDSIZE, 1.5f * GRIDSIZE);
         slot.SetActive(false);
         slot.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
@@ -74,7 +74,7 @@ public class Inventory : MonoBehaviour
         slot = new GameObject("Armour Inventory Slot");
         slot.transform.localScale = new Vector2(slotScale, slotScale);
         slot.AddComponent<SpriteRenderer>().sprite = inventorySlotSprite;
-        slot.AddComponent<RectTransform>().parent = this.transform;
+        slot.AddComponent<RectTransform>().SetParent(this.transform);
         slot.GetComponent<RectTransform>().anchoredPosition = new Vector2(1 * GRIDSIZE, 1.5f * GRIDSIZE);
         slot.SetActive(false);
         slot.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
@@ -91,7 +91,7 @@ public class Inventory : MonoBehaviour
                 slot = new GameObject("Inventory Slot");
                 slot.transform.localScale = new Vector2(slotScale, slotScale);
                 slot.AddComponent<SpriteRenderer>().sprite = inventorySlotSprite;
-                slot.AddComponent<RectTransform>().parent = this.transform;
+                slot.AddComponent<RectTransform>().SetParent(this.transform);
                 slot.GetComponent<RectTransform>().anchoredPosition = new Vector2((numOfColumns - 4) * GRIDSIZE, (numOfRows-2) * GRIDSIZE);
                 slot.SetActive(false);
                 slot.GetComponent<SpriteRenderer>().sortingLayerName = "Player";

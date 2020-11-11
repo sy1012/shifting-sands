@@ -5,32 +5,32 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     [SerializeField]
-    Weapon weapon;
+    GameObject weapon;
     [SerializeField]
     GameObject armor;
     [SerializeField]
     GameObject ability;
 
-    public Weapon Weapon { get => weapon; }
+    public Weapon Weapon { get => weapon.GetComponent<Weapon>(); }
     public GameObject Armor { get => armor;}
     public GameObject Ability { get => ability;}
 
-    public void AddWeapon(GameObject newWeapon)
+    public void Start()
     {
-        //Check if has a weapon component
-        Weapon w = newWeapon.GetComponent<Weapon>();
-        if (w == null)
-        {//Not a Weapon
-            return;
-        }
+        if (Weapon != null) { weapon = Weapon.gameObject; }
+    }
+
+    public void AddWeapon(WeaponData newWeapon)
+    {
         //Destroy old copy of weapon if any
         if (Weapon != null)
         {
             Destroy(Weapon);
         }
-        //Position COPY of weapon and parent it
-        Instantiate(newWeapon, transform.position, Quaternion.identity, transform);
-        this.weapon = newWeapon.GetComponent<Weapon>();
+        ////Position COPY of weapon and parent it
+        //Instantiate(newWeapon, transform.position, Quaternion.identity, transform);
+        this.weapon.GetComponent<Weapon>().data = newWeapon;
+        this.weapon.GetComponent<Weapon>().Initialize();
     }
     public void AddArmor(GameObject armor)
     {
@@ -43,7 +43,7 @@ public class EquipmentManager : MonoBehaviour
         //Check if has a weapon component
         Ability a = newAbility.GetComponent<Ability>();
         if (a == null)
-        {//Not a Weapon
+        {//Not a ability
             return;
         }
         if (newAbility != null)

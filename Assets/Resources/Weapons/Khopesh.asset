@@ -22,8 +22,8 @@ MonoBehaviour:
   recipe: []
   scroll: {fileID: 0}
   description: Khopesh
-  spriteAnimation: []
-  speed: 0.4
+  animation: {fileID: 0}
+  speed: 5.76
   hitBoxSize: {x: 0.4, y: 1}
   damage: 50
   knockback: 0
