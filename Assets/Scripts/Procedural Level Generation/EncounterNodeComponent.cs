@@ -57,5 +57,9 @@ public class EncounterNodeComponent : NodeComponent
         Gizmos.color = (Color.red+Color.white/(1f+Difficulty));
         Gizmos.DrawSphere(transform.position, 0.11f+0.1f*Difficulty);
     }
+    private void OnDestroy()
+    {
+        EventManager.onDungeonGenerated -= SpawnMonstersInRoom;
+    }
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class EventManager
@@ -25,9 +26,30 @@ public static class EventManager
     public static event EventHandler onOasisClicked;
     public static event EventHandler onPyramidClicked;
     public static event EventHandler onRoomFilled;
+    // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
+
+    public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
+                                            onUseShrine,onDash,onDungeonGenerated};
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
+    public static void TriggerDungeonExit()
+    {
+        OnExitDungeon?.Invoke(EventArgs.Empty);
+        Debug.Log("Exit Dungeon Event");
+        //Clean the Game Events
+        onRoomFilled = null;
+        DoorEntered = null;
+        OnExitDungeon = null;
+        OnPlayerHit = null;
+        OnCastFireball = null;
+        onAttack = null;
+        onFireballCollision = null;
+        onPlayerMovement = null;
+        onUseShrine = null;
+        onDash = null;
+        onDungeonGenerated = null;
+    }
 
     public static void TriggerDoorEntered(DoorComponent door)
     {
@@ -44,11 +66,6 @@ public static class EventManager
         Debug.Log("Dungeon Generated");
     }
 
-    public static void TriggerDungeonExit()
-    {
-        OnExitDungeon?.Invoke(EventArgs.Empty);
-        Debug.Log("Exit Dungeon Event");
-    }
     public static void TriggerEnteringDungeon(int dungeonLevel)
     {
         onEnteringDungeon?.Invoke(null, new onEnteringDungeonEventArgs { dungeonLevel = dungeonLevel });

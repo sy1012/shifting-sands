@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using UnityEditor;
 public class Entrance : Interactable
 {
@@ -58,11 +59,16 @@ public class Entrance : Interactable
     IEnumerator LeaveDungeon()
     {
         yield return new WaitForSeconds(.5f);
+        SceneManager.LoadScene("Overworld_Scot");
         EndInteraction(interactor);
     }
 
     public override void EndInteraction(GameObject interactor)
     {
         EventManager.TriggerDungeonExit();
+    }
+    private void OnDestroy()
+    {
+        EventManager.onDungeonGenerated -= HandleDungeonGenerated;
     }
 }
