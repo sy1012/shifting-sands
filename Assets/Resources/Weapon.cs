@@ -19,7 +19,6 @@ public class Weapon : ItemArchtype
     // item needs to be set up but only after the Data has been added
     public override void Initialize()
     {
-        Debug.Log("hello");
         // set up all the initial values for this weapon
         this.scrollOffset = data.scrollOffset;
         this.transform.localScale = data.spriteScaling;
@@ -39,12 +38,11 @@ public class Weapon : ItemArchtype
         if (this.transform.parent.GetComponent<Animator>() != null)
         {
             this.transform.parent.GetComponent<Animator>().SetInteger("Weapon Equipped", data.animationNumber);
+            this.transform.parent.GetComponent<Animator>().speed = 1/speed;
         }
 
         // set up the SpriteRenderer, BoxCollider2d, and rigidbody
-        this.sr = this.gameObject.AddComponent<SpriteRenderer>();
-        this.sr.sortingLayerName = "Player";
-        this.sr.sprite = sprite;
+        
         if (this.GetComponent<BoxCollider2D>() != null) { this.collider = this.GetComponent<BoxCollider2D>(); }
         else { this.collider = this.gameObject.AddComponent<BoxCollider2D>(); }
         this.collider.size = hitBoxSize;
@@ -56,18 +54,14 @@ public class Weapon : ItemArchtype
 
     void FixedUpdate()
     {
-        Debug.Log("what is going on");
-        Debug.Log(coolDown);
-        if (this.GetComponent<SpriteRenderer>() == null) { Initialize(); }
+        if (this.collider == null) { Initialize(); }
         if (this.coolDown > 0)
         {
             this.coolDown -= Time.deltaTime;
-            Debug.Log(coolDown);
             if (this.coolDown <= 0) // check if we are done the attack
             {
                 this.collider.enabled = false;
                 this.coolDown = 0;
-                Debug.Log("cd");
             }
         }
     }
@@ -75,11 +69,11 @@ public class Weapon : ItemArchtype
     public void Attack()
     {
         if (this.data == null) { return; }
-        if (this.collider == null) { Initialize(); }
+        //if (this.collider == null) { Initialize(); }
         if (this.coolDown <= 0)
         {
+            this.transform.parent.GetComponent<Animator>().SetTrigger("Attack");
             this.collider.enabled = true;
-            Debug.Log("attack");
             this.coolDown = speed;
         }
     }

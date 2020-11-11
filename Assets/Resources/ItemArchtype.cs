@@ -19,7 +19,7 @@ public class ItemArchtype : MonoBehaviour, IItem
     // Start is called before the first frame update
     public virtual void Initialize()
     {
-        Debug.Log("werong one");
+        Debug.Log("wrong one");
     }
 
     public void PickedUp()
@@ -34,7 +34,9 @@ public class ItemArchtype : MonoBehaviour, IItem
 
     public void Dropped()
     {
-        if (this.sr == null) { Initialize(); }
+        this.sr = this.gameObject.AddComponent<SpriteRenderer>();
+        this.sr.sortingLayerName = "Player";
+        this.sr.sprite = sprite;
         if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));
         this.GetComponent<Rigidbody2D>().AddForce(force);
