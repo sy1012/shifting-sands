@@ -24,7 +24,7 @@ MonoBehaviour:
   scroll: {fileID: 0}
   description: Khopesh
   animationNumber: 0
-  speed: 1
+  speed: 0.25
   hitBoxSize: {x: 0.4, y: 1}
   damage: 50
   knockback: 0
