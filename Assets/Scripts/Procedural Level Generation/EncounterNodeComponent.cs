@@ -12,7 +12,11 @@ public class EncounterNodeComponent : NodeComponent
 
     private void SpawnMonstersInRoom(System.EventArgs e)
     {
-        throw new System.NotImplementedException();
+        DungeonGenArgs de = (DungeonGenArgs)e;
+        Room room = de.generator.GetRoom(neighbours[0]);
+        var encounterTable = FindObjectOfType<EncounterTable>();
+        var pool = encounterTable.GetEncounterFactory(1, Difficulty).GetEncounter(room);
+        EventManager.TriggerRoomFilled(room, pool);
     }
 
     public void Update()

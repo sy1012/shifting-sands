@@ -12,6 +12,7 @@ public class RoomGenerator : MonoBehaviour
     public List<Door> doors;
     private Transform doorHolder;
     private Transform roomHolder;
+    public Dictionary<NodeComponent, Room> NodeCompRoomMap;
 
     // A table of Node to Node To Direction of Door. e.g. Room A's door to Room B faces "S" for south.
     [SerializeField]
@@ -41,6 +42,7 @@ public class RoomGenerator : MonoBehaviour
         }
         doors = new List<Door>();
         rooms = new List<Transform>();
+        NodeCompRoomMap = new Dictionary<NodeComponent, Room>();
     }
     public void MakeRooms()
     {
@@ -65,6 +67,7 @@ public class RoomGenerator : MonoBehaviour
             rooms.Add(newRoom.transform);
             _levelRoomByNode.Add(node, newRoom.transform);
             newRoom.GetComponent<Room>().RoomNode = node;
+            NodeCompRoomMap.Add(node, newRoom.GetComponent<Room>());
             newRoom.transform.SetParent(roomHolder);
         }
         //Connect doors to room door transforms

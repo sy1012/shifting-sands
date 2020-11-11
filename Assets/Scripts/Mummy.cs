@@ -7,14 +7,6 @@ using UnityEngine;
 public class Mummy : Enemy
 {
 
-    [SerializeField]
-    private Room room;
-    [SerializeField]
-    private AIDestinationSetter destination;
-    [SerializeField]
-    private Transform Player;
-    private PlayerStateMachine psm;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +15,7 @@ public class Mummy : Enemy
         damage = 25;
         //move healthbar to a more suitable position
         healthCanvas.transform.position = transform.position + new Vector3(0, 1.7f, 0);
-        psm = Player.GetComponent<PlayerStateMachine>();
-        
+        base.Start();
     }
 
     private void Update()

@@ -94,8 +94,13 @@ public class LevelGenerator : MonoBehaviour
         //TODO Quality check dungeon
 
         //Let everyone else know Dungeon skeleton has been made
-        EventManager.TriggerDungeonGenerated(new DungeonGenArgs(doors, rooms, graph));
+        EventManager.TriggerDungeonGenerated(new DungeonGenArgs(this,doors, rooms, graph));
         return true;
+    }
+
+    public Room GetRoom(NodeComponent nc)
+    {
+        return roomGenerator.NodeCompRoomMap[nc];
     }
 
     private void OnDisable()

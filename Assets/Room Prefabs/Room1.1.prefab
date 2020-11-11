@@ -11,9 +11,17 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f2f8e912dab3a394f8bb4a6e3716519b, type: 3}
+    - target: {fileID: 5493810267570589119, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5894289244723539802, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_Name
       value: Room1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900246052297539390, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 7273963258188965664, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_LocalPosition.x

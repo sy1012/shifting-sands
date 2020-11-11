@@ -24,8 +24,10 @@ public static class EventManager
     public static event EventHandler onNewOasis;
     public static event EventHandler onOasisClicked;
     public static event EventHandler onPyramidClicked;
+    public static event EventHandler onRoomFilled;
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
+    public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
 
     public static void TriggerDoorEntered(DoorComponent door)
     {
@@ -127,6 +129,12 @@ public static class EventManager
     {
         onPyramidClicked?.Invoke(null, EventArgs.Empty);
     }
-
+    public static void TriggerRoomFilled(Room room, List<MonoBehaviour> prefabs)
+    {
+        onRoomFilledArgs filledArgs = new onRoomFilledArgs();
+        filledArgs.room = room;
+        filledArgs.prefabs = prefabs;
+        onRoomFilled?.Invoke(null,filledArgs);
+    }
 }
 

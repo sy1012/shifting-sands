@@ -14,6 +14,18 @@
         {
             GetEncounter();
         }
+
+        public List<MonoBehaviour> GetEncounter(Room room)
+        {
+            var pool = GetEncounter();
+            foreach (var enemy in pool)
+            {
+                enemy.GetComponent<Enemy>().room = room;
+                room.PlaceObject(enemy);
+                enemy.transform.position += Vector3.up * UnityEngine.Random.Range(-1, 1) + Vector3.right * UnityEngine.Random.Range(-1, 1);
+            }
+            return pool;
+        }
         public List<MonoBehaviour> GetEncounter()
         {
             int j = UnityEngine.Random.Range(0, EncounterPool.Count);

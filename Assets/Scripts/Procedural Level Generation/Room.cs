@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class Room : MonoBehaviour
     public string doorHeadings;
     [SerializeField]
     private NodeComponent roomNode;
+    public List<Transform> spawnLocations;
     public NodeComponent RoomNode{ get { return roomNode; } set { roomNode = value; } }
 
     public float getOrientationForDoors(string toDoorHeadings)
@@ -49,6 +51,14 @@ public class Room : MonoBehaviour
             rotation += 90;
         }
         return rotation;
+    }
+
+    public void PlaceObject(MonoBehaviour prefab)
+    {
+        Transform randomSpawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count)];
+        prefab.transform.position = randomSpawnLocation.position;
+        //Parent object to spawn location. Not needed.Only to clean up hierarchy. Also if a room is destroyed the enemy should be too
+        prefab.transform.SetParent(randomSpawnLocation);
     }
 
     public List<Transform> OrderDoorsByHeading()
