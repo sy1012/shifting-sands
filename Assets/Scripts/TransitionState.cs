@@ -27,7 +27,7 @@ public class TransitionState : State
         while (!goneThroughDoor)
         {
             psm.MoveCharacter(target - psm.transform.position, 4f);
-            if ((target - psm.transform.position).magnitude <0.05f)
+            if ((target - psm.transform.position).magnitude <0.1f)
             {
                 goneThroughDoor = true;
             }

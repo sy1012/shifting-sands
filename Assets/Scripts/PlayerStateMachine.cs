@@ -52,8 +52,10 @@ public class PlayerStateMachine : Character
         Transform entrance = LevelUtils.FindEntrance(de.Graph, de.Rooms);
         Room entranceRoom = entrance.GetComponent<Room>();
         entranceRoom.PlaceObject(this);
-        //offset down so player is in front of ladder
-        transform.position -= Vector3.up * 0.3f;
+        //offset down so player is in front of ladder and ZERO Z position
+        transform.position -= Vector3.up;
+        //No parent
+        transform.SetParent(null);
     }
 
     // Start is called before the first frame update

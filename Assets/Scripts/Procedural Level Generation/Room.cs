@@ -56,7 +56,7 @@ public class Room : MonoBehaviour
     public void PlaceObject(MonoBehaviour prefab)
     {
         Transform randomSpawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count)];
-        prefab.transform.position = randomSpawnLocation.position;
+        prefab.transform.position = new Vector3(randomSpawnLocation.position.x, randomSpawnLocation.position.y,0);
         //Parent object to spawn location. Not needed.Only to clean up hierarchy. Also if a room is destroyed the enemy should be too
         prefab.transform.SetParent(randomSpawnLocation);
     }
