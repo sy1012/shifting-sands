@@ -15,13 +15,16 @@ public class Enemy : Character
     [SerializeField]
     protected Transform Player;
     protected PlayerStateMachine psm;
+    
+
 
     public int quality; // WHat tier are the drops from this enemy?
     public int damage;  // any Enemy inheriting this class should set these two values themselves
     public float damageSpeed; // note this is per second
     public float cooldown = 0;
+    public float detectionRange; //the distance at which the enemy can spot the player
     public Room room;
-
+    public Transform randTarget; //an invisible gameobject used to implement random patrol behaviour
 
     public void Start()
     {
