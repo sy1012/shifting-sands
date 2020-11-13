@@ -116,7 +116,7 @@ class InitialInventoryState : InventoryState
         PubData.coinSprite = Resources.Load<Sprite>("Sprites/coin");
 
         // How large should the inventory be on the Viewport?
-        const float VIEWPERCENT = 0.95f;
+        const float VIEWPERCENT = 0.93f;
 
         //Initialize stuff
         PubData.slots = new List<GameObject>();
@@ -124,7 +124,7 @@ class InitialInventoryState : InventoryState
         PubData.inventoryBackground = new GameObject("Inventory Back");
         PubData.inventoryBackground.AddComponent<SpriteRenderer>().sprite = PubData.inventoryBackgroundSprite;
         PubData.inventoryBackground.AddComponent<RectTransform>().SetParent(Camera.main.transform);
-        PubData.inventoryBackground.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        PubData.inventoryBackground.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToWorldPoint(new Vector2(.5f, .45f));
         PubData.inventoryBackground.SetActive(false);
         PubData.inventoryBackground.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         PubData.inventoryBackground.GetComponent<SpriteRenderer>().sortingOrder = 15;
@@ -170,7 +170,6 @@ class InitialInventoryState : InventoryState
         PubData.coin.SetActive(false);
         PubData.coin.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         PubData.coin.GetComponent<SpriteRenderer>().sortingOrder = 16;
-        PubData.slots.Add(PubData.coin);
 
         PubData.coinText = Formatter.ScaleTextToPercentOfScreen(PubData.coins.ToString(), 8, new Vector2(0.2f, 0.2f));
         PubData.coinText.GetComponent<RectTransform>().SetParent(inventoryTransform);

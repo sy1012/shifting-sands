@@ -10,6 +10,10 @@ public static class EventManager
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
     public static event EventHandler onInventoryTrigger;
+    public static event EventHandler onWeaponMerchant;
+    public static event EventHandler onArmourMerchant;
+    public static event EventHandler onRuneMerchant;
+    public static event EventHandler onCrafting;
     public static event EventHandler onOpenInventory;
     public static event EventHandler onCloseInventory;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
@@ -94,6 +98,26 @@ public static class EventManager
     public static void TriggerOnInventoryTrigger()
     {
         onInventoryTrigger?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnWeaponMerchant()
+    {
+        onWeaponMerchant?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnArmournMerchant()
+    {
+        onArmourMerchant?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnRuneMerchant()
+    {
+        onRuneMerchant?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnCrafting()
+    {
+        onCrafting?.Invoke(null, EventArgs.Empty);
     }
 
     public static void TriggerOnCastFireball()

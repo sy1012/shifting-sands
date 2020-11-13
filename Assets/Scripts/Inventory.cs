@@ -22,11 +22,35 @@ public class Inventory : MonoBehaviour
         EventManager.onDungeonGenerated += DungeonEntered;
         EventManager.OnExitDungeon += DungeonExited;
         EventManager.onInventoryTrigger += TriggerInventory;
+        EventManager.onWeaponMerchant += WeaponMerchantClicked;
+        EventManager.onArmourMerchant += ArmourMerchantClicked;
+        EventManager.onRuneMerchant += RuneMerchantClicked;
+        EventManager.onCrafting += EventManager_onCrafting;
 
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
         state.Enter();
         state = new OverworldInventoryState();
+    }
+
+    private void EventManager_onCrafting(object sender, EventArgs e)
+    {
+        ChangeState(new OverworldCraftingState());
+    }
+
+    private void RuneMerchantClicked(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ArmourMerchantClicked(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void WeaponMerchantClicked(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
     private void InventoryInteracted(object sender, EventArgs e)
@@ -36,9 +60,16 @@ public class Inventory : MonoBehaviour
 
     private void ChangeState(InventoryState newState)
     {
-        state.Exit();
-        state = newState;
-        state.Enter();
+        if (state.ToString() == newState.ToString())
+        {
+            state.Triggered();
+        }
+        else
+        {
+            state.Exit();
+            state = newState;
+            state.Enter();
+        }
     }
 
     private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
@@ -95,7 +126,7 @@ public class Inventory : MonoBehaviour
 
     private void TriggerInventory(object sender, EventArgs e)
     {
-        state.Triggered();
+        ChangeState(new OverworldInventoryState());
     }
 
     //private void OpenInventory()
