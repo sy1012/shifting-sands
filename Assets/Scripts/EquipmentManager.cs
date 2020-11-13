@@ -32,7 +32,7 @@ public class EquipmentManager : MonoBehaviour
         ////Position COPY of weapon and parent it
         //Instantiate(newWeapon, transform.position, Quaternion.identity, transform);
         this.weaponObject.GetComponent<Weapon>().data = newWeapon;
-        this.weaponObject.GetComponent<Weapon>().Initialize();
+        if (newWeapon != null){ this.weaponObject.GetComponent<Weapon>().Initialize(); }
     }
 
     public Weapon GetWeapon()

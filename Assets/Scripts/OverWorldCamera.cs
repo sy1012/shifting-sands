@@ -1,55 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class OverWorldCamera : MonoBehaviour
+public class OverworldCamera : MonoBehaviour
 {
-    float zoomSize = 10;
-    Caravan follow;
+    public Transform target;
+    public float smoothing;
+    public Vector2 maxPos;
+    public Vector2 minPos;
+    public Sprite inventoryButtonBackground;
 
-	private void Start()
-	{
-        follow = FindObjectOfType<Caravan>();
-	}
+    private GameObject inventoryButton;
+    private GameObject inventoryButtonText;
 
-	// Update is called once per frame
-	void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        // get values if WASD was pressed in any way
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        // move the camera
-        if (Camera.current != null){
-            Camera.current.transform.Translate(follow.transform.position);
-        }
+        Application.targetFrameRate = 70;
 
-        // adjusting zoom
-        // zoom in
-        /*
-        if (Input.GetAxis("Mouse ScrollWheel") > 0){
-            if (zoomSize > 6){
-                zoomSize -= 1;
-            }
-        }
-        // zoom out
-        if (Input.GetAxis("Mouse ScrollWheel") < 0){
-            if (zoomSize < 19){
-                zoomSize += 1;
-            }
-        }*/
-        GetComponent<Camera>().orthographicSize = zoomSize;
+        // set up the inventory button
+        (inventoryButtonText, inventoryButton) = Formatter.CreateAssetsFromScratch("Inventory", inventoryButtonBackground, this.gameObject.transform, "Inventory Button Text", "Inventory Button Background");
+        //inventoryButton = new GameObject("Inventory Button");
+        //inventoryButton.transform.SetParent(this.gameObject.transform);
+        inventoryButton.AddComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToWorldPoint(new Vector2(.9f, .9f));
+        inventoryButton.transform.position += new Vector3(0, 0, -8);
+        inventoryButtonText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToWorldPoint(new Vector2(.9f, .9f));
+        inventoryButton.GetComponent<RectTransform>().localScale *= new Vector2(4, 4);
+        inventoryButtonText.GetComponent<RectTransform>().localScale *= new Vector2(4, 4);
+        inventoryButtonText.GetComponent<TextMeshPro>().fontSize = 2;
+        inventoryButton.AddComponent<InventoryButton>();
+        inventoryButton.AddComponent<BoxCollider2D>().isTrigger = true;
+        inventoryButton.AddComponent<Rigidbody2D>().gravityScale = 0;
     }
 
-    private void LateUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        Vector3 clampMovement = transform.position;
-        float CamSize = Camera.main.orthographicSize;
-        float aspect = Camera.main.aspect;
+        if (transform.position != target.position)
+        {
+            Vector3 targetposition = new Vector3(target.position.x, target.position.y, transform.position.z);
+            targetposition.x = Mathf.Clamp(targetposition.x, minPos.x, maxPos.x);
+            targetposition.y = Mathf.Clamp(targetposition.y, minPos.y, maxPos.y);
+            transform.position = Vector3.Lerp(transform.position, targetposition, smoothing);
+        }
 
-
-        clampMovement.x = Mathf.Clamp(clampMovement.x, -33f + CamSize * aspect, 35f - CamSize * aspect);
-        clampMovement.y = Mathf.Clamp(clampMovement.y, -18.9f + CamSize, 19.1f - CamSize);
-
-        transform.position = clampMovement;
     }
 }

@@ -1,0 +1,11 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// The most complicated of scripts
+public class InventoryButton : MonoBehaviour
+{   private void OnMouseDown()
+    {
+        EventManager.TriggerOnInventoryTrigger();
+    }
+}

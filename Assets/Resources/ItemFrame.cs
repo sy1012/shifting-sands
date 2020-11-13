@@ -68,8 +68,11 @@ public class ItemFrame : MonoBehaviour
         initialized = true;
 
         // the size the frame should be
-        Vector2 slotPercent = Camera.main.WorldToViewportPoint(new Vector2(Camera.main.GetComponent<Inventory>().slotWorldUnits, Camera.main.GetComponent<Inventory>().slotWorldUnits))
-            - Camera.main.WorldToViewportPoint(new Vector2(0, 0));
+        //Vector2 slotPercent = Camera.main.WorldToViewportPoint(new Vector2(Camera.main.GetComponent<Inventory>().slotWorldUnits, Camera.main.GetComponent<Inventory>().slotWorldUnits))
+        //    - Camera.main.WorldToViewportPoint(new Vector2(0, 0));
+        Vector2 slotPercent = Camera.main.WorldToViewportPoint(new Vector2(this.transform.parent.GetComponent<Slot>().slotWorldUnits / data.frame.bounds.size.x,
+            this.transform.parent.GetComponent<Slot>().slotWorldUnits / data.frame.bounds.size.x)) - Camera.main.WorldToViewportPoint(new Vector2(0, 0));
+            //Camera.main.WorldToViewportPoint(this.gameObject.transform.parent.position) - Camera.main.WorldToViewportPoint(new Vector2(0, 0));
 
         // Create the item sprite and the frame for it
         (this.text, this.scroll) = Formatter.CreateAssetsFromScratch(this.data.description, this.data.scroll);

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerOverworldTraversal : MonoBehaviour
 {
+    private bool inventoryOpen;
+
     public Graph oasisGraph;
     MapManager mapManager;
 
@@ -48,7 +50,6 @@ public class PlayerOverworldTraversal : MonoBehaviour
                     }
                 }
             }
-
         }
     }
 
