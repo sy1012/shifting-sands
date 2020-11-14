@@ -45,7 +45,7 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        /*if (Input.GetKeyDown(KeyCode.S))
         {
             SaveOverworld();
         }
@@ -53,7 +53,7 @@ public class MapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadOverworld();
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.D))
         {
