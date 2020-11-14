@@ -42,7 +42,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
                     destinationNode = hit.collider.gameObject.GetComponent<Oasis>().oasisNode;
                     List<Node> nodePath = BFSPath(mapManager.oasisGraph, currentNode, destinationNode);
                     caravan.path = nodePath;
-                    foreach(Follower follower in caravan.followers)
+                    foreach (Follower follower in caravan.followers)
                     {
                         follower.path = new List<Node>(nodePath);
                     }
@@ -56,6 +56,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
     {
         caravan.entering = true;
         caravan.enterPyramid = pyramid;
+        mapManager.SaveOverworld();
     }
 
     List<Node> graphTraversal(Graph graph, Node root, OasisNode destination)

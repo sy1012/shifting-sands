@@ -58,6 +58,10 @@ public class Entrance : Interactable
 
     IEnumerator LeaveDungeon()
     {
+        if (isGoalExit)
+        {
+            FindObjectOfType<DungeonDataKeeper>().beatLastDungeon = true;
+        }
         yield return new WaitForSeconds(.5f);
         SceneManager.LoadScene("Overworld_Scot");
         EndInteraction(interactor);
