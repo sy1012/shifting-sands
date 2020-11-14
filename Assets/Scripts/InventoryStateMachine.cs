@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 static class PubData
 {
@@ -31,6 +33,7 @@ static class PubData
     static public GameObject weaponSlot;
     static public GameObject armourSlot;
     static public GameObject inventoryText;
+    static public GameObject craftingText;
     static public List<GameObject> slots;
     static public GameObject weaponText;
     static public GameObject armourText;
@@ -39,6 +42,7 @@ static class PubData
     static public GameObject craftingSlotTwo;
     static public GameObject craftingSlotThree;
     static public GameObject craftingSlotResult;
+    static public GameObject craftingButton;
     static public GameObject craftingSlotsText;
     static public GameObject craftingSlotResultText;
 
@@ -68,7 +72,7 @@ abstract class InventoryState
         yield break;
     }
 
-    public void Triggered()
+    public virtual void Triggered()
     {
         if (PubData.open) { Exit(); }
         else { Enter(); }
@@ -107,6 +111,9 @@ class InitialInventoryState : InventoryState
 {
     public override void Enter()
     {
+        GameObject canvas = GameObject.Find("Canvas");
+        PubData.open = false;
+
         // initialize the variables needed
         PubData.equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
 
@@ -116,18 +123,18 @@ class InitialInventoryState : InventoryState
         PubData.coinSprite = Resources.Load<Sprite>("Sprites/coin");
 
         // How large should the inventory be on the Viewport?
-        const float VIEWPERCENT = 0.93f;
+        const float VIEWPERCENT = 0.85f;
 
         //Initialize stuff
         PubData.slots = new List<GameObject>();
         PubData.inventory = new List<ItemData>();
         PubData.inventoryBackground = new GameObject("Inventory Back");
-        PubData.inventoryBackground.AddComponent<SpriteRenderer>().sprite = PubData.inventoryBackgroundSprite;
-        PubData.inventoryBackground.AddComponent<RectTransform>().SetParent(Camera.main.transform);
-        PubData.inventoryBackground.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToWorldPoint(new Vector2(.5f, .45f));
+        PubData.inventoryBackground.AddComponent<Image>().sprite = PubData.inventoryBackgroundSprite;
+        PubData.inventoryBackground.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.inventoryBackground.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.50f, 0.45f));
+        PubData.inventoryBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(VIEWPERCENT * Camera.main.pixelWidth / PubData.inventoryBackgroundSprite.bounds.size.x,
+            VIEWPERCENT * Camera.main.pixelHeight / PubData.inventoryBackgroundSprite.bounds.size.y);
         PubData.inventoryBackground.SetActive(false);
-        PubData.inventoryBackground.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.inventoryBackground.GetComponent<SpriteRenderer>().sortingOrder = 15;
 
         // Scale the images for this resolution
         Vector2 screenUpperRight = Camera.main.ViewportToWorldPoint(new Vector2(VIEWPERCENT, VIEWPERCENT));
@@ -136,7 +143,7 @@ class InitialInventoryState : InventoryState
         float yScale = PubData.inventoryBackgroundSprite.bounds.size.y;
         float worldUnitsWide = screenUpperRight.x - screenLowerLeft.x;
         float worldUnitsTall = screenUpperRight.y - screenLowerLeft.y;
-        PubData.inventoryBackground.transform.localScale = new Vector2(1 / xScale * worldUnitsWide, 1 / yScale * worldUnitsTall);
+        //PubData.inventoryBackground.transform.localScale = new Vector2(1 / xScale * worldUnitsWide, 1 / yScale * worldUnitsTall);
 
         float slotWorldUnits = (screenUpperRight.x - screenLowerLeft.x) / 15;
         float slotScale = 1 / PubData.inventorySlotSprite.bounds.size.x * slotWorldUnits;
@@ -146,58 +153,64 @@ class InitialInventoryState : InventoryState
         float BLOCKSIZE = 0.1f;
         float GRIDSIZE = (Camera.main.ViewportToWorldPoint(new Vector2(0, BLOCKSIZE)).y - Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y) * 2;
 
-        // Make the two equipment slots and the coin display and text and the text saying Inventory
+        // Make stuff
         PubData.inventoryText = Formatter.ScaleTextToPercentOfScreen("Inventory", 12, new Vector2(0.4f, 0.05f));
         PubData.inventoryText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.inventoryText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1 * GRIDSIZE, 0);
+        PubData.inventoryText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(0, 1.7f * GRIDSIZE));
+        PubData.inventoryText.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.inventoryText.SetActive(false);
 
-        PubData.weaponText = Formatter.ScaleTextToPercentOfScreen("Equipped Weapon", 4, new Vector2(0.4f, 0.1f));
+        PubData.craftingText = Formatter.ScaleTextToPercentOfScreen("Craffting", 12, new Vector2(0.4f, 0.05f));
+        PubData.craftingText.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.craftingText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(0, 1.7f * GRIDSIZE));
+        PubData.craftingText.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
+        PubData.craftingText.SetActive(false);
+
+        PubData.weaponText = Formatter.ScaleTextToPercentOfScreen("Equipped Weapon", 6, new Vector2(0.4f, 0.1f));
         PubData.weaponText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.weaponText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1 * GRIDSIZE, 2f * GRIDSIZE);
+        PubData.weaponText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1 * GRIDSIZE, 0.8f * GRIDSIZE));
+        PubData.weaponText.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.weaponText.SetActive(false);
 
-        PubData.armourText = Formatter.ScaleTextToPercentOfScreen("Equipped Armour", 4, new Vector2(0.4f, 0.1f));
+        PubData.armourText = Formatter.ScaleTextToPercentOfScreen("Equipped Armour", 6, new Vector2(0.4f, 0.1f));
         PubData.armourText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.armourText.GetComponent<RectTransform>().anchoredPosition = new Vector2(1 * GRIDSIZE, 2f * GRIDSIZE);
+        PubData.armourText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(1 * GRIDSIZE, 0.8f * GRIDSIZE));
+        PubData.armourText.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.armourText.SetActive(false);
 
         PubData.coin = new GameObject("Coin Inventory");
         PubData.coin.transform.localScale = new Vector2(coinScale, coinScale);
-        PubData.coin.AddComponent<SpriteRenderer>().sprite = PubData.coinSprite;
-        PubData.coin.AddComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.coin.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3 * GRIDSIZE, 1.5f * GRIDSIZE);
+        PubData.coin.AddComponent<Image>().sprite = PubData.coinSprite;
+        PubData.coin.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.coin.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-3 * GRIDSIZE, 1.3f * GRIDSIZE));
+        PubData.coin.GetComponent<RectTransform>().sizeDelta = new Vector2(12, 12);
         PubData.coin.SetActive(false);
-        PubData.coin.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.coin.GetComponent<SpriteRenderer>().sortingOrder = 16;
 
         PubData.coinText = Formatter.ScaleTextToPercentOfScreen(PubData.coins.ToString(), 8, new Vector2(0.2f, 0.2f));
         PubData.coinText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.coinText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3.6f * GRIDSIZE, .6f * GRIDSIZE);
+        PubData.coinText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-3.6f * GRIDSIZE, .6f * GRIDSIZE));
+        PubData.coinText.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.coinText.SetActive(false);
 
         PubData.weaponSlot = new GameObject("Weapon Inventory Slot");
         PubData.weaponSlot.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.weaponSlot.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+        PubData.weaponSlot.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.weaponSlot.AddComponent<BoxCollider2D>().isTrigger = true;
-        PubData.weaponSlot.AddComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.weaponSlot.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.weaponSlot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.weaponSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1 * GRIDSIZE, 1.5f * GRIDSIZE);
-        PubData.weaponSlot.SetActive(false);
-        PubData.weaponSlot.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.weaponSlot.GetComponent<SpriteRenderer>().sortingOrder = 16;
+        PubData.weaponSlot.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1 * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.weaponSlot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4); PubData.weaponSlot.SetActive(false);
         PubData.weaponSlot.transform.position += new Vector3(0, 0, -8);
 
         PubData.armourSlot = new GameObject("Armour Inventory Slot");
         PubData.armourSlot.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.armourSlot.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+        PubData.armourSlot.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.armourSlot.AddComponent<BoxCollider2D>().isTrigger = true;
-        PubData.armourSlot.AddComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.armourSlot.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.armourSlot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.armourSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(1 * GRIDSIZE, 1.5f * GRIDSIZE);
+        PubData.armourSlot.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(1 * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.armourSlot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.armourSlot.SetActive(false);
-        PubData.armourSlot.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.armourSlot.GetComponent<SpriteRenderer>().sortingOrder = 16;
         PubData.armourSlot.transform.position += new Vector3(0, 0, -8);
 
 
@@ -211,14 +224,13 @@ class InitialInventoryState : InventoryState
             {
                 slot = new GameObject("Inventory Slot");
                 slot.transform.localScale = new Vector2(slotScale, slotScale);
-                slot.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+                slot.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
                 slot.AddComponent<BoxCollider2D>().isTrigger = true;
-                slot.AddComponent<RectTransform>().SetParent(inventoryTransform);
+                slot.GetComponent<RectTransform>().SetParent(inventoryTransform);
                 slot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-                slot.GetComponent<RectTransform>().anchoredPosition = new Vector2((-numOfColumns + 4) * GRIDSIZE, (numOfRows - 2.5f) * GRIDSIZE);
+                slot.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2((-numOfColumns + 4) * GRIDSIZE, (numOfRows - 2.5f) * GRIDSIZE));
+                slot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
                 slot.SetActive(false);
-                slot.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-                slot.GetComponent<SpriteRenderer>().sortingOrder = 16;
                 slot.transform.position += new Vector3(0, 0, -8);
                 PubData.slots.Add(slot);
                 numOfColumns -= 1;
@@ -229,59 +241,67 @@ class InitialInventoryState : InventoryState
         // make the combinination specific stuff here
         PubData.craftingSlotOne = new GameObject("Crafting Slot One");
         PubData.craftingSlotOne.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.craftingSlotOne.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+        PubData.craftingSlotOne.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.craftingSlotOne.AddComponent<BoxCollider2D>().isTrigger = true;
-        PubData.craftingSlotOne.AddComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.craftingSlotOne.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotOne.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotOne.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1 * GRIDSIZE, 1.5f * GRIDSIZE);
+        PubData.craftingSlotOne.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-2.5f * GRIDSIZE, 1.2f * GRIDSIZE));
         PubData.craftingSlotOne.SetActive(false);
-        PubData.craftingSlotOne.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.craftingSlotOne.GetComponent<SpriteRenderer>().sortingOrder = 16;
+        PubData.craftingSlotOne.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotOne.transform.position += new Vector3(0, 0, -8);
 
         PubData.craftingSlotTwo = new GameObject("Crafting Slot Two");
         PubData.craftingSlotTwo.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.craftingSlotTwo.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+        PubData.craftingSlotTwo.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.craftingSlotTwo.AddComponent<BoxCollider2D>().isTrigger = true;
-        PubData.craftingSlotTwo.AddComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.craftingSlotTwo.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotTwo.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotTwo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-0.5f * GRIDSIZE, 1.2f * GRIDSIZE);
+        PubData.craftingSlotTwo.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1.5f * GRIDSIZE, 0.8f * GRIDSIZE));
+        PubData.craftingSlotTwo.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotTwo.SetActive(false);
-        PubData.craftingSlotTwo.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.craftingSlotTwo.GetComponent<SpriteRenderer>().sortingOrder = 16;
         PubData.craftingSlotTwo.transform.position += new Vector3(0, 0, -8);
 
 
         PubData.craftingSlotThree = new GameObject("Crafting Slot Three");
         PubData.craftingSlotThree.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.craftingSlotThree.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+        PubData.craftingSlotThree.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.craftingSlotThree.AddComponent<BoxCollider2D>().isTrigger = true;
-        PubData.craftingSlotThree.AddComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.craftingSlotThree.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotThree.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotThree.GetComponent<RectTransform>().anchoredPosition = new Vector2(0 * GRIDSIZE, 1.5f * GRIDSIZE);
+        PubData.craftingSlotThree.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-.5f * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.craftingSlotThree.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotThree.SetActive(false);
-        PubData.craftingSlotThree.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.craftingSlotThree.GetComponent<SpriteRenderer>().sortingOrder = 16;
         PubData.craftingSlotThree.transform.position += new Vector3(0, 0, -8);
 
 
         PubData.craftingSlotResult = new GameObject("Crafting Slot Result");
         PubData.craftingSlotResult.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.craftingSlotResult.AddComponent<SpriteRenderer>().sprite = PubData.inventorySlotSprite;
+        PubData.craftingSlotResult.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.craftingSlotResult.AddComponent<BoxCollider2D>().isTrigger = true;
-        PubData.craftingSlotResult.AddComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.craftingSlotResult.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotResult.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotResult.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1 * GRIDSIZE, 1.5f * GRIDSIZE);
+        PubData.craftingSlotResult.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(2.5f * GRIDSIZE, 1f * GRIDSIZE));
+        PubData.craftingSlotResult.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotResult.SetActive(false);
-        PubData.craftingSlotResult.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        PubData.craftingSlotResult.GetComponent<SpriteRenderer>().sortingOrder = 16;
         PubData.craftingSlotResult.transform.position += new Vector3(0, 0, -8);
+
+        PubData.craftingButton = new GameObject("Crafting Button");
+        PubData.craftingButton.transform.localScale = new Vector2(slotScale, slotScale);
+        PubData.craftingButton.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
+        PubData.craftingButton.AddComponent<BoxCollider2D>().isTrigger = true;
+        PubData.craftingButton.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        //PubData.craftingButton.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
+        PubData.craftingButton.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(1f * GRIDSIZE, .5f * GRIDSIZE));
+        PubData.craftingButton.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
+        PubData.craftingButton.SetActive(false);
+        PubData.craftingButton.transform.position += new Vector3(0, 0, -8);
 
 
         PubData.craftingSlotsText = new GameObject();
-
+        PubData.craftingSlotsText.transform.SetParent(inventoryTransform);
 
         PubData.craftingSlotResultText = new GameObject();
+        PubData.craftingSlotResultText.transform.SetParent(inventoryTransform);
 
 
         PubData.open = false;
@@ -311,6 +331,8 @@ class OverworldInventoryState : InventoryState
         }
         PubData.inventoryBackground.SetActive(true);
         PubData.armourSlot.SetActive(true);
+        PubData.weaponText.SetActive(true);
+        PubData.armourText.SetActive(true);
         PubData.weaponSlot.SetActive(true);
         PubData.coin.SetActive(true);
         PubData.coinText.SetActive(true);
@@ -340,6 +362,8 @@ class OverworldInventoryState : InventoryState
         PubData.inventoryBackground.SetActive(false);
         PubData.armourSlot.SetActive(false);
         PubData.weaponSlot.SetActive(false);
+        PubData.weaponText.SetActive(false);
+        PubData.armourText.SetActive(false);
         PubData.coin.SetActive(false);
         PubData.coinText.SetActive(false);
         PubData.inventoryText.SetActive(false);
@@ -379,6 +403,8 @@ class OverworldCraftingState : InventoryState
         {
             slot.SetActive(true);
         }
+        PubData.craftingButton.SetActive(true);
+        PubData.craftingText.SetActive(true);
         PubData.inventoryBackground.SetActive(true);
         PubData.craftingSlotOne.SetActive(true);
         PubData.craftingSlotTwo.SetActive(true);
@@ -434,6 +460,8 @@ class OverworldCraftingState : InventoryState
         {
             slot.SetActive(false);
         }
+        PubData.craftingButton.SetActive(false);
+        PubData.craftingText.SetActive(false);
         PubData.inventoryBackground.SetActive(false);
         PubData.craftingSlotOne.SetActive(false);
         PubData.craftingSlotTwo.SetActive(false);
@@ -494,65 +522,66 @@ class OverworldShopingState : InventoryState
 }
 
 // You are in a dungeon
-class DungeonState : InventoryState
-{
-    public override void Enter()
-    {
-        // Fire the event
-        EventManager.TriggerOnOpenInventory();
+//class DungeonInventoryState : InventoryState
+//{
+//    public override void Enter()
+//    {
+//        Debug.Log("hey");
+//        // Fire the event
+//        EventManager.TriggerOnOpenInventory();
 
-        PubData.open = true;
+//        PubData.open = true;
 
-        int i = 0;
-        while (i <= 7)
-        {
-            PubData.slots[i].SetActive(true);
-            i += 1;
-        }
-        PubData.armourSlot.SetActive(true);
-        PubData.weaponSlot.SetActive(true);
-        PubData.coin.SetActive(true);
-        PubData.coinText.SetActive(true);
-        PubData.inventoryText.SetActive(true);
+//        int i = 0;
+//        while (i <= 7)
+//        {
+//            PubData.slots[i].SetActive(true);
+//            i += 1;
+//        }
+//        PubData.armourSlot.SetActive(true);
+//        PubData.weaponSlot.SetActive(true);
+//        PubData.coin.SetActive(true);
+//        PubData.coinText.SetActive(true);
+//        PubData.inventoryText.SetActive(true);
 
-        return;
-    }
+//        return;
+//    }
 
-    public override void Exit()
-    {
-        // Fire the event
-        EventManager.TriggerOnCloseInventory();
+//    public override void Exit()
+//    {
+//        // Fire the event
+//        EventManager.TriggerOnCloseInventory();
 
-        PubData.open = false;
+//        PubData.open = false;
 
-        int i = 0;
-        while (i <= 7)
-        {
-            PubData.slots[i].SetActive(false);
-            i += 1;
-        }
-        PubData.armourSlot.SetActive(false);
-        PubData.weaponSlot.SetActive(false);
-        PubData.coin.SetActive(false);
-        PubData.coinText.SetActive(false);
-        PubData.inventoryText.SetActive(false);
+//        int i = 0;
+//        while (i <= 7)
+//        {
+//            PubData.slots[i].SetActive(false);
+//            i += 1;
+//        }
+//        PubData.armourSlot.SetActive(false);
+//        PubData.weaponSlot.SetActive(false);
+//        PubData.coin.SetActive(false);
+//        PubData.coinText.SetActive(false);
+//        PubData.inventoryText.SetActive(false);
 
-        return;
-    }
+//        return;
+//    }
 
-    public override IEnumerator Interact()
-    {
-        // DROP ITEM HERE
+//    public override IEnumerator Interact()
+//    {
+//        // DROP ITEM HERE
 
-        yield break;
-    }
+//        yield break;
+//    }
 
-    public override IEnumerator Swapped(Slot slotOne, Slot slotTwo)
-    {
-        ItemData temp = slotOne.RetrieveData();
-        slotOne.AssignData(slotTwo.RetrieveData());
-        slotTwo.AssignData(temp);
+//    public override IEnumerator Swapped(Slot slotOne, Slot slotTwo)
+//    {
+//        ItemData temp = slotOne.RetrieveData();
+//        slotOne.AssignData(slotTwo.RetrieveData());
+//        slotTwo.AssignData(temp);
 
-        yield break;
-    }
-}
+//        yield break;
+//    }
+//}

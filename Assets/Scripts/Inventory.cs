@@ -18,19 +18,29 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        this.transform.position = Camera.main.transform.position;
+
         //DontDestroyOnLoad(this);
-        EventManager.onDungeonGenerated += DungeonEntered;
         EventManager.OnExitDungeon += DungeonExited;
         EventManager.onInventoryTrigger += TriggerInventory;
         EventManager.onWeaponMerchant += WeaponMerchantClicked;
         EventManager.onArmourMerchant += ArmourMerchantClicked;
         EventManager.onRuneMerchant += RuneMerchantClicked;
         EventManager.onCrafting += EventManager_onCrafting;
+        EventManager.onDungeonInventoryTrigger += DungeonInventory;
+        //EventManager.onDungeonGenerated += Refresh;
+        //EventManager.OnExitDungeon += Refresh;
 
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
         state.Enter();
         state = new OverworldInventoryState();
+    }
+
+    private void DungeonInventory(object sender, EventArgs e)
+    {
+        Debug.Log("Helloooooo");
+        ChangeState(new OverworldInventoryState());
     }
 
     private void EventManager_onCrafting(object sender, EventArgs e)
@@ -75,11 +85,6 @@ public class Inventory : MonoBehaviour
     private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
     {
         state.Swapped(slotOne, slotTwo);
-    }
-
-    private void DungeonEntered(EventArgs e)
-    {
-        ChangeState(new DungeonState());
     }
 
     private void DungeonExited(EventArgs e)

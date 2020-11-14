@@ -124,7 +124,7 @@ public class NormalState : State
 
     public override IEnumerator Inventory()
     {
-        EventManager.TriggerOnInventoryTrigger();
+        EventManager.TriggerOnDungeonInventoryTrigger();
         yield break;
     }
 

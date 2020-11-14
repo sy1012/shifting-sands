@@ -15,11 +15,17 @@ public class DisableOnOpenInventory : MonoBehaviour
 
     private void InventoryClosed(object sender, System.EventArgs e)
     {
-        script.enabled = true;
+        if (script != null)
+        {
+            script.enabled = true;
+        }
     }
 
     private void InventoryOpened(object sender, System.EventArgs e)
     {
-        script.enabled = false;
+        if (script != null)
+        {
+            script.enabled = false;
+        }
     }
 }

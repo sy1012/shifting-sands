@@ -61,6 +61,8 @@ public class PlayerStateMachine : Character
     // Start is called before the first frame update
     void Start()
     {
+        equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
+
         //Set intial set to normal
         SetState(new NormalState(this));
         //move healthbar to a more suitable position

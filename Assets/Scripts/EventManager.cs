@@ -10,6 +10,7 @@ public static class EventManager
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
     public static event EventHandler onInventoryTrigger;
+    public static event EventHandler onDungeonInventoryTrigger;
     public static event EventHandler onWeaponMerchant;
     public static event EventHandler onArmourMerchant;
     public static event EventHandler onRuneMerchant;
@@ -100,12 +101,17 @@ public static class EventManager
         onInventoryTrigger?.Invoke(null, EventArgs.Empty);
     }
 
+    public static void TriggerOnDungeonInventoryTrigger()
+    {
+        onDungeonInventoryTrigger?.Invoke(null, EventArgs.Empty);
+    }
+
     public static void TriggerOnWeaponMerchant()
     {
         onWeaponMerchant?.Invoke(null, EventArgs.Empty);
     }
 
-    public static void TriggerOnArmournMerchant()
+    public static void TriggerOnArmourMerchant()
     {
         onArmourMerchant?.Invoke(null, EventArgs.Empty);
     }
