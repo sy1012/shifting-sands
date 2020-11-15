@@ -13,6 +13,7 @@ public class OverworldData
     public float[] playerPosition;
     public float[,] camelPositions;
     public int currentOasisIndex;
+    public int pyramidEnteredIndex = -1;
 
     public OverworldData(MapManager mapManager)
     {
@@ -47,6 +48,15 @@ public class OverworldData
 
         for (int i = 0; i < numPyramids; i++)
         {
+            if(mapManager.player.enterPyramid == null)
+            {
+                pyramidEnteredIndex = -1;
+                Debug.Log("nulled");
+            }
+            else if (mapManager.pyramids[i] == mapManager.player.enterPyramid)
+            {
+                pyramidEnteredIndex = i;
+            }
             pyramidPositions[i, 0] = mapManager.pyramids[i].transform.position.x;
             pyramidPositions[i, 1] = mapManager.pyramids[i].transform.position.y;
         }

@@ -17,6 +17,8 @@ public class MapManager : MonoBehaviour
 
     public Oasis currentOasis;
 
+    private bool needToSave;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,7 +45,7 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        /*if (Input.GetKeyDown(KeyCode.S))
         {
             SaveOverworld();
         }
@@ -51,15 +53,22 @@ public class MapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadOverworld();
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             SaveSystem.DeleteOverworld();
         }
+
+        if(needToSave && !player.waiting)
+        {
+            player.enterPyramid = null;
+            SaveOverworld();
+            needToSave = false;
+        }
     }
 
-    public void NewOasis(Vector2 position, float radius, Pyramid parentPyramid)
+    public Oasis NewOasis(Vector2 position, float radius, Pyramid parentPyramid)
     {
         Oasis newOasis = Instantiate(oasisPrefab, position, Quaternion.identity);
         oases.Add(newOasis);
@@ -72,6 +81,7 @@ public class MapManager : MonoBehaviour
         EventManager.TriggerOnNewOasis();
 
         BuildRelationships(newOasis);
+        return newOasis;
     }
 
     public void BuildRelationships(Oasis oasis)
@@ -181,17 +191,30 @@ public class MapManager : MonoBehaviour
                 }
             }
 
+            Pyramid entered = null;
             for (int i = 0; i < loadedData.numPyramids; i++)
             {
                 pyramids.Add(Instantiate(pyramidPrefab, new Vector2(loadedData.pyramidPositions[i, 0], loadedData.pyramidPositions[i, 1]), Quaternion.identity));
+                if (i == loadedData.pyramidEnteredIndex)
+                {
+                    entered = pyramids[pyramids.Count - 1];
+                }
             }
 
             foreach (Oasis oasis in oases)
             {
                 BuildRelationships(oasis);
             }
-
-            player.transform.position = new Vector2(loadedData.playerPosition[0], loadedData.playerPosition[1]);
+            Debug.Log(loadedData.pyramidEnteredIndex);
+            if (loadedData.pyramidEnteredIndex != -1)
+            {
+                player.transform.position = new Vector2(loadedData.pyramidPositions[loadedData.pyramidEnteredIndex, 0], loadedData.pyramidPositions[loadedData.pyramidEnteredIndex, 1]);
+            }
+            else
+            {
+                player.transform.position = currentOasis.transform.position;
+            }
+            
 
             player.path.Clear();
 
@@ -206,8 +229,36 @@ public class MapManager : MonoBehaviour
                 camel.transform.position = new Vector2(loadedData.camelPositions[i, 0], loadedData.camelPositions[i, 1]);
             }
 
+            DungeonDataKeeper dungeonData = FindObjectOfType<DungeonDataKeeper>();
+            if (dungeonData.beatLastDungeon)
+            {
+                StartCoroutine(waitToTransformPyramid(entered, dungeonData));
+                player.waiting = true;
+                needToSave = true;
+            }
+            else
+            {
+                player.path.Add(oases[loadedData.currentOasisIndex].oasisNode);
+            }
+
+            player.enterPyramid = null;
+            SaveOverworld();
+
         }
 
+    }
+
+    IEnumerator waitToTransformPyramid(Pyramid entered, DungeonDataKeeper dungeonData)
+    {
+        yield return new WaitForSeconds(0.3f);    //Wait 0.3s
+        Oasis oasis = entered.TransformToOasis();
+        dungeonData.beatLastDungeon = false;
+        currentOasis = oasis;
+        player.currentNode = oasis.oasisNode;
+        player.traversal.currentNode = oasis.oasisNode;
+        player.traversal.destinationNode = oasis.oasisNode;
+        player.path.Clear();
+        player.waiting = false;
     }
 
 }

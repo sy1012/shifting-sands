@@ -25,10 +25,14 @@ public class Pyramid : MonoBehaviour
     }
 
     //for testing of transformation into a new oasis
-    private void TransformToOasis()
+    public Oasis TransformToOasis()
     {
         //spawn a new oasis where pyramid is and get rid of the pyramid
-        pyramidManager.NewOasis(transform.position, 6f, this);
+        if (pyramidManager == null)
+        {
+            pyramidManager = FindObjectOfType<MapManager>();
+        }
+        Oasis newOasis = pyramidManager.NewOasis(transform.position, 6f, this);
         foreach (Oasis oasis in pyramidManager.oases)
         {
             //remove all references to the pyramid
@@ -42,6 +46,7 @@ public class Pyramid : MonoBehaviour
         }
         
         Destroy(gameObject);
+        return newOasis;
     }
 
     private void Update()
@@ -60,13 +65,12 @@ public class Pyramid : MonoBehaviour
                         if (Input.GetMouseButtonDown(0))
                         {
                             EventManager.TriggerOnPyramidClicked();
-                            pyramidManager.SaveOverworld();
                             overworldTraversal.EnterPyramid(this);
                         }
-                        else if (Input.GetMouseButtonDown(1))
+                        /*else if (Input.GetMouseButtonDown(1))
                         {
                             TransformToOasis();
-                        }
+                        }*/
                         
                     }
                     mousedOver = true;
