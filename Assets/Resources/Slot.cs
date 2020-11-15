@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Slot : MonoBehaviour
     public float slotWorldUnits;
     //private GameObject popUpHolder;
 
-    public void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = this;
         if (occupied == true)
@@ -20,7 +21,7 @@ public class Slot : MonoBehaviour
         }
     }
 
-    public void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = this;
         if (occupied == true)
@@ -57,6 +58,7 @@ public class Slot : MonoBehaviour
     {
         if (data != null)
         {
+            Debug.Log("null data?");
             this.occupied = true;
             Destroy(item);
             this.item = new GameObject("Slot Frame");
@@ -68,6 +70,7 @@ public class Slot : MonoBehaviour
         }
         else
         {
+            Debug.Log("null data?");
             this.occupied = false;
             Destroy(item);
         }

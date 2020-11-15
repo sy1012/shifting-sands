@@ -91,7 +91,6 @@ public class CanvasClickController : MonoBehaviour
             //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
             foreach (RaycastResult result in results)
             {
-                Debug.Log(result.gameObject.name);
                 if (result.gameObject.name == "Inventory Button(Clone)")
                 {
                     EventManager.TriggerOnInventoryTrigger();
@@ -111,6 +110,11 @@ public class CanvasClickController : MonoBehaviour
                 else if (result.gameObject.name == "Rune Merchant Clone(Clone)")
                 {
                     EventManager.TriggerOnRuneMerchant();
+                }
+                else if (result.gameObject.GetComponent<Slot>() != null)
+                {
+                    GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = result.gameObject.GetComponent<Slot>();
+
                 }
             }
         }

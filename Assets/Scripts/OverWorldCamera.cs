@@ -26,6 +26,5 @@ public class OverworldCamera : MonoBehaviour
             targetposition.y = Mathf.Clamp(targetposition.y, minPos.y, maxPos.y);
             transform.position = Vector3.Lerp(transform.position, targetposition, smoothing);
         }
-
     }
 }
