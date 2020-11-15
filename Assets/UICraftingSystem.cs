@@ -11,7 +11,7 @@ public class UICraftingSystem : MonoBehaviour
 
     private void Awake()
     {
-        craftingSystem = new CraftingSystem();
+        //craftingSystem = new CraftingSystem();
 
         //Find transforms based on name in UI hierachy
         Transform slotContainer = transform.Find("SlotContainer");

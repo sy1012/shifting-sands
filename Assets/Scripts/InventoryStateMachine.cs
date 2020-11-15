@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 static class PubData
 {
+    // Crafting System
+    static public CraftingSystem craftingSystem;
+
     // two for equipment plus six others
     static public int numberOfDungeonSlots = 8;
 
@@ -26,6 +29,12 @@ static class PubData
     static public bool open; // is the inventory currently open
 
     static public EquipmentManager equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
+
+    static public List<ItemData> armourMerchantInventory;
+    static public List<ItemData> WeaponMerchantInventory;
+    static public List<ItemData> RuneMerchantInventory;
+    static public List<GameObject> merchantSlots;
+    static public GameObject runeText;
 
     static public List<ItemData> inventory;
     static public GameObject coin;
@@ -62,18 +71,20 @@ abstract class InventoryState
         return;
     }
 
-    public virtual IEnumerator Swapped(Slot slotOne, Slot slotTwo)
+    public virtual void Swapped(Slot slotOne, Slot slotTwo)
     {
-        yield break;
+        Debug.Log("Swappage");
+        return;
     }
 
-    public virtual IEnumerator Interact()
+    public virtual void Interact()
     {
-        yield break;
+        return;
     }
 
     public virtual void Triggered()
     {
+        Debug.Log("Triggering");
         if (PubData.open) { Exit(); }
         else { Enter(); }
     }
@@ -111,8 +122,11 @@ class InitialInventoryState : InventoryState
 {
     public override void Enter()
     {
+        // Set up the inventory state
         GameObject canvas = GameObject.Find("Canvas");
         PubData.open = false;
+
+        PubData.craftingSystem = CraftingSystem.current;
 
         // initialize the variables needed
         PubData.equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
@@ -160,7 +174,7 @@ class InitialInventoryState : InventoryState
         PubData.inventoryText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
         PubData.inventoryText.SetActive(false);
 
-        PubData.craftingText = Formatter.ScaleTextToPercentOfScreenUI("Craffting", 20, new Vector2(0.4f, 0.05f));
+        PubData.craftingText = Formatter.ScaleTextToPercentOfScreenUI("Crafting", 20, new Vector2(0.4f, 0.05f));
         PubData.craftingText.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
         PubData.craftingText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
@@ -285,7 +299,7 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotResult.SetActive(false);
         PubData.craftingSlotResult.transform.position += new Vector3(0, 0, -8);
 
-        PubData.craftingButton = new GameObject("Crafting Button");
+        PubData.craftingButton = new GameObject("Trigger");
         PubData.craftingButton.transform.localScale = new Vector2(slotScale, slotScale);
         PubData.craftingButton.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.craftingButton.AddComponent<BoxCollider2D>().isTrigger = true;
@@ -308,6 +322,44 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotResultText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.6f, 0.5f));
         PubData.craftingSlotResultText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.craftingSlotResultText.SetActive(false);
+
+
+        // Set up the rune state
+        PubData.merchantSlots = new List<GameObject>();
+
+        // Make the grid of Slots
+        numOfRows = 2;
+        while (numOfRows > 0)
+        {
+            int numOfColumns = 7;
+            while (numOfColumns > 0)
+            {
+                slot = new GameObject("Merchant Slot");
+                slot.transform.localScale = new Vector2(slotScale, slotScale);
+                slot.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
+                slot.AddComponent<BoxCollider2D>().isTrigger = true;
+                slot.GetComponent<RectTransform>().SetParent(inventoryTransform);
+                slot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
+                slot.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.9f + -0.1f * numOfColumns, -0.17f * numOfRows + 0.9f));
+                slot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
+                slot.SetActive(false);
+                slot.transform.position += new Vector3(0, 0, -8);
+                PubData.merchantSlots.Add(slot);
+                numOfColumns -= 1;
+            }
+            numOfRows -= 1;
+        }
+        PubData.RuneMerchantInventory = new List<ItemData>();
+        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorAirRune"));
+        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorEarthRune"));
+        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorWaterRune"));
+        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorFireRune"));
+
+        PubData.runeText = Formatter.ScaleTextToPercentOfScreenUI("Rune Merchant", 20, new Vector2(0.4f, 0.05f));
+        PubData.runeText.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.runeText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
+        PubData.runeText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
+        PubData.runeText.SetActive(false);
 
         PubData.open = false;
 
@@ -378,21 +430,23 @@ class OverworldInventoryState : InventoryState
         return;
     }
 
-    public override IEnumerator Interact()
+    public override void Interact()
     {
         if (PubData.weaponSlot.activeSelf) { Exit(); }
         else { Enter(); }
 
-        yield break;
+        return;
     }
 
-    public override IEnumerator Swapped(Slot slotOne, Slot slotTwo)
+    public override void Swapped(Slot slotOne, Slot slotTwo)
     {
+        Debug.Log("Swapped");
+
         ItemData temp = slotOne.RetrieveData();
         slotOne.AssignData(slotTwo.RetrieveData());
         slotTwo.AssignData(temp);
 
-        yield break;
+        return;
     }
 }
 
@@ -480,51 +534,115 @@ class OverworldCraftingState : InventoryState
         return;
     }
 
-    public override IEnumerator Interact()
+    public override void Interact()
     {
-        // CALL TO SOME TYPE OF CRAFTING THING HERE
+        ItemData[] items = new ItemData[]{ PubData.craftingSlotOne.GetComponent<Slot>().RetrieveData(),
+        PubData.craftingSlotTwo.GetComponent<Slot>().RetrieveData(), PubData.craftingSlotThree.GetComponent<Slot>().RetrieveData()};
 
-        yield break;
+        // If there is a match in the recipes
+        ItemData item = PubData.craftingSystem.Craft(items);
+        if (item != null)
+        {
+            PubData.craftingSlotResult.GetComponent<Slot>().AssignData(item);
+            PubData.craftingSlotOne.GetComponent<Slot>().AssignData(null);
+            PubData.craftingSlotTwo.GetComponent<Slot>().AssignData(null);
+            PubData.craftingSlotThree.GetComponent<Slot>().AssignData(null);
+        }
+
+        return;
     }
 
     // allow two slots to be swapped as long as the only way a result can be swapped is if it is the first slot and the second is empty
-    public override IEnumerator Swapped(Slot slotOne, Slot slotTwo)
+    public override void Swapped(Slot slotOne, Slot slotTwo)
     {
+        Debug.Log("crafting swap?");
+
         // invalid swap so just pass
-        if (slotTwo.name == "Crafting Slot Reult" || (slotOne.name == "Crafting Slot Result" && slotTwo.GetComponent<Slot>().RetrieveData( )!= null))
+        if (slotTwo.name == "Crafting Slot Result" || (slotOne.name == "Crafting Slot Result" && slotTwo.GetComponent<Slot>().RetrieveData( )!= null))
         {
-            yield break;
+            return;
         }
 
         ItemData temp = slotOne.RetrieveData();
         slotOne.AssignData(slotTwo.RetrieveData());
         slotTwo.AssignData(temp);
 
-        yield break;
+        return;
     }
 }
 
 // You are in the overworld and the player has the shop tab selected
-class OverworldShopingState : InventoryState
+class OverworldRuneState : InventoryState
 {
     public override void Enter()
     {
+        // Fire the event
+        EventManager.TriggerOnOpenInventory();
+
+        PubData.open = true;
+
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.SetActive(true);
+        }
+
+        foreach (GameObject slot in PubData.merchantSlots)
+        {
+            slot.SetActive(true);
+        }
+
+        int i = 0;
+        foreach (ItemData data in PubData.RuneMerchantInventory)
+        {
+            PubData.merchantSlots[i].GetComponent<Slot>().AssignData(data);
+            i += 1;
+        }
+        
+        PubData.runeText.SetActive(true);
+        PubData.inventoryBackground.SetActive(true);
+
         return;
     }
 
     public override void Exit()
     {
+        PubData.open = false;
+
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.SetActive(false);
+        }
+
+        foreach (GameObject slot in PubData.merchantSlots)
+        {
+            slot.SetActive(false);
+        }
+
+        PubData.runeText.SetActive(false);
+        PubData.inventoryBackground.SetActive(false);
+    }
+
+    public override void Interact()
+    {
         return;
     }
 
-    public override IEnumerator Interact()
+    public override void Swapped(Slot slotOne, Slot slotTwo)
     {
-        yield break;
-    }
+        Debug.Log("Running?");
+        Debug.Log(slotOne);
+        Debug.Log(slotTwo);
+        // You are buying an item
+        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied)
+        {
+            slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+        }
 
-    public override IEnumerator Swapped(Slot slotOne, Slot slotTwo)
-    {
-        yield break;
+        // You are selling an item
+        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        {
+            slotOne.AssignData(null);
+        }
     }
 }
 

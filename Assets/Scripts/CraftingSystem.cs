@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class CraftingSystem
 {
-    public const int maxIngredients = 2;
+    private static CraftingSystem _current;
+    public static CraftingSystem current
+    {
+        get
+        {
+            if (_current == null) { _current = new CraftingSystem(); }
+            return _current;
+        }
+    }
+
+    public const int maxIngredients = 3;
     private ItemData[] ingredients;
 
     // Event Telling others what item has been crafter
@@ -14,11 +24,12 @@ public class CraftingSystem
     //Recipes
     List<CraftingRecipe> recipes;
 
-    public CraftingSystem()
+    private CraftingSystem()
     {
         ingredients = new ItemData[maxIngredients];
         recipes = Resources.Load<CraftingRecipeCollection>("CraftingRecipes").recipes;
     }
+
     private bool IsEmpty(int index) { return ingredients[index] == null; }
     private void SetItem(Item item, int index)
     {
@@ -27,6 +38,16 @@ public class CraftingSystem
     public void RemoveItem(int index)
     {
         SetItem(null, index);
+    }
+
+    public void ClearItems()
+    {
+        ingredients = new ItemData[maxIngredients];
+    }
+
+    public void AddItems()
+    {
+        ingredients = new ItemData[maxIngredients];
     }
 
     /// <summary>
@@ -49,6 +70,7 @@ public class CraftingSystem
             return false;
         }
     }
+
     private void UpdateCrafting()
     {
         ItemData craftingResult = null;
@@ -65,5 +87,19 @@ public class CraftingSystem
                 onCraftSuccess?.Invoke(null, new onCraftSuccessArgs(craftingResult));
             }
         }
+    }
+
+    public ItemData Craft(ItemData[] ingredients)
+    {
+        ItemData craftingResult = null;
+        foreach (var recipe in recipes)
+        {
+            craftingResult = recipe.TryToCraft(ingredients);
+            if (craftingResult != null)
+            {
+                return craftingResult;
+            }
+        }
+        return null;
     }
 }

@@ -8,6 +8,7 @@ public static class ItemTypes
     {
         item,
         weapon,
-        consumable
+        consumable,
+        rune
     }
 }

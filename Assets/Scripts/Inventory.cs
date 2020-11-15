@@ -21,13 +21,13 @@ public class Inventory : MonoBehaviour
         this.transform.position = Camera.main.transform.position;
 
         //DontDestroyOnLoad(this);
-        EventManager.OnExitDungeon += DungeonExited;
+        //EventManager.OnExitDungeon += DungeonExited;
         EventManager.onInventoryTrigger += TriggerInventory;
         EventManager.onWeaponMerchant += WeaponMerchantClicked;
         EventManager.onArmourMerchant += ArmourMerchantClicked;
         EventManager.onRuneMerchant += RuneMerchantClicked;
-        EventManager.onCrafting += EventManager_onCrafting;
-        EventManager.onDungeonInventoryTrigger += DungeonInventory;
+        EventManager.onCrafting += CraftingClicked;
+        //EventManager.onDungeonInventoryTrigger += DungeonInventory;
         //EventManager.onDungeonGenerated += Refresh;
         //EventManager.OnExitDungeon += Refresh;
 
@@ -37,20 +37,14 @@ public class Inventory : MonoBehaviour
         state = new OverworldInventoryState();
     }
 
-    private void DungeonInventory(object sender, EventArgs e)
-    {
-        Debug.Log("Helloooooo");
-        ChangeState(new OverworldInventoryState());
-    }
-
-    private void EventManager_onCrafting(object sender, EventArgs e)
+    private void CraftingClicked(object sender, EventArgs e)
     {
         ChangeState(new OverworldCraftingState());
     }
 
     private void RuneMerchantClicked(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        ChangeState(new OverworldRuneState());
     }
 
     private void ArmourMerchantClicked(object sender, EventArgs e)
@@ -64,6 +58,11 @@ public class Inventory : MonoBehaviour
     }
 
     private void InventoryInteracted(object sender, EventArgs e)
+    {
+        state.Interact();
+    }
+
+    public void Interact()
     {
         state.Interact();
     }
@@ -84,12 +83,8 @@ public class Inventory : MonoBehaviour
 
     private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
     {
+        Debug.Log("SWAPPINGAGE");
         state.Swapped(slotOne, slotTwo);
-    }
-
-    private void DungeonExited(EventArgs e)
-    {
-        ChangeState(new OverworldInventoryState());
     }
 
     public void Update()
@@ -100,24 +95,28 @@ public class Inventory : MonoBehaviour
             {
                 if (held != null)
                 {
-                    Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    held.transform.position = mouse;
+                    held.transform.parent.transform.SetAsLastSibling();
+                    held.transform.position = Input.mousePosition;
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (slotClicked != null)
+                if (slotHovered != null && held != null)
                 {
-                    slotClicked.Released();
-                    if (slotHovered != null)
-                    {
-                        ItemData temp = slotHovered.RetrieveData();
-                        slotHovered.AssignData(slotClicked.RetrieveData());
-                        slotClicked.AssignData(temp);
-                    }
-                    slotClicked = null;
-                    held= null;
+                    InventorySlotsSwapped(held.transform.parent.GetComponent<Slot>(), slotHovered);
+                    held.transform.position = held.transform.parent.position;
+                    held = null;
+                    slotHovered = null;
+                //    slotClicked.Released();
+                //    if (slotHovered != null)
+                //    {
+                //        ItemData temp = slotHovered.RetrieveData();
+                //        slotHovered.AssignData(slotClicked.RetrieveData());
+                //        slotClicked.AssignData(temp);
+                //    }
+                //    slotClicked = null;
+                //    held= null;
                 }           
             }
         }
@@ -131,6 +130,7 @@ public class Inventory : MonoBehaviour
 
     private void TriggerInventory(object sender, EventArgs e)
     {
+        Debug.Log("Happening");
         ChangeState(new OverworldInventoryState());
     }
 

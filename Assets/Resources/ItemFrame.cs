@@ -56,8 +56,6 @@ public class ItemFrame : MonoBehaviour
     public void Released()
     {
         //Initialize();
-        this.frame.GetComponent<SpriteRenderer>().sortingOrder -= 2;
-        this.item.GetComponent<SpriteRenderer>().sortingOrder -= 2;
         this.transform.position = this.transform.parent.GetComponent<RectTransform>().position;
         this.HideInfo();
     }

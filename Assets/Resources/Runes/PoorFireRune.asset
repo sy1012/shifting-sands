@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b956cd09ba6f3499fa29f372775cae, type: 3}
+  m_Name: PoorFireRune
+  m_EditorClassIdentifier: 
+  scrollOffset: {x: 0, y: 0}
+  spriteScaling: {x: 0, y: 0}
+  relativeWeight: 0
+  sprite: {fileID: 21300000, guid: d2b0ce5aecc813945b496cdd4b1e8669, type: 3}
+  frame: {fileID: 21300000, guid: e149dafa21f510d4bb2e92ecf6f2b9ce, type: 3}
+  itemType: 3
+  itemName: Poor Fire Rune
+  value: 10
+  recipe: []
+  scroll: {fileID: 1447974547751498129, guid: f1c2a55796f029745a5149d3336c8eda, type: 3}
+  description: 

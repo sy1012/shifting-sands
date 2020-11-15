@@ -54,11 +54,16 @@ public class Slot : MonoBehaviour
         return this.item.GetComponent<ItemFrame>().data;
     }
 
+
+    public GameObject RetrieveItem()
+    {
+        return item;
+    }
+
     public void AssignData(ItemData data)
     {
         if (data != null)
         {
-            Debug.Log("null data?");
             this.occupied = true;
             Destroy(item);
             this.item = new GameObject("Slot Frame");
