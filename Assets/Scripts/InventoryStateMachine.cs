@@ -156,25 +156,25 @@ class InitialInventoryState : InventoryState
         // Make stuff
         PubData.inventoryText = Formatter.ScaleTextToPercentOfScreenUI("Inventory", 20, new Vector2(0.4f, 0.05f));
         PubData.inventoryText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.inventoryText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(0, 1.6f * GRIDSIZE));
+        PubData.inventoryText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
         PubData.inventoryText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
         PubData.inventoryText.SetActive(false);
 
         PubData.craftingText = Formatter.ScaleTextToPercentOfScreenUI("Craffting", 20, new Vector2(0.4f, 0.05f));
         PubData.craftingText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.craftingText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(0, 1.6f * GRIDSIZE));
+        PubData.craftingText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
         PubData.craftingText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
         PubData.craftingText.SetActive(false);
 
         PubData.weaponText = Formatter.ScaleTextToPercentOfScreenUI("Equipped Weapon", 10, new Vector2(0.4f, .1f));
         PubData.weaponText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.weaponText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1 * GRIDSIZE, 0.5f * GRIDSIZE));
+        PubData.weaponText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.3f,  0.6f));
         PubData.weaponText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.weaponText.SetActive(false);
 
         PubData.armourText = Formatter.ScaleTextToPercentOfScreenUI("Equipped Armour", 10, new Vector2(0.4f, .1f));
         PubData.armourText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.armourText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(1 * GRIDSIZE, 0.5f * GRIDSIZE));
+        PubData.armourText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.7f , 0.6f));
         PubData.armourText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.armourText.SetActive(false);
 
@@ -182,13 +182,13 @@ class InitialInventoryState : InventoryState
         PubData.coin.transform.localScale = new Vector2(coinScale, coinScale);
         PubData.coin.AddComponent<Image>().sprite = PubData.coinSprite;
         PubData.coin.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.coin.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-3 * GRIDSIZE, 1.3f * GRIDSIZE));
+        PubData.coin.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.2f, .7f));
         PubData.coin.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
         PubData.coin.SetActive(false);
 
         PubData.coinText = Formatter.ScaleTextToPercentOfScreenUI(PubData.coins.ToString(), 8, new Vector2(0.2f, 0.2f));
         PubData.coinText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.coinText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-3.6f * GRIDSIZE, .6f * GRIDSIZE));
+        PubData.coinText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.2f, .6f));
         PubData.coinText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.coinText.SetActive(false);
 
@@ -198,7 +198,7 @@ class InitialInventoryState : InventoryState
         PubData.weaponSlot.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.weaponSlot.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.weaponSlot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.weaponSlot.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1 * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.weaponSlot.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.3f, .7f));
         PubData.weaponSlot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4); PubData.weaponSlot.SetActive(false);
         PubData.weaponSlot.transform.position += new Vector3(0, 0, -8);
 
@@ -208,7 +208,7 @@ class InitialInventoryState : InventoryState
         PubData.armourSlot.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.armourSlot.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.armourSlot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.armourSlot.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(1 * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.armourSlot.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.7f, .7f));
         PubData.armourSlot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.armourSlot.SetActive(false);
         PubData.armourSlot.transform.position += new Vector3(0, 0, -8);
@@ -228,7 +228,7 @@ class InitialInventoryState : InventoryState
                 slot.AddComponent<BoxCollider2D>().isTrigger = true;
                 slot.GetComponent<RectTransform>().SetParent(inventoryTransform);
                 slot.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-                slot.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2((-numOfColumns + 4) * GRIDSIZE, (numOfRows - 2.5f) * GRIDSIZE));
+                slot.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2( 0.9f + -0.1f * numOfColumns, -0.2f * numOfRows + 0.6f));
                 slot.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
                 slot.SetActive(false);
                 slot.transform.position += new Vector3(0, 0, -8);
@@ -245,7 +245,7 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotOne.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingSlotOne.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotOne.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotOne.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-2.5f * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.craftingSlotOne.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.2f, .7f));
         PubData.craftingSlotOne.SetActive(false);
         PubData.craftingSlotOne.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotOne.transform.position += new Vector3(0, 0, -8);
@@ -256,7 +256,7 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotTwo.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingSlotTwo.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotTwo.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotTwo.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1.5f * GRIDSIZE, 0.8f * GRIDSIZE));
+        PubData.craftingSlotTwo.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.3f, 0.6f));
         PubData.craftingSlotTwo.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotTwo.SetActive(false);
         PubData.craftingSlotTwo.transform.position += new Vector3(0, 0, -8);
@@ -268,7 +268,7 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotThree.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingSlotThree.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotThree.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotThree.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-.5f * GRIDSIZE, 1.2f * GRIDSIZE));
+        PubData.craftingSlotThree.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.4f, 0.7f));
         PubData.craftingSlotThree.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotThree.SetActive(false);
         PubData.craftingSlotThree.transform.position += new Vector3(0, 0, -8);
@@ -280,7 +280,7 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotResult.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingSlotResult.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotResult.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotResult.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(2.5f * GRIDSIZE, 1f * GRIDSIZE));
+        PubData.craftingSlotResult.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, 0.65f));
         PubData.craftingSlotResult.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotResult.SetActive(false);
         PubData.craftingSlotResult.transform.position += new Vector3(0, 0, -8);
@@ -291,7 +291,7 @@ class InitialInventoryState : InventoryState
         PubData.craftingButton.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingButton.GetComponent<RectTransform>().SetParent(inventoryTransform);
         //PubData.craftingButton.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingButton.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(1f * GRIDSIZE, .5f * GRIDSIZE));
+        PubData.craftingButton.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.6f, 0.6f));
         PubData.craftingButton.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingButton.SetActive(false);
         PubData.craftingButton.transform.position += new Vector3(0, 0, -8);
@@ -299,13 +299,13 @@ class InitialInventoryState : InventoryState
 
         PubData.craftingSlotsText = Formatter.ScaleTextToPercentOfScreenUI("Crafting Slots", 10, new Vector2(0.4f, .1f));
         PubData.craftingSlotsText.transform.SetParent(inventoryTransform);
-        PubData.craftingSlotsText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(-1.5f * GRIDSIZE, 0.15f * GRIDSIZE));
+        PubData.craftingSlotsText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.4f, 0.5f));
         PubData.craftingSlotsText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.craftingSlotsText.SetActive(false);
 
         PubData.craftingSlotResultText = Formatter.ScaleTextToPercentOfScreenUI("Crafting Result", 10, new Vector2(0.4f, .1f));
         PubData.craftingSlotResultText.transform.SetParent(inventoryTransform);
-        PubData.craftingSlotResultText.GetComponent<RectTransform>().localPosition = Camera.main.WorldToScreenPoint(new Vector2(2.45f * GRIDSIZE, 0.25f * GRIDSIZE));
+        PubData.craftingSlotResultText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.6f, 0.5f));
         PubData.craftingSlotResultText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.craftingSlotResultText.SetActive(false);
 
