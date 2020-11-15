@@ -1300,8 +1300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 45069194}
   smoothing: 10
-  maxPos: {x: 10, y: 15}
-  minPos: {x: -10, y: -15}
+  maxPos: {x: 15, y: 10}
+  minPos: {x: -15, y: -10}
 --- !u!81 &4826073063063656024
 AudioListener:
   m_ObjectHideFlags: 0
