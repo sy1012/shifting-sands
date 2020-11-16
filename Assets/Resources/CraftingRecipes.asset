@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 196983bf1c6e23f43860ec94ed60b9fc, type: 3}
   m_Name: CraftingRecipes
-  m_EditorClassIdentifier: Assembly-CSharp::CraftingRecipeCollection
+  m_EditorClassIdentifier: 
   recipes:
   - recipeInputs:
-    - {fileID: 11400000, guid: cba0ead1acc29594d96f4b0c9e1c3156, type: 2}
     - {fileID: 11400000, guid: 80765918c59609f4b9ca1fdcba3c415d, type: 2}
+    - {fileID: 11400000, guid: cba0ead1acc29594d96f4b0c9e1c3156, type: 2}
     output: {fileID: 11400000, guid: 9735d09f27813ed4bb7885e1fe5247e9, type: 2}
   - recipeInputs:
     - {fileID: 11400000, guid: 68d40afa8d571dd45b60849236c62c7e, type: 2}

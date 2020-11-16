@@ -31,10 +31,11 @@ public static class EventManager
     public static event EventHandler onOasisClicked;
     public static event EventHandler onPyramidClicked;
     public static event EventHandler onRoomFilled;
+    public static event GameEvent onRelicCollected;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
 
     public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
-                                            onUseShrine,onDash,onDungeonGenerated};
+                                            onUseShrine,onDash,onDungeonGenerated, onRelicCollected};
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
@@ -181,6 +182,14 @@ public static class EventManager
         filledArgs.room = room;
         filledArgs.prefabs = prefabs;
         onRoomFilled?.Invoke(null,filledArgs);
+    }
+
+    public class RelicEventArgs : EventArgs { public Interactable relic; }
+    public static void TriggerRelicGathered(Interactable relic)
+    {
+        var args = new RelicEventArgs();
+        args.relic = relic;
+        onRelicCollected?.Invoke(args);
     }
 }
 
