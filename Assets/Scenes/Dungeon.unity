@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 519420035}
   - component: {fileID: 519420034}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -455,7 +456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6050eeca2416d1847afdbc2fcde79070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotWorldUnits: 0
   slotHovered: {fileID: 0}
 --- !u!20 &519420031
 Camera:
@@ -558,6 +558,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6a1810467357b429955044f903565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessMaterial: {fileID: 2100000, guid: 1fe014278320b5d47ad37bcb4558d3ce, type: 2}
 --- !u!1 &562458653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,11 +1043,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bf97c26c3cfb89458b7e823b80c4deb, type: 3}
---- !u!1 &1154394525 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4044431646173052028, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
-  m_PrefabInstance: {fileID: 1343036029}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1343036029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1045,7 +1053,7 @@ PrefabInstance:
     - target: {fileID: 96976485, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: equipment
       value: 
-      objectReference: {fileID: 1418634580}
+      objectReference: {fileID: 0}
     - target: {fileID: 1746857443, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: cam
       value: 
@@ -1101,7 +1109,7 @@ PrefabInstance:
     - target: {fileID: 7882188165053800896, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: weaponObject
       value: 
-      objectReference: {fileID: 1154394525}
+      objectReference: {fileID: 0}
     - target: {fileID: 8626454037002132843, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: data
       value: 
@@ -1203,17 +1211,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1418634580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7882188165053800896, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
-  m_PrefabInstance: {fileID: 1343036029}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17d44c62611d3f46a049cb9eb25afc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1601702374
 PrefabInstance:
   m_ObjectHideFlags: 0
