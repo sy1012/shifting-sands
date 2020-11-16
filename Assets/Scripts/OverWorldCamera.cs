@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class OverworldCamera : MonoBehaviour
+public class OverWorldCamera : MonoBehaviour
 {
     public Transform target;
     public float smoothing;
