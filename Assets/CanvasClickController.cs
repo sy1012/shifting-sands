@@ -90,12 +90,18 @@ public class CanvasClickController : MonoBehaviour
         //Raycast using the Graphics Raycaster and mouse click position
         pointerData.position = Input.mousePosition;
         this.raycaster.Raycast(pointerData, results);
-        
+
+        bool foundSomething = false;
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.GetComponent<Slot>() != null)
             {
+                foundSomething = true;
                 GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = result.gameObject.GetComponent<Slot>();
+            }
+            else if (!foundSomething)
+            {
+                GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = null;
             }
         }
 
@@ -112,7 +118,7 @@ public class CanvasClickController : MonoBehaviour
             pointerData.position = Input.mousePosition;
             this.raycaster.Raycast(pointerData, results);
 
-            bool foundSomething = false;
+            foundSomething = false;
             //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
             foreach (RaycastResult result in results)
             {

@@ -14,22 +14,18 @@ public class Inventory : MonoBehaviour
     private GameObject held;
     private Slot slotClicked;
     public Slot slotHovered;
+    private Slot hoveredPreviously;
+    private bool displayed;  // is the info for the current item hovered displayed already
   
     // Start is called before the first frame update
     public void Start()
     {
         this.transform.position = Camera.main.transform.position;
-
-        //DontDestroyOnLoad(this);
-        //EventManager.OnExitDungeon += DungeonExited;
         EventManager.onInventoryTrigger += TriggerInventory;
         EventManager.onWeaponMerchant += WeaponMerchantClicked;
         EventManager.onArmourMerchant += ArmourMerchantClicked;
         EventManager.onRuneMerchant += RuneMerchantClicked;
         EventManager.onCrafting += CraftingClicked;
-        //EventManager.onDungeonInventoryTrigger += DungeonInventory;
-        //EventManager.onDungeonGenerated += Refresh;
-        //EventManager.OnExitDungeon += Refresh;
 
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
@@ -83,12 +79,24 @@ public class Inventory : MonoBehaviour
 
     private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log("SWAPPINGAGE");
         state.Swapped(slotOne, slotTwo);
     }
 
     public void Update()
     {
+        if (slotHovered != null && !displayed && held == null)
+        {
+            displayed = true;
+            slotHovered.ShowInfo();
+            hoveredPreviously = slotHovered;
+            slotHovered.transform.SetAsLastSibling();
+        }
+        else if (slotHovered == null && displayed)
+        {
+            displayed = false;
+            hoveredPreviously.HideInfo();
+        }
+
         if (state.IsOpen())
         {
             if (Input.GetMouseButton(0))
@@ -134,36 +142,9 @@ public class Inventory : MonoBehaviour
         ChangeState(new OverworldInventoryState());
     }
 
-    //private void OpenInventory()
-    //{
-    //    inventoryOpen = true;
-    //    foreach (GameObject obj in slots)
-    //    {
-    //        obj.SetActive(true);
-    //    }
-    //    coinText.SetActive(true);
-    //    weaponText.SetActive(true);
-    //    armourText.SetActive(true);
-    //    inventoryBackground.SetActive(true);
-    //    EventManager.TriggerOnOpenInventory();
-    //}
-
-    //private void CloseInventory()
-    //{
-    //    inventoryOpen = false;
-    //    foreach (GameObject obj in slots)
-    //    {
-    //        obj.SetActive(false);
-    //    }
-    //    coinText.SetActive(false);
-    //    weaponText.SetActive(false);
-    //    armourText.SetActive(false);
-    //    inventoryBackground.SetActive(false);
-    //    EventManager.TriggerOnCloseInventory();
-    //}
-
     public bool AddToInventory(ItemData data)
     {
+        Debug.Log("picking up item");
         return state.AddToInventory(data);
     }
 
@@ -174,6 +155,7 @@ public class Inventory : MonoBehaviour
 
     public void PickUpCoin(int amount)
     {
+        Debug.Log("picking up coin");
         state.PickUpCoins(amount);
     }
 }

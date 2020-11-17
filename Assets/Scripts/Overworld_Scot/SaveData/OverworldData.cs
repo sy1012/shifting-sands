@@ -51,7 +51,6 @@ public class OverworldData
             if(mapManager.player.enterPyramid == null)
             {
                 pyramidEnteredIndex = -1;
-                Debug.Log("nulled");
             }
             else if (mapManager.pyramids[i] == mapManager.player.enterPyramid)
             {

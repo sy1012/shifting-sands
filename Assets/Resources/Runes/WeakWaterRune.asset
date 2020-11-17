@@ -16,7 +16,7 @@ MonoBehaviour:
   spriteScaling: {x: 0, y: 0}
   relativeWeight: 0
   sprite: {fileID: 21300000, guid: 541f665140c9077448322d4484dbf3b5, type: 3}
-  frame: {fileID: 21300000, guid: e149dafa21f510d4bb2e92ecf6f2b9ce, type: 3}
+  frame: {fileID: 21300000, guid: 133bf6c311ce1884b837fb15ac5f12e0, type: 3}
   itemType: 3
   itemName: WeakWaterRune
   value: 25

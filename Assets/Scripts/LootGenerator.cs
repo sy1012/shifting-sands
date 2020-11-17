@@ -64,9 +64,9 @@ public static class LootGenerator
 
         /* set up the tier Lists */
         //firstTierUncommon.Add(woodSword);
-        firstTierCommon.Add(silver);
-        //thisTierCommon.Add(silver);
-        thisTierCommon.Add(stick);
+        //firstTierCommon.Add(silver);
+        thisTierCommon.Add(silver);
+        //thisTierCommon.Add(stick);
         //thisTierUncommon.Add(woodSword);
     }
 
@@ -100,7 +100,6 @@ public static class LootGenerator
             else { item = thisTierExotic[Random.Range(0, thisTierExotic.Count - 1)]; }
             dropped.Add(item);  
         }
-        Debug.Log(dropped[0]);
         return dropped;
     }
 

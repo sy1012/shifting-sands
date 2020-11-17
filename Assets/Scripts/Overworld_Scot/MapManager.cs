@@ -205,7 +205,6 @@ public class MapManager : MonoBehaviour
             {
                 BuildRelationships(oasis);
             }
-            Debug.Log(loadedData.pyramidEnteredIndex);
             if (loadedData.pyramidEnteredIndex != -1)
             {
                 player.transform.position = new Vector2(loadedData.pyramidPositions[loadedData.pyramidEnteredIndex, 0], loadedData.pyramidPositions[loadedData.pyramidEnteredIndex, 1]);

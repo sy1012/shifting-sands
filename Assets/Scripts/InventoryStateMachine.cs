@@ -46,6 +46,8 @@ static class PubData
     static public List<GameObject> slots;
     static public GameObject weaponText;
     static public GameObject armourText;
+    static public GameObject weaponEquippedText;
+    static public GameObject armourEquippedText;
 
     static public GameObject craftingSlotOne;
     static public GameObject craftingSlotTwo;
@@ -97,8 +99,7 @@ abstract class InventoryState
     public void PickUpCoins(int amount)
     {
         PubData.coins += amount;
-        this.Exit();  // refresh the inventory in case it changes something
-        this.Enter();
+        PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
     }
 
     public bool AddToInventory(ItemData item)
@@ -107,8 +108,8 @@ abstract class InventoryState
         if (PubData.inventory.Count < PubData.slots.Count)
         {
             int i = 0;
-            while (PubData.inventory[i] != null) {  i += 1; }
-            PubData.inventory[i] = item;
+            while (i < PubData.slots.Count && PubData.slots[i] != null) {  i += 1; }
+            PubData.inventory.Add(item);
             PubData.slots[i].GetComponent<Slot>().AssignData(item);
             return true;
         }
@@ -175,27 +176,27 @@ class InitialInventoryState : InventoryState
         // Make stuff
         PubData.inventoryText = Formatter.ScaleTextToPercentOfScreenUI("Inventory", 20, new Vector2(0.4f, 0.05f));
         PubData.inventoryText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.inventoryText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
+        PubData.inventoryText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .81f));
         PubData.inventoryText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
         PubData.inventoryText.SetActive(false);
 
         PubData.craftingText = Formatter.ScaleTextToPercentOfScreenUI("Crafting", 20, new Vector2(0.4f, 0.05f));
         PubData.craftingText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.craftingText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
+        PubData.craftingText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .81f));
         PubData.craftingText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
         PubData.craftingText.SetActive(false);
 
-        PubData.weaponText = Formatter.ScaleTextToPercentOfScreenUI("Equipped Weapon", 10, new Vector2(0.4f, .1f));
-        PubData.weaponText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.weaponText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(.3f,  0.6f));
-        PubData.weaponText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
-        PubData.weaponText.SetActive(false);
+        PubData.weaponEquippedText = Formatter.ScaleTextToPercentOfScreenUI("Equipped Weapon", 10, new Vector2(0.4f, .1f));
+        PubData.weaponEquippedText.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.weaponEquippedText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(.3f,  0.6f));
+        PubData.weaponEquippedText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
+        PubData.weaponEquippedText.SetActive(false);
 
-        PubData.armourText = Formatter.ScaleTextToPercentOfScreenUI("Equipped Armour", 10, new Vector2(0.4f, .1f));
-        PubData.armourText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.armourText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(.7f , 0.6f));
-        PubData.armourText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
-        PubData.armourText.SetActive(false);
+        PubData.armourEquippedText = Formatter.ScaleTextToPercentOfScreenUI("Equipped Armour", 10, new Vector2(0.4f, .1f));
+        PubData.armourEquippedText.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.armourEquippedText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(.7f , 0.6f));
+        PubData.armourEquippedText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
+        PubData.armourEquippedText.SetActive(false);
 
         PubData.coin = new GameObject("Coin Inventory");
         PubData.coin.transform.localScale = new Vector2(coinScale, coinScale);
@@ -357,23 +358,21 @@ class InitialInventoryState : InventoryState
 
         PubData.weaponText = Formatter.ScaleTextToPercentOfScreenUI("Weapon Merchant", 20, new Vector2(0.4f, 0.05f));
         PubData.weaponText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.weaponText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
-        PubData.weaponText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
+        PubData.weaponText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.48f, .83f));
+        PubData.weaponText.GetComponent<RectTransform>().sizeDelta *= new Vector2(15, 4);
         PubData.weaponText.SetActive(false);
 
         PubData.armourText = Formatter.ScaleTextToPercentOfScreenUI("Armour Merchant", 20, new Vector2(0.4f, 0.05f));
         PubData.armourText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.armourText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
-        PubData.armourText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
+        PubData.armourText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.48f, .83f));
+        PubData.armourText.GetComponent<RectTransform>().sizeDelta *= new Vector2(15, 4);
         PubData.armourText.SetActive(false);
 
         PubData.runeText = Formatter.ScaleTextToPercentOfScreenUI("Rune Merchant", 20, new Vector2(0.4f, 0.05f));
         PubData.runeText.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        PubData.runeText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
-        PubData.runeText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
+        PubData.runeText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.48f, .83f));
+        PubData.runeText.GetComponent<RectTransform>().sizeDelta *= new Vector2(15, 4);
         PubData.runeText.SetActive(false);
-
-        PubData.open = false;
 
         return;
     }
@@ -389,9 +388,8 @@ class OverworldInventoryState : InventoryState
         
         // put the equipped item in the weapon and armour slots
         PubData.open = true;
-        Debug.Log(PubData.equipment.GetWeapon());
+
         if (PubData.equipment.GetWeapon() != null){
-            Debug.Log("Weapon?");
             PubData.weaponSlot.GetComponent<Slot>().AssignData(PubData.equipment.GetWeapon().data);
         }
         
@@ -402,8 +400,8 @@ class OverworldInventoryState : InventoryState
         }
         PubData.inventoryBackground.SetActive(true);
         PubData.armourSlot.SetActive(true);
-        PubData.weaponText.SetActive(true);
-        PubData.armourText.SetActive(true);
+        PubData.weaponEquippedText.SetActive(true);
+        PubData.armourEquippedText.SetActive(true);
         PubData.weaponSlot.SetActive(true);
         PubData.coin.SetActive(true);
         PubData.coinText.SetActive(true);
@@ -433,8 +431,8 @@ class OverworldInventoryState : InventoryState
         PubData.inventoryBackground.SetActive(false);
         PubData.armourSlot.SetActive(false);
         PubData.weaponSlot.SetActive(false);
-        PubData.weaponText.SetActive(false);
-        PubData.armourText.SetActive(false);
+        PubData.weaponEquippedText.SetActive(false);
+        PubData.armourEquippedText.SetActive(false);
         PubData.coin.SetActive(false);
         PubData.coinText.SetActive(false);
         PubData.inventoryText.SetActive(false);
@@ -620,6 +618,9 @@ class OverworldRuneState : InventoryState
     {
         PubData.open = false;
 
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
+
         foreach (GameObject slot in PubData.slots)
         {
             slot.SetActive(false);
@@ -652,7 +653,7 @@ class OverworldRuneState : InventoryState
         Debug.Log(slotOne);
         Debug.Log(slotTwo);
         // You are buying an item
-        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied)
+        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied && slotTwo.name != "Merchant Slot")
         {
             slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
         }
@@ -702,6 +703,9 @@ class OverworldWeaponState : InventoryState
     {
         PubData.open = false;
 
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
+
         foreach (GameObject slot in PubData.slots)
         {
             slot.SetActive(false);
@@ -733,7 +737,7 @@ class OverworldWeaponState : InventoryState
         Debug.Log(slotOne);
         Debug.Log(slotTwo);
         // You are buying an item
-        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied)
+        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied && slotTwo.name != "Merchant Slot")
         {
             slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
         }
@@ -783,6 +787,9 @@ class OverworldArmourState : InventoryState
     {
         PubData.open = false;
 
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
+
         foreach (GameObject slot in PubData.slots)
         {
             slot.SetActive(false);
@@ -814,13 +821,13 @@ class OverworldArmourState : InventoryState
         Debug.Log(slotOne);
         Debug.Log(slotTwo);
         // You are buying an item
-        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied)
+        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied && slotTwo.name != "Merchant Slot")
         {
             slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
         }
 
         // You are selling an item
-        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied && slotTwo.name == "Merchant Slot")
         {
             slotOne.AssignData(null);
         }

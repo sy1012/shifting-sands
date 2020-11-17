@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Ensures that at runtime that we create one and only one set of objects that persist throughtought the game
+// These objects include the Canvas and equipment
 public class InventoryChecker : MonoBehaviour
 {
     public GameObject equipmentPrefab;

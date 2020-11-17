@@ -17,9 +17,6 @@ namespace GraphGrammars
             }
 
             SinglePushOut(isomorphAssignments, graph, rule.GetLeftHandExpression().Graph, rule.GetRightHandExpression().Graph);
-
-            Debug.Log(" Rule: " + rule.transform.name);
-            //Debug.Log(graph.ToString());
             return true;
         }
 
