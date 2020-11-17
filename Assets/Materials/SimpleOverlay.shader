@@ -72,7 +72,7 @@ Shader "SimpleOverlay/PostProcess" {
                 float4 shadowCol = tex2D(_ShadowTex, fragIn.uv);
 
                 // Combination
-                return col * paperCol * vignette;
+                return col * paperCol * vignette * shadowCol;
             }
 
             //
