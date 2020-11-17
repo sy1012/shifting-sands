@@ -52,10 +52,8 @@ public static class Formatter
         // Innitialize everything
         TextMeshProUGUI textComponent = new GameObject(textName).AddComponent<TextMeshProUGUI>();
         GameObject scroll = new GameObject(scrollName);
-        SpriteRenderer sr = scroll.AddComponent<SpriteRenderer>();
+        Image sr = scroll.AddComponent<Image>();
         sr.sprite = scrollSprite;
-        sr.sortingLayerName = "Player";
-        sr.sortingOrder = 18;
 
         // if they set a parent for this object
         if (parent != null)
@@ -74,7 +72,7 @@ public static class Formatter
         textComponent.text = text;
 
         scroll.transform.localScale = new Vector2((1 / xSize) * Mathf.Sqrt(text.Length * 1.9f) * area, targetRatio * (1 / ySize) * Mathf.Sqrt(text.Length * 1.9f) * area);
-        textComponent.rectTransform.sizeDelta = new Vector2(sr.bounds.size.x, sr.bounds.size.y);
+        textComponent.rectTransform.sizeDelta = new Vector2(scrollSprite.bounds.size.x, scrollSprite.bounds.size.y);
         scroll.transform.localScale *= PADDING;
         textComponent.alignment = TextAlignmentOptions.Midline;
 
@@ -130,8 +128,8 @@ public static class Formatter
     public static GameObject ScaleSpriteToPercentOfScreenUI(Sprite sprite, Vector2 percentScreen, int layerOrder)
     {
         GameObject obj = new GameObject();
-        Image sr = obj.AddComponent<Image>();
-        sr.sprite = sprite;
+        Image image = obj.AddComponent<Image>();
+        image.sprite = sprite;
         Vector2 size = Camera.main.ViewportToWorldPoint(percentScreen) - Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         float spriteScalerX = sprite.bounds.size.x;
         float spriteScalerY = sprite.bounds.size.y;

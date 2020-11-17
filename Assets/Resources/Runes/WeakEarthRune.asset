@@ -16,7 +16,7 @@ MonoBehaviour:
   spriteScaling: {x: 0, y: 0}
   relativeWeight: 0
   sprite: {fileID: 21300000, guid: d3246446b1dc0fb40a8c6228ad52766e, type: 3}
-  frame: {fileID: 21300000, guid: e149dafa21f510d4bb2e92ecf6f2b9ce, type: 3}
+  frame: {fileID: 21300000, guid: a7c4ded6a3bf5de45b975125af3af56a, type: 3}
   itemType: 3
   itemName: Weak Earth Rune
   value: 25

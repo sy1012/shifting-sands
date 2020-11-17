@@ -85,21 +85,19 @@ public class ItemFrame : MonoBehaviour
         if (scroll.GetComponent<RectTransform>() == null) { scroll.AddComponent<RectTransform>(); }
         if (item.GetComponent<RectTransform>() == null) { item.AddComponent<RectTransform>(); }
         if (frame.GetComponent<RectTransform>() == null) { frame.AddComponent<RectTransform>(); }
-        this.text.GetComponent<RectTransform>().localPosition = (Vector2)this.transform.position + data.scrollOffset;
-        this.scroll.GetComponent<RectTransform>().localPosition = (Vector2)this.transform.position + data.scrollOffset;
-        this.item.GetComponent<RectTransform>().localPosition = (Vector2)this.transform.position;
-        this.frame.GetComponent<RectTransform>().localPosition = (Vector2)this.transform.position;
+        this.text.GetComponent<RectTransform>().position = (Vector2)this.transform.position + data.scrollOffset * 1000;
+        this.scroll.GetComponent<RectTransform>().position = (Vector2)this.transform.position + data.scrollOffset * 1000;
+        this.item.GetComponent<RectTransform>().position = (Vector2)this.transform.position;
+        this.frame.GetComponent<RectTransform>().position = (Vector2)this.transform.position;
 
-        text.transform.position = (Vector2)this.transform.position + data.scrollOffset;
-        scroll.transform.position = (Vector2)this.transform.position + data.scrollOffset;
+        //text.transform.position = (Vector2)this.transform.position + data.scrollOffset;
+        //scroll.transform.position = (Vector2)this.transform.position + data.scrollOffset;
 
         // Parent everything so that it is neat and tidy and the rect transforms function appriatley
         scroll.transform.SetParent(this.transform);
         text.transform.SetParent(this.transform);
         frame.transform.SetParent(this.transform);
         item.transform.SetParent(this.transform);
-        
-        
 
         HideInfo();
     }

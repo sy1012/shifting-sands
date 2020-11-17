@@ -47,18 +47,18 @@ public class ItemArchtype : MonoBehaviour, IItem
         //Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
         //Destroy(background);
         //Destroy(text);
-        
-        Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
+        if (this.data.itemName != "Silver") GameObject.Find("Inventory").GetComponent<Inventory>().AddToInventory(this.data);
+        else GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
+
         Destroy(this.gameObject);
-        // ADD TO INVENTORY OR WHATEVER HERE
     }
 
     public void Dropped()
     {
         Debug.Log("hey");
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
-        this.sr.sortingLayerName = "Player";
         this.sr.sprite = data.sprite;
+        this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
         if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));

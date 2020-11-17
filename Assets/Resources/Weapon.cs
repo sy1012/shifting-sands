@@ -92,6 +92,12 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<IDamagable>() != null && collision.gameObject.GetComponent<PlayerStateMachine>() == null) collision.gameObject.GetComponent<IDamagable>().TakeDamage(this.damage);
+        if (collision.gameObject.GetComponent<IDamagable>() != null && collision.gameObject.GetComponent<PlayerStateMachine>() == null)
+        {
+            collision.gameObject.GetComponent<IDamagable>().TakeDamage(this.damage);
+            Vector2 normalizedAngle = (collision.transform.position - this.transform.position);
+            normalizedAngle.Normalize();
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(normalizedAngle * 1000 * this.data.knockback);
+        }
     }
 }

@@ -12,18 +12,16 @@ public class Slot : MonoBehaviour
     public float slotWorldUnits;
     //private GameObject popUpHolder;
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void ShowInfo()
     {
-        GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = this;
         if (occupied == true)
         {
             item.GetComponent<ItemFrame>().ShowInfo();
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void HideInfo()
     {
-        GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = this;
         if (occupied == true)
         {
             item.GetComponent<ItemFrame>().HideInfo();

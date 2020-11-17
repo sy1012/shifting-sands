@@ -16,7 +16,7 @@ MonoBehaviour:
   spriteScaling: {x: 0, y: 0}
   relativeWeight: 0
   sprite: {fileID: 21300000, guid: a5945ef076e3dfc4f8b4a996b6f240d7, type: 3}
-  frame: {fileID: 21300000, guid: e149dafa21f510d4bb2e92ecf6f2b9ce, type: 3}
+  frame: {fileID: 21300000, guid: 133bf6c311ce1884b837fb15ac5f12e0, type: 3}
   itemType: 3
   itemName: Poor Air Rune
   value: 10

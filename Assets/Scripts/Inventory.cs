@@ -14,22 +14,18 @@ public class Inventory : MonoBehaviour
     private GameObject held;
     private Slot slotClicked;
     public Slot slotHovered;
+    private Slot hoveredPreviously;
+    private bool displayed;  // is the info for the current item hovered displayed already
   
     // Start is called before the first frame update
     public void Start()
     {
         this.transform.position = Camera.main.transform.position;
-
-        //DontDestroyOnLoad(this);
-        //EventManager.OnExitDungeon += DungeonExited;
         EventManager.onInventoryTrigger += TriggerInventory;
         EventManager.onWeaponMerchant += WeaponMerchantClicked;
         EventManager.onArmourMerchant += ArmourMerchantClicked;
         EventManager.onRuneMerchant += RuneMerchantClicked;
         EventManager.onCrafting += CraftingClicked;
-        //EventManager.onDungeonInventoryTrigger += DungeonInventory;
-        //EventManager.onDungeonGenerated += Refresh;
-        //EventManager.OnExitDungeon += Refresh;
 
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
@@ -83,12 +79,26 @@ public class Inventory : MonoBehaviour
 
     private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log("SWAPPINGAGE");
         state.Swapped(slotOne, slotTwo);
     }
 
     public void Update()
     {
+        if (slotHovered != null && !displayed && held == null)
+        {
+            Debug.Log("diplaying message");
+            displayed = true;
+            slotHovered.ShowInfo();
+            hoveredPreviously = slotHovered;
+            slotHovered.transform.SetAsLastSibling();
+        }
+        else if (slotHovered == null && displayed)
+        {
+            Debug.Log("indiplaying message");
+            displayed = false;
+            hoveredPreviously.HideInfo();
+        }
+
         if (state.IsOpen())
         {
             if (Input.GetMouseButton(0))
