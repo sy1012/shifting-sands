@@ -16,7 +16,7 @@ MonoBehaviour:
   spriteScaling: {x: 1, y: 1}
   relativeWeight: 15
   sprite: {fileID: 21300000, guid: fda02a0069f3c6244bc4b1d0fcac9884, type: 3}
-  frame: {fileID: 0}
+  frame: {fileID: 21300000, guid: d2ab47f6e834c0c4f8c7213efd2d09d6, type: 3}
   itemType: 1
   itemName: Spear
   value: 0

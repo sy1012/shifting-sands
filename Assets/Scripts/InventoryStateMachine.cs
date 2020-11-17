@@ -136,6 +136,11 @@ class InitialInventoryState : InventoryState
         PubData.inventorySlotSprite = Resources.Load<Sprite>("Sprites/InventorySlot");
         PubData.coinSprite = Resources.Load<Sprite>("Sprites/coin");
 
+        // load in the merchants inventories
+        PubData.RuneMerchantInventory = Resources.Load<ShopInventories>("RuneMerchant").items;
+        PubData.WeaponMerchantInventory = Resources.Load<ShopInventories>("WeaponMerchant").items;
+        PubData.armourMerchantInventory = Resources.Load<ShopInventories>("ArmourMerchant").items;
+
         // How large should the inventory be on the Viewport?
         const float VIEWPERCENT = 0.85f;
 
@@ -349,11 +354,18 @@ class InitialInventoryState : InventoryState
             }
             numOfRows -= 1;
         }
-        PubData.RuneMerchantInventory = new List<ItemData>();
-        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorAirRune"));
-        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorEarthRune"));
-        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorWaterRune"));
-        PubData.RuneMerchantInventory.Add(Resources.Load<ItemData>("Runes/PoorFireRune"));
+
+        PubData.weaponText = Formatter.ScaleTextToPercentOfScreenUI("Weapon Merchant", 20, new Vector2(0.4f, 0.05f));
+        PubData.weaponText.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.weaponText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
+        PubData.weaponText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
+        PubData.weaponText.SetActive(false);
+
+        PubData.armourText = Formatter.ScaleTextToPercentOfScreenUI("Armour Merchant", 20, new Vector2(0.4f, 0.05f));
+        PubData.armourText.GetComponent<RectTransform>().SetParent(inventoryTransform);
+        PubData.armourText.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, .85f));
+        PubData.armourText.GetComponent<RectTransform>().sizeDelta *= new Vector2(7, 4);
+        PubData.armourText.SetActive(false);
 
         PubData.runeText = Formatter.ScaleTextToPercentOfScreenUI("Rune Merchant", 20, new Vector2(0.4f, 0.05f));
         PubData.runeText.GetComponent<RectTransform>().SetParent(inventoryTransform);
@@ -618,6 +630,13 @@ class OverworldRuneState : InventoryState
             slot.SetActive(false);
         }
 
+        int i = 0;
+        foreach (ItemData data in PubData.RuneMerchantInventory)
+        {
+            PubData.merchantSlots[i].GetComponent<Slot>().AssignData(null);
+            i += 1;
+        }
+
         PubData.runeText.SetActive(false);
         PubData.inventoryBackground.SetActive(false);
     }
@@ -630,6 +649,168 @@ class OverworldRuneState : InventoryState
     public override void Swapped(Slot slotOne, Slot slotTwo)
     {
         Debug.Log("Running?");
+        Debug.Log(slotOne);
+        Debug.Log(slotTwo);
+        // You are buying an item
+        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied)
+        {
+            slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+        }
+
+        // You are selling an item
+        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        {
+            slotOne.AssignData(null);
+        }
+    }
+}
+
+// You are in the overworld and the player has the shop tab selected
+class OverworldWeaponState : InventoryState
+{
+    public override void Enter()
+    {
+        // Fire the event
+        EventManager.TriggerOnOpenInventory();
+
+        PubData.open = true;
+
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.SetActive(true);
+        }
+
+        foreach (GameObject slot in PubData.merchantSlots)
+        {
+            slot.SetActive(true);
+        }
+
+        int i = 0;
+        foreach (ItemData data in PubData.WeaponMerchantInventory)
+        {
+            PubData.merchantSlots[i].GetComponent<Slot>().AssignData(data);
+            i += 1;
+        }
+        
+        PubData.weaponText.SetActive(true);
+        PubData.inventoryBackground.SetActive(true);
+
+        return;
+    }
+
+    public override void Exit()
+    {
+        PubData.open = false;
+
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.SetActive(false);
+        }
+
+        foreach (GameObject slot in PubData.merchantSlots)
+        {
+            slot.SetActive(false);
+        }
+
+        int i = 0;
+        foreach (ItemData data in PubData.WeaponMerchantInventory)
+        {
+            PubData.merchantSlots[i].GetComponent<Slot>().AssignData(null);
+            i += 1;
+        }
+
+        PubData.weaponText.SetActive(false);
+        PubData.inventoryBackground.SetActive(false);
+    }
+
+    public override void Interact()
+    {
+        return;
+    }
+
+    public override void Swapped(Slot slotOne, Slot slotTwo)
+    {
+        Debug.Log(slotOne);
+        Debug.Log(slotTwo);
+        // You are buying an item
+        if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied)
+        {
+            slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+        }
+
+        // You are selling an item
+        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        {
+            slotOne.AssignData(null);
+        }
+    }
+}
+
+// You are in the overworld and the player has the shop tab selected
+class OverworldArmourState : InventoryState
+{
+    public override void Enter()
+    {
+        // Fire the event
+        EventManager.TriggerOnOpenInventory();
+
+        PubData.open = true;
+
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.SetActive(true);
+        }
+
+        foreach (GameObject slot in PubData.merchantSlots)
+        {
+            slot.SetActive(true);
+        }
+
+        int i = 0;
+        foreach (ItemData data in PubData.armourMerchantInventory)
+        {
+            PubData.merchantSlots[i].GetComponent<Slot>().AssignData(data);
+            i += 1;
+        }
+
+        PubData.armourText.SetActive(true);
+        PubData.inventoryBackground.SetActive(true);
+
+        return;
+    }
+
+    public override void Exit()
+    {
+        PubData.open = false;
+
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.SetActive(false);
+        }
+
+        foreach (GameObject slot in PubData.merchantSlots)
+        {
+            slot.SetActive(false);
+        }
+
+        int i = 0;
+        foreach (ItemData data in PubData.armourMerchantInventory)
+        {
+            PubData.merchantSlots[i].GetComponent<Slot>().AssignData(null);
+            i += 1;
+        }
+
+        PubData.armourText.SetActive(false);
+        PubData.inventoryBackground.SetActive(false);
+    }
+
+    public override void Interact()
+    {
+        return;
+    }
+
+    public override void Swapped(Slot slotOne, Slot slotTwo)
+    {
         Debug.Log(slotOne);
         Debug.Log(slotTwo);
         // You are buying an item

@@ -49,12 +49,12 @@ public class Inventory : MonoBehaviour
 
     private void ArmourMerchantClicked(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        ChangeState(new OverworldArmourState());
     }
 
     private void WeaponMerchantClicked(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        ChangeState(new OverworldWeaponState());
     }
 
     private void InventoryInteracted(object sender, EventArgs e)
