@@ -11,7 +11,7 @@ public class Character : MonoBehaviour, IHealable, IDamagable
     //below are used to instantiate and manage the healthbar
     public Canvas healthCanvasPrefab;
     protected Canvas healthCanvas;
-    private Healthbar healthbar;
+    protected Healthbar healthbar;
 
     // Start is called before the first frame update
     protected virtual void Awake()

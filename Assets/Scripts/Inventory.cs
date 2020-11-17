@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
     private GameObject held;
     private Slot slotClicked;
     public Slot slotHovered;
+    CoinDisplay CoinDisplay;  
 
     // Start is called before the first frame update
     public void Start()
@@ -93,6 +94,8 @@ public class Inventory : MonoBehaviour
         coinText.GetComponent<RectTransform>().SetParent(this.transform);
         coinText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3.6f * GRIDSIZE, .6f * GRIDSIZE);
         coinText.SetActive(false);
+        // Updates the Coin Count on the HUD 
+        CoinDisplay.SetCoins(coinAmount);
 
         GameObject slot = new GameObject("Weapon Inventory Slot");
         slot.transform.localScale = new Vector2(slotScale, slotScale);
@@ -255,5 +258,7 @@ public class Inventory : MonoBehaviour
     {
         this.coinAmount += amount;
         coinText.GetComponent<TextMeshPro>().text = this.coinAmount.ToString();
+        // Updates the Coin Count on the HUD 
+        CoinDisplay.SetCoins(coinAmount);
     }
 }

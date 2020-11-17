@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7408489527691097511}
   - component: {fileID: 7408489527691097509}
   - component: {fileID: 7408489527691097510}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,6 +146,7 @@ MonoBehaviour:
   isMousedOver: 0
   maxHealth: 100
   health: 100
+  weight: 3
   healthCanvasPrefab: {fileID: 5570061624185154329, guid: 639cf5f9e4e52c14dab334bb49afea26, type: 3}
   destination: {fileID: 7408489527691097512}
   Player: {fileID: 0}
@@ -186,7 +187,7 @@ GameObject:
   - component: {fileID: 7408489528431082808}
   - component: {fileID: 7408489528431082809}
   - component: {fileID: 7408489528431082807}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: SkeletonGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

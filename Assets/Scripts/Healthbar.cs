@@ -33,13 +33,18 @@ public class Healthbar : MonoBehaviour
     private void Update()
     {
         //Enlarge healthbar when enemy moused over
-        if (character.isMousedOver)
+        if (GetComponentInParent<PlayerStateMachine>() == null)
         {
-            canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(0.5f, 0.5f, 0.5f), 10 * Time.deltaTime);
-        }
-        else
-        {
-            canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(0.3f, 0.3f, 0.3f), 10 * Time.deltaTime);
+
+            if (character.isMousedOver)
+            {
+                canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(0.5f, 0.5f, 0.5f), 10 * Time.deltaTime);
+            }
+            else
+            {
+                canvasTransform.localScale = Vector3.Lerp(canvasTransform.localScale, new Vector3(0.3f, 0.3f, 0.3f), 10 * Time.deltaTime);
+
+            }
         }
     }
 

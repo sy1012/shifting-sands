@@ -7,7 +7,7 @@ public class fireball : MonoBehaviour
     // Hit effect for later
     public GameObject hitEffect;
     public int fireballDamage = 50;
-    public int speed =1;
+    private int speed = 7;
 
     public void Update()
     {

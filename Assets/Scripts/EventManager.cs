@@ -26,6 +26,8 @@ public static class EventManager
     public static event EventHandler onOasisClicked;
     public static event EventHandler onPyramidClicked;
     public static event EventHandler onRoomFilled;
+    public static event GameEvent OnCastSnowball;
+    public static event GameEvent onSnowballCollision;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
 
     public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
@@ -49,6 +51,8 @@ public static class EventManager
         onUseShrine = null;
         onDash = null;
         onDungeonGenerated = null;
+        OnCastSnowball = null;
+        onSnowballCollision = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -151,6 +155,15 @@ public static class EventManager
         filledArgs.room = room;
         filledArgs.prefabs = prefabs;
         onRoomFilled?.Invoke(null,filledArgs);
+    }
+    public static void TriggerOnCastSnowball()
+    {
+        OnCastSnowball?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnSnowballCollison()
+    {
+        onSnowballCollision?.Invoke(EventArgs.Empty);
     }
 }
 

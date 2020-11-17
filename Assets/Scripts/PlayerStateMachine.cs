@@ -13,6 +13,8 @@ public class PlayerStateMachine : Character
     GameObject background;
     public float playerRootOffset = -0.5f;
     public EquipmentManager equipment;
+    public Transform HealthBarTransform;
+    public Vector3 healthbarScale;
     public Weapon GetWeapon { get => equipment.GetWeapon(); }
     KeyCode interactKey = KeyCode.F;
     KeyCode InventoryKey = KeyCode.V;
@@ -61,12 +63,20 @@ public class PlayerStateMachine : Character
     // Start is called before the first frame update
     void Start()
     {
-        //Set intial set to normal
+        // Set intial set to normal
         SetState(new NormalState(this));
-        //move healthbar to a more suitable position
-        healthCanvas.transform.position = transform.position + new Vector3(0, 1f, 0);
+        
+        // Increase the scale of the healthbar
+        healthbarScale = healthCanvas.transform.localScale;
+        healthbarScale.x += 0.01f;
+        healthbarScale.y += 0.01f;
+        healthCanvas.transform.localScale = healthbarScale;
+        // Move Heakthbar to bottom left 
+        healthCanvas.transform.position = HealthBarTransform.position;
+
         dashLayerMask.value = 10;
         triggerCollisions = new List<Collider2D>();
+       
     }
 
     //Try to get input from player here consistently
@@ -218,4 +228,10 @@ public class PlayerStateMachine : Character
         return new Vector2(transform.position.x, transform.position.y + playerRootOffset);
     }
     //  Handle Triggers
+
+    public void SetHealthBar(Healthbar h)
+    {
+        healthbar =  h;
+    }
+
 }
