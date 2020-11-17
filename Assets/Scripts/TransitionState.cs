@@ -62,6 +62,7 @@ public class TransitionState : State
         if(newRoom != null)
         {
             psm.SetRoom(newRoom);
+            EventManager.TriggerPlayerEneteredRoom(newRoom);
         }
         TurnOnColliders();
         psm.SetState(new NormalState(psm));
