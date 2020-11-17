@@ -43,10 +43,8 @@ public class ItemArchtype : MonoBehaviour, IItem
     {
         //if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
         DungeonMaster.loot.Remove(this.gameObject);
-        //Debug.Log(this.data);
-        //Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
-        //Destroy(background);
-        //Destroy(text);
+        Debug.Log(this.data.itemName);
+        Debug.Log(this.data.itemName == "Silver");
         if (this.data.itemName != "Silver") GameObject.Find("Inventory").GetComponent<Inventory>().AddToInventory(this.data);
         else GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
 
@@ -58,6 +56,7 @@ public class ItemArchtype : MonoBehaviour, IItem
         Debug.Log("hey");
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
         this.sr.sprite = data.sprite;
+        this.transform.localScale = this.data.spriteScaling;
         this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
         if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
@@ -65,7 +64,6 @@ public class ItemArchtype : MonoBehaviour, IItem
         this.GetComponent<Rigidbody2D>().AddForce(force);
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
         this.GetComponent<Rigidbody2D>().drag = relativeWeight;
-        this.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 
     public void Sold()
@@ -77,6 +75,8 @@ public class ItemArchtype : MonoBehaviour, IItem
     {
         //if (this.sprite == null) { Initialize(); }
         if (this.background == null) { (this.text, this.background) = Formatter.CreateAssetsFromScratch(data.description, data.scroll); }
+        text.transform.SetParent(this.transform);
+        background.transform.SetParent(this.transform);
         text.gameObject.SetActive(true);
         background.SetActive(true);
         //if (this.GetComponent<RectTransform>() != null)

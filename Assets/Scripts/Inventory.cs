@@ -86,7 +86,6 @@ public class Inventory : MonoBehaviour
     {
         if (slotHovered != null && !displayed && held == null)
         {
-            Debug.Log("diplaying message");
             displayed = true;
             slotHovered.ShowInfo();
             hoveredPreviously = slotHovered;
@@ -94,7 +93,6 @@ public class Inventory : MonoBehaviour
         }
         else if (slotHovered == null && displayed)
         {
-            Debug.Log("indiplaying message");
             displayed = false;
             hoveredPreviously.HideInfo();
         }
@@ -144,36 +142,9 @@ public class Inventory : MonoBehaviour
         ChangeState(new OverworldInventoryState());
     }
 
-    //private void OpenInventory()
-    //{
-    //    inventoryOpen = true;
-    //    foreach (GameObject obj in slots)
-    //    {
-    //        obj.SetActive(true);
-    //    }
-    //    coinText.SetActive(true);
-    //    weaponText.SetActive(true);
-    //    armourText.SetActive(true);
-    //    inventoryBackground.SetActive(true);
-    //    EventManager.TriggerOnOpenInventory();
-    //}
-
-    //private void CloseInventory()
-    //{
-    //    inventoryOpen = false;
-    //    foreach (GameObject obj in slots)
-    //    {
-    //        obj.SetActive(false);
-    //    }
-    //    coinText.SetActive(false);
-    //    weaponText.SetActive(false);
-    //    armourText.SetActive(false);
-    //    inventoryBackground.SetActive(false);
-    //    EventManager.TriggerOnCloseInventory();
-    //}
-
     public bool AddToInventory(ItemData data)
     {
+        Debug.Log("picking up item");
         return state.AddToInventory(data);
     }
 
@@ -184,6 +155,7 @@ public class Inventory : MonoBehaviour
 
     public void PickUpCoin(int amount)
     {
+        Debug.Log("picking up coin");
         state.PickUpCoins(amount);
     }
 }

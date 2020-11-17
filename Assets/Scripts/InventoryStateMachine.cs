@@ -99,6 +99,7 @@ abstract class InventoryState
     public void PickUpCoins(int amount)
     {
         PubData.coins += amount;
+        PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
     }
 
     public bool AddToInventory(ItemData item)
@@ -388,9 +389,7 @@ class OverworldInventoryState : InventoryState
         // put the equipped item in the weapon and armour slots
         PubData.open = true;
 
-        Debug.Log(PubData.equipment.GetWeapon());
         if (PubData.equipment.GetWeapon() != null){
-            Debug.Log("Weapon?");
             PubData.weaponSlot.GetComponent<Slot>().AssignData(PubData.equipment.GetWeapon().data);
         }
         
