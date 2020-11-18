@@ -60,7 +60,6 @@ public static class EventManager
     public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
     public static void TriggerDungeonExit()
     {
-        Debug.Log("Exit Dungeon Event");
         //Clean the Game Events
         onScarabAgro = null;
         onSkullAgro = null;

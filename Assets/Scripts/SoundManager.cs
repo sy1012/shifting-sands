@@ -199,6 +199,9 @@ public class SoundManager : MonoBehaviour
     public static SoundManager current;
 
     void Start(){
+        EventManager.onResubscribeOverworld += EnteringOverworld;
+        EventManager.onResubscribeDungeon += EnteringOverworld;
+
         // initialize sound manager
         current = this;
         SoundPlayer = this.gameObject.AddComponent<AudioSource>();
@@ -426,6 +429,36 @@ public class SoundManager : MonoBehaviour
         // play overworld start
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
+    }
+
+    private void EnteringOverworld(System.EventArgs e)
+    {
+        EventManager.onAttack += PlaySwing;
+        EventManager.OnPlayerHit += PlayPlayerHit;
+        EventManager.DoorEntered += PlayDoor;
+        EventManager.OnCastFireball += PlayFireball;
+        EventManager.onFireballCollision += PlayFireExplosion;
+        EventManager.onPlayerMovement += PlayPlayerMovement;
+        EventManager.onUseShrine += PlayShrine;
+        EventManager.onDash += PlayDash;
+        EventManager.onDungeonGenerated += PlayDungeonAmbiance;
+        EventManager.OnCastSnowball += PlaySnowball;
+        EventManager.onSnowballCollision += PlaySnowballExplosion;
+        EventManager.onOpenInventory += PlayInventoryCloth;
+        EventManager.onCloseInventory += PlayInventoryCloth;
+        EventManager.onMagicFailure += PlayMagicFailure;
+        EventManager.onArmorChange += PlayInventoryArmor;
+        EventManager.onWeaponChange += PlayInventoryChangeWeapon;
+        EventManager.onInventorySwap += PlayInventoryClick;
+        EventManager.onBuy += PlayCoins;
+        EventManager.onSell += PlayCoins;
+        EventManager.onCoinPickedUp += PlayCoins;
+        EventManager.onCraftingMade += PlayCraftSound;
+        EventManager.onRuneChange += PlayShrine;
+        EventManager.OnExitDungeon += PlayDesertWind;
+        EventManager.onScarabAgro += PlayEnemyBite;
+        EventManager.onSkullAgro += PlayEnemyShade;
+        EventManager.onMummyAgro += PlayEnemyMonster;
     }
 
     // play dungeon ambiance
