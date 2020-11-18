@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4650606477536454453}
   - component: {fileID: 4589790641975348386}
   - component: {fileID: 8857799296077590688}
+  - component: {fileID: 9084898400967632550}
   - component: {fileID: 3465174865291364896}
   m_Layer: 0
   m_Name: pyramid
@@ -96,6 +97,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28db4a7902bb29478fa0abff837c10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9084898400967632550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947233375297821395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46813fcf65736149ad077fcb9c7c505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 8857799296077590688}
 --- !u!61 &3465174865291364896
 BoxCollider2D:
   m_ObjectHideFlags: 0

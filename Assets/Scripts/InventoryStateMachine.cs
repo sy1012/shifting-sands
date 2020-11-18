@@ -943,6 +943,7 @@ class OverworldArmourState : InventoryState
             {
                 EventManager.TriggerOnSell();
                 this.PickUpCoins(slotOne.RetrieveData().value);
+                slotOne.AssignData(null);
             }
             else
             {
