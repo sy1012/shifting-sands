@@ -73,29 +73,34 @@ public class ItemArchtype : MonoBehaviour, IItem
 
     public virtual void CreateInfoPopUp()
     {
-        //if (this.sprite == null) { Initialize(); }
-        if (this.background == null) { (this.text, this.background) = Formatter.CreateAssetsFromScratch(data.description, data.scroll); }
-        text.transform.SetParent(this.transform);
-        background.transform.SetParent(this.transform);
-        text.gameObject.SetActive(true);
-        background.SetActive(true);
-        //if (this.GetComponent<RectTransform>() != null)
-        //{
-        //    if (background.GetComponent<RectTransform>() == null) { background.AddComponent <RectTransform>(); }
-        //    text.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
-        //    background.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
-        //}
-        text.transform.position = (Vector2)this.transform.position + scrollOffset;
-        background.transform.position = (Vector2)this.transform.position + scrollOffset;
+        DungeonMaster.loot.Remove(this.gameObject);
+        if (this.data.itemName != "Silver") GameObject.Find("Inventory").GetComponent<Inventory>().AddToInventory(this.data);
+        else GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
+
+        Destroy(this.gameObject);
+        ////if (this.sprite == null) { Initialize(); }
+        //if (this.background == null) { (this.text, this.background) = Formatter.CreateAssetsFromScratch(data.description, data.scroll); }
+        //text.transform.SetParent(this.transform);
+        //background.transform.SetParent(this.transform);
+        //text.gameObject.SetActive(true);
+        //background.SetActive(true);
+        ////if (this.GetComponent<RectTransform>() != null)
+        ////{
+        ////    if (background.GetComponent<RectTransform>() == null) { background.AddComponent <RectTransform>(); }
+        ////    text.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
+        ////    background.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition + scrollOffset;
+        ////}
+        //text.transform.position = (Vector2)this.transform.position + scrollOffset;
+        //background.transform.position = (Vector2)this.transform.position + scrollOffset;
     }
 
     public void DestroyInfoPopUp()
     {
-        if (this.sr == null) { Initialize(); }
-        if (text != null)
-        {
-            text.gameObject.SetActive(false);
-            background.SetActive(false);
-        }
+        //if (this.sr == null) { Initialize(); }
+        //if (text != null)
+        //{
+        //    text.gameObject.SetActive(false);
+        //    background.SetActive(false);
+        //}
     }
 }

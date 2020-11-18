@@ -75,7 +75,6 @@ abstract class InventoryState
 
     public virtual void Swapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log("Swappage");
         return;
     }
 
@@ -86,7 +85,6 @@ abstract class InventoryState
 
     public virtual void Triggered()
     {
-        Debug.Log("Triggering");
         if (PubData.open) { Exit(); }
         else { Enter(); }
     }
@@ -100,6 +98,14 @@ abstract class InventoryState
     {
         PubData.coins += amount;
         PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
+    }
+
+    public bool Buy(int amount)
+    {
+        if (amount > PubData.coins) { return false; }
+        PubData.coins -= amount;
+        PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
+        return true;
     }
 
     public bool AddToInventory(ItemData item)
@@ -300,18 +306,17 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotResult.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingSlotResult.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingSlotResult.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingSlotResult.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, 0.65f));
+        PubData.craftingSlotResult.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.7f, 0.65f));
         PubData.craftingSlotResult.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingSlotResult.SetActive(false);
         PubData.craftingSlotResult.transform.position += new Vector3(0, 0, -8);
 
-        PubData.craftingButton = new GameObject("Trigger");
+        PubData.craftingButton = new GameObject("Interact Button");
         PubData.craftingButton.transform.localScale = new Vector2(slotScale, slotScale);
         PubData.craftingButton.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
         PubData.craftingButton.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingButton.GetComponent<RectTransform>().SetParent(inventoryTransform);
-        //PubData.craftingButton.AddComponent<Slot>().slotWorldUnits = slotWorldUnits;
-        PubData.craftingButton.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.6f, 0.6f));
+        PubData.craftingButton.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.55f, 0.6f));
         PubData.craftingButton.GetComponent<RectTransform>().sizeDelta = new Vector2(4, 4);
         PubData.craftingButton.SetActive(false);
         PubData.craftingButton.transform.position += new Vector3(0, 0, -8);
@@ -323,9 +328,9 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotsText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.craftingSlotsText.SetActive(false);
 
-        PubData.craftingSlotResultText = Formatter.ScaleTextToPercentOfScreenUI("Crafting Result", 10, new Vector2(0.4f, .1f));
+        PubData.craftingSlotResultText = Formatter.ScaleTextToPercentOfScreenUI("Crafting Result", 10, new Vector2(0.3f, .1f));
         PubData.craftingSlotResultText.transform.SetParent(inventoryTransform);
-        PubData.craftingSlotResultText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.6f, 0.5f));
+        PubData.craftingSlotResultText.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.7f, 0.5f));
         PubData.craftingSlotResultText.GetComponent<RectTransform>().sizeDelta *= new Vector2(4, 4);
         PubData.craftingSlotResultText.SetActive(false);
 
@@ -649,18 +654,24 @@ class OverworldRuneState : InventoryState
 
     public override void Swapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log("Running?");
-        Debug.Log(slotOne);
-        Debug.Log(slotTwo);
         // You are buying an item
         if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied && slotTwo.name != "Merchant Slot")
         {
-            slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+            // check that you have the money
+            if (Buy(slotOne.RetrieveData().value))
+            {
+                slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+            }
         }
 
-        // You are selling an item
+        // You are selling or moving an item
         else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
         {
+            // if you are selling
+            if (slotTwo.name == "Merchant Slot")
+            {
+                this.PickUpCoins(slotOne.RetrieveData().value);
+            }
             slotOne.AssignData(null);
         }
     }
@@ -734,17 +745,24 @@ class OverworldWeaponState : InventoryState
 
     public override void Swapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log(slotOne);
-        Debug.Log(slotTwo);
         // You are buying an item
         if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied && slotTwo.name != "Merchant Slot")
         {
-            slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+            // check that you have the money
+            if (Buy(slotOne.RetrieveData().value))
+            {
+                slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+            }
         }
 
-        // You are selling an item
+        // You are selling or moving an item
         else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
         {
+            // if you are selling
+            if (slotTwo.name == "Merchant Slot")
+            {
+                this.PickUpCoins(slotOne.RetrieveData().value);
+            }
             slotOne.AssignData(null);
         }
     }
@@ -818,17 +836,24 @@ class OverworldArmourState : InventoryState
 
     public override void Swapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log(slotOne);
-        Debug.Log(slotTwo);
         // You are buying an item
         if (slotOne.gameObject.name == "Merchant Slot" && !slotTwo.occupied && slotTwo.name != "Merchant Slot")
         {
-            slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+            // check that you have the money
+            if (Buy(slotOne.RetrieveData().value))
+            {
+                slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
+            }
         }
 
-        // You are selling an item
-        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied && slotTwo.name == "Merchant Slot")
+        // You are selling or moving an item
+        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
         {
+            // if you are selling
+            if (slotTwo.name == "Merchant Slot")
+            {
+                this.PickUpCoins(slotOne.RetrieveData().value);
+            }
             slotOne.AssignData(null);
         }
     }

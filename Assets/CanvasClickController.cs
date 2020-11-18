@@ -142,7 +142,7 @@ public class CanvasClickController : MonoBehaviour
                 {
                     EventManager.TriggerOnRuneMerchant();
                 }
-                else if (result.gameObject.name == "Trigger")
+                else if (result.gameObject.name == "Interact Button")
                 {
                     foundSomething = true;
                     GameObject.Find("Inventory").GetComponent<Inventory>().Interact();
@@ -160,6 +160,7 @@ public class CanvasClickController : MonoBehaviour
                 {
                     Debug.Log("Clicked On: " + result.gameObject.name);
                 }
+                Debug.Log(result.gameObject);
             }
         }
     }
