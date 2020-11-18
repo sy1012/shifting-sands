@@ -63,18 +63,24 @@ public class PlayerStateMachine : Character
     // Start is called before the first frame update
     void Start()
     {
+        // Increase the scale of the healthbar
+        healthbar.GetComponentInParent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        RectTransform hb_rect = healthbar.GetComponent<RectTransform>();
+        hb_rect.anchorMin = new Vector2(0.02f, 0.02f);
+        hb_rect.anchorMax = new Vector2(0.2f, 0.1f);
+        hb_rect.anchoredPosition = Vector2.zero;
+        hb_rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,1);
+        hb_rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,1);
+        healthbarScale = healthCanvas.transform.localScale;
+        healthCanvas.transform.localScale = healthbarScale;
+        // Move Heakthbar to bottom left 
+        healthCanvas.transform.position = HealthBarTransform.position;
+
         equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
 
         //Set intial set to normal
         SetState(new NormalState(this));
-        
-        // Increase the scale of the healthbar
-        healthbarScale = healthCanvas.transform.localScale;
-        healthbarScale.x += 0.01f;
-        healthbarScale.y += 0.01f;
-        healthCanvas.transform.localScale = healthbarScale;
-        // Move Heakthbar to bottom left 
-        healthCanvas.transform.position = HealthBarTransform.position;
+
 
         dashLayerMask.value = 10;
         triggerCollisions = new List<Collider2D>();
