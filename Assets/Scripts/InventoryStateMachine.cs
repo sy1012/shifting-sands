@@ -20,6 +20,7 @@ static class PubData
     static public Sprite inventoryBackgroundSprite;
     static public Sprite inventorySlotSprite;
     static public Sprite coinSprite;
+    static public Sprite craftSprite;
 
     // background for everything inventory related
     static public GameObject inventoryBackground;
@@ -100,6 +101,11 @@ abstract class InventoryState
         PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
     }
 
+    public int GetCoinAmount()
+    {
+        return PubData.coins;
+    }
+
     public bool Buy(int amount)
     {
         if (amount > PubData.coins) { return false; }
@@ -134,6 +140,7 @@ class InitialInventoryState : InventoryState
         PubData.open = false;
 
         PubData.craftingSystem = CraftingSystem.current;
+        PubData.craftSprite = Resources.Load<Sprite>("Sprites/craft_icon");
 
         // initialize the variables needed
         PubData.equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
@@ -311,9 +318,10 @@ class InitialInventoryState : InventoryState
         PubData.craftingSlotResult.SetActive(false);
         PubData.craftingSlotResult.transform.position += new Vector3(0, 0, -8);
 
+        //PubData.craftingButton = Formatter.ScaleSpriteToPercentOfScreenUI(PubData.craftSprite, new Vector2(slotScale, slotScale))
         PubData.craftingButton = new GameObject("Interact Button");
         PubData.craftingButton.transform.localScale = new Vector2(slotScale, slotScale);
-        PubData.craftingButton.AddComponent<Image>().sprite = PubData.inventorySlotSprite;
+        PubData.craftingButton.AddComponent<Image>().sprite = PubData.craftSprite;
         PubData.craftingButton.AddComponent<BoxCollider2D>().isTrigger = true;
         PubData.craftingButton.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.craftingButton.GetComponent<RectTransform>().anchoredPosition = Camera.main.ViewportToScreenPoint(new Vector2(.55f, 0.6f));

@@ -17,6 +17,7 @@ public static class EventManager
     public static event EventHandler onCrafting;
     public static event EventHandler onOpenInventory;
     public static event EventHandler onCloseInventory;
+    public static event GameEvent onCoinPickedUp;
     public static event EventHandler<onEnteringDungeonEventArgs> onEnteringDungeon;
     public static event GameEvent OnPlayerHit;
     public static event GameEvent OnCastFireball;
@@ -97,6 +98,11 @@ public static class EventManager
     public static void TriggerOnCloseInventory()
     {
         onCloseInventory?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static void TriggerOnCoinPickedUp()
+    {
+        onCoinPickedUp?.Invoke(EventArgs.Empty);
     }
 
     public static void TriggerOnPlayerHit()

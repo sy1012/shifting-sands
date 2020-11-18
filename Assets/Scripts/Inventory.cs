@@ -15,7 +15,6 @@ public class Inventory : MonoBehaviour
     private GameObject held;
     private Slot slotClicked;
     public Slot slotHovered;
-    CoinDisplay CoinDisplay;  
     private Slot hoveredPreviously;
     private bool displayed;  // is the info for the current item hovered displayed already
   
@@ -34,8 +33,7 @@ public class Inventory : MonoBehaviour
         state.Enter();
         state = new OverworldInventoryState();
 
-        // Updates the Coin Count on the HUD 
-        CoinDisplay.SetCoins(coinAmount);
+        PickUpCoin(30);
     }
 
     private void CraftingClicked(object sender, EventArgs e)
@@ -122,15 +120,6 @@ public class Inventory : MonoBehaviour
                     held.transform.position = held.transform.parent.position;
                     held = null;
                     slotHovered = null;
-                //    slotClicked.Released();
-                //    if (slotHovered != null)
-                //    {
-                //        ItemData temp = slotHovered.RetrieveData();
-                //        slotHovered.AssignData(slotClicked.RetrieveData());
-                //        slotClicked.AssignData(temp);
-                //    }
-                //    slotClicked = null;
-                //    held= null;
                 }
                 else if (held != null)
                 {
@@ -166,17 +155,15 @@ public class Inventory : MonoBehaviour
 
     public void PickUpCoin(int amount)
     {
-
         this.coinAmount += amount;
         // Updates the Coin Count on the HUD 
-        if (CoinDisplay == null)
-        {
-            CoinDisplay = FindObjectOfType<CoinDisplay>();
-        }
-        CoinDisplay.SetCoins(coinAmount);
 
         Debug.Log("picking up coin");
         state.PickUpCoins(amount);
+    }
 
+    public int GetCoinAmount()
+    {
+        return state.GetCoinAmount();
     }
 }

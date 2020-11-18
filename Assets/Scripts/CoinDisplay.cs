@@ -6,13 +6,26 @@ using UnityEngine.UI;
 public class CoinDisplay : MonoBehaviour
 {
     public Text coinText;
-        
-    // Sets the Coin Amount
-    public void SetCoins(int amount)
+    private Inventory inventory;
+
+    public void Start()
     {
-        // Displays the Coin Total
-        coinText.text = amount.ToString();
-        
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+
+        EventManager.onCoinPickedUp += CoinPickedUp;
+        CoinPickedUp(null);
     }
+
+    private void CoinPickedUp(System.EventArgs e)
+    {
+        coinText.text = inventory.GetCoinAmount().ToString();
+    }
+
+    // Sets the Coin Amount
+    //public void SetCoins(int amount)
+    //{
+    //    // Displays the Coin Total
+    //    coinText.text = amount.ToString();
+    //}
 
 }
