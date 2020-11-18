@@ -8,6 +8,7 @@ public class InventoryChecker : MonoBehaviour
 {
     public GameObject equipmentPrefab;
     public GameObject CanvasPrefab;
+    public GameObject soundPrefab;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,6 +17,7 @@ public class InventoryChecker : MonoBehaviour
         {
             GameObject temp = Instantiate(CanvasPrefab);
             temp.name = "Canvas";
+            temp = Instantiate(soundPrefab);
             temp = new GameObject("Inventory");
             temp.transform.SetParent(GameObject.Find("Canvas").transform);
             temp.AddComponent<Inventory>();

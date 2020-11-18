@@ -937,6 +937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentPrefab: {fileID: 2186752933071229218, guid: 11aa11fc5c440b04bb7f543ebdd02f85, type: 3}
   CanvasPrefab: {fileID: 3994768178738054236, guid: 3251dc0ba37fa324a8c6f8f77b37b065, type: 3}
+  soundPrefab: {fileID: 8096003828929859507, guid: 5646f8b76b6be03499bf553b57601da0, type: 3}
 --- !u!4 &1374007945
 Transform:
   m_ObjectHideFlags: 0

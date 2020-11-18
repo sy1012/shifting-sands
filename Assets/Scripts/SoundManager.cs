@@ -194,6 +194,10 @@ public class SoundManager : MonoBehaviour
         // initialize sound manager
         current = this;
         SoundPlayer = this.gameObject.AddComponent<AudioSource>();
+        SoundPlayer.loop = true;
+        SoundPlayer.volume = 1.0f;
+
+        GameObject.DontDestroyOnLoad(this.gameObject);
 
         // initialize every audio clip
 
@@ -384,18 +388,26 @@ public class SoundManager : MonoBehaviour
         EventManager.onPlayerMovement += PlayPlayerMovement;
         EventManager.onUseShrine += PlayShrine;
         EventManager.onDash += PlayDash;
+        EventManager.onDungeonGenerated += PlayDungeonAmbiance;
+        EventManager.OnExitDungeon += PlayDesertWind;
+
+        // play overworld start
+        SoundPlayer.clip = OverworldMusic;
+        SoundPlayer.Play();
     }
 
-    
-
     // play dungeon ambiance
-    private void PlayDungeonAmbiance(object sender, EventManager.onEnteringDungeonEventArgs e){
-        SoundPlayer.PlayOneShot(DungeonMusic);
+    private void PlayDungeonAmbiance(System.EventArgs e){
+        SoundPlayer.Stop();
+        SoundPlayer.clip = DungeonMusic;
+        SoundPlayer.Play();
     }
 
     // play desert wind on overworld
     private void PlayDesertWind(System.EventArgs e){
-        SoundPlayer.PlayOneShot(OverworldMusic);
+        SoundPlayer.Stop();
+        SoundPlayer.clip = OverworldMusic;
+        SoundPlayer.Play();
     }
     
     // play caravan music
