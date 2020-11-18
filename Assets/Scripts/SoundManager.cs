@@ -417,7 +417,7 @@ public class SoundManager : MonoBehaviour
         EventManager.onBuy += PlayCoins;
         EventManager.onSell += PlayCoins;
         EventManager.onCoinPickedUp += PlayCoins;
-        EventManager.onCraftMade += PlayCraftSound;
+        EventManager.onCraftingMade += PlayCraftSound;
         EventManager.onRuneChange += PlayShrine;
 
         // play overworld start

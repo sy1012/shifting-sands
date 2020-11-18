@@ -73,7 +73,6 @@ public class Slot : MonoBehaviour
         }
         else
         {
-            Debug.Log("null data?");
             this.occupied = false;
             Destroy(item);
         }

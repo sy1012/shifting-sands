@@ -40,9 +40,11 @@ public static class EventManager
     public static event GameEvent onMagicFailure;
     public static event GameEvent onArmorChange;
     public static event GameEvent onWeaponChange;
+    public static event GameEvent onRuneChange;
     public static event GameEvent onInventorySwap;
     public static event GameEvent onBuy;
     // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public static event GameEvent onSell;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -77,6 +79,8 @@ public static class EventManager
         onInventorySwap = null;
         onBuy = null;
         onCraftingMade = null;
+        onSell = null;
+        onCrafting = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -256,6 +260,11 @@ public static class EventManager
         onWeaponChange?.Invoke(EventArgs.Empty);
     }
 
+    public static void TriggerOnRuneChange()
+    {
+        onRuneChange?.Invoke(EventArgs.Empty);
+    }
+
     public static void TriggerOnInventorySwap()
     {
         onInventorySwap?.Invoke(EventArgs.Empty);
@@ -264,6 +273,11 @@ public static class EventManager
     public static void TriggerOnBuy()
     {
         onBuy?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnSell()
+    {
+        onSell?.Invoke(EventArgs.Empty);
     }
 }
 
