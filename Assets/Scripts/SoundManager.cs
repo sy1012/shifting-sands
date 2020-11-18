@@ -487,7 +487,7 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player movement sound effects
     private void PlayPlayerMovement(System.EventArgs e){
-        float volume = 0.01f;
+        float volume = 0.05f;
         int x = Random.Range(0, 10);
         if (x == 0){
             SoundPlayer.PlayOneShot(Footstep1, volume);
