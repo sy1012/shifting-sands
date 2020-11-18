@@ -55,11 +55,10 @@ public static class EventManager
     public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
     public static void TriggerDungeonExit()
     {
-        OnExitDungeon?.Invoke(EventArgs.Empty);
+        Debug.Log("Exit Dungeon Event");
         //Clean the Game Events
         onRoomFilled = null;
         DoorEntered = null;
-        OnExitDungeon = null;
         OnPlayerHit = null;
         OnCastFireball = null;
         onAttack = null;
@@ -81,7 +80,13 @@ public static class EventManager
         onCraftingMade = null;
         onSell = null;
         onCrafting = null;
+        onOpenInventory = null;
+        onCloseInventory = null;
         onCoinPickedUp = null;
+        onCraftingMade = null;
+        onRuneChange = null;
+        OnExitDungeon?.Invoke(EventArgs.Empty);
+        OnExitDungeon = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
