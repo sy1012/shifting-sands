@@ -200,7 +200,7 @@ public class SoundManager : MonoBehaviour
 
     void Start(){
         EventManager.onResubscribeOverworld += EnteringOverworld;
-        EventManager.onResubscribeDungeon += EnteringOverworld;
+        EventManager.onResubscribeDungeon += EnteringDungeon;
 
         // initialize sound manager
         current = this;
@@ -398,34 +398,6 @@ public class SoundManager : MonoBehaviour
         // enemy hit
         EnemyHit1 = Resources.Load<AudioClip>("SFX/Enemy/enemyHit1");
 
-        // subscribe to events
-        EventManager.onAttack += PlaySwing;
-        EventManager.OnPlayerHit += PlayPlayerHit;
-        EventManager.DoorEntered += PlayDoor;
-        EventManager.OnCastFireball += PlayFireball;
-        EventManager.onFireballCollision += PlayFireExplosion;
-        EventManager.onPlayerMovement += PlayPlayerMovement;
-        EventManager.onUseShrine += PlayShrine;
-        EventManager.onDash += PlayDash;
-        EventManager.onDungeonGenerated += PlayDungeonAmbiance;
-        EventManager.OnExitDungeon += PlayDesertWind;
-        EventManager.OnCastSnowball += PlaySnowball;
-        EventManager.onSnowballCollision += PlaySnowballExplosion;
-        EventManager.onOpenInventory += PlayInventoryCloth;
-        EventManager.onCloseInventory += PlayInventoryCloth;
-        EventManager.onMagicFailure += PlayMagicFailure;
-        EventManager.onArmorChange += PlayInventoryArmor;
-        EventManager.onWeaponChange += PlayInventoryChangeWeapon;
-        EventManager.onInventorySwap += PlayInventoryClick;
-        EventManager.onBuy += PlayCoins;
-        EventManager.onSell += PlayCoins;
-        EventManager.onCoinPickedUp += PlayCoins;
-        EventManager.onCraftingMade += PlayCraftSound;
-        EventManager.onRuneChange += PlayShrine;
-        EventManager.onScarabAgro += PlayEnemyBite;
-        EventManager.onSkullAgro += PlayEnemyShade;
-        EventManager.onMummyAgro += PlayEnemyMonster;
-
         // play overworld start
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
@@ -433,43 +405,6 @@ public class SoundManager : MonoBehaviour
 
     private void EnteringOverworld(System.EventArgs e)
     {
-        EventManager.onAttack += PlaySwing;
-        EventManager.OnPlayerHit += PlayPlayerHit;
-        EventManager.DoorEntered += PlayDoor;
-        EventManager.OnCastFireball += PlayFireball;
-        EventManager.onFireballCollision += PlayFireExplosion;
-        EventManager.onPlayerMovement += PlayPlayerMovement;
-        EventManager.onUseShrine += PlayShrine;
-        EventManager.onDash += PlayDash;
-        EventManager.onDungeonGenerated += PlayDungeonAmbiance;
-        EventManager.OnCastSnowball += PlaySnowball;
-        EventManager.onSnowballCollision += PlaySnowballExplosion;
-        EventManager.onOpenInventory += PlayInventoryCloth;
-        EventManager.onCloseInventory += PlayInventoryCloth;
-        EventManager.onMagicFailure += PlayMagicFailure;
-        EventManager.onArmorChange += PlayInventoryArmor;
-        EventManager.onWeaponChange += PlayInventoryChangeWeapon;
-        EventManager.onInventorySwap += PlayInventoryClick;
-        EventManager.onBuy += PlayCoins;
-        EventManager.onSell += PlayCoins;
-        EventManager.onCoinPickedUp += PlayCoins;
-        EventManager.onCraftingMade += PlayCraftSound;
-        EventManager.onRuneChange += PlayShrine;
-        EventManager.OnExitDungeon += PlayDesertWind;
-        EventManager.onScarabAgro += PlayEnemyBite;
-        EventManager.onSkullAgro += PlayEnemyShade;
-        EventManager.onMummyAgro += PlayEnemyMonster;
-    }
-
-    // play dungeon ambiance
-    private void PlayDungeonAmbiance(System.EventArgs e){
-        SoundPlayer.Stop();
-        SoundPlayer.clip = DungeonMusic;
-        SoundPlayer.Play();
-    }
-
-    // play desert wind on overworld
-    private void PlayDesertWind(System.EventArgs e){
         // subscribe to events
         EventManager.onAttack += PlaySwing;
         EventManager.OnPlayerHit += PlayPlayerHit;
@@ -479,7 +414,7 @@ public class SoundManager : MonoBehaviour
         EventManager.onPlayerMovement += PlayPlayerMovement;
         EventManager.onUseShrine += PlayShrine;
         EventManager.onDash += PlayDash;
-        EventManager.onDungeonGenerated += PlayDungeonAmbiance;
+        //EventManager.onDungeonGenerated += PlayDungeonAmbiance;
         EventManager.OnCastSnowball += PlaySnowball;
         EventManager.onSnowballCollision += PlaySnowballExplosion;
         EventManager.onOpenInventory += PlayInventoryCloth;
@@ -493,15 +428,31 @@ public class SoundManager : MonoBehaviour
         EventManager.onCoinPickedUp += PlayCoins;
         EventManager.onCraftingMade += PlayCraftSound;
         EventManager.onRuneChange += PlayShrine;
-        EventManager.OnExitDungeon += PlayDesertWind;
+        //EventManager.OnExitDungeon += PlayDesertWind;
         EventManager.onScarabAgro += PlayEnemyBite;
         EventManager.onSkullAgro += PlayEnemyShade;
         EventManager.onMummyAgro += PlayEnemyMonster;
-
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
     }
+
+    private void EnteringDungeon(System.EventArgs e)
+    {
+        SoundPlayer.Stop();
+        SoundPlayer.clip = DungeonMusic;
+        SoundPlayer.Play();
+    }
+
+    // play dungeon ambiance
+    //private void PlayDungeonAmbiance(System.EventArgs e){
+        
+    //}
+
+    // play desert wind on overworld
+    //private void PlayDesertWind(System.EventArgs e){
+        
+    //}
     
     // play caravan music
     private void PlayCaravan(System.EventArgs e){
@@ -536,7 +487,7 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player movement sound effects
     private void PlayPlayerMovement(System.EventArgs e){
-        float volume = 0.1f;
+        float volume = 0.01f;
         int x = Random.Range(0, 10);
         if (x == 0){
             SoundPlayer.PlayOneShot(Footstep1, volume);
@@ -563,12 +514,12 @@ public class SoundManager : MonoBehaviour
 
     // play any one of shrine sound effects
     private void PlayShrine(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Shrine1);
+        SoundPlayer.PlayOneShot(Shrine1, 0.4f);
     }
 
     // play any one of dash sound effects
     private void PlayDash(System.EventArgs e){
-        float volume = 0.5f;
+        float volume = 0.4f;
         int x = Random.Range(0, 2);
         if (x == 0){
             SoundPlayer.PlayOneShot(Dash1, volume);
@@ -601,81 +552,83 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player hit sound effects
     private void PlayPlayerHit(System.EventArgs e){
-        SoundPlayer.PlayOneShot(PlayerHit1, 0.7f);
+        SoundPlayer.PlayOneShot(PlayerHit1, 0.6f);
     }
 
     // play any one of swing sound effects
     private void PlaySwing(System.EventArgs e){
-        float volume = 0.4f;
+        float volume = 0.5f;
         int x = Random.Range(0, 5);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Swing1);
+            SoundPlayer.PlayOneShot(Swing1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Swing2);
+            SoundPlayer.PlayOneShot(Swing2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Swing3);
+            SoundPlayer.PlayOneShot(Swing3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Swing4);
+            SoundPlayer.PlayOneShot(Swing4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Swing5);
+            SoundPlayer.PlayOneShot(Swing5, volume);
         }
     }
 
     // play any one of coin sounds
     private void PlayCoins(System.EventArgs e){
+        float volume = 0.4f;
         int x = Random.Range(0, 5);
         if (x == 0) {
-            SoundPlayer.PlayOneShot(Coin1);
+            SoundPlayer.PlayOneShot(Coin1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Coin2);
+            SoundPlayer.PlayOneShot(Coin2, volume);
         } else if (x == 2) {
-            SoundPlayer.PlayOneShot(Coin3);
+            SoundPlayer.PlayOneShot(Coin3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Coin4);
+            SoundPlayer.PlayOneShot(Coin4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Coin5);
+            SoundPlayer.PlayOneShot(Coin5, volume);
         }
     }
 
     // play anyone of enemy sounds
     private void PlayEnemyMonster(System.EventArgs e){
+        float volume = 0.7f;
         int x = Random.Range(0, 15);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Monster1);
+            SoundPlayer.PlayOneShot(Monster1, volume);
         } else if (x == 1) {
-            SoundPlayer.PlayOneShot(Monster2);
+            SoundPlayer.PlayOneShot(Monster2, volume);
         } else if (x == 2) {
-            SoundPlayer.PlayOneShot(Monster3);
+            SoundPlayer.PlayOneShot(Monster3, volume);
         } else if (x == 3) {
-            SoundPlayer.PlayOneShot(Monster4);
+            SoundPlayer.PlayOneShot(Monster4, volume);
         } else if (x == 4) {
-            SoundPlayer.PlayOneShot(Monster5);
+            SoundPlayer.PlayOneShot(Monster5, volume);
         } else if (x == 5) {
-            SoundPlayer.PlayOneShot(Monster6);
+            SoundPlayer.PlayOneShot(Monster6, volume);
         } else if (x == 6) {
-            SoundPlayer.PlayOneShot(Monster7);
+            SoundPlayer.PlayOneShot(Monster7, volume);
         } else if (x == 7) {
-            SoundPlayer.PlayOneShot(Monster8);
+            SoundPlayer.PlayOneShot(Monster8, volume);
         } else if (x == 8) {
-            SoundPlayer.PlayOneShot(Monster9);
+            SoundPlayer.PlayOneShot(Monster9, volume);
         } else if (x == 9) {
-            SoundPlayer.PlayOneShot(Monster10);
+            SoundPlayer.PlayOneShot(Monster10, volume);
         } else if (x == 10) {
-            SoundPlayer.PlayOneShot(Monster11);
+            SoundPlayer.PlayOneShot(Monster11, volume);
         } else if (x == 11) {
-            SoundPlayer.PlayOneShot(Monster12);
+            SoundPlayer.PlayOneShot(Monster12, volume);
         } else if (x == 12) {
-            SoundPlayer.PlayOneShot(Monster13);
+            SoundPlayer.PlayOneShot(Monster13, volume);
         } else if (x == 13) {
-            SoundPlayer.PlayOneShot(Monster14);
+            SoundPlayer.PlayOneShot(Monster14, volume);
         } else if (x == 14) {
-            SoundPlayer.PlayOneShot(Monster15);
+            SoundPlayer.PlayOneShot(Monster15, volume);
         }
     }
 
     // play anyone of door sounds
     private void PlayDoor(System.EventArgs e){
-        float volume = 0.4f;
+        float volume = 0.35f;
         int x = Random.Range(0, 7);
         if (x == 0){
             SoundPlayer.PlayOneShot(Door1, volume);
@@ -696,13 +649,14 @@ public class SoundManager : MonoBehaviour
 
     // play any one of armor inventory sounds
     private void PlayInventoryArmor(System.EventArgs e){
+        float volume = 0.6f;
         int x = Random.Range(0, 3);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Armor1);
+            SoundPlayer.PlayOneShot(Armor1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Chainmail1);
+            SoundPlayer.PlayOneShot(Chainmail1, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Chainmail2);
+            SoundPlayer.PlayOneShot(Chainmail2, volume);
         }
     }
 
@@ -754,57 +708,60 @@ public class SoundManager : MonoBehaviour
     
     // play any one of inventory click sounds
     private void PlayInventoryClick(System.EventArgs e){
+        float volume = 0.7f;
         int x = Random.Range(0, 5);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Click1);
+            SoundPlayer.PlayOneShot(Click1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Click2);
+            SoundPlayer.PlayOneShot(Click2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Click3);
+            SoundPlayer.PlayOneShot(Click3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Click4);
+            SoundPlayer.PlayOneShot(Click4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Click5);
+            SoundPlayer.PlayOneShot(Click5, volume);
         }
     }
 
     // play any one of cloth inventory sounds
     private void PlayInventoryCloth(object sender, System.EventArgs e){
+        float volume = 0.4f;
         int x = Random.Range(0, 9);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Cloth1);
+            SoundPlayer.PlayOneShot(Cloth1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Cloth2);
+            SoundPlayer.PlayOneShot(Cloth2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Cloth3);
+            SoundPlayer.PlayOneShot(Cloth3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Cloth4);
+            SoundPlayer.PlayOneShot(Cloth4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Cloth5);
+            SoundPlayer.PlayOneShot(Cloth5, volume);
         } else if (x == 5){
-            SoundPlayer.PlayOneShot(Cloth6);
+            SoundPlayer.PlayOneShot(Cloth6, volume);
         } else if (x == 6){
-            SoundPlayer.PlayOneShot(Cloth7);
+            SoundPlayer.PlayOneShot(Cloth7, volume);
         } else if (x == 7){
-            SoundPlayer.PlayOneShot(Cloth8);
+            SoundPlayer.PlayOneShot(Cloth8, volume);
         } else if (x == 8){
-            SoundPlayer.PlayOneShot(Cloth9);
+            SoundPlayer.PlayOneShot(Cloth9, volume);
         }
     }
 
     // play any one of changing weapons sounds
     private void PlayInventoryChangeWeapon(System.EventArgs e){
+        float volume = 0.5f;
         int x = Random.Range(0, 5);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Weapon1);
+            SoundPlayer.PlayOneShot(Weapon1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Weapon2);
+            SoundPlayer.PlayOneShot(Weapon2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Weapon3);
+            SoundPlayer.PlayOneShot(Weapon3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Weapon4);
+            SoundPlayer.PlayOneShot(Weapon4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Weapon5);
+            SoundPlayer.PlayOneShot(Weapon5, volume);
         }
     }
 
@@ -815,13 +772,14 @@ public class SoundManager : MonoBehaviour
 
     // play any one of enemy bite sounds
     private void PlayEnemyBite(System.EventArgs e){
+        float volume = 0.7f;
         int x = Random.Range(0, 3);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Bite1);
+            SoundPlayer.PlayOneShot(Bite1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Bite2);
+            SoundPlayer.PlayOneShot(Bite2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Bite3);
+            SoundPlayer.PlayOneShot(Bite3, volume);
         }
     }
 
@@ -843,37 +801,38 @@ public class SoundManager : MonoBehaviour
 
     // play any one of enemy shade sounds
     private void PlayEnemyShade(System.EventArgs e){
+        float volume = 0.6f;
         int x = Random.Range(0, 15);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Shade1);
+            SoundPlayer.PlayOneShot(Shade1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Shade2);
+            SoundPlayer.PlayOneShot(Shade2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Shade3);
+            SoundPlayer.PlayOneShot(Shade3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Shade4);
+            SoundPlayer.PlayOneShot(Shade4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Shade5);
+            SoundPlayer.PlayOneShot(Shade5, volume);
         } else if (x == 5){
-            SoundPlayer.PlayOneShot(Shade6);
+            SoundPlayer.PlayOneShot(Shade6, volume);
         } else if (x == 6){
-            SoundPlayer.PlayOneShot(Shade7);
+            SoundPlayer.PlayOneShot(Shade7, volume);
         } else if (x == 7){
-            SoundPlayer.PlayOneShot(Shade8);
+            SoundPlayer.PlayOneShot(Shade8, volume);
         } else if (x == 8){
-            SoundPlayer.PlayOneShot(Shade9);
+            SoundPlayer.PlayOneShot(Shade9, volume);
         } else if (x == 9){
-            SoundPlayer.PlayOneShot(Shade10);
+            SoundPlayer.PlayOneShot(Shade10, volume);
         } else if (x == 10){
-            SoundPlayer.PlayOneShot(Shade11);
+            SoundPlayer.PlayOneShot(Shade11, volume);
         } else if (x == 11){
-            SoundPlayer.PlayOneShot(Shade12);
+            SoundPlayer.PlayOneShot(Shade12, volume);
         } else if (x == 12){
-            SoundPlayer.PlayOneShot(Shade13);
+            SoundPlayer.PlayOneShot(Shade13, volume);
         } else if (x == 13){
-            SoundPlayer.PlayOneShot(Shade14);
+            SoundPlayer.PlayOneShot(Shade14, volume);
         } else if (x == 14){
-            SoundPlayer.PlayOneShot(Shade15);
+            SoundPlayer.PlayOneShot(Shade15, volume);
         }
     }
 
@@ -920,26 +879,28 @@ public class SoundManager : MonoBehaviour
 
     // play any one of magic snowball sounds
     private void PlaySnowball(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Snowball);
+        SoundPlayer.PlayOneShot(Snowball, 0.8f);
     }
 
     // play any one of magic snowball explosion sounds
     private void PlaySnowballExplosion(System.EventArgs e){
+        float volume = 0.9f;
         int x = Random.Range(0, 2);
         if (x == 0){
-            SoundPlayer.PlayOneShot(SnowBallExplosion1);
+            SoundPlayer.PlayOneShot(SnowBallExplosion1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(SnowBallExplosion2);
+            SoundPlayer.PlayOneShot(SnowBallExplosion2, volume);
         }
     }
 
     // play anyone of magic failure sounds
     private void PlayMagicFailure(System.EventArgs e){
+        float volume = 0.9f;
         int x = Random.Range(0, 2);
         if (x == 0){
-            SoundPlayer.PlayOneShot(MagicFail1);
+            SoundPlayer.PlayOneShot(MagicFail1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(MagicFail2);
+            SoundPlayer.PlayOneShot(MagicFail2, volume);
         }
     }
 

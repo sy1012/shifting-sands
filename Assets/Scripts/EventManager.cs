@@ -86,7 +86,6 @@ public static class EventManager
         onBuy = null;
         onCraftingMade = null;
         onSell = null;
-        onCrafting = null;
         onOpenInventory = null;
         onCloseInventory = null;
         onCoinPickedUp = null;
