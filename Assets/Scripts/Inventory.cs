@@ -88,11 +88,6 @@ public class Inventory : MonoBehaviour
         state.Swapped(slotOne, slotTwo);
     }
 
-    private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
-    {
-        state.Swapped(slotOne, slotTwo);
-    }
-
     public void Update()
     {
         if (slotHovered != null && !displayed && held == null)
