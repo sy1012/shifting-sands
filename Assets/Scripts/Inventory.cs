@@ -11,7 +11,6 @@ public class Inventory : MonoBehaviour
     private bool inDungeon;
     private bool inventoryOpen;
     private bool mouseDown;
-    private int coinAmount;
     private GameObject held;
     private Slot slotClicked;
     public Slot slotHovered;
@@ -138,13 +137,11 @@ public class Inventory : MonoBehaviour
 
     private void TriggerInventory(object sender, EventArgs e)
     {
-        Debug.Log("Happening");
         ChangeState(new OverworldInventoryState());
     }
 
     public bool AddToInventory(ItemData data)
     {
-        Debug.Log("picking up item");
         return state.AddToInventory(data);
     }
 
@@ -155,10 +152,7 @@ public class Inventory : MonoBehaviour
 
     public void PickUpCoin(int amount)
     {
-        this.coinAmount += amount;
         // Updates the Coin Count on the HUD 
-
-        Debug.Log("picking up coin");
         state.PickUpCoins(amount);
     }
 

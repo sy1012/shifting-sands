@@ -10,7 +10,7 @@ public static class EventManager
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
     public static event EventHandler onInventoryTrigger;
-    public static event EventHandler onDungeonInventoryTrigger;
+    //public static event EventHandler onDungeonInventoryTrigger;
     public static event EventHandler onWeaponMerchant;
     public static event EventHandler onArmourMerchant;
     public static event EventHandler onRuneMerchant;
@@ -40,10 +40,13 @@ public static class EventManager
     public static event GameEvent onMagicFailure;
     public static event GameEvent onArmorChange;
     public static event GameEvent onWeaponChange;
+    public static event GameEvent onRuneChange;
     public static event GameEvent onInventorySwap;
     public static event GameEvent onBuy;
-    public static event GameEvent onCraft;
+    // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public static event GameEvent onSell;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
                                             onUseShrine,onDash,onDungeonGenerated, onRelicCollected,onPlayerEnteredRoom};
@@ -53,7 +56,6 @@ public static class EventManager
     public static void TriggerDungeonExit()
     {
         OnExitDungeon?.Invoke(EventArgs.Empty);
-        Debug.Log("Exit Dungeon Event");
         //Clean the Game Events
         onRoomFilled = null;
         DoorEntered = null;
@@ -73,14 +75,17 @@ public static class EventManager
         onMagicFailure = null;
         onArmorChange = null;
         onWeaponChange = null;
+        onRuneChange = null;
         onInventorySwap = null;
         onBuy = null;
-        onCraft = null;
+        onCraftingMade = null;
+        onSell = null;
+        onCrafting = null;
+        onCoinPickedUp = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
     {
-        Debug.Log("Door Entered");
         if (DoorEntered != null)
         {
             DoorEntered(EventArgs.Empty);
@@ -90,7 +95,6 @@ public static class EventManager
     public static void TriggerDungeonGenerated(DungeonGenArgs e)
     {
         onDungeonGenerated?.Invoke(e);
-        Debug.Log("Dungeon Generated");
     }
 
     public static void TriggerEnteringDungeon(int dungeonLevel)
@@ -133,10 +137,10 @@ public static class EventManager
         onInventoryTrigger?.Invoke(null, EventArgs.Empty);
     }
 
-    public static void TriggerOnDungeonInventoryTrigger()
-    {
-        onDungeonInventoryTrigger?.Invoke(null, EventArgs.Empty);
-    }
+    //public static void TriggerOnDungeonInventoryTrigger()
+    //{
+    //    onDungeonInventoryTrigger?.Invoke(null, EventArgs.Empty);
+    //}
 
     public static void TriggerOnWeaponMerchant()
     {
@@ -255,6 +259,11 @@ public static class EventManager
         onWeaponChange?.Invoke(EventArgs.Empty);
     }
 
+    public static void TriggerOnRuneChange()
+    {
+        onRuneChange?.Invoke(EventArgs.Empty);
+    }
+
     public static void TriggerOnInventorySwap()
     {
         onInventorySwap?.Invoke(EventArgs.Empty);
@@ -265,9 +274,9 @@ public static class EventManager
         onBuy?.Invoke(EventArgs.Empty);
     }
 
-    public static void TriggerOnCraft()
+    public static void TriggerOnSell()
     {
-        onCraft?.Invoke(EventArgs.Empty);
+        onSell?.Invoke(EventArgs.Empty);
     }
 }
 

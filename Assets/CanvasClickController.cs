@@ -161,11 +161,6 @@ public class CanvasClickController : MonoBehaviour
                 {
                     GameObject.Find("Inventory").GetComponent<Inventory>().slotHovered = null;
                 }
-                else
-                {
-                    Debug.Log("Clicked On: " + result.gameObject.name);
-                }
-                Debug.Log(result.gameObject);
             }
         }
     }

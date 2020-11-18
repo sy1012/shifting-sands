@@ -101,6 +101,7 @@ abstract class InventoryState
     {
         PubData.coins += amount;
         PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
+        EventManager.TriggerOnCoinPickedUp();
     }
 
     public int GetCoinAmount()
@@ -521,9 +522,9 @@ class OverworldInventoryState : InventoryState
         if (slotTwo.name == "Armour Inventory Slot" && slotOne.RetrieveData().itemType != ItemTypes.Type.armour) { return; }
         if (slotTwo.name == "Rune Inventory Slot" && slotOne.RetrieveData().itemType != ItemTypes.Type.rune) { return; }
 
-        if (slotTwo.name == "Weapon Inventory Slot") { }
-        else if (slotTwo.name == "Armour Inventory Slot") { }
-        else if (slotTwo.name == "Rune Inventory Slot") { }
+        if (slotTwo.name == "Weapon Inventory Slot") { EventManager.TriggerOnWeaponChange(); }
+        else if (slotTwo.name == "Armour Inventory Slot") { EventManager.TriggerOnArmorChange(); }
+        else if (slotTwo.name == "Rune Inventory Slot") { EventManager.TriggerOnRuneChange(); }
         else EventManager.TriggerOnInventorySwap();
 
         ItemData temp = slotOne.RetrieveData();
@@ -627,6 +628,7 @@ class OverworldCraftingState : InventoryState
         ItemData item = PubData.craftingSystem.Craft(items);
         if (item != null)
         {
+            EventManager.TriggerOnCraftingMade();
             PubData.craftingSlotResult.GetComponent<Slot>().AssignData(item);
             PubData.craftingSlotOne.GetComponent<Slot>().AssignData(null);
             PubData.craftingSlotTwo.GetComponent<Slot>().AssignData(null);
@@ -728,21 +730,28 @@ class OverworldRuneState : InventoryState
             // check that you have the money
             if (Buy(slotOne.RetrieveData().value))
             {
-                EventManager.TriggerOnInventorySwap();
+                EventManager.TriggerOnBuy();
                 slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
             }
         }
 
         // You are selling or moving an item
-        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        else if (slotOne.gameObject.name == "Inventory Slot")
         {
             // if you are selling
             if (slotTwo.name == "Merchant Slot")
             {
-                EventManager.TriggerOnCoinPickedUp();
+                EventManager.TriggerOnSell();
                 this.PickUpCoins(slotOne.RetrieveData().value);
+                slotOne.AssignData(null);
             }
-            slotOne.AssignData(null);
+            else
+            {
+                EventManager.TriggerOnInventorySwap();
+                ItemData temp = slotOne.RetrieveData();
+                slotOne.AssignData(slotTwo.RetrieveData());
+                slotTwo.AssignData(temp);
+            }
         }
     }
 }
@@ -821,21 +830,28 @@ class OverworldWeaponState : InventoryState
             // check that you have the money
             if (Buy(slotOne.RetrieveData().value))
             {
-                EventManager.TriggerOnInventorySwap();
+                EventManager.TriggerOnBuy();
                 slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
             }
         }
 
         // You are selling or moving an item
-        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        else if (slotOne.gameObject.name == "Inventory Slot")
         {
             // if you are selling
             if (slotTwo.name == "Merchant Slot")
             {
-                EventManager.TriggerOnCoinPickedUp();
+                EventManager.TriggerOnSell();
                 this.PickUpCoins(slotOne.RetrieveData().value);
+                slotOne.AssignData(null);
             }
-            slotOne.AssignData(null);
+            else
+            {
+                EventManager.TriggerOnInventorySwap();
+                ItemData temp = slotOne.RetrieveData();
+                slotOne.AssignData(slotTwo.RetrieveData());
+                slotTwo.AssignData(temp);
+            }
         }
     }
 }
@@ -914,21 +930,28 @@ class OverworldArmourState : InventoryState
             // check that you have the money
             if (Buy(slotOne.RetrieveData().value))
             {
-                EventManager.TriggerOnInventorySwap();
+                EventManager.TriggerOnBuy();
                 slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
             }
         }
 
         // You are selling or moving an item
-        else if (slotOne.gameObject.name == "Inventory Slot" && !slotTwo.occupied)
+        else if (slotOne.gameObject.name == "Inventory Slot")
         {
             // if you are selling
             if (slotTwo.name == "Merchant Slot")
             {
-                EventManager.TriggerOnCoinPickedUp();
+                EventManager.TriggerOnSell();
                 this.PickUpCoins(slotOne.RetrieveData().value);
+                slotOne.AssignData(null);
             }
-            slotOne.AssignData(null);
+            else
+            {
+                EventManager.TriggerOnInventorySwap();
+                ItemData temp = slotOne.RetrieveData();
+                slotOne.AssignData(slotTwo.RetrieveData());
+                slotTwo.AssignData(temp);
+            }
         }
     }
 }

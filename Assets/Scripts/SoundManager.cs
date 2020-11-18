@@ -415,8 +415,10 @@ public class SoundManager : MonoBehaviour
         EventManager.onWeaponChange += PlayInventoryChangeWeapon;
         EventManager.onInventorySwap += PlayInventoryClick;
         EventManager.onBuy += PlayCoins;
+        EventManager.onSell += PlayCoins;
         EventManager.onCoinPickedUp += PlayCoins;
-        EventManager.onCraft += PlayCraftSound;
+        EventManager.onCraftingMade += PlayCraftSound;
+        EventManager.onRuneChange += PlayShrine;
 
         // play overworld start
         SoundPlayer.clip = OverworldMusic;
@@ -470,7 +472,7 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player movement sound effects
     private void PlayPlayerMovement(System.EventArgs e){
-        float volume = 0.2f;
+        float volume = 0.1f;
         int x = Random.Range(0, 10);
         if (x == 0){
             SoundPlayer.PlayOneShot(Footstep1, volume);
