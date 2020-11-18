@@ -25,14 +25,13 @@ public class SnowBall : MonoBehaviour
         if (onHitAI)
         {
             timer += 1 / duration * Time.deltaTime;
-            Debug.Log("Ummm");
-
+            
 
         }
 
         if (timer >= duration)
         {
-            Debug.Log("Sup Bitch");
+            
             target.GetComponent<IAstarAI>().maxSpeed = normalSpeed;
             onHitAI = false;
             timer = 0;

@@ -67,7 +67,7 @@ public class PlayerStateMachine : Character
         // Increase the scale of the healthbar
         Canvas canvas = healthbar.GetComponentInParent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.scaleFactor = 0.2f;
+        canvas.scaleFactor = 0.4f;
         RectTransform hb_rect = healthbar.GetComponent<RectTransform>();
         hb_rect.anchorMin = new Vector2(0.02f, 0.02f);
         hb_rect.anchorMax = new Vector2(0.2f, 0.1f);
