@@ -36,6 +36,12 @@ public static class EventManager
     public static event GameEvent onSnowballCollision;
     public static event GameEvent onRelicCollected;
     public static event GameEvent onPlayerEnteredRoom;
+    public static event GameEvent onMagicFailure;
+    public static event GameEvent onArmorChange;
+    public static event GameEvent onWeaponChange;
+    public static event GameEvent onInventorySwap;
+    public static event GameEvent onBuy;
+    public static event GameEvent onCraft;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
 
     public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
@@ -63,6 +69,12 @@ public static class EventManager
         onSnowballCollision = null;
         onRelicCollected = null;
         onPlayerEnteredRoom = null;
+        onMagicFailure = null;
+        onArmorChange = null;
+        onWeaponChange = null;
+        onInventorySwap = null;
+        onBuy = null;
+        onCraft = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -220,6 +232,36 @@ public static class EventManager
         var args = new PlayerEnterRoomArgs();
         args.room = room;
         onPlayerEnteredRoom?.Invoke(args);
+    }
+
+    public static void TriggerOnMagicFailure()
+    {
+        onMagicFailure?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnArmorChange()
+    {
+        onArmorChange?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnWeaponChange()
+    {
+        onWeaponChange?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnInventorySwap()
+    {
+        onInventorySwap?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnBuy()
+    {
+        onBuy?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnCraft()
+    {
+        onCraft?.Invoke(EventArgs.Empty);
     }
 }
 

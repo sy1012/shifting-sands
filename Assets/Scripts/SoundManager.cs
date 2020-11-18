@@ -177,8 +177,16 @@ public class SoundManager : MonoBehaviour
     private AudioClip Footstep10;
 
     // magic
-    private AudioClip Magic1;
-    private AudioClip Explosion1;
+    private AudioClip Fire;
+    private AudioClip FireExplosion;
+    private AudioClip Snowball;
+    private AudioClip MagicFail1;
+    private AudioClip MagicFail2;
+    private AudioClip SnowBallExplosion1;
+    private AudioClip SnowBallExplosion2;
+
+    // crafting
+    private AudioClip Craft;
 
     // dash
     private AudioClip Dash1;
@@ -369,8 +377,16 @@ public class SoundManager : MonoBehaviour
         Footstep10 = Resources.Load<AudioClip>("SFX/Player/footstep09");
 
         // magic
-        Magic1 = Resources.Load<AudioClip>("SFX/Player/magic1");
-        Explosion1 = Resources.Load<AudioClip>("SFX/Player/synthetic_explosion_1");
+        Fire = Resources.Load<AudioClip>("SFX/Player/foom_0");
+        FireExplosion = Resources.Load<AudioClip>("SFX/Player/synthetic_explosion_1");
+        Snowball = Resources.Load<AudioClip>("SFX/Player/freeze2");
+        MagicFail1 = Resources.Load<AudioClip>("SFX/Player/magicfail");
+        MagicFail2 = Resources.Load<AudioClip>("SFX/Player/magicfail2");
+        SnowBallExplosion1 = Resources.Load<AudioClip>("SFX/Player/ice");
+        SnowBallExplosion2 = Resources.Load<AudioClip>("SFX/Player/coldsnap");
+
+        // crafting
+        Craft = Resources.Load<AudioClip>("SFX/Player/bing1");
         
         // dash
         Dash1 = Resources.Load<AudioClip>("SFX/Player/whoosh");
@@ -384,12 +400,23 @@ public class SoundManager : MonoBehaviour
         EventManager.OnPlayerHit += PlayPlayerHit;
         EventManager.DoorEntered += PlayDoor;
         EventManager.OnCastFireball += PlayFireball;
-        EventManager.onFireballCollision += PlayMagicExplosion;
+        EventManager.onFireballCollision += PlayFireExplosion;
         EventManager.onPlayerMovement += PlayPlayerMovement;
         EventManager.onUseShrine += PlayShrine;
         EventManager.onDash += PlayDash;
         EventManager.onDungeonGenerated += PlayDungeonAmbiance;
         EventManager.OnExitDungeon += PlayDesertWind;
+        EventManager.OnCastSnowball += PlaySnowball;
+        EventManager.onSnowballCollision += PlaySnowballExplosion;
+        EventManager.onOpenInventory += PlayInventoryCloth;
+        EventManager.onCloseInventory += PlayInventoryCloth;
+        EventManager.onMagicFailure += PlayMagicFailure;
+        EventManager.onArmorChange += PlayInventoryArmor;
+        EventManager.onWeaponChange += PlayInventoryChangeWeapon;
+        EventManager.onInventorySwap += PlayInventoryClick;
+        EventManager.onBuy += PlayCoins;
+        EventManager.onCoinPickedUp += PlayCoins;
+        EventManager.onCraft += PlayCraftSound;
 
         // play overworld start
         SoundPlayer.clip = OverworldMusic;
@@ -513,7 +540,7 @@ public class SoundManager : MonoBehaviour
 
     // play any one of swing sound effects
     private void PlaySwing(System.EventArgs e){
-        float volume = 0.6f;
+        float volume = 0.4f;
         int x = Random.Range(0, 5);
         if (x == 0){
             SoundPlayer.PlayOneShot(Swing1);
@@ -676,7 +703,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // play any one of cloth inventory sounds
-    private void PlayInventoryCloth(System.EventArgs e){
+    private void PlayInventoryCloth(object sender, System.EventArgs e){
         int x = Random.Range(0, 9);
         if (x == 0){
             SoundPlayer.PlayOneShot(Cloth1);
@@ -817,12 +844,48 @@ public class SoundManager : MonoBehaviour
 
     // play any one of magic fireball sounds
     private void PlayFireball(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Magic1, 0.4f);
+        SoundPlayer.PlayOneShot(Fire, 0.6f);
     }
 
-    // play any one of magic explosion sounds
-    private void PlayMagicExplosion(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Explosion1, 0.4f);
+    // play any one of magic fire explosion sounds
+    private void PlayFireExplosion(System.EventArgs e){
+        SoundPlayer.PlayOneShot(FireExplosion, 0.4f);
+    }
+
+    // play any one of magic snowball sounds
+    private void PlaySnowball(System.EventArgs e){
+        SoundPlayer.PlayOneShot(Snowball);
+    }
+
+    // play any one of magic snowball explosion sounds
+    private void PlaySnowballExplosion(System.EventArgs e){
+        int x = Random.Range(0, 2);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(SnowBallExplosion1);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(SnowBallExplosion2);
+        }
+    }
+
+    // play anyone of magic failure sounds
+    private void PlayMagicFailure(System.EventArgs e){
+        int x = Random.Range(0, 2);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(MagicFail1);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(MagicFail2);
+        }
+    }
+
+    // play anyone of crafting sounds
+    private void PlayCraftSound(System.EventArgs e){
+        StartCoroutine(waiter());
+    }
+
+    IEnumerator waiter(){
+        SoundPlayer.PlayOneShot(Craft);
+        yield return new WaitForSeconds(0.2f);
+        SoundPlayer.PlayOneShot(Craft);
     }
 
 }

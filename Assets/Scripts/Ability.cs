@@ -57,6 +57,8 @@ public class Ability : MonoBehaviour
             abilityImage1.fillAmount = 1;
             Fireball();
                         
+        } else if (Input.GetKeyDown(abilitybutton1) && isCoolDown1 == true){
+            EventManager.TriggerOnMagicFailure();
         }
 
         // Ability2 Button Pressed and not on CD
@@ -66,6 +68,8 @@ public class Ability : MonoBehaviour
             abilityImage2.fillAmount = 1;
             SnowBall();
 
+        } else if (Input.GetKeyDown(abilitybutton2) && isCoolDown2 == true){
+            EventManager.TriggerOnMagicFailure();
         }
         
     }
