@@ -19,6 +19,7 @@ public class PlayerStateMachine : Character
     KeyCode interactKey = KeyCode.F;
     KeyCode InventoryKey = KeyCode.V;
     KeyCode dashKey = KeyCode.Space;
+    private float footstepSoundCooldown = 0;
 
     // Dash Cooldown
     private float dashCoolDown = 1f;
@@ -118,6 +119,13 @@ public class PlayerStateMachine : Character
         {
             animator.SetFloat("PrevHorizontal", input.x);
             animator.SetFloat("PrevVertical", input.y);
+            if (footstepSoundCooldown <= 0){
+                EventManager.TriggerOnPlayerMovement();
+                footstepSoundCooldown = 0.3f;
+            }
+        }
+        if (footstepSoundCooldown > 0){
+                footstepSoundCooldown -= Time.deltaTime;
         }
         animator.SetFloat("Horizontal", input.x);
         animator.SetFloat("Vertical", input.y);

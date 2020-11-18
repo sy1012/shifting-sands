@@ -443,27 +443,28 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player movement sound effects
     private void PlayPlayerMovement(System.EventArgs e){
+        float volume = 0.3f;
         int x = Random.Range(0, 10);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Footstep1);
+            SoundPlayer.PlayOneShot(Footstep1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Footstep2);
+            SoundPlayer.PlayOneShot(Footstep2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Footstep3);
+            SoundPlayer.PlayOneShot(Footstep3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Footstep4);
+            SoundPlayer.PlayOneShot(Footstep4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Footstep5);
+            SoundPlayer.PlayOneShot(Footstep5, volume);
         } else if (x == 5){
-            SoundPlayer.PlayOneShot(Footstep6);
+            SoundPlayer.PlayOneShot(Footstep6, volume);
         } else if (x == 6){
-            SoundPlayer.PlayOneShot(Footstep7);
+            SoundPlayer.PlayOneShot(Footstep7, volume);
         } else if (x == 7){
-            SoundPlayer.PlayOneShot(Footstep8);
+            SoundPlayer.PlayOneShot(Footstep8, volume);
         } else if (x == 8){
-            SoundPlayer.PlayOneShot(Footstep9);
+            SoundPlayer.PlayOneShot(Footstep9, volume);
         } else if (x == 9){
-            SoundPlayer.PlayOneShot(Footstep10);
+            SoundPlayer.PlayOneShot(Footstep10, volume);
         }
     }
 
@@ -813,12 +814,12 @@ public class SoundManager : MonoBehaviour
 
     // play any one of magic fireball sounds
     private void PlayFireball(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Magic1);
+        SoundPlayer.PlayOneShot(Magic1, 0.3f);
     }
 
     // play any one of magic explosion sounds
     private void PlayMagicExplosion(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Explosion1);
+        SoundPlayer.PlayOneShot(Explosion1, 0.3f);
     }
 
 }
