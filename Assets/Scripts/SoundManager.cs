@@ -249,7 +249,7 @@ public class SoundManager : MonoBehaviour
         Click1 = Resources.Load<AudioClip>("SFX/Inventory/click1");
         Click2 = Resources.Load<AudioClip>("SFX/Inventory/click2");
         Click3 = Resources.Load<AudioClip>("SFX/Inventory/click3");
-        Click4 = Resources.Load<AudioClip>("SFX/Inventort/click4");
+        Click4 = Resources.Load<AudioClip>("SFX/Inventory/click4");
         Click5 = Resources.Load<AudioClip>("SFX/Inventory/click5");
 
         // inventory cloth
@@ -386,7 +386,7 @@ public class SoundManager : MonoBehaviour
         SnowBallExplosion2 = Resources.Load<AudioClip>("SFX/Player/coldsnap");
 
         // crafting
-        Craft = Resources.Load<AudioClip>("SFX/Player/bing1");
+        Craft = Resources.Load<AudioClip>("SFX/Inventory/bing1");
         
         // dash
         Dash1 = Resources.Load<AudioClip>("SFX/Player/whoosh");
@@ -434,6 +434,31 @@ public class SoundManager : MonoBehaviour
 
     // play desert wind on overworld
     private void PlayDesertWind(System.EventArgs e){
+        // subscribe to events
+        EventManager.onAttack += PlaySwing;
+        EventManager.OnPlayerHit += PlayPlayerHit;
+        EventManager.DoorEntered += PlayDoor;
+        EventManager.OnCastFireball += PlayFireball;
+        EventManager.onFireballCollision += PlayFireExplosion;
+        EventManager.onPlayerMovement += PlayPlayerMovement;
+        EventManager.onUseShrine += PlayShrine;
+        EventManager.onDash += PlayDash;
+        EventManager.onDungeonGenerated += PlayDungeonAmbiance;
+        EventManager.OnCastSnowball += PlaySnowball;
+        EventManager.onSnowballCollision += PlaySnowballExplosion;
+        EventManager.onOpenInventory += PlayInventoryCloth;
+        EventManager.onCloseInventory += PlayInventoryCloth;
+        EventManager.onMagicFailure += PlayMagicFailure;
+        EventManager.onArmorChange += PlayInventoryArmor;
+        EventManager.onWeaponChange += PlayInventoryChangeWeapon;
+        EventManager.onInventorySwap += PlayInventoryClick;
+        EventManager.onBuy += PlayCoins;
+        EventManager.onSell += PlayCoins;
+        EventManager.onCoinPickedUp += PlayCoins;
+        EventManager.onCraftingMade += PlayCraftSound;
+        EventManager.onRuneChange += PlayShrine;
+        EventManager.OnExitDungeon += PlayDesertWind;
+
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
@@ -886,7 +911,7 @@ public class SoundManager : MonoBehaviour
 
     IEnumerator waiter(){
         SoundPlayer.PlayOneShot(Craft);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         SoundPlayer.PlayOneShot(Craft);
     }
 
