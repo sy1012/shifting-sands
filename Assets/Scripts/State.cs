@@ -285,6 +285,7 @@ public class RollState : State
 }
 public class HitState:State
 {
+    EquipmentManager equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
     float stunTime = 0.35f;
     float invincibleTime = 0.5f;
     int damageTaking;
@@ -298,7 +299,18 @@ public class HitState:State
     public override IEnumerator Enter()
     {
         psm.animator.SetTrigger("hit");
-        psm.health -= damageTaking;
+        if (equipment.GetArmour().data != null)
+        {
+            float armour = equipment.GetArmour().data.flatArmour;
+            if (equipment.GetRune().data != null && equipment.GetRune().data.type == RuneType.Type.earth)
+            {
+                Debug.Log("Is it doing anything?");
+                armour += armour * equipment.GetRune().data.effectiveness;
+            }
+            psm.health = (int)(((psm.health + psm.health * armour) - damageTaking) / (1 + armour));
+            Debug.Log(psm.health);
+        }
+        else psm.health -= damageTaking;
         var healthbar = psm.GetComponentInChildren<Healthbar>();
         Vector3 dir = hitCollision.transform.position - psm.transform.position;
         dir = dir.normalized;

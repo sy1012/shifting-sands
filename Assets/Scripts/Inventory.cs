@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
         state.Enter();
         state = new OverworldInventoryState();
 
-        PickUpCoin(30);
+        PickUpCoin(300);
     }
 
     private void CraftingClicked(object sender, EventArgs e)

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ArmourMerchant
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 951c94a79b2737748ba83159723dff53, type: 2}
+  - {fileID: 11400000, guid: b60fe78d6eceb7a4b9feb3fe61701f6b, type: 2}
+  - {fileID: 11400000, guid: 043b46d23567c5c42b4a42ac8f3e014f, type: 2}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RuneMerchant
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 68d40afa8d571dd45b60849236c62c7e, type: 2}
-  - {fileID: 11400000, guid: afdfcbe93051b454b8e20990229a8bb3, type: 2}
-  - {fileID: 11400000, guid: 8c9d6f54aa14ecb4398acf529fccaedc, type: 2}
-  - {fileID: 11400000, guid: 5430eaefc8348ac46b367789f129c741, type: 2}
+  - {fileID: 11400000, guid: 8dd83b09667475342893aca700021176, type: 2}
+  - {fileID: 11400000, guid: 66378e006c2e1f144b32378bf89a518d, type: 2}
+  - {fileID: 11400000, guid: 9682d9e86cc381e428e758949e64a0de, type: 2}
+  - {fileID: 11400000, guid: 3d3df5d87f63c4f4e987d6746522acd4, type: 2}
   - {fileID: 11400000, guid: 80765918c59609f4b9ca1fdcba3c415d, type: 2}

@@ -9,6 +9,7 @@ public static class ItemTypes
         item,
         weapon,
         consumable,
-        rune
+        rune,
+        armour
     }
 }

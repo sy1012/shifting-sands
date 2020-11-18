@@ -29,27 +29,32 @@ public class CanvasClickController : MonoBehaviour
     void Start()
     {
         _inventoryButton = Instantiate(inventoryButton);
-        _inventoryButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        _inventoryButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+        _inventoryButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _inventoryButton.transform.SetParent(this.transform);
         _inventoryButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.7f, .95f));
 
         _craftingButton = Instantiate(craftingButton);
-        _craftingButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        _craftingButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+        _craftingButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _craftingButton.transform.SetParent(this.transform);
         _craftingButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.6f, .95f));
 
         _runeMerchantButton = Instantiate(runeMerchantButton);
-        _runeMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        _runeMerchantButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+        _runeMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _runeMerchantButton.transform.SetParent(this.transform);
         _runeMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .95f));
 
         _weaponMerchantButton = Instantiate(weaponMerchantButton);
-        _weaponMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        _weaponMerchantButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+        _weaponMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _weaponMerchantButton.transform.SetParent(this.transform);
         _weaponMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.4f, .95f));
 
         _armourMerchantButton = Instantiate(armourMerchantButton);
-        _armourMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        _armourMerchantButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+        _armourMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _armourMerchantButton.transform.SetParent(this.transform);
         _armourMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.3f, .95f));
 
