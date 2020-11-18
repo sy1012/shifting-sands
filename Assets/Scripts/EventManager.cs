@@ -43,6 +43,9 @@ public static class EventManager
     public static event GameEvent onRuneChange;
     public static event GameEvent onInventorySwap;
     public static event GameEvent onBuy;
+    public static event GameEvent onScarabAgro;
+    public static event GameEvent onSkullAgro;
+    public static event GameEvent onMummyAgro;
     // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public static event GameEvent onSell;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
@@ -57,6 +60,9 @@ public static class EventManager
     {
         Debug.Log("Exit Dungeon Event");
         //Clean the Game Events
+        onScarabAgro = null;
+        onSkullAgro = null;
+        onMummyAgro = null;
         onRoomFilled = null;
         DoorEntered = null;
         OnPlayerHit = null;
@@ -282,6 +288,21 @@ public static class EventManager
     public static void TriggerOnSell()
     {
         onSell?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnScarabAgro()
+    {
+        onScarabAgro?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnSkullAgro()
+    {
+        onSkullAgro?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnMummyAgro()
+    {
+        onMummyAgro?.Invoke(EventArgs.Empty);
     }
 }
 
