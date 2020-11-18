@@ -64,15 +64,13 @@ public class PlayerStateMachine : Character
     void Start()
     {
         // Increase the scale of the healthbar
-        healthbar.GetComponentInParent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        Canvas canvas = healthbar.GetComponentInParent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.scaleFactor = 0.2f;
         RectTransform hb_rect = healthbar.GetComponent<RectTransform>();
         hb_rect.anchorMin = new Vector2(0.02f, 0.02f);
         hb_rect.anchorMax = new Vector2(0.2f, 0.1f);
         hb_rect.anchoredPosition = Vector2.zero;
-        hb_rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,1);
-        hb_rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,1);
-        healthbarScale = healthCanvas.transform.localScale;
-        healthCanvas.transform.localScale = healthbarScale;
         // Move Heakthbar to bottom left 
         healthCanvas.transform.position = HealthBarTransform.position;
 
