@@ -42,8 +42,9 @@ public static class EventManager
     public static event GameEvent onWeaponChange;
     public static event GameEvent onInventorySwap;
     public static event GameEvent onBuy;
-    public static event GameEvent onCraft;
+    // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
                                             onUseShrine,onDash,onDungeonGenerated, onRelicCollected,onPlayerEnteredRoom};
@@ -75,7 +76,7 @@ public static class EventManager
         onWeaponChange = null;
         onInventorySwap = null;
         onBuy = null;
-        onCraft = null;
+        onCraftingMade = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -263,11 +264,6 @@ public static class EventManager
     public static void TriggerOnBuy()
     {
         onBuy?.Invoke(EventArgs.Empty);
-    }
-
-    public static void TriggerOnCraft()
-    {
-        onCraft?.Invoke(EventArgs.Empty);
     }
 }
 
