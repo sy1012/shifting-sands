@@ -53,7 +53,6 @@ public class Weapon : MonoBehaviour
         }
 
         // set up the SpriteRenderer, BoxCollider2d, and rigidbody
-        
         if (this.GetComponent<BoxCollider2D>() != null) { this.collider = this.GetComponent<BoxCollider2D>(); }
         else { this.collider = this.gameObject.AddComponent<BoxCollider2D>(); }
         this.collider.size = hitBoxSize;
@@ -62,6 +61,27 @@ public class Weapon : MonoBehaviour
         this.collider.isTrigger = true;
         if (this.gameObject.GetComponent<Rigidbody2D>() != null) { this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0; }
         else this.gameObject.AddComponent<Rigidbody2D>().gravityScale = 0;
+
+        // add the values of the the armour and rune
+        EquipmentManager equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
+        if ( equipment.GetRune().data != null)
+        {
+            // handle each of the rune types that isnt earth (since it doesnt effect the weapon in any way)
+            if (equipment.GetRune().data.type == RuneType.Type.fire)
+            {
+                this.damage += (int)(equipment.GetRune().data.effectiveness * (float)this.damage);
+            }
+
+            if (equipment.GetRune().data.type == RuneType.Type.water)
+            {
+                this.collider.size += (equipment.GetRune().data.effectiveness * this.collider.size);
+            }
+
+            if (equipment.GetRune().data.type == RuneType.Type.air)
+            {
+                this.speed -= (equipment.GetRune().data.effectiveness * this.speed);
+            }
+        }
     }
 
     void FixedUpdate()
