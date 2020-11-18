@@ -137,13 +137,11 @@ public class Inventory : MonoBehaviour
 
     private void TriggerInventory(object sender, EventArgs e)
     {
-        Debug.Log("Happening");
         ChangeState(new OverworldInventoryState());
     }
 
     public bool AddToInventory(ItemData data)
     {
-        Debug.Log("picking up item");
         return state.AddToInventory(data);
     }
 
@@ -155,8 +153,6 @@ public class Inventory : MonoBehaviour
     public void PickUpCoin(int amount)
     {
         // Updates the Coin Count on the HUD 
-
-        Debug.Log("picking up coin");
         state.PickUpCoins(amount);
     }
 

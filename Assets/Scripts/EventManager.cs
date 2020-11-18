@@ -10,7 +10,7 @@ public static class EventManager
     public static event GameEvent DoorEntered;
     public static event GameEvent OnExitDungeon;
     public static event EventHandler onInventoryTrigger;
-    public static event EventHandler onDungeonInventoryTrigger;
+    //public static event EventHandler onDungeonInventoryTrigger;
     public static event EventHandler onWeaponMerchant;
     public static event EventHandler onArmourMerchant;
     public static event EventHandler onRuneMerchant;
@@ -56,7 +56,6 @@ public static class EventManager
     public static void TriggerDungeonExit()
     {
         OnExitDungeon?.Invoke(EventArgs.Empty);
-        Debug.Log("Exit Dungeon Event");
         //Clean the Game Events
         onRoomFilled = null;
         DoorEntered = null;
@@ -76,16 +75,17 @@ public static class EventManager
         onMagicFailure = null;
         onArmorChange = null;
         onWeaponChange = null;
+        onRuneChange = null;
         onInventorySwap = null;
         onBuy = null;
         onCraftingMade = null;
         onSell = null;
         onCrafting = null;
+        onCoinPickedUp = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
     {
-        Debug.Log("Door Entered");
         if (DoorEntered != null)
         {
             DoorEntered(EventArgs.Empty);
@@ -95,7 +95,6 @@ public static class EventManager
     public static void TriggerDungeonGenerated(DungeonGenArgs e)
     {
         onDungeonGenerated?.Invoke(e);
-        Debug.Log("Dungeon Generated");
     }
 
     public static void TriggerEnteringDungeon(int dungeonLevel)
@@ -138,10 +137,10 @@ public static class EventManager
         onInventoryTrigger?.Invoke(null, EventArgs.Empty);
     }
 
-    public static void TriggerOnDungeonInventoryTrigger()
-    {
-        onDungeonInventoryTrigger?.Invoke(null, EventArgs.Empty);
-    }
+    //public static void TriggerOnDungeonInventoryTrigger()
+    //{
+    //    onDungeonInventoryTrigger?.Invoke(null, EventArgs.Empty);
+    //}
 
     public static void TriggerOnWeaponMerchant()
     {
