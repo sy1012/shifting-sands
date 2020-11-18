@@ -22,14 +22,14 @@ public class Ability : MonoBehaviour
     public Image abilityImage1;
     public float coolDown1 = 3f;
     private bool isCoolDown1;
-    private KeyCode abilitybutton1 = KeyCode.E;
+    private KeyCode abilitybutton1 = KeyCode.Q;
 
     // Ability 2
     [Header("Ability 2")]
     public Image abilityImage2;
     public float coolDown2 = 3f;
     private bool isCoolDown2;
-    private KeyCode abilitybutton2 = KeyCode.R;
+    private KeyCode abilitybutton2 = KeyCode.E;
 
     private void Start()
     {
