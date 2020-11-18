@@ -443,7 +443,7 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player movement sound effects
     private void PlayPlayerMovement(System.EventArgs e){
-        float volume = 0.3f;
+        float volume = 0.2f;
         int x = Random.Range(0, 10);
         if (x == 0){
             SoundPlayer.PlayOneShot(Footstep1, volume);
@@ -475,11 +475,12 @@ public class SoundManager : MonoBehaviour
 
     // play any one of dash sound effects
     private void PlayDash(System.EventArgs e){
+        float volume = 0.5f;
         int x = Random.Range(0, 2);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Dash1);
+            SoundPlayer.PlayOneShot(Dash1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Dash2);
+            SoundPlayer.PlayOneShot(Dash2, volume);
         }
     }
 
@@ -507,11 +508,12 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player hit sound effects
     private void PlayPlayerHit(System.EventArgs e){
-        SoundPlayer.PlayOneShot(PlayerHit1);
+        SoundPlayer.PlayOneShot(PlayerHit1, 0.7f);
     }
 
     // play any one of swing sound effects
     private void PlaySwing(System.EventArgs e){
+        float volume = 0.6f;
         int x = Random.Range(0, 5);
         if (x == 0){
             SoundPlayer.PlayOneShot(Swing1);
@@ -580,21 +582,22 @@ public class SoundManager : MonoBehaviour
 
     // play anyone of door sounds
     private void PlayDoor(System.EventArgs e){
+        float volume = 0.4f;
         int x = Random.Range(0, 7);
         if (x == 0){
-            SoundPlayer.PlayOneShot(Door1);
+            SoundPlayer.PlayOneShot(Door1, volume);
         } else if (x == 1){
-            SoundPlayer.PlayOneShot(Door2);
+            SoundPlayer.PlayOneShot(Door2, volume);
         } else if (x == 2){
-            SoundPlayer.PlayOneShot(Door3);
+            SoundPlayer.PlayOneShot(Door3, volume);
         } else if (x == 3){
-            SoundPlayer.PlayOneShot(Door4);
+            SoundPlayer.PlayOneShot(Door4, volume);
         } else if (x == 4){
-            SoundPlayer.PlayOneShot(Door5);
+            SoundPlayer.PlayOneShot(Door5, volume);
         } else if (x == 5){
-            SoundPlayer.PlayOneShot(Door6);
+            SoundPlayer.PlayOneShot(Door6, volume);
         } else if (x == 6){
-            SoundPlayer.PlayOneShot(Door7);
+            SoundPlayer.PlayOneShot(Door7, volume);
         }
     }
 
@@ -814,12 +817,12 @@ public class SoundManager : MonoBehaviour
 
     // play any one of magic fireball sounds
     private void PlayFireball(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Magic1, 0.3f);
+        SoundPlayer.PlayOneShot(Magic1, 0.4f);
     }
 
     // play any one of magic explosion sounds
     private void PlayMagicExplosion(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Explosion1, 0.3f);
+        SoundPlayer.PlayOneShot(Explosion1, 0.4f);
     }
 
 }
