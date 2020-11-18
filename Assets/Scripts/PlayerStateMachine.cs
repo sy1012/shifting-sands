@@ -63,7 +63,9 @@ public class PlayerStateMachine : Character
     // Start is called before the first frame update
     void Start()
     {
-        // Set intial set to normal
+        equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
+
+        //Set intial set to normal
         SetState(new NormalState(this));
         
         // Increase the scale of the healthbar

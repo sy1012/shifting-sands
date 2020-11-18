@@ -15,6 +15,7 @@ public class Caravan : MonoBehaviour
     public GameObject fade;
     SpriteRenderer fadeRenderer;
     public List<Follower> followers = new List<Follower>();
+    public bool waiting = false;
 
     public Follower camelPrefab;
 
@@ -35,7 +36,11 @@ public class Caravan : MonoBehaviour
             traversal.currentNode = (OasisNode)currentNode;
             if (transform.position != ((OasisNode)path[0]).getOasis().transform.position)
             {
-                transform.position = Vector2.MoveTowards(transform.position, ((OasisNode)path[0]).getOasis().transform.position, 10f * Time.deltaTime);
+                if (!waiting)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, ((OasisNode)path[0]).getOasis().transform.position, 10f * Time.deltaTime);
+                }
+                
             }
 			else
 			{

@@ -43,29 +43,27 @@ public class ItemArchtype : MonoBehaviour, IItem
     {
         //if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
         DungeonMaster.loot.Remove(this.gameObject);
-        //Debug.Log(this.data);
-        //Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
-        //Destroy(background);
-        //Destroy(text);
-        
-        Camera.main.GetComponent<Inventory>().AddToInventory(this.data);
+        Debug.Log(this.data.itemName);
+        Debug.Log(this.data.itemName == "Silver");
+        if (this.data.itemName != "Silver") GameObject.Find("Inventory").GetComponent<Inventory>().AddToInventory(this.data);
+        else GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
+
         Destroy(this.gameObject);
-        // ADD TO INVENTORY OR WHATEVER HERE
     }
 
     public void Dropped()
     {
         Debug.Log("hey");
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
-        this.sr.sortingLayerName = "Player";
         this.sr.sprite = data.sprite;
+        this.transform.localScale = this.data.spriteScaling;
+        this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
         if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));
         this.GetComponent<Rigidbody2D>().AddForce(force);
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
         this.GetComponent<Rigidbody2D>().drag = relativeWeight;
-        this.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 
     public void Sold()
@@ -77,6 +75,8 @@ public class ItemArchtype : MonoBehaviour, IItem
     {
         //if (this.sprite == null) { Initialize(); }
         if (this.background == null) { (this.text, this.background) = Formatter.CreateAssetsFromScratch(data.description, data.scroll); }
+        text.transform.SetParent(this.transform);
+        background.transform.SetParent(this.transform);
         text.gameObject.SetActive(true);
         background.SetActive(true);
         //if (this.GetComponent<RectTransform>() != null)

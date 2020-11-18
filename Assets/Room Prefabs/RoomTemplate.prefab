@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793106922154944180}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.037469056, y: -0.3431571, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6900246052297539390}
@@ -396,5 +396,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 0bb199b09a3e66a47a389b60deab15c7, type: 2}
   - color: {r: 0.5254902, g: 0.5254902, b: 0.5254902, a: 0}
     tile: {fileID: 11400000, guid: 68ea6da5124c46f4299a4ed0218fb9e0, type: 2}
+  - color: {r: 0, g: 1, b: 0, a: 1}
+    tile: {fileID: 11400000, guid: 508fb8061c583a1418f2f22ebc0a7395, type: 2}
   tilemap: {fileID: 2690313161345917226}
   rotation: 0

@@ -18,7 +18,7 @@ public enum StateEnum
 /// Makes sure they ruturn null or if a IEnumerator, yield break.
 /// If a state does not have an implemented command, the command will be ignored.
 /// </summary>
-public  abstract class State
+public abstract class State
 {
 
     protected PlayerStateMachine psm;
@@ -124,7 +124,7 @@ public class NormalState : State
 
     public override IEnumerator Inventory()
     {
-        EventManager.TriggerOnInventoryInteraction();
+        EventManager.TriggerOnInventoryTrigger();
         yield break;
     }
 

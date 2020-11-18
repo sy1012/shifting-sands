@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 // purpose of this class is to contain the logic needed to format a message and a background so that it looks good
 public static class Formatter
@@ -46,6 +47,38 @@ public static class Formatter
         return (textComponent.gameObject, scroll);
     }
 
+    public static (GameObject, GameObject) CreateAssetsFromScratchUI(string text, Sprite scrollSprite, Transform parent = null, string textName = "text", string scrollName = "textScroll")
+    {
+        // Innitialize everything
+        TextMeshProUGUI textComponent = new GameObject(textName).AddComponent<TextMeshProUGUI>();
+        GameObject scroll = new GameObject(scrollName);
+        Image sr = scroll.AddComponent<Image>();
+        sr.sprite = scrollSprite;
+
+        // if they set a parent for this object
+        if (parent != null)
+        {
+            scroll.transform.SetParent(parent);
+            textComponent.gameObject.transform.SetParent(parent);
+        }
+
+        // get some initial measurents of our data
+        float xSize = sr.sprite.bounds.size.x;
+        float ySize = sr.sprite.bounds.size.y;
+        float targetRatio = ySize / xSize;
+        float area = (xSize / (xSize + ySize) * (ySize / (xSize + ySize)));
+
+        textComponent.fontSize = 4;
+        textComponent.text = text;
+
+        scroll.transform.localScale = new Vector2((1 / xSize) * Mathf.Sqrt(text.Length * 1.9f) * area, targetRatio * (1 / ySize) * Mathf.Sqrt(text.Length * 1.9f) * area);
+        textComponent.rectTransform.sizeDelta = new Vector2(scrollSprite.bounds.size.x, scrollSprite.bounds.size.y);
+        scroll.transform.localScale *= PADDING;
+        textComponent.alignment = TextAlignmentOptions.Midline;
+
+        return (textComponent.gameObject, scroll);
+    }
+
     // Returns an object with the text and scaled to the specified size on screen, will overflow the text area potentially
     public static GameObject ScaleTextToPercentOfScreen(string text, int textSize, Vector2 percentScreen)
     {
@@ -54,6 +87,20 @@ public static class Formatter
         TextMeshPro textComponent = textObj.AddComponent<TextMeshPro>();
         textComponent.sortingOrder = 16;
         textComponent.sortingLayerID = SortingLayer.NameToID("Player");
+        textComponent.fontSize = textSize;
+        textComponent.fontSizeMin = 4;
+        textComponent.text = text;
+        textComponent.rectTransform.sizeDelta = size;
+        textComponent.alignment = TextAlignmentOptions.Midline;
+        return textObj;
+    }
+
+    // Returns an object with the text and scaled to the specified size on screen, will overflow the text area potentially
+    public static GameObject ScaleTextToPercentOfScreenUI(string text, int textSize, Vector2 percentScreen)
+    {
+        GameObject textObj = new GameObject();
+        Vector2 size = Camera.main.ViewportToWorldPoint(percentScreen) - Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        TextMeshProUGUI textComponent = textObj.AddComponent<TextMeshProUGUI>();
         textComponent.fontSize = textSize;
         textComponent.fontSizeMin = 4;
         textComponent.text = text;
@@ -74,6 +121,19 @@ public static class Formatter
         sr.sortingOrder = layerOrder;
         sr.sortingLayerName = "Player";
         obj.transform.localScale = new Vector2(1/spriteScalerX * size.x, 1/spriteScalerY * size.y);
+        return obj;
+    }
+
+    // Returns the Sprite given scaled to the desired percentage of the screen
+    public static GameObject ScaleSpriteToPercentOfScreenUI(Sprite sprite, Vector2 percentScreen, int layerOrder)
+    {
+        GameObject obj = new GameObject();
+        Image image = obj.AddComponent<Image>();
+        image.sprite = sprite;
+        Vector2 size = Camera.main.ViewportToWorldPoint(percentScreen) - Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        float spriteScalerX = sprite.bounds.size.x;
+        float spriteScalerY = sprite.bounds.size.y;
+        obj.transform.localScale = new Vector2(1 / spriteScalerX * size.x / 4, 1 / spriteScalerY * size.y / 4);
         return obj;
     }
 }

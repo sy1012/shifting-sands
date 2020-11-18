@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour
 {
@@ -8,20 +9,19 @@ public class Slot : MonoBehaviour
     //private ItemData data;
     //private GameObject itemFrame;
     private GameObject item;
+    public float slotWorldUnits;
     //private GameObject popUpHolder;
 
-    public void OnMouseEnter()
+    public void ShowInfo()
     {
-        Camera.main.GetComponent<Inventory>().slotHovered = this;
         if (occupied == true)
         {
             item.GetComponent<ItemFrame>().ShowInfo();
         }
     }
 
-    public void OnMouseExit()
+    public void HideInfo()
     {
-        Camera.main.GetComponent<Inventory>().slotHovered = null;
         if (occupied == true)
         {
             item.GetComponent<ItemFrame>().HideInfo();
@@ -32,7 +32,7 @@ public class Slot : MonoBehaviour
     {
         if (occupied == true)
         {
-            Camera.main.GetComponent<Inventory>().SetHeld(this, item.GetComponent<ItemFrame>().Clicked());
+            GameObject.Find("Inventory").GetComponent<Inventory>().SetHeld(this, item.GetComponent<ItemFrame>().Clicked());
         }
     }
 
@@ -52,13 +52,20 @@ public class Slot : MonoBehaviour
         return this.item.GetComponent<ItemFrame>().data;
     }
 
+
+    public GameObject RetrieveItem()
+    {
+        return item;
+    }
+
     public void AssignData(ItemData data)
     {
         if (data != null)
         {
             this.occupied = true;
             Destroy(item);
-            this.item = new GameObject("ItemFrame");
+            this.item = new GameObject("Slot Frame");
+            //this.item.transform.localScale = new Vector2(1 / data.frame.bounds.size.x * slotWorldUnits, 1 / data.frame.bounds.size.x * slotWorldUnits);
             this.item.transform.SetParent(this.transform);
             this.item.AddComponent<ItemFrame>().data = data;
             this.item.transform.position = this.transform.position;
@@ -66,6 +73,7 @@ public class Slot : MonoBehaviour
         }
         else
         {
+            Debug.Log("null data?");
             this.occupied = false;
             Destroy(item);
         }
