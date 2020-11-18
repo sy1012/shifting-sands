@@ -96,12 +96,13 @@ public static class Formatter
     }
 
     // Returns an object with the text and scaled to the specified size on screen, will overflow the text area potentially
-    public static GameObject ScaleTextToPercentOfScreenUI(string text, int textSize, Vector2 percentScreen)
+    public static GameObject ScaleTextToPercentOfScreenUI(string text, int textSize, Vector2 size)
     {
         GameObject textObj = new GameObject();
-        Vector2 size = Camera.main.ViewportToWorldPoint(percentScreen) - Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        //Vector2 size = Camera.main.View(percentScreen) - Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         TextMeshProUGUI textComponent = textObj.AddComponent<TextMeshProUGUI>();
-        textComponent.fontSize = textSize;
+        //textComponent.fontSize = textSize;
+        textComponent.enableAutoSizing = true;
         textComponent.fontSizeMin = 4;
         textComponent.text = text;
         textComponent.rectTransform.sizeDelta = size;
