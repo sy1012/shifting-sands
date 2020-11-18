@@ -11,9 +11,11 @@ public class Inventory : MonoBehaviour
     private bool inDungeon;
     private bool inventoryOpen;
     private bool mouseDown;
+    private int coinAmount;
     private GameObject held;
     private Slot slotClicked;
     public Slot slotHovered;
+    CoinDisplay CoinDisplay;  
     private Slot hoveredPreviously;
     private bool displayed;  // is the info for the current item hovered displayed already
   
@@ -31,6 +33,9 @@ public class Inventory : MonoBehaviour
         state = new InitialInventoryState();
         state.Enter();
         state = new OverworldInventoryState();
+
+        // Updates the Coin Count on the HUD 
+        CoinDisplay.SetCoins(coinAmount);
     }
 
     private void CraftingClicked(object sender, EventArgs e)
@@ -52,6 +57,7 @@ public class Inventory : MonoBehaviour
     {
         ChangeState(new OverworldWeaponState());
     }
+
 
     private void InventoryInteracted(object sender, EventArgs e)
     {
@@ -75,6 +81,11 @@ public class Inventory : MonoBehaviour
             state = newState;
             state.Enter();
         }
+    }
+
+    private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
+    {
+        state.Swapped(slotOne, slotTwo);
     }
 
     private void InventorySlotsSwapped(Slot slotOne, Slot slotTwo)
@@ -155,7 +166,17 @@ public class Inventory : MonoBehaviour
 
     public void PickUpCoin(int amount)
     {
+
+        this.coinAmount += amount;
+        // Updates the Coin Count on the HUD 
+        if (CoinDisplay == null)
+        {
+            CoinDisplay = FindObjectOfType<CoinDisplay>();
+        }
+        CoinDisplay.SetCoins(coinAmount);
+
         Debug.Log("picking up coin");
         state.PickUpCoins(amount);
+
     }
 }
