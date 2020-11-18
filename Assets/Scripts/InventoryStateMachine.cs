@@ -521,6 +521,11 @@ class OverworldInventoryState : InventoryState
         if (slotTwo.name == "Armour Inventory Slot" && slotOne.RetrieveData().itemType != ItemTypes.Type.armour) { return; }
         if (slotTwo.name == "Rune Inventory Slot" && slotOne.RetrieveData().itemType != ItemTypes.Type.rune) { return; }
 
+        if (slotTwo.name == "Weapon Inventory Slot") { }
+        else if (slotTwo.name == "Armour Inventory Slot") { }
+        else if (slotTwo.name == "Rune Inventory Slot") { }
+        else EventManager.TriggerOnInventorySwap();
+
         ItemData temp = slotOne.RetrieveData();
         slotOne.AssignData(slotTwo.RetrieveData());
         slotTwo.AssignData(temp);
@@ -634,14 +639,13 @@ class OverworldCraftingState : InventoryState
     // allow two slots to be swapped as long as the only way a result can be swapped is if it is the first slot and the second is empty
     public override void Swapped(Slot slotOne, Slot slotTwo)
     {
-        Debug.Log("crafting swap?");
-
         // invalid swap so just pass
         if (slotTwo.name == "Crafting Slot Result" || (slotOne.name == "Crafting Slot Result" && slotTwo.GetComponent<Slot>().RetrieveData( )!= null))
         {
             return;
         }
 
+        EventManager.TriggerOnInventorySwap();
         ItemData temp = slotOne.RetrieveData();
         slotOne.AssignData(slotTwo.RetrieveData());
         slotTwo.AssignData(temp);
@@ -724,6 +728,7 @@ class OverworldRuneState : InventoryState
             // check that you have the money
             if (Buy(slotOne.RetrieveData().value))
             {
+                EventManager.TriggerOnInventorySwap();
                 slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
             }
         }
@@ -734,6 +739,7 @@ class OverworldRuneState : InventoryState
             // if you are selling
             if (slotTwo.name == "Merchant Slot")
             {
+                EventManager.TriggerOnCoinPickedUp();
                 this.PickUpCoins(slotOne.RetrieveData().value);
             }
             slotOne.AssignData(null);
@@ -815,6 +821,7 @@ class OverworldWeaponState : InventoryState
             // check that you have the money
             if (Buy(slotOne.RetrieveData().value))
             {
+                EventManager.TriggerOnInventorySwap();
                 slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
             }
         }
@@ -825,6 +832,7 @@ class OverworldWeaponState : InventoryState
             // if you are selling
             if (slotTwo.name == "Merchant Slot")
             {
+                EventManager.TriggerOnCoinPickedUp();
                 this.PickUpCoins(slotOne.RetrieveData().value);
             }
             slotOne.AssignData(null);
@@ -906,6 +914,7 @@ class OverworldArmourState : InventoryState
             // check that you have the money
             if (Buy(slotOne.RetrieveData().value))
             {
+                EventManager.TriggerOnInventorySwap();
                 slotTwo.GetComponent<Slot>().AssignData(slotOne.RetrieveData());
             }
         }
@@ -916,74 +925,10 @@ class OverworldArmourState : InventoryState
             // if you are selling
             if (slotTwo.name == "Merchant Slot")
             {
+                EventManager.TriggerOnCoinPickedUp();
                 this.PickUpCoins(slotOne.RetrieveData().value);
             }
             slotOne.AssignData(null);
         }
     }
 }
-
-// You are in a dungeon
-//class DungeonInventoryState : InventoryState
-//{
-//    public override void Enter()
-//    {
-//        Debug.Log("hey");
-//        // Fire the event
-//        EventManager.TriggerOnOpenInventory();
-
-//        PubData.open = true;
-
-//        int i = 0;
-//        while (i <= 7)
-//        {
-//            PubData.slots[i].SetActive(true);
-//            i += 1;
-//        }
-//        PubData.armourSlot.SetActive(true);
-//        PubData.weaponSlot.SetActive(true);
-//        PubData.coin.SetActive(true);
-//        PubData.coinText.SetActive(true);
-//        PubData.inventoryText.SetActive(true);
-
-//        return;
-//    }
-
-//    public override void Exit()
-//    {
-//        // Fire the event
-//        EventManager.TriggerOnCloseInventory();
-
-//        PubData.open = false;
-
-//        int i = 0;
-//        while (i <= 7)
-//        {
-//            PubData.slots[i].SetActive(false);
-//            i += 1;
-//        }
-//        PubData.armourSlot.SetActive(false);
-//        PubData.weaponSlot.SetActive(false);
-//        PubData.coin.SetActive(false);
-//        PubData.coinText.SetActive(false);
-//        PubData.inventoryText.SetActive(false);
-
-//        return;
-//    }
-
-//    public override IEnumerator Interact()
-//    {
-//        // DROP ITEM HERE
-
-//        yield break;
-//    }
-
-//    public override IEnumerator Swapped(Slot slotOne, Slot slotTwo)
-//    {
-//        ItemData temp = slotOne.RetrieveData();
-//        slotOne.AssignData(slotTwo.RetrieveData());
-//        slotTwo.AssignData(temp);
-
-//        yield break;
-//    }
-//}

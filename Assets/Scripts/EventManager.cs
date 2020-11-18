@@ -27,6 +27,7 @@ public static class EventManager
     public static event GameEvent onUseShrine;
     public static event GameEvent onDash;
     public static event GameEvent onDungeonGenerated;
+    public static event GameEvent onCraftingMade;
     public static event EventHandler onOverworldStart;
     public static event EventHandler onNewOasis;
     public static event EventHandler onOasisClicked;
@@ -115,6 +116,11 @@ public static class EventManager
     public static void TriggerOnCoinPickedUp()
     {
         onCoinPickedUp?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnCraftingMade()
+    {
+        onCraftingMade?.Invoke(EventArgs.Empty);
     }
 
     public static void TriggerOnPlayerHit()
