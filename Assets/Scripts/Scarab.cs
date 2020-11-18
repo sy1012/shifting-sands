@@ -13,8 +13,8 @@ public class Scarab : Enemy
     void Start()
     {
         damageSpeed = 1;
-        damage = 1;
-        detectionRange = 8;
+        damage = 5;
+        detectionRange = 7;
         randTarget = new GameObject().transform;
         //move healthbar to a more suitable position
         healthCanvas.transform.position = transform.position + new Vector3(0, 0.5f, 0);
@@ -41,8 +41,8 @@ public class Scarab : Enemy
             destination.target = Player;
         }
         //enter randomly-moving patrol mode if the player isn't nearby.
-        //(If the player is not in the same room and is out of range, or if the player is in the same room and is out of range, patrol randomly).
-        else if ((!room.Equals(psm.GetRoom()) && Vector3.Distance(Player.position, transform.position) > detectionRange) || (room.Equals(psm.GetRoom()) && Vector3.Distance(Player.position, transform.position) > detectionRange))
+        //(if the player is in the same room and is out of range, patrol randomly).
+        else if (room.Equals(psm.GetRoom()) && Vector3.Distance(Player.position, transform.position) > detectionRange)
         {
             //only perform a random move if a few seconds have passed.
             //Scarabs are fast, and so move quite a bit.
