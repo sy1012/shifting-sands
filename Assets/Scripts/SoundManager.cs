@@ -419,6 +419,9 @@ public class SoundManager : MonoBehaviour
         EventManager.onCoinPickedUp += PlayCoins;
         EventManager.onCraftingMade += PlayCraftSound;
         EventManager.onRuneChange += PlayShrine;
+        EventManager.onScarabAgro += PlayEnemyBite;
+        EventManager.onSkullAgro += PlayEnemyShade;
+        EventManager.onMummyAgro += PlayEnemyMonster;
 
         // play overworld start
         SoundPlayer.clip = OverworldMusic;
@@ -458,6 +461,9 @@ public class SoundManager : MonoBehaviour
         EventManager.onCraftingMade += PlayCraftSound;
         EventManager.onRuneChange += PlayShrine;
         EventManager.OnExitDungeon += PlayDesertWind;
+        EventManager.onScarabAgro += PlayEnemyBite;
+        EventManager.onSkullAgro += PlayEnemyShade;
+        EventManager.onMummyAgro += PlayEnemyMonster;
 
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;

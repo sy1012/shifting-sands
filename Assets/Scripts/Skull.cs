@@ -44,6 +44,10 @@ public class Skull : Enemy
         if (room.Equals(psm.GetRoom()) && Vector3.Distance(Player.position, transform.position) <= detectionRange)
         {
             destination.target = Player;
+            int x = UnityEngine.Random.Range(0, 1000);
+            if (x == 0){
+                EventManager.TriggerOnSkullAgro();
+            }
         }
         //enter randomly-moving patrol mode if the player isn't nearby. 
         //(If the player is in the same room and is out of range, patrol randomly).
