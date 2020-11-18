@@ -22,7 +22,8 @@
             {
                 enemy.GetComponent<Enemy>().room = room;
                 room.PlaceObject(enemy);
-                enemy.transform.position += Vector3.up * UnityEngine.Random.Range(-1, 1) + Vector3.right * UnityEngine.Random.Range(-1, 1);
+                room.enemies.Add(enemy);
+                //enemy.transform.position += Vector3.up * UnityEngine.Random.Range(-1, 1) + Vector3.right * UnityEngine.Random.Range(-1, 1);
             }
             return pool;
         }

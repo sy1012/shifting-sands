@@ -158,16 +158,61 @@ public class Room : MonoBehaviour
             door.AssignRoomDoorTr(doorTransforms[i],roomNode);
         }
     }
+
+    // -------------------Door Lock and Open Logic -----------------------------------//
+
+    public List<MonoBehaviour> enemies;
+    bool locked = false;
+    bool roomCleared;
+    private void HandlePlayerEnteredThisRoom(EventArgs e)
+    {
+        if (enemies.Count != 0)
+        {
+            LockDoors();
+        }
+    }
+
+    void LockDoors()
+    {
+        SpriteSelector[] doorSpriteSelectors = GetComponentsInChildren<SpriteSelector>();
+        foreach (SpriteSelector ss in doorSpriteSelectors)
+        {
+            ss.SetLocked();
+        }
+    }
+    void UnlockDoors()
+    {
+        SpriteSelector[] doorSpriteSelectors = GetComponentsInChildren<SpriteSelector>();
+        foreach (SpriteSelector ss in doorSpriteSelectors)
+        {
+            ss.SetUnlocked();
+        }
+    }
+
+
+    //-----------------------End Lock and Open Logic----------------------------------//
+
+    private void Awake()
+    {
+        enemies = new List<MonoBehaviour>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventManager.onPlayerEnteredRoom += HandlePlayerEnteredThisRoom;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemies.RemoveAll(item => item == null);
+        if (!roomCleared && enemies.Count == 0)
+        {
+            UnlockDoors();
+            roomCleared = true;
+        }
     }
     private void OnDrawGizmosSelected()
     {

@@ -31,11 +31,14 @@ public static class EventManager
     public static event EventHandler onOasisClicked;
     public static event EventHandler onPyramidClicked;
     public static event EventHandler onRoomFilled;
+    public static event GameEvent OnCastSnowball;
+    public static event GameEvent onSnowballCollision;
     public static event GameEvent onRelicCollected;
+    public static event GameEvent onPlayerEnteredRoom;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
 
     public static GameEvent[] gameEvents = {DoorEntered, OnExitDungeon,OnPlayerHit,OnCastFireball,onAttack,onFireballCollision,onPlayerMovement,
-                                            onUseShrine,onDash,onDungeonGenerated, onRelicCollected};
+                                            onUseShrine,onDash,onDungeonGenerated, onRelicCollected,onPlayerEnteredRoom};
 
     public class onEnteringDungeonEventArgs : EventArgs{ public int dungeonLevel; }
     public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
@@ -55,6 +58,10 @@ public static class EventManager
         onUseShrine = null;
         onDash = null;
         onDungeonGenerated = null;
+        OnCastSnowball = null;
+        onSnowballCollision = null;
+        onRelicCollected = null;
+        onPlayerEnteredRoom = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -184,12 +191,29 @@ public static class EventManager
         onRoomFilled?.Invoke(null,filledArgs);
     }
 
+    public static void TriggerOnCastSnowball()
+    {
+        OnCastSnowball?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnSnowballCollison()
+    {
+        onSnowballCollision?.Invoke(EventArgs.Empty);
+    }
+
     public class RelicEventArgs : EventArgs { public Interactable relic; }
     public static void TriggerRelicGathered(Interactable relic)
     {
         var args = new RelicEventArgs();
         args.relic = relic;
         onRelicCollected?.Invoke(args);
+    }
+    public class PlayerEnterRoomArgs : EventArgs { public Room room; }
+    public static void TriggerPlayerEneteredRoom(Room room)
+    {
+        var args = new PlayerEnterRoomArgs();
+        args.room = room;
+        onPlayerEnteredRoom?.Invoke(args);
     }
 }
 
