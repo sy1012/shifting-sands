@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkullBasher
   m_EditorClassIdentifier: 
   scrollOffset: {x: 0, y: 0}
-  spriteScaling: {x: 1, y: 1}
+  spriteScaling: {x: 1.2, y: 1.2}
   relativeWeight: 10
   sprite: {fileID: 21300000, guid: 4b3517daee64e7b43ba0737a208fe973, type: 3}
   frame: {fileID: 21300000, guid: 133bf6c311ce1884b837fb15ac5f12e0, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   scroll: {fileID: 21300000, guid: 9f4c5842872c35e40b50b7e1725f4eb9, type: 3}
   description: Hammer with teeth
   animationNumber: 3
-  speed: 0
-  hitBoxSize: {x: 0.5, y: 0.5}
-  damage: 0
-  knockback: 0
+  speed: 0.55
+  hitBoxSize: {x: 0.5, y: 1.4}
+  damage: 15
+  knockback: 4
