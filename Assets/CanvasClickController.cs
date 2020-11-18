@@ -26,7 +26,7 @@ public class CanvasClickController : MonoBehaviour
     // Normal raycasts do not work on UI elements, they require a special kind
     GraphicRaycaster raycaster;
 
-    void Start()
+    void Awake()
     {
         _inventoryButton = Instantiate(inventoryButton);
         _inventoryButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
@@ -58,32 +58,31 @@ public class CanvasClickController : MonoBehaviour
         _armourMerchantButton.transform.SetParent(this.transform);
         _armourMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.3f, .95f));
 
-        EventManager.onDungeonGenerated += EnteringDungeon;
-        EventManager.OnExitDungeon += ExitDungeon;
 
-        ExitDungeon(new EventArgs());
+        EventManager.onResubscribeOverworld += OverworldSubscribe;
+        EventManager.onResubscribeDungeon += DungeonSubscribe;
 
         // Get both of the components we need to do this
         this.raycaster = GetComponent<GraphicRaycaster>();
         GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
-    private void ExitDungeon(System.EventArgs e)
-    {
-        _armourMerchantButton.SetActive(true);
-        _weaponMerchantButton.SetActive(true);
-        _craftingButton.SetActive(true);
-        _runeMerchantButton.SetActive(true);
-        _inventoryButton.SetActive(true);
-    }
-
-    private void EnteringDungeon(System.EventArgs e)
+    private void DungeonSubscribe(EventArgs e)
     {
         _armourMerchantButton.SetActive(false);
         _weaponMerchantButton.SetActive(false);
         _craftingButton.SetActive(false);
         _runeMerchantButton.SetActive(false);
         _inventoryButton.SetActive(false);
+    }
+
+    private void OverworldSubscribe(EventArgs e)
+    {
+        _armourMerchantButton.SetActive(true);
+        _weaponMerchantButton.SetActive(true);
+        _craftingButton.SetActive(true);
+        _runeMerchantButton.SetActive(true);
+        _inventoryButton.SetActive(true);
     }
 
     void Update()

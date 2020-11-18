@@ -46,6 +46,8 @@ public static class EventManager
     public static event GameEvent onScarabAgro;
     public static event GameEvent onSkullAgro;
     public static event GameEvent onMummyAgro;
+    public static event GameEvent onResubscribeOverworld;  // DO NOT CLEAN THESE
+    public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING AND ARE FOR PERMANANT OBJS ONLY
     // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public static event GameEvent onSell;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
@@ -91,7 +93,6 @@ public static class EventManager
         onCoinPickedUp = null;
         onCraftingMade = null;
         onRuneChange = null;
-        OnExitDungeon?.Invoke(EventArgs.Empty);
         OnExitDungeon = null;
     }
 
@@ -101,6 +102,16 @@ public static class EventManager
         {
             DoorEntered(EventArgs.Empty);
         }
+    }
+
+    public static void TriggerOnResubscribeDungeon(DungeonGenArgs e)
+    {
+        onResubscribeDungeon?.Invoke(e);
+    }
+
+    public static void TriggerOnResubscribeOverworld(DungeonGenArgs e)
+    {
+        onResubscribeOverworld?.Invoke(e);
     }
 
     public static void TriggerDungeonGenerated(DungeonGenArgs e)

@@ -104,6 +104,12 @@ abstract class InventoryState
         EventManager.TriggerOnCoinPickedUp();
     }
 
+    public void QuietPickUpCoins(int amount)
+    {
+        PubData.coins += amount;
+        PubData.coinText.GetComponent<TextMeshProUGUI>().text = PubData.coins.ToString();
+    }
+
     public int GetCoinAmount()
     {
         return PubData.coins;
