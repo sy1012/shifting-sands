@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateMachine : Character
 {
@@ -227,7 +228,6 @@ public class PlayerStateMachine : Character
         }
     }
 
-
     public override void TakeDamage(int damage, Collision2D collision)
     {
         if (InvincibleTime>0)
@@ -247,5 +247,4 @@ public class PlayerStateMachine : Character
     {
         healthbar =  h;
     }
-
 }
