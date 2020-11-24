@@ -12,11 +12,63 @@ public class Pyramid : MonoBehaviour
     private MapManager pyramidManager;
     bool mousedOver = false;
     private PlayerOverworldTraversal overworldTraversal;
+    float localScale = 0.45f;
+
+    // Default size of dungeon
+    public DungeonVariant dungeonVarient = DungeonVariant.tiny;
+
     // Start is called before the first frame update
     void Start()
     {
         pyramidManager = FindObjectOfType<MapManager>();
         overworldTraversal = FindObjectOfType<PlayerOverworldTraversal>();
+
+
+        // Asssign dungeon varients if applicable
+        float distOfBigPyramid = 10;
+        float dist = transform.position.magnitude;
+        float angle = Utilities.PositiveCWAngleBetween(Vector3.up, transform.position);
+
+        if (dist>distOfBigPyramid)
+        {
+            if ( (int)angle/90 == 0 && !pyramidManager.NEGrandPyramidPlaced)
+            {
+                dungeonVarient = DungeonVariant.medium;
+                pyramidManager.NEGrandPyramidPlaced = true;
+            }
+            else if ((int)angle/90 == 1 && !pyramidManager.SEGrandPyramidPlaced)
+            {
+                dungeonVarient = DungeonVariant.medium;
+                pyramidManager.SEGrandPyramidPlaced = true;
+            }
+            else if ((int)angle/90 == 2 && !pyramidManager.SWGrandPyramidPlaced)
+            {
+                dungeonVarient = DungeonVariant.medium;
+                pyramidManager.SWGrandPyramidPlaced = true;
+            }
+            else if ((int)angle/90 == 3 && !pyramidManager.NWGrandPyramidPlaced)
+            {
+                dungeonVarient = DungeonVariant.medium;
+                pyramidManager.NWGrandPyramidPlaced = true;
+            }
+
+        }
+
+        // Handle dungeon varients
+        switch (dungeonVarient)
+        {
+            case DungeonVariant.tiny:
+                //Do nothing
+                break;
+            case DungeonVariant.medium:
+                localScale = 0.9f;
+                break;
+            case DungeonVariant.none:
+                Debug.Log("Warning: Unassigned variant" + transform.name);
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetParentOasis(Oasis parent)
@@ -69,10 +121,10 @@ public class Pyramid : MonoBehaviour
                             overworldTraversal.EnterPyramid(this);
                             Debug.Log(FindObjectOfType<DungeonDataKeeper>().dungeonDistance);
                         }
-                        /*else if (Input.GetMouseButtonDown(1))
+                        else if (Input.GetMouseButtonDown(1))
                         {
                             TransformToOasis();
-                        }*/
+                        }
                         
                     }
                     mousedOver = true;
@@ -83,11 +135,11 @@ public class Pyramid : MonoBehaviour
             //scale pyramid when moused over
             if (overworldTraversal.currentNode.getOasis().pyramids.Contains(this) && mousedOver)
             {
-                transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.8f, 0.8f), 5 * Time.deltaTime);
+                transform.localScale = Vector2.Lerp(transform.localScale, Vector3.one * localScale * 1.3f, 5 * Time.deltaTime);
             }
             else
             {
-                transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.5f, 0.5f), 5 * Time.deltaTime);
+                transform.localScale = Vector2.Lerp(transform.localScale, Vector3.one * localScale, 5 * Time.deltaTime);
 
             }
 
