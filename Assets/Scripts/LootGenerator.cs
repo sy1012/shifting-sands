@@ -113,7 +113,7 @@ public static class LootGenerator
             DungeonMaster.loot.Add(drop);
             if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<ItemArchtype>().data = (ItemData)item; drop.GetComponent<ItemArchtype>().Dropped(); }
             else if (item.itemType is ItemTypes.Type.consumable) { } // TODO
-            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<ItemArchtype>().data = item; drop.GetComponent<ItemArchtype>().Dropped(); }
+            else if (item.itemType is ItemTypes.Type.item) { }//drop.AddComponent<ItemArchtype>().data = item; }//drop.GetComponent<ItemArchtype>().Dropped(); }
             drop.transform.position = position;
         }
     }

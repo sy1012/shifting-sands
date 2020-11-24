@@ -65,7 +65,9 @@ public class Pyramid : MonoBehaviour
                         if (Input.GetMouseButtonDown(0))
                         {
                             EventManager.TriggerOnPyramidClicked();
+                            FindObjectOfType<DungeonDataKeeper>().dungeonDistance = Vector2.Distance(this.transform.position, pyramidManager.oases[0].transform.position);
                             overworldTraversal.EnterPyramid(this);
+                            Debug.Log(FindObjectOfType<DungeonDataKeeper>().dungeonDistance);
                         }
                         /*else if (Input.GetMouseButtonDown(1))
                         {
