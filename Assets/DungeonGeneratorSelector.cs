@@ -24,6 +24,14 @@ public class DungeonGeneratorSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //  Get dungeon information from overworld
+        var ddkeeper = FindObjectOfType<DungeonDataKeeper>();
+        if (ddkeeper!= null)
+        {
+            currentVariant = ddkeeper.dungeonVariant;
+        }
+
+        //  Select which generator to use
         switch (currentVariant)
         {
             case DungeonVariant.tiny:
