@@ -87,6 +87,14 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveInventory();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+		{
+            LoadInventory();
+		}
         if (slotHovered != null && !displayed && held == null)
         {
             displayed = true;
@@ -172,5 +180,79 @@ public class Inventory : MonoBehaviour
     public bool SetInventoryList(List<ItemData> items)
     {
         return state.SetInventory(items);
+    }
+
+    public void SaveInventory()
+	{
+        SaveSystem.SaveInventory(this, FindObjectOfType<EquipmentManager>());
+	}
+
+    public void LoadInventory()
+	{
+        InventoryData data = SaveSystem.LoadInventory();
+        ItemAccess itemAccess = FindObjectOfType<ItemAccess>();
+        EquipmentManager equipment = FindObjectOfType<EquipmentManager>();
+
+        List<ItemData> loadedItems = new List<ItemData>();
+
+        for(int i = 0; i < data.inventoryItems.Length; i++)
+		{
+            if(data.inventoryItems[i] == null)
+			{
+                loadedItems.Add(null);
+			}
+			else
+			{
+                foreach(ItemData item in itemAccess.items)
+				{
+                    if (item.itemName == data.inventoryItems[i])
+					{
+                        loadedItems.Add(item);
+                        break;
+					}
+				}
+			}
+		}
+
+        SetInventoryList(loadedItems);
+
+        if(data.armour != null)
+		{
+            foreach (ItemData item in itemAccess.items)
+            {
+                if (item.itemName == data.armour)
+                {
+                    equipment.SetArmour((ArmourData)item);
+                    break;
+                }
+            }
+        }
+
+        if (data.weapon != null)
+        {
+            foreach (ItemData item in itemAccess.items)
+            {
+                if (item.itemName == data.weapon)
+                {
+                    equipment.SetWeapon((WeaponData)item);
+                    break;
+                }
+            }
+        }
+
+        if (data.rune != null)
+        {
+            foreach (ItemData item in itemAccess.items)
+            {
+                if (item.itemName == data.rune)
+                {
+                    equipment.SetRune((RuneData)item);
+                    break;
+                }
+            }
+        }
+
+        state.QuietPickUpCoins(data.gold - GetCoinAmount());
+
     }
 }

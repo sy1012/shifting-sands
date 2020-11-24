@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class InventoryData
 {
-	string[] inventoryItems;
-	string rune;
-	string weapon;
-	string armour;
+	public string[] inventoryItems;
+	public string rune;
+	public string weapon;
+	public string armour;
 
-	int gold;
+	public int gold;
 
 	public InventoryData(Inventory inventory, EquipmentManager equipment)
 	{
@@ -19,12 +19,39 @@ public class InventoryData
 
 		for(int i = 0; i < items.Count; i++)
 		{
-			inventoryItems[i] = items[i].itemName;
+			if (items[i] != null)
+			{
+				inventoryItems[i] = items[i].itemName;
+			}
 		}
 
-		armour = equipment.GetArmour().data.itemName;
-		weapon = equipment.GetWeapon().data.itemName;
-		rune = equipment.GetRune().data.itemName;
+		if(equipment.GetArmour().data != null)
+		{
+			armour = equipment.GetArmour().data.itemName;
+		}
+		else
+		{
+			armour = null;
+		}
+
+		if (equipment.GetArmour().data != null)
+		{
+			weapon = equipment.GetWeapon().data.itemName;
+		}
+		else
+		{
+			weapon = null;
+		}
+
+		if (equipment.GetArmour().data != null)
+		{
+			rune = equipment.GetRune().data.itemName;
+		}
+		else
+		{
+			rune = null;
+		}
+
 
 		gold = inventory.GetCoinAmount();
 
