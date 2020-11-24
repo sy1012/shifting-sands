@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum DungeonVariant
+{
+    tiny,
+    medium,
+    none
+}
+
 public class DungeonGeneratorSelector : MonoBehaviour
 {
     [SerializeField]
@@ -11,16 +19,19 @@ public class DungeonGeneratorSelector : MonoBehaviour
     [SerializeField]
     bool newLevelTrigger = false;
 
-    public enum DungeonVariant
-    {
-        tiny,
-        medium,
-        none
-    }
+
     public DungeonVariant currentVariant;
     // Start is called before the first frame update
     void Start()
     {
+        //  Get dungeon information from overworld
+        var ddkeeper = FindObjectOfType<DungeonDataKeeper>();
+        if (ddkeeper!= null)
+        {
+            currentVariant = ddkeeper.dungeonVariant;
+        }
+
+        //  Select which generator to use
         switch (currentVariant)
         {
             case DungeonVariant.tiny:

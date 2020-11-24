@@ -19,6 +19,11 @@ public class MapManager : MonoBehaviour
 
     private bool needToSave;
 
+    public bool NEGrandPyramidPlaced = false;
+    public bool SEGrandPyramidPlaced = false;
+    public bool SWGrandPyramidPlaced = false;
+    public bool NWGrandPyramidPlaced = false;
+
     // Start is called before the first frame update
     void Awake()
     {
