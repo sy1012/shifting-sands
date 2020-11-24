@@ -14,7 +14,7 @@ public class DungeonGeneratorSelector : MonoBehaviour
     public enum DungeonVariant
     {
         tiny,
-        small,
+        medium,
         none
     }
     public DungeonVariant currentVariant;
@@ -26,7 +26,7 @@ public class DungeonGeneratorSelector : MonoBehaviour
             case DungeonVariant.tiny:
                 tinyDungeon.gameObject.SetActive(true);
                 break;
-            case DungeonVariant.small:
+            case DungeonVariant.medium:
                 mediumDungeon.gameObject.SetActive(true);
                 break;
             case DungeonVariant.none:
@@ -50,7 +50,7 @@ public class DungeonGeneratorSelector : MonoBehaviour
                     tinyDungeon.gameObject.SetActive(true);
                     tinyDungeon.MakeNewDungeon();
                     break;
-                case DungeonVariant.small:
+                case DungeonVariant.medium:
                     mediumDungeon.gameObject.SetActive(true);
                     mediumDungeon.MakeNewDungeon();
                     break;

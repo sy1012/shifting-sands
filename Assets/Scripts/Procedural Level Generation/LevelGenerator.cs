@@ -72,6 +72,7 @@ public class LevelGenerator : MonoBehaviour
         graph = new Graph("Level Graph");
         graph.AddNode(new StartNode());
         graphGenerator.ResetForNewGeneration();
+        graphComponent.Reset();
     }
 
     public bool MakeNewDungeon()
