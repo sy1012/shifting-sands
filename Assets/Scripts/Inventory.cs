@@ -160,4 +160,17 @@ public class Inventory : MonoBehaviour
     {
         return state.GetCoinAmount();
     }
+
+    // Gets a list of the entire Inventory
+    public List<ItemData> GetInventoryList()
+    {
+        List<ItemData> items = state.GetInventory();
+        return items;
+    }
+
+    // Sets a list of the entire Inventory
+    public bool SetInventoryList(List<ItemData> items)
+    {
+        return state.SetInventory(items);
+    }
 }

@@ -5,9 +5,16 @@ using UnityEngine;
 public static class LootGenerator
 {
     private static int initialized = 1;
-    private static WeaponData woodSword;
-    private static WeaponData stick;
+    private static RuneData patheticFire;
+    private static RuneData patheticEarth;
+    private static RuneData patheticWater;
+    private static RuneData patheticAir;
     private static ItemData silver;
+    private static ItemData silverx2;
+    private static ItemData silverx3;
+    private static ItemData silverx4;
+    private static ItemData silverx5;
+    private static ItemData silverx10;
 
     private static List<float> dropQuality0;
     private static List<float> dropQuality1;
@@ -38,7 +45,7 @@ public static class LootGenerator
         List<(int, int)> sticks = new List<(int, int)> { (1, 2), (2, 1) };
 
         /* These variables are used to control drop chances of classes of items for a particular quality */
-        dropQuality0 = new List<float> { 0.0f, 1.1f };
+        dropQuality0 = new List<float> { 0.0f, 0.8f };
         dropQuality1 = new List<float> { 0.0f, 0.2f, 0.7f };
 
         /* These variables are used to control drop numbers for a particular quality */
@@ -57,17 +64,31 @@ public static class LootGenerator
             }
             else { Debug.Log("NOT IMPLEMENTED YET"); }
         };
-
-        woodSword = Resources.Load<WeaponData>("Weapons/WoodenTrainingSword");
+        
         silver = Resources.Load<ItemData>("Items/SilverPiece");
-        stick = Resources.Load<WeaponData>("Weapons/Spear");
+        silverx2 = Resources.Load<ItemData>("Items/SilverPiecex2");
+        silverx3 = Resources.Load<ItemData>("Items/SilverPiecex3");
+        silverx4 = Resources.Load<ItemData>("Items/SilverPiecex4");
+        silverx5 = Resources.Load<ItemData>("Items/SilverPiecex5");
+        silverx10 = Resources.Load<ItemData>("Items/SilverPiecex10");
+        patheticFire = Resources.Load<RuneData>("Runes/patheticFireRune");
+        patheticEarth = Resources.Load<RuneData>("Runes/patheticEarthRune");
+        patheticAir = Resources.Load<RuneData>("Runes/patheticAirRune");
+        patheticWater = Resources.Load<RuneData>("Runes/patheticWaterRune");
 
         /* set up the tier Lists */
-        //firstTierUncommon.Add(woodSword);
-        //firstTierCommon.Add(silver);
         thisTierCommon.Add(silver);
-        //thisTierCommon.Add(stick);
-        //thisTierUncommon.Add(woodSword);
+        thisTierCommon.Add(silverx2);
+        thisTierUncommon.Add(silver);
+        thisTierUncommon.Add(silverx2);
+        thisTierUncommon.Add(silverx3);
+        thisTierUncommon.Add(silverx4);
+        thisTierRare.Add(silverx4);
+        thisTierRare.Add(silverx5);
+        thisTierRare.Add(patheticFire);
+        thisTierRare.Add(patheticEarth);
+        thisTierRare.Add(patheticWater);
+        thisTierRare.Add(patheticAir);
     }
 
     private static List<ItemData> GenerateDropsList(int quality)
@@ -94,10 +115,10 @@ public static class LootGenerator
             int counter = 0;
             while (dropQuality.Count-1 >= counter && qualityReached >= dropQuality[counter]) { counter += 1; }
             ItemData item;
-            if (counter == 1) { item = thisTierCommon[Random.Range(0, thisTierCommon.Count - 1)]; }
-            else if (counter == 2) { item = thisTierUncommon[Random.Range(0, thisTierUncommon.Count - 1)]; }
-            else if (counter == 3) { item = thisTierRare[Random.Range(0, thisTierRare.Count - 1)]; }
-            else { item = thisTierExotic[Random.Range(0, thisTierExotic.Count - 1)]; }
+            if (counter == 1) { item = thisTierCommon[(int)Mathf.Round(Random.Range(0, thisTierCommon.Count - 1))]; }
+            else if (counter == 2) { item = thisTierUncommon[(int)Mathf.Round(Random.Range(0, thisTierUncommon.Count - 1))]; }
+            else if (counter == 3) { item = thisTierRare[(int)Mathf.Round(Random.Range(0, thisTierRare.Count - 1))]; }
+            else { item = thisTierExotic[(int)Mathf.Round(Random.Range(0, thisTierExotic.Count - 1))]; }
             dropped.Add(item);  
         }
         return dropped;
@@ -108,13 +129,24 @@ public static class LootGenerator
         if (items[0] == null) { return; }
         foreach (ItemData item in items)
         {
-            GameObject drop = new GameObject("lootDrop");
-            //GameObject.Destroy(drop.GetComponent<SpriteRenderer>());
-            DungeonMaster.loot.Add(drop);
-            if (item.itemType is ItemTypes.Type.weapon) { drop.AddComponent<ItemArchtype>().data = (ItemData)item; drop.GetComponent<ItemArchtype>().Dropped(); }
-            else if (item.itemType is ItemTypes.Type.consumable) { } // TODO
-            else if (item.itemType is ItemTypes.Type.item) { drop.AddComponent<ItemArchtype>().data = item; drop.GetComponent<ItemArchtype>().Dropped(); }
-            drop.transform.position = position;
+            ItemData itemData = item;
+            int times = 1;
+            if (item.sprite == null)  // is it one of the psuedo siver coins
+            {
+                itemData = silver;
+                times = item.value;
+            }
+            while (times > 0)
+            {
+                GameObject drop = new GameObject("lootDrop");
+                DungeonMaster.loot.Add(drop);
+                if (itemData.itemType is ItemTypes.Type.weapon) { drop.AddComponent<ItemArchtype>().data = (ItemData)itemData; drop.GetComponent<ItemArchtype>().Dropped(); }
+                else if (itemData.itemType is ItemTypes.Type.consumable) { } // TODO
+                else if (itemData.itemType is ItemTypes.Type.item) { drop.AddComponent<ItemArchtype>().data = itemData; drop.GetComponent<ItemArchtype>().Dropped(); }
+                drop.transform.position = position;
+                drop.layer = 11;
+                times -= 1;
+            }
         }
     }
 

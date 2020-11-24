@@ -10,8 +10,7 @@ public class OverWorldCamera : MonoBehaviour
     public Vector2 maxPos;
     public Vector2 minPos;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Application.targetFrameRate = 70;
     }

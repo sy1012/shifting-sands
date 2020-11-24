@@ -31,10 +31,13 @@ public class SnowBall : MonoBehaviour
 
         if (timer >= duration)
         {
-            
-            target.GetComponent<IAstarAI>().maxSpeed = normalSpeed;
-            onHitAI = false;
-            timer = 0;
+            try
+            {
+                target.GetComponent<IAstarAI>().maxSpeed = normalSpeed;
+                onHitAI = false;
+                timer = 0;
+            }
+            catch { } // no worries just means the enemy died
             
         }
     }

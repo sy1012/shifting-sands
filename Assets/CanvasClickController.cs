@@ -62,7 +62,7 @@ public class CanvasClickController : MonoBehaviour
         EventManager.onResubscribeOverworld += OverworldSubscribe;
         EventManager.onResubscribeDungeon += DungeonSubscribe;
 
-        // Get both of the components we need to do this
+        // Get components we need to do this
         this.raycaster = GetComponent<GraphicRaycaster>();
         GameObject.DontDestroyOnLoad(this.gameObject);
     }

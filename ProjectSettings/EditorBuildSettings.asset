@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Overworld.unity
+    path: 
     guid: fd8c6dfe7ecb05449af916c9e86f9c93
   - enabled: 0
     path: Assets/Scenes/EnemyAI.unity
@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon.unity
     guid: d4a7a9e1ab5697e44a75271a4f552c60
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1298ef4d44328d44f911604ff0164db2
+  - enabled: 1
+    path: Assets/Scenes/Story.unity
+    guid: 01d0c1991a941144bb86577d17c01880
   m_configObjects: {}

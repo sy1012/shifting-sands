@@ -137,6 +137,29 @@ abstract class InventoryState
         // we dont have any more inventory space
         else return false;
     }
+
+    public bool SetInventory(List<ItemData> items)
+    {
+        if (items.Count > PubData.slots.Count) { return false; }
+        int counter = 0;
+        foreach (ItemData item in items)
+        {
+            PubData.slots[counter].GetComponent<Slot>().AssignData(item);
+            counter += 1;
+        }
+        return true;
+    }
+
+    public List<ItemData> GetInventory()
+    {
+        List<ItemData> items = new List<ItemData>();
+        foreach (GameObject slot in PubData.slots)
+        {
+            items.Add(slot.GetComponent<Slot>().RetrieveData());
+        }
+
+        return items;
+    }
 }
 
 // This will prepare all the initial views and is only used at the start of the application.
