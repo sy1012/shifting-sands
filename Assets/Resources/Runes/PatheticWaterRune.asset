@@ -18,7 +18,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: fa7b8cd0af6f29c4092e7f92753137e0, type: 3}
   frame: {fileID: 21300000, guid: a7c4ded6a3bf5de45b975125af3af56a, type: 3}
   itemType: 3
-  itemName: 
+  itemName: Pathetic Water Rune
   value: 10
   recipe: []
   scroll: {fileID: 21300000, guid: 9f4c5842872c35e40b50b7e1725f4eb9, type: 3}
