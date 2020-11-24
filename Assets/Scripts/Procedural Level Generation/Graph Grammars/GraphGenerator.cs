@@ -45,7 +45,7 @@ namespace GraphGrammars
             }
             if (!done && instructionRules.Count == 0)
             {
-                Debug.Log("Exhausted options for rules to apply at step: " + currentStep + ", moving on to next step if any" );
+                //Debug.Log("Exhausted options for rules to apply at step: " + currentStep + ", moving on to next step if any" );
             }
             //if this is the last recipe
             if (currentStep == currentRecipe.instructions.Count-1)

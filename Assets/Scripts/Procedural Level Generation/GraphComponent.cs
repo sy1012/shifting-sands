@@ -77,6 +77,14 @@ public class GraphComponent : MonoBehaviour
         return edges;
     }
 
+    public void Reset()
+    {
+        while (ncList.Count>0)
+        {
+            RemoveNode(ncList[0]);
+        }
+    }
+
     /// <summary>
     /// Uses BFS to create a list of Bidirectional edges. Each edge is a list of Node Components
     /// </summary>

@@ -14,6 +14,14 @@ public class TreasureNodeComponent: NodeComponent
     private void SpawenTreasure(System.EventArgs e)
     {
         DungeonGenArgs de = (DungeonGenArgs)e;
+
+        //Weird bug work around caused by previous dungeon nodes not being destroyed in time?
+        if (neighbours.Count == 0)
+        {
+            //Debug.Log("Make Treasure Old Node: " + transform.name);
+            return;
+        }
+
         Room room = de.generator.GetRoom(neighbours[0]);
         GameObject newBox = (GameObject) Resources.Load("BreakableBox");
         for (int i = 0; i < Value; i++)
@@ -26,7 +34,10 @@ public class TreasureNodeComponent: NodeComponent
             instance.transform.position += Vector3.up * UnityEngine.Random.Range(-0.75f, 0.75f) + Vector3.right * UnityEngine.Random.Range(-1, 1);
         }
     }
-
+    private void OnDestroy()
+    {
+        EventManager.onDungeonGenerated -= SpawenTreasure;
+    }
     public void Update()
     {
         float ks = 0.2f;
