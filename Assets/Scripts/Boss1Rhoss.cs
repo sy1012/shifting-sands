@@ -6,16 +6,18 @@ public class Boss1Rhoss : Enemy
 {
     public float mvmt_timer = 0.0f; //used to update enemy movement every few seconds.
     public int mvmt_seconds = 0;
+    private int upperChargeTime;  // how often should the enemy try to charge
+    private int lowerChargeTime;  // random amount between these two each time
 
     // Start is called before the first frame update
     void Start()
     {
         damageSpeed = 1;
         damage = 25;
-        detectionRange = 3;
+        detectionRange = 5;
         randTarget = new GameObject().transform;
         //move healthbar to a more suitable position
-        healthCanvas.transform.position = transform.position + new Vector3(0, 1.7f, 0);
+        healthCanvas.transform.position = transform.position + new Vector3(0, 2.5f, 0);
         base.Start();
     }
 
