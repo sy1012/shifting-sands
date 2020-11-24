@@ -34,7 +34,7 @@ public class InventoryData
 			armour = null;
 		}
 
-		if (equipment.GetArmour().data != null)
+		if (equipment.GetWeapon().data != null)
 		{
 			weapon = equipment.GetWeapon().data.itemName;
 		}
@@ -43,7 +43,7 @@ public class InventoryData
 			weapon = null;
 		}
 
-		if (equipment.GetArmour().data != null)
+		if (equipment.GetRune().data != null)
 		{
 			rune = equipment.GetRune().data.itemName;
 		}
