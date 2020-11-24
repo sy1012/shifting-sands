@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7bbd6db8e286ad045a390c29308ceb20, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.23529412}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -331,6 +331,7 @@ MonoBehaviour:
   roomNode: {fileID: 0}
   spawnLocations:
   - {fileID: 6900246052297539390}
+  enemies: []
 --- !u!1 &7324735142884720668
 GameObject:
   m_ObjectHideFlags: 0

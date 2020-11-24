@@ -100,7 +100,7 @@ public class RoomPicker : ScriptableObject
 
     private string RotateString(string headings)
     {
-        Dictionary<char, char> rotHeadings = new Dictionary<char, char>() { { 'N', 'E' }, { 'E', 'S' }, { 'S', 'W' }, { 'W', 'N' } };
+        Dictionary<char, char> rotHeadings = new Dictionary<char, char>() { { 'N', 'E' }, { 'E', 'S' }, { 'S', 'W' }, { 'W', 'N' },{ '*','*'} };
         int n = headings.Length;
         char[] newHeadings = new char[n];
         for (int i = 0; i < n; i++)
@@ -119,6 +119,11 @@ public class RoomPicker : ScriptableObject
         List<char> rcList = new List<char>();
         foreach (var c in roomCode)
         {
+            if (c == '*')
+            {
+                //Dont need to check wild cards
+                continue;
+            }
             rcList.Add(c);
         }
         foreach (var c in headings)

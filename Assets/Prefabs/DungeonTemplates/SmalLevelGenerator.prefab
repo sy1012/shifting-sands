@@ -321,6 +321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipes:
   - {fileID: 11400000, guid: 744e721fa2c661e4484052a1c10d1cfb, type: 2}
+  - {fileID: 11400000, guid: 2b8b59113b490fe429320f983beed84a, type: 2}
+  - {fileID: 11400000, guid: ef0bd65528cee4e4396353e4d9b7f270, type: 2}
   completedGeneration: 0
 --- !u!1 &2510383239450181271
 GameObject:
@@ -367,5 +369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gc: {fileID: 2510383239385449738}
   roomPicker: {fileID: 11400000, guid: 569d3105165e7c84f921949138e4113c, type: 2}
+  roomPickerGoal: {fileID: 11400000, guid: fb5e3aad6a9903f4b8c76ea265d55429, type: 2}
   rooms: []
   doors: []
