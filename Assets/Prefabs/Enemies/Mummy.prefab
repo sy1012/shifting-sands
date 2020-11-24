@@ -130,7 +130,7 @@ MonoBehaviour:
   isMousedOver: 0
   maxHealth: 100
   health: 100
-  weight: 3
+  weight: 30
   healthCanvasPrefab: {fileID: 5570061624185154329, guid: 639cf5f9e4e52c14dab334bb49afea26, type: 3}
   destination: {fileID: 568382389312279834}
   Player: {fileID: 0}
