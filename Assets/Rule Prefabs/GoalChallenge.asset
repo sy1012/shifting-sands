@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d55c0ed7c9584c49a9632c9fb4dcddd, type: 3}
-  m_Name: GoalEncounterLoot
+  m_Name: GoalChallenge
   m_EditorClassIdentifier: 
   instructions:
   - 0
   rules:
-  - {fileID: 5488637155056375895, guid: f3ae51839fd93954e8e284f91ebd5808, type: 3}
+  - {fileID: 1320534409639731065, guid: fdbfe80a5ec0f864c96f1fa738fa06bd, type: 3}

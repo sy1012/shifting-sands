@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d55c0ed7c9584c49a9632c9fb4dcddd, type: 3}
+  m_Name: TinyLevel
+  m_EditorClassIdentifier: 
+  instructions:
+  - 0
+  - 1
+  rules:
+  - {fileID: 655633867292884788, guid: 29d3a8cbe5cbea347ab609d18bd3465e, type: 3}
+  - {fileID: 7478871445448567255, guid: c85332eecf761514ea4aaa15599283d2, type: 3}

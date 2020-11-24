@@ -8,7 +8,25 @@ public class TreasureNodeComponent: NodeComponent
     private void Awake()
     {
         symbol = Symbol.Treasure;
+        EventManager.onDungeonGenerated += SpawenTreasure;
     }
+
+    private void SpawenTreasure(System.EventArgs e)
+    {
+        DungeonGenArgs de = (DungeonGenArgs)e;
+        Room room = de.generator.GetRoom(neighbours[0]);
+        GameObject newBox = (GameObject) Resources.Load("BreakableBox");
+        for (int i = 0; i < Value; i++)
+        {
+            var instance = Instantiate(newBox);
+            room.PlaceObject(instance);
+            instance.transform.position += Vector3.up * UnityEngine.Random.Range(-0.75f, 0.75f) + Vector3.right * UnityEngine.Random.Range(-1, 1);
+            instance = Instantiate(newBox);
+            room.PlaceObject(instance);
+            instance.transform.position += Vector3.up * UnityEngine.Random.Range(-0.75f, 0.75f) + Vector3.right * UnityEngine.Random.Range(-1, 1);
+        }
+    }
+
     public void Update()
     {
         float ks = 0.2f;

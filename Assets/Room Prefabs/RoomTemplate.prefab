@@ -331,6 +331,7 @@ MonoBehaviour:
   roomNode: {fileID: 0}
   spawnLocations:
   - {fileID: 6900246052297539390}
+  enemies: []
 --- !u!1 &7324735142884720668
 GameObject:
   m_ObjectHideFlags: 0

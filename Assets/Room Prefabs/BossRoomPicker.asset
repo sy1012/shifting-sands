@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e7924792a9a24cab172944aa99a7a, type: 3}
+  m_Name: BossRoomPicker
+  m_EditorClassIdentifier: 
+  OneDoorRooms:
+  - {fileID: 8258062586857101258, guid: 3c68c20dc8cf36c4b85a75d4ada846c3, type: 3}
+  TwoDoorRooms:
+  - {fileID: 8258062586857101258, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
+  - {fileID: 8258062586857101258, guid: fa41864127dd3d34082133d1c787f3be, type: 3}
+  - {fileID: 8258062586857101258, guid: ea38faa7ff9dbe84388fb4559942ad4c, type: 3}
+  ThreeDoorRooms: []
+  FourDoorRooms: []

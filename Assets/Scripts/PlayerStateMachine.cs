@@ -76,7 +76,8 @@ public class PlayerStateMachine : Character
         // Move Heakthbar to bottom left 
         healthCanvas.transform.position = HealthBarTransform.position;
 
-        equipment = GameObject.Find("Equipment").GetComponent<EquipmentManager>();
+        
+        equipment = GameObject.Find("Equipment")?.GetComponent<EquipmentManager>();
 
         //Set intial set to normal
         SetState(new NormalState(this));

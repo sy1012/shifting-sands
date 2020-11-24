@@ -14,49 +14,19 @@ public class Room : MonoBehaviour
     public List<Transform> spawnLocations;
     public NodeComponent RoomNode{ get { return roomNode; } set { roomNode = value; } }
 
-    public float getOrientationForDoors(string toDoorHeadings)
-    {
-        // get how much a room needs to be rotated by to match needed orientation
-        float rotation = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            Debug.Log(doorHeadings);
-            if (doorHeadings.Equals(toDoorHeadings))
-            {
-                return rotation;
-            }
-            //Rotate headings by 90
-            //make new headings string
-            string newHeadings = "";
-            foreach (var c in doorHeadings.ToCharArray())
-            {
-                if (c == 'N')
-                {
-                    newHeadings += "E";
-                }
-                else if (c == 'E')
-                {
-                    newHeadings += "S";
-                }
-                else if (c == 'S')
-                {
-                    newHeadings += "W";
-                }
-                else if (c == 'W')
-                {
-                    newHeadings += "N";
-                }
-            }
-            doorHeadings = newHeadings.ToString();
-            rotation += 90;
-        }
-        return rotation;
-    }
 
     public void PlaceObject(MonoBehaviour prefab)
     {
         Transform randomSpawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count)];
         prefab.transform.position = new Vector3(randomSpawnLocation.position.x, randomSpawnLocation.position.y,0);
+        //Parent object to spawn location. Not needed.Only to clean up hierarchy. Also if a room is destroyed the enemy should be too
+        prefab.transform.SetParent(randomSpawnLocation);
+    }
+
+    public void PlaceObject(GameObject prefab)
+    {
+        Transform randomSpawnLocation = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count)];
+        prefab.transform.position = new Vector3(randomSpawnLocation.position.x, randomSpawnLocation.position.y, 0);
         //Parent object to spawn location. Not needed.Only to clean up hierarchy. Also if a room is destroyed the enemy should be too
         prefab.transform.SetParent(randomSpawnLocation);
     }

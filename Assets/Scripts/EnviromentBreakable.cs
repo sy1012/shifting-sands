@@ -11,25 +11,19 @@ public class EnviromentBreakable : MonoBehaviour, IDamagable
     private Sprite sprite;
     private Sprite[] destructionAnimation;
     private Sprite[] beingHitAnimation;
-    private Animator animator;
-    private SpriteRenderer sr;
+    public Animator animator;
     private BoxCollider2D bc;
 
     void Start()
     {
         //TEMP WHILE SPRITES ARE TINY
-        this.transform.localScale = new Vector2(5, 5);
+        //this.transform.localScale = new Vector2(5, 5);
 
-        sr = this.gameObject.AddComponent<SpriteRenderer>();
-        animator = this.gameObject.AddComponent<Animator>();
         quality = data.quality;
         health = data.health;
         sprite = data.sprite;
         destructionAnimation = data.destructionAnimation;
         beingHitAnimation = data.beingHitAnimation;
-        this.sr.sortingLayerName = "Player";
-        this.sr.sprite = sprite;
-        this.bc = this.gameObject.AddComponent<BoxCollider2D>();
     }
 
     public virtual void OnDestroy()
@@ -42,8 +36,19 @@ public class EnviromentBreakable : MonoBehaviour, IDamagable
         this.health -= damage;
         if (this.health <= 0) 
         {
+            StartCoroutine(Break()); 
+        }
+    }
+
+    IEnumerator Break()
+    {
+        if (animator != null)
+        {
+            animator.enabled = true;
+            yield return new WaitForSeconds(0.2f);
             LootGenerator.Generate(this.transform.position, quality);
-            Destroy(this.gameObject); 
+            yield return new WaitForSeconds(1);
+            Destroy(this.gameObject);
         }
     }
 }

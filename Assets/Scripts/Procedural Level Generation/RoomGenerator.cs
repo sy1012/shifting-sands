@@ -8,6 +8,7 @@ public class RoomGenerator : MonoBehaviour
     //Maybe protect these later
     public GraphComponent gc;
     public RoomPicker roomPicker;
+    public RoomPicker roomPickerGoal;
     public List<Transform> rooms;
     public List<Door> doors;
     private Transform doorHolder;
@@ -60,7 +61,19 @@ public class RoomGenerator : MonoBehaviour
 
         List<Door> roomDoors = GetNodeDoors(node);
         DoorT doorTree = new DoorT(roomDoors, node);
-        GameObject newRoom = roomPicker.GetRoomMatch(DoorT.ToOrderedStack(doorTree, null), node);
+        
+        GameObject newRoom = null;
+
+        switch (node.symbol)
+        {
+            case GraphGrammars.Symbol.Goal:
+                newRoom = roomPickerGoal.GetRoomMatch(DoorT.ToOrderedStack(doorTree, null), node);
+                break;
+            default:
+                newRoom = roomPicker.GetRoomMatch(DoorT.ToOrderedStack(doorTree, null), node);
+                break;
+        }
+
         newRoom.name = "Room :" + node.name;
         if (newRoom != null)
         {

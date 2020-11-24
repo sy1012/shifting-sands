@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3880078308236853005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284951216809032839}
+  m_Layer: 0
+  m_Name: Spawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &284951216809032839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880078308236853005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.33, y: 4.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1392433319775688524}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5989204359673313458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218415347701373584}
+  m_Layer: 0
+  m_Name: Spawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1218415347701373584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989204359673313458}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.34, y: 4.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1392433319775688524}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1917540032759511073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,6 +555,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5493810267570589119, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5894289244723539802, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_Name
       value: Room4.1
@@ -552,6 +616,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7627660811624736171, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: spawnLocations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627660811624736171, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: doorTransforms.Array.data[0]
       value: 
       objectReference: {fileID: 6995170252549340988}
@@ -571,10 +639,23 @@ PrefabInstance:
       propertyPath: doorTransforms.Array.data[3]
       value: 
       objectReference: {fileID: 4960336425841187860}
+    - target: {fileID: 7627660811624736171, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: spawnLocations.Array.data[1]
+      value: 
+      objectReference: {fileID: 1218415347701373584}
+    - target: {fileID: 7627660811624736171, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: spawnLocations.Array.data[2]
+      value: 
+      objectReference: {fileID: 284951216809032839}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
 --- !u!4 &4295671971062824403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7273963258188965664, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+  m_PrefabInstance: {fileID: 6876721678518688499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1392433319775688524 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5493810267570589119, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
   m_PrefabInstance: {fileID: 6876721678518688499}
   m_PrefabAsset: {fileID: 0}
