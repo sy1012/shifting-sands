@@ -40,6 +40,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(FindObjectOfType<DungeonDataKeeper>());
         LoadOverworld();
     }
 
