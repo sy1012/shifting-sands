@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2510383238531894095, guid: d5cd5ac752552ce41bfd8259bb962ac5, type: 3}
       propertyPath: m_Name
-      value: SmalLevelGenerator
+      value: MediumLevelGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 2510383238531894095, guid: d5cd5ac752552ce41bfd8259bb962ac5, type: 3}
       propertyPath: m_IsActive
@@ -1113,6 +1113,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900462496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4786746697163729273, guid: 7955e4d2a4403a946b37e0dae52541dc, type: 3}
+  m_PrefabInstance: {fileID: 7993023262838522956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5efb5934d43dc847a61e2a4d1f437c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &951227350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1513136775}
+  - component: {fileID: 1513136776}
   m_Layer: 0
   m_Name: Dungeon Generators
   m_TagString: Untagged
@@ -1774,6 +1786,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1513136776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513136774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3964387473164541a43206c931941a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tinyDungeon: {fileID: 900462496}
+  mediumDungeon: {fileID: 1857472663}
+  currentVariant: 0
 --- !u!1 &1737492458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1878,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737492458}
   m_CullTransparentMesh: 0
+--- !u!114 &1857472663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2510383238531894088, guid: d5cd5ac752552ce41bfd8259bb962ac5, type: 3}
+  m_PrefabInstance: {fileID: 69280082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5efb5934d43dc847a61e2a4d1f437c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931229630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,11 +2079,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4786746697163729278, guid: 7955e4d2a4403a946b37e0dae52541dc, type: 3}
       propertyPath: m_Name
-      value: TinyLevelGenerator (1)
+      value: TinyLevelGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 4786746697163729278, guid: 7955e4d2a4403a946b37e0dae52541dc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7955e4d2a4403a946b37e0dae52541dc, type: 3}

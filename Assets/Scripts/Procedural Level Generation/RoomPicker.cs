@@ -85,6 +85,7 @@ public class RoomPicker : ScriptableObject
         if (canidates.Count == 0)
         {
             Debug.Log("No rooms were found for node" + node.transform.name + ", edges: " + n + ", headings: "+ headings);
+            throw new ArgumentOutOfRangeException("Chosen Room", "No room could match the current graph.");
         }
         GameObject chosenRoom = canidates[randomCanidateIndex];
         float chosenRoomRot = canidatesRots[randomCanidateIndex];
