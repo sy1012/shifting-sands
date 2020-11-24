@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -43,9 +44,10 @@ public class MainMenuClickController : MonoBehaviour
                 }
                 else if (result.gameObject.name == "LoadButton")
                 {
-                    script.load = true;
-                    // ADD A CHECK FOR IF A SAVE EXISTS HERE
-                    SceneManager.LoadScene("Overworld_Scot");
+                    if (File.Exists(Application.persistentDataPath + "overworld.sav")){
+                        script.load = true;
+                        SceneManager.LoadScene("Overworld_Scot");
+                    }
                 }
             }
         }
