@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &791490963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 791490964}
+  - component: {fileID: 791490965}
+  m_Layer: 0
+  m_Name: Treasure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &791490964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791490963}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6283188, y: -2.6745524, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1320534410716970561}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791490965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791490963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594d0531ad86bcb4a83260f8c1501cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbours:
+  - {fileID: 1320534409749640480}
+  symbol: 10
+  Value: 3
 --- !u!1 &1320534409596421287
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +110,7 @@ GameObject:
   - component: {fileID: 1320534409639731064}
   - component: {fileID: 1320534409639731065}
   m_Layer: 0
-  m_Name: LastRoomChallenge
+  m_Name: GoalChallengeRule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbours:
   - {fileID: 1320534410255725614}
+  - {fileID: 791490965}
   symbol: 2
 --- !u!1 &1320534409865136812
 GameObject:
@@ -256,6 +304,7 @@ Transform:
   - {fileID: 1320534410255725601}
   - {fileID: 1320534409749640483}
   - {fileID: 8328032264433806787}
+  - {fileID: 791490964}
   m_Father: {fileID: 1320534409865136815}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -280,6 +329,8 @@ MonoBehaviour:
       name: Goal
     - symbol: 9
       name: Encounter
+    - symbol: 10
+      name: Treasure
     adjList:
     - adj:
       - symbol: 2
@@ -289,10 +340,15 @@ MonoBehaviour:
     - adj:
       - symbol: 2
         name: Goal
+      - symbol: 10
+        name: Treasure
     - adj:
       - symbol: 2
         name: Goal
-    symbols: 020000000200000009000000
+    - adj:
+      - symbol: 2
+        name: Goal
+    symbols: 0200000002000000090000000a000000
 --- !u!1 &1320534411020306784
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8328032264433806788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5190868, y: 2.4319472, z: 0}
+  m_LocalPosition: {x: 1.6473103, y: 2.498805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1320534410716970561}

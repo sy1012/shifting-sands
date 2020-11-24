@@ -86,13 +86,13 @@ public class RoomGenerator : MonoBehaviour
         //Connect doors to room door transforms
         List<Door> orderedDoors = DoorT.ToOrderedList(doorTree, null);
 
+        /*Logging
         string orderStr = node.name + " has these doors in order:";
         foreach (var door in orderedDoors)
         {
             orderStr += " " + door.GetNeighbourNodeOfDoorFor(node).name + ",";
         }
         Debug.Log(orderStr);
-        /*Logging
         */// End logging
 
         newRoom.GetComponent<Room>().MatchUpDoors(orderedDoors);

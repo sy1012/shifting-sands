@@ -25,9 +25,16 @@ public class LevelGenerator : MonoBehaviour
         {
             throw new MissingComponentException("Don't forget graphGenerator,roomGenerator, force directed graph, graph component dependencies");
         }
+        int maxIterations = 10;
+        int curIteration = 0;
+        bool done = false;
         if (!debuggingMode)
         {
-            MakeNewDungeon();
+            while (!done && curIteration<=maxIterations)
+            {
+                done = MakeNewDungeon();
+                curIteration++;
+            }
         }
     }
 
@@ -91,7 +98,23 @@ public class LevelGenerator : MonoBehaviour
             doors = roomGenerator.doors;
             i++;
         }
-        //TODO Quality check dungeon
+
+        // Quality check dungeon
+        int originRooms = 0;
+        foreach (var room in roomGenerator.rooms)
+        {
+            if (room.position.magnitude <= 0.1f)
+            {
+                originRooms += 1;
+            }
+        }
+
+        if (originRooms > 1)
+        {
+            //fail.
+            Debug.Log("Fail");
+            return false;
+        }
 
         //Let everyone else know Dungeon skeleton has been made
         EventManager.TriggerDungeonGenerated(new DungeonGenArgs(this,doors, rooms, graph));

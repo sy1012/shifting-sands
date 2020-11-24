@@ -241,9 +241,9 @@ public class RollState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
-        float dashAmount = 3f;//in units
-        float dashTime = 0.2f;//in seconds
-        int segments = 6;//amount of splits for dash
+        float dashAmount = 4f;//in units
+        float dashTime = 0.12f;//in seconds
+        int segments = 4;//amount of splits for dash
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
