@@ -47,7 +47,7 @@ public class Boss1Rhoss : Enemy
         bossText.GetComponent<TextMeshProUGUI>().fontSize = 25;
         bossText.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.TopGeoAligned;
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
-        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .85f));
+        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .80f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
 
         initialized = true;
@@ -104,7 +104,7 @@ public class Boss1Rhoss : Enemy
                     {
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
-                        this.GetComponent<AIPath>().rotationSpeed = 100;
+                        this.GetComponent<AIPath>().rotationSpeed = 250;
                         charging = true;
                         rotatingTime = 1;
                         chargeTimer = 1;
