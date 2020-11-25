@@ -25,16 +25,10 @@ public class LevelGenerator : MonoBehaviour
         {
             throw new MissingComponentException("Don't forget graphGenerator,roomGenerator, force directed graph, graph component dependencies");
         }
-        int maxIterations = 10;
-        int curIteration = 0;
-        bool done = false;
+
         if (!debuggingMode)
         {
-            while (!done && curIteration<=maxIterations)
-            {
-                done = MakeNewDungeon();
-                curIteration++;
-            }
+             MakeNewDungeon();
         }
     }
 
@@ -78,42 +72,44 @@ public class LevelGenerator : MonoBehaviour
         graph = new Graph("Level Graph");
         graph.AddNode(new StartNode());
         graphGenerator.ResetForNewGeneration();
+        graphComponent.Reset();
     }
 
     public bool MakeNewDungeon()
     {
-        InitializeNewDungeon();
-        int i = 0; //safe guard
-        while (!graphGenerator.completedGeneration && i < 100)
-        {
-            graphGenerator.StepThroughGenerateGraph(graph);
-            graphComponent.UpdateToGraph(graph);
-            fdg.SolveFDG_Recipe();
-            graphComponent.SnapToGrid();
-            roomGenerator.Refresh();
-            roomGenerator.MakeDoors();
-            roomGenerator.MakeRooms();
-            roomGenerator.MoveRoomsToNodes();
-            rooms = roomGenerator.rooms;
-            doors = roomGenerator.doors;
-            i++;
-        }
+        int maxAttempts = 10;
+        int curAttempt = 0;
+        bool done = false;
 
-        // Quality check dungeon
-        int originRooms = 0;
-        foreach (var room in roomGenerator.rooms)
+        while (!done && curAttempt <= maxAttempts)
         {
-            if (room.position.magnitude <= 0.1f)
+            try
             {
-                originRooms += 1;
-            }
-        }
+                curAttempt++;
 
-        if (originRooms > 1)
-        {
-            //fail.
-            Debug.Log("Fail");
-            return false;
+                InitializeNewDungeon();
+                int i = 0; //safe guard
+                while (!graphGenerator.completedGeneration && i < 50)
+                {
+                    graphGenerator.StepThroughGenerateGraph(graph);
+                    graphComponent.UpdateToGraph(graph);
+                    fdg.SolveFDG_Recipe();
+                    graphComponent.SnapToGrid();
+                    roomGenerator.Refresh();
+                    roomGenerator.MakeDoors();
+                    roomGenerator.MakeRooms();
+                    roomGenerator.MoveRoomsToNodes();
+                    rooms = roomGenerator.rooms;
+                    doors = roomGenerator.doors;
+                    i++;
+                }
+
+                done = true;
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
+                Debug.LogError(e.Message);
+            }
         }
 
         //Let everyone else know Dungeon skeleton has been made

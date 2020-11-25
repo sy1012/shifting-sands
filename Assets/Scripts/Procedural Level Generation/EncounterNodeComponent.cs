@@ -13,6 +13,15 @@ public class EncounterNodeComponent : NodeComponent
     private void SpawnMonstersInRoom(System.EventArgs e)
     {
         DungeonGenArgs de = (DungeonGenArgs)e;
+
+        //Sanity CHeck that this isnt an old node
+        if (neighbours.Count == 0)
+        {
+            //Debug.Log("Make Encounter: " + transform.name );
+            return;
+        }
+
+
         Room room = de.generator.GetRoom(neighbours[0]);
         var encounterTable = FindObjectOfType<EncounterTable>();
         var pool = encounterTable.GetEncounterFactory(1, Difficulty).GetEncounter(room);

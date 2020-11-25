@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMousedOver: 0
-  maxHealth: 50
-  health: 50
+  maxHealth: 30
+  health: 30
   weight: 3
   healthCanvasPrefab: {fileID: 5570061624185154329, guid: 639cf5f9e4e52c14dab334bb49afea26, type: 3}
   destination: {fileID: 5967142386578456987}

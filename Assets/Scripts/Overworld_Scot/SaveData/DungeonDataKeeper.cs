@@ -2,19 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DungeonDataKeeper : MonoBehaviour
 {
-    public bool beatLastDungeon = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public static DungeonDataKeeper instance = null;
+
+
+    public bool beatLastDungeon = false;
+    public float dungeonDistance = 0;
+    public DungeonVariant dungeonVariant = DungeonVariant.tiny;
+
+    private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public static DungeonDataKeeper getInstance()
     {
-        
+        if (instance == null)
+        {
+            var newDDK = new GameObject("DungeonDataKeeper");
+            newDDK.AddComponent<DungeonDataKeeper>();
+        }
+        return instance;
     }
 }
