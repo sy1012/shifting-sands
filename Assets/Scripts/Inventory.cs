@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
         EventManager.onArmourMerchant += ArmourMerchantClicked;
         EventManager.onRuneMerchant += RuneMerchantClicked;
         EventManager.onCrafting += CraftingClicked;
+        EventManager.onCloseInventory += SaveInventory;
 
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
@@ -87,10 +88,6 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveInventory();
-        }
         if (Input.GetKeyDown(KeyCode.L))
 		{
             LoadInventory();
@@ -182,7 +179,7 @@ public class Inventory : MonoBehaviour
         return state.SetInventory(items);
     }
 
-    public void SaveInventory()
+    public void SaveInventory(object sender, EventArgs e)
 	{
         SaveSystem.SaveInventory(this, FindObjectOfType<EquipmentManager>());
 	}

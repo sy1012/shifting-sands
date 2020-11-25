@@ -491,8 +491,6 @@ class OverworldInventoryState : InventoryState
 
     public override void Exit()
     {
-        // Fire the event
-        EventManager.TriggerOnCloseInventory();
 
         PubData.open = false;
 
@@ -532,6 +530,9 @@ class OverworldInventoryState : InventoryState
         PubData.coin.SetActive(false);
         PubData.coinText.SetActive(false);
         PubData.inventoryText.SetActive(false);
+
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
 
         return;
     }
@@ -593,8 +594,6 @@ class OverworldCraftingState : InventoryState
 
     public override void Exit()
     {
-        // Fire the event
-        EventManager.TriggerOnCloseInventory();
 
         PubData.open = false;
 
@@ -644,6 +643,9 @@ class OverworldCraftingState : InventoryState
         PubData.craftingSlotResult.SetActive(false);
         PubData.craftingSlotsText.SetActive(false);
         PubData.craftingSlotResultText.SetActive(false);
+
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
 
         return;
     }
@@ -722,9 +724,6 @@ class OverworldRuneState : InventoryState
     {
         PubData.open = false;
 
-        // Fire the event
-        EventManager.TriggerOnCloseInventory();
-
         foreach (GameObject slot in PubData.slots)
         {
             slot.SetActive(false);
@@ -744,6 +743,9 @@ class OverworldRuneState : InventoryState
 
         PubData.runeText.SetActive(false);
         PubData.inventoryBackground.SetActive(false);
+
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
     }
 
     public override void Interact()
@@ -822,9 +824,6 @@ class OverworldWeaponState : InventoryState
     {
         PubData.open = false;
 
-        // Fire the event
-        EventManager.TriggerOnCloseInventory();
-
         foreach (GameObject slot in PubData.slots)
         {
             slot.SetActive(false);
@@ -844,6 +843,9 @@ class OverworldWeaponState : InventoryState
 
         PubData.weaponText.SetActive(false);
         PubData.inventoryBackground.SetActive(false);
+
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
     }
 
     public override void Interact()
@@ -922,9 +924,6 @@ class OverworldArmourState : InventoryState
     {
         PubData.open = false;
 
-        // Fire the event
-        EventManager.TriggerOnCloseInventory();
-
         foreach (GameObject slot in PubData.slots)
         {
             slot.SetActive(false);
@@ -944,6 +943,9 @@ class OverworldArmourState : InventoryState
 
         PubData.armourText.SetActive(false);
         PubData.inventoryBackground.SetActive(false);
+        
+        // Fire the event
+        EventManager.TriggerOnCloseInventory();
     }
 
     public override void Interact()
