@@ -13,7 +13,7 @@ public class Boss1Rhoss : Enemy
     public bool startFight = false;
     private bool initialized = false;
     private int chargeSpeed = 20;
-    private int runSpeed = 5;
+    private int runSpeed = 4;
     private bool charging;
     private float stunned;
     private float rotatingTime = 1;
@@ -22,7 +22,10 @@ public class Boss1Rhoss : Enemy
 
     protected override void Awake()
     {
-
+        AstarData astarData = AstarPath.active.data;
+        GridGraph gg = (GridGraph) astarData.graphs[0];
+        gg.collision.diameter = 1.06f;
+        AstarPath.active.Scan();
     }
 
 
@@ -43,16 +46,20 @@ public class Boss1Rhoss : Enemy
         GameObject bossText = new GameObject("boss text");
         bossText.transform.SetParent(this.transform);
         bossText.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-        bossText.AddComponent<TextMeshProUGUI>().text = "Rhoss the Rammy";
-        bossText.GetComponent<TextMeshProUGUI>().fontSize = 25;
-        bossText.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.TopGeoAligned;
+        TextMeshProUGUI bossTextUI = bossText.AddComponent<TextMeshProUGUI>();
+        bossTextUI.text = "Rhoss the Rammy";
+        bossTextUI.fontSize = 25;
+        bossTextUI.color = Color.white;
+        bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
         healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .80f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
 
+        destination.target = Player;
+
         initialized = true;
         damageSpeed = 1;
-        damage = 45;
+        damage = 30;
         detectionRange = 10;
         randTarget = new GameObject().transform;
         //move healthbar to a more suitable position
@@ -119,6 +126,10 @@ public class Boss1Rhoss : Enemy
                     this.GetComponent<AIPath>().rotationSpeed = 360;
                 }
             }
+            else if (Vector3.Distance(Player.transform.position,transform.position)<5)
+            {
+                startFight = true;
+            }
         }
         else
         {
@@ -149,8 +160,8 @@ public class Boss1Rhoss : Enemy
         }
         else if (collision.collider.name == "Pillar" && this.charging)
         {
-            this.TakeDamage(150);
-            this.stunned = 3;
+            this.TakeDamage(200);
+            this.stunned = 4;
             this.charging = false;
             Destroy(collision.collider.gameObject);
             this.GetComponent<AIPath>().maxSpeed = 0;
@@ -161,4 +172,5 @@ public class Boss1Rhoss : Enemy
         this.charging = false;
         chargeTimer = Random.Range(lowerChargeTime, upperChargeTime);
     }
+
 }

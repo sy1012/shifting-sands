@@ -11,6 +11,7 @@ public class Boss2Anubis : Enemy
     private float upperAttackTime = 8;
     private float lowerAttackTime = 5;
     private bool attacking = false;
+    private float attackingTimer = 1; // an attack isnt instant
     private float attackTime;
     private float teleportTime;
     private int teleportTo = 1;  // This will hold the value 1-4 (inclusive) to determine where he will teleport next
@@ -70,6 +71,7 @@ public class Boss2Anubis : Enemy
             }
 
             // If he isn't ready to teleport update his cooldown on the teleport, if he is then teleport him and reset the timer
+            // Make him finish his attack if he is attacking though
             if (teleportTime > 0)
             {
                 teleportTime -= Time.deltaTime;
@@ -82,7 +84,15 @@ public class Boss2Anubis : Enemy
                 else if (teleportTo == 3) { this.transform.position = GameObject.Find("AnubisPillarThree").transform.position; }
                 else if (teleportTo == 4) { this.transform.position = GameObject.Find("AnubisPillarFour").transform.position; }
                 teleportTo = Random.Range(0, 4);
+            }
 
+            if (attackTime > 0)
+            {
+                attackTime -= Time.deltaTime;
+            }
+            else
+            {
+                attacking = true;
             }
 
             if (room == null)
@@ -93,10 +103,20 @@ public class Boss2Anubis : Enemy
             {
                 throw new System.Exception("The Anubis' enemy:" + transform.name + "'s target player is Null");
             }
-            //if the player is in the same room as the Mummy, and is within the Mummy's detection radius, pursue the player to attack!
-            if (room.Equals(psm.GetRoom()))
-            {
 
+            //if the player is in the same room and the attack time is 0 then start an attack
+            if (room.Equals(psm.GetRoom()) && attacking)
+            {
+                // this is the first frame of the attack so set everything in motion
+                if (attackingTimer == 0)
+                {
+                    attackingTimer = 1;
+                    this.GetComponent<Animator>().SetBool("Attacking", true);
+                }
+                Debug.Log("ATTACKING!");
+                attackingTimer -= Time.deltaTime;
+                
+                
             }
         }
     }
