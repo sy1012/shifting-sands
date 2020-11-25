@@ -8,15 +8,15 @@ public class Boss1Rhoss : Enemy
 {
     public float mvmt_timer = 0.0f; //used to update enemy movement every few seconds.
     public int mvmt_seconds = 0;
-    private int upperChargeTime = 10;  // how often should the enemy try to charge
-    private int lowerChargeTime = 5;  // random amount between these two each time
+    private int upperChargeTime = 4;  // how often should the enemy try to charge
+    private int lowerChargeTime = 2;  // random amount between these two each time
     public bool startFight = false;
     private bool initialized = false;
     private int chargeSpeed = 20;
-    private int runSpeed = 7;
+    private int runSpeed = 5;
     private bool charging;
     private float stunned;
-    private float rotatingTime = 2;
+    private float rotatingTime = 1;
     private float chargeTimer;
 
 
@@ -47,7 +47,7 @@ public class Boss1Rhoss : Enemy
         bossText.GetComponent<TextMeshProUGUI>().fontSize = 25;
         bossText.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.TopGeoAligned;
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
-        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .75f));
+        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .85f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
 
         initialized = true;
@@ -76,6 +76,12 @@ public class Boss1Rhoss : Enemy
                 {
                     chargeTimer -= Time.deltaTime;
                 }
+                // he failed to connect stop the charge
+                if (charging && chargeTimer <= 0)
+                {
+                    charging = false;
+                    chargeTimer = Random.Range(lowerChargeTime, upperChargeTime);
+                }
 
                 //update the timer and number of seconds passed since last movement
                 mvmt_timer += Time.deltaTime;
@@ -98,10 +104,10 @@ public class Boss1Rhoss : Enemy
                     {
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
-                        this.GetComponent<AIPath>().rotationSpeed = 360;
+                        this.GetComponent<AIPath>().rotationSpeed = 100;
                         charging = true;
-                        rotatingTime = 2;
-                        chargeTimer = Random.Range(lowerChargeTime, upperChargeTime);
+                        rotatingTime = 1;
+                        chargeTimer = 1;
                     }
                 }
                 //enter randomly-moving patrol mode if the player isn't nearby.
@@ -143,11 +149,15 @@ public class Boss1Rhoss : Enemy
         else if (collision.collider.name == "Pillar" && this.charging)
         {
             this.TakeDamage(150);
-            this.stunned = 2;
+            this.stunned = 3;
             this.charging = false;
             Destroy(collision.collider.gameObject);
             this.GetComponent<AIPath>().maxSpeed = 0;
             this.GetComponent<AIPath>().canMove = true;
         }
+        this.GetComponent<AIPath>().rotationSpeed = 360;
+        this.GetComponent<AIPath>().maxSpeed = 0;
+        this.charging = false;
+        chargeTimer = Random.Range(lowerChargeTime, upperChargeTime);
     }
 }
