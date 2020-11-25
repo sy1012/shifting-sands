@@ -16,7 +16,5 @@ MonoBehaviour:
   - {fileID: 8258062586857101258, guid: 3c68c20dc8cf36c4b85a75d4ada846c3, type: 3}
   TwoDoorRooms:
   - {fileID: 8258062586857101258, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
-  - {fileID: 8258062586857101258, guid: fa41864127dd3d34082133d1c787f3be, type: 3}
-  - {fileID: 8258062586857101258, guid: ea38faa7ff9dbe84388fb4559942ad4c, type: 3}
   ThreeDoorRooms: []
   FourDoorRooms: []
