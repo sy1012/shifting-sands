@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1577505332123409518}
   - component: {fileID: 3939381209776630648}
   - component: {fileID: 6832817009383514905}
+  - component: {fileID: -4197711690386665983}
   m_Layer: 14
-  m_Name: fireball
+  m_Name: fireballProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1415255399047042295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.77, y: -4.66, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: -1380088617
   m_SortingLayer: 2
   m_SortingOrder: 999
-  m_Sprite: {fileID: 21300000, guid: 0fab0f2a86cb81048ae0827797272a8c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7d761347831e17d42b73f12d71623dce, type: 3}
+  m_Color: {r: 1, g: 0.97299725, b: 0.95660377, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,7 +124,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.35, y: 1.35}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1.35, y: 1.35}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -146,4 +147,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 1195645871915285880, guid: f0454963a03e6d84e8c872736f4fccac, type: 3}
   fireballDamage: 50
-  speed: 6
+  animator: {fileID: -4197711690386665983}
+--- !u!95 &-4197711690386665983
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415255399047042295}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69c1a428d7e12fb489c531054710c602, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

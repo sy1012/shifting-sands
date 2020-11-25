@@ -8,6 +8,7 @@ public class fireball : MonoBehaviour
     public GameObject hitEffect;
     public int fireballDamage = 50;
     private int speed = 7;
+    public Animator animator;
 
     public void Update()
     {

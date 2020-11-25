@@ -1477,6 +1477,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1746857442, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746857442, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746857442, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1746857443, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: cam
       value: 
