@@ -145,6 +145,7 @@ public class Boss1Rhoss : Enemy
         {
             cooldown = damageSpeed;
             psm.TakeDamage(damage, collision);
+            stunned = 1;
         }
         else if (collision.collider.name == "Pillar" && this.charging)
         {
