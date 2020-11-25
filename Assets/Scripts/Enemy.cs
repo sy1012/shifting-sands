@@ -37,7 +37,7 @@ public class Enemy : Character
         if (cooldown >= 0) { cooldown -= Time.deltaTime; }
     }
 
-    public void OnCollisionStay2D(Collision2D collision)
+    public virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.collider.transform == Player && cooldown <= 0)
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public enum StateEnum
@@ -308,9 +309,10 @@ public class HitState:State
                 armour += armour * equipment.GetRune().data.effectiveness;
             }
             psm.health = (int)(((psm.health + psm.health * armour) - damageTaking) / (1 + armour));
-            Debug.Log(psm.health);
+            if (psm.health <= 0) { PlayerDeath(); }
         }
         else psm.health -= damageTaking;
+        if (psm.health <= 0) { PlayerDeath(); }
         var healthbar = psm.GetComponentInChildren<Healthbar>();
         Vector3 dir = hitCollision.transform.position - psm.transform.position;
         dir = dir.normalized;
@@ -325,5 +327,16 @@ public class HitState:State
 
     }
 
+    public void PlayerDeath()
+    {
+        // clean up the hierarchy
+        GameObject.Destroy(GameObject.Find("Canvas"));
+        GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
+        GameObject.Destroy(GameObject.Find("DungeonData"));
+        GameObject.Destroy(GameObject.Find("Equipment"));
+
+        Debug.Log("Death Noises");
+        SceneManager.LoadScene("MainMenu");
+    }
 }
 
