@@ -6,6 +6,7 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
+
     InventoryState state;
     EquipmentManager equipment;
     private bool inDungeon;
@@ -27,15 +28,17 @@ public class Inventory : MonoBehaviour
         EventManager.onRuneMerchant += RuneMerchantClicked;
         EventManager.onCrafting += CraftingClicked;
         EventManager.onCloseInventory += SaveInventory;
-
+        
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
         state.Enter();
         state = new OverworldInventoryState();
 
         state.QuietPickUpCoins(300);
-    }
 
+        LoadInventory();
+
+    }
     private void CraftingClicked(object sender, EventArgs e)
     {
         ChangeState(new OverworldCraftingState());
@@ -88,10 +91,6 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-		{
-            LoadInventory();
-		}
         if (slotHovered != null && !displayed && held == null)
         {
             displayed = true;
@@ -176,6 +175,10 @@ public class Inventory : MonoBehaviour
     // Sets a list of the entire Inventory
     public bool SetInventoryList(List<ItemData> items)
     {
+        if(state == null)
+        {
+            Debug.Log("bruh");
+        }
         return state.SetInventory(items);
     }
 
@@ -186,70 +189,72 @@ public class Inventory : MonoBehaviour
 
     public void LoadInventory()
 	{
-        InventoryData data = SaveSystem.LoadInventory();
-        ItemAccess itemAccess = FindObjectOfType<ItemAccess>();
-        EquipmentManager equipment = FindObjectOfType<EquipmentManager>();
+        if (FindObjectOfType<MenuSelection>().load)
+        {
+            InventoryData data = SaveSystem.LoadInventory();
+            ItemAccess itemAccess = FindObjectOfType<ItemAccess>();
+            EquipmentManager equipment = FindObjectOfType<EquipmentManager>();
 
-        List<ItemData> loadedItems = new List<ItemData>();
+            List<ItemData> loadedItems = new List<ItemData>();
 
-        for(int i = 0; i < data.inventoryItems.Length; i++)
-		{
-            if(data.inventoryItems[i] == null)
-			{
-                loadedItems.Add(null);
-			}
-			else
-			{
-                foreach(ItemData item in itemAccess.items)
-				{
-                    if (item.itemName == data.inventoryItems[i])
-					{
-                        loadedItems.Add(item);
+            for (int i = 0; i < data.inventoryItems.Length; i++)
+            {
+                if (data.inventoryItems[i] == null)
+                {
+                    loadedItems.Add(null);
+                }
+                else
+                {
+                    foreach (ItemData item in itemAccess.items)
+                    {
+                        if (item.itemName == data.inventoryItems[i])
+                        {
+                            loadedItems.Add(item);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            SetInventoryList(loadedItems);
+
+            if (data.armour != null)
+            {
+                foreach (ItemData item in itemAccess.items)
+                {
+                    if (item.itemName == data.armour)
+                    {
+                        equipment.SetArmour((ArmourData)item);
                         break;
-					}
-				}
-			}
-		}
-
-        SetInventoryList(loadedItems);
-
-        if(data.armour != null)
-		{
-            foreach (ItemData item in itemAccess.items)
-            {
-                if (item.itemName == data.armour)
-                {
-                    equipment.SetArmour((ArmourData)item);
-                    break;
+                    }
                 }
             }
-        }
 
-        if (data.weapon != null)
-        {
-            foreach (ItemData item in itemAccess.items)
+            if (data.weapon != null)
             {
-                if (item.itemName == data.weapon)
+                foreach (ItemData item in itemAccess.items)
                 {
-                    equipment.SetWeapon((WeaponData)item);
-                    break;
+                    if (item.itemName == data.weapon)
+                    {
+                        equipment.SetWeapon((WeaponData)item);
+                        break;
+                    }
                 }
             }
-        }
 
-        if (data.rune != null)
-        {
-            foreach (ItemData item in itemAccess.items)
+            if (data.rune != null)
             {
-                if (item.itemName == data.rune)
+                foreach (ItemData item in itemAccess.items)
                 {
-                    equipment.SetRune((RuneData)item);
-                    break;
+                    if (item.itemName == data.rune)
+                    {
+                        equipment.SetRune((RuneData)item);
+                        break;
+                    }
                 }
             }
+
+            state.QuietPickUpCoins(data.gold - GetCoinAmount());
         }
-
-        state.QuietPickUpCoins(data.gold - GetCoinAmount());
-
     }
 }
