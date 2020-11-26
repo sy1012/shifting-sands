@@ -15,7 +15,7 @@ MonoBehaviour:
   scrollOffset: {x: 0, y: 0}
   spriteScaling: {x: 1.2, y: 1.2}
   relativeWeight: 10
-  sprite: {fileID: 21300000, guid: 4b3517daee64e7b43ba0737a208fe973, type: 3}
+  sprite: {fileID: 21300000, guid: 0d2f70c55830ccb4ca71137ba3b7af70, type: 3}
   frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 1
   itemName: Skull Crusher

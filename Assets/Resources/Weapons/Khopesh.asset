@@ -15,7 +15,7 @@ MonoBehaviour:
   scrollOffset: {x: 0, y: 75.1}
   spriteScaling: {x: 1, y: 1}
   relativeWeight: 10
-  sprite: {fileID: 21300000, guid: f6d3a1b3fc23e874aa394e9244c9a11b, type: 3}
+  sprite: {fileID: 21300000, guid: 841e743c7badc074c9b2f6aa46a26c40, type: 3}
   frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 1
   itemName: Khopesh
