@@ -442,6 +442,25 @@ class InitialInventoryState : InventoryState
             PubData.armourSlot.GetComponent<Slot>().AssignData(PubData.equipment.GetRune().data);
         }
 
+        PubData.inventoryText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.craftingText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.runeText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.weaponText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.armourText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.coinText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+
+        PubData.craftingSlotResultText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.craftingSlotsText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+
+
+
+        PubData.weaponEquippedText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.runeEquippedText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.armourEquippedText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+
+
+
+
         return;
     }
 }
