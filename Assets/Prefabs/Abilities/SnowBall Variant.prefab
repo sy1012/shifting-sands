@@ -26,8 +26,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4197711690386665983, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4197711690386665983, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e3d0382f351e43349b5a174b4d9d17bd, type: 2}
     - target: {fileID: 1415255399047042295, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
       propertyPath: m_Name
       value: SnowBall Variant
@@ -130,7 +134,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6832817009383514905, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
-    - {fileID: -4197711690386665983, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75a6a5e0a5f35d8419aaebce7d99f58c, type: 3}
 --- !u!1 &8017507522371142616 stripped
 GameObject:
