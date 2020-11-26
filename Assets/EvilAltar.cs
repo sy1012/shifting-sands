@@ -5,14 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class EvilAltar : Interactable
 {
+    // Children in hierachry refs
+    [SerializeField]
+    Transform flameRoot;
+    FlameExplosion explosion;
+
     IEnumerator LeaveDungeon()
     {
         DungeonDataKeeper.getInstance().beatLastDungeon = true;
         FadeController.PlayFadeOutText("curse");
+        explosion.PlayExplosionForTime(3);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Overworld_Scot");
         EventManager.TriggerDungeonExit();
     }
+
     public override void Interact(GameObject interactor)
     {
         //  Validate interactor. Sanity check
@@ -23,6 +30,13 @@ public class EvilAltar : Interactable
             return;
         }
         EventManager.TriggerRelicGathered(this);
+        DungeonDataKeeper.getInstance().curseValue = DungeonDataKeeper.getInstance().curseValue * 0.5f;
         StartCoroutine(LeaveDungeon());
+    }
+
+    private void Start()
+    {
+        flameRoot.localScale = DungeonDataKeeper.getInstance().curseValue * Vector3.one;
+        explosion = GetComponentInChildren<FlameExplosion>();
     }
 }
