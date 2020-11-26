@@ -8,8 +8,8 @@ public class PureAltar : Interactable
     IEnumerator LeaveDungeon()
     {
         DungeonDataKeeper.getInstance().beatLastDungeon = true;
-        FadeController.PlayFadeOut();
-        yield return new WaitForSeconds(.5f);
+        FadeController.PlayFadeOutText("blessing");
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Overworld_Scot");
         EventManager.TriggerDungeonExit();
     }
