@@ -16,7 +16,7 @@ MonoBehaviour:
   spriteScaling: {x: 0, y: 0}
   relativeWeight: 0
   sprite: {fileID: 21300000, guid: 94637b631ee325c44a1cf5d77489f553, type: 3}
-  frame: {fileID: 21300000, guid: a7c4ded6a3bf5de45b975125af3af56a, type: 3}
+  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 3
   itemName: Pathetic Earth Rune
   value: 10
