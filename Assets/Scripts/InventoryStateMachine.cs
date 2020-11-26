@@ -197,8 +197,8 @@ class InitialInventoryState : InventoryState
         PubData.inventoryBackground.AddComponent<Image>().sprite = PubData.inventoryBackgroundSprite;
         PubData.inventoryBackground.GetComponent<RectTransform>().SetParent(inventoryTransform);
         PubData.inventoryBackground.GetComponent<RectTransform>().localPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.50f, 0.45f));
-        PubData.inventoryBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(VIEWPERCENT * Camera.main.pixelWidth / PubData.inventoryBackgroundSprite.bounds.size.x,
-            VIEWPERCENT * Camera.main.pixelHeight / PubData.inventoryBackgroundSprite.bounds.size.y);
+        PubData.inventoryBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(15 * VIEWPERCENT * Camera.main.pixelWidth / PubData.inventoryBackgroundSprite.bounds.size.x,
+            12* VIEWPERCENT * Camera.main.pixelHeight / PubData.inventoryBackgroundSprite.bounds.size.y);
         PubData.inventoryBackground.SetActive(false);
 
         // Scale the images for this resolution
@@ -211,7 +211,7 @@ class InitialInventoryState : InventoryState
         //PubData.inventoryBackground.transform.localScale = new Vector2(1 / xScale * worldUnitsWide, 1 / yScale * worldUnitsTall);
 
         float slotWorldUnits = (screenUpperRight.x - screenLowerLeft.x) / 330;
-        float slotScale = 1 / PubData.inventorySlotSprite.bounds.size.x * slotWorldUnits;
+        float slotScale = 15 / PubData.inventorySlotSprite.bounds.size.x * slotWorldUnits;
         float coinScale = (1 / PubData.coinSprite.bounds.size.x * (screenUpperRight.x - screenLowerLeft.x) / 200);
 
         // what Size is each block
@@ -441,6 +441,25 @@ class InitialInventoryState : InventoryState
         {
             PubData.armourSlot.GetComponent<Slot>().AssignData(PubData.equipment.GetRune().data);
         }
+
+        PubData.inventoryText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.craftingText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.runeText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.weaponText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.armourText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.coinText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+
+        PubData.craftingSlotResultText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.craftingSlotsText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+
+
+
+        PubData.weaponEquippedText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.runeEquippedText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+        PubData.armourEquippedText.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("CASTELAR SDF");
+
+
+
 
         return;
     }
