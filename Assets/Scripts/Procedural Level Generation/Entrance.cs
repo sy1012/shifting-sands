@@ -62,6 +62,7 @@ public class Entrance : Interactable
         {
             FindObjectOfType<DungeonDataKeeper>().beatLastDungeon = true;
         }
+        FadeController.PlayFadeOut();
         yield return new WaitForSeconds(.5f);
         SceneManager.LoadScene("Overworld_Scot");
         EndInteraction(interactor);

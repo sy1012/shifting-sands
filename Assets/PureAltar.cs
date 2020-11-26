@@ -7,7 +7,8 @@ public class PureAltar : Interactable
 {
     IEnumerator LeaveDungeon()
     {
-        FindObjectOfType<DungeonDataKeeper>().beatLastDungeon = true;
+        DungeonDataKeeper.getInstance().beatLastDungeon = true;
+        FadeController.PlayFadeOut();
         yield return new WaitForSeconds(.5f);
         SceneManager.LoadScene("Overworld_Scot");
         EventManager.TriggerDungeonExit();
