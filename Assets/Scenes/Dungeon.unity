@@ -782,6 +782,10 @@ PrefabInstance:
       propertyPath: coolDown1
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1574710585840825553, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2022992065126582977, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
