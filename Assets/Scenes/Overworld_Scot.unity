@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 91791886}
   - component: {fileID: 91791885}
+  - component: {fileID: 91791887}
   m_Layer: 0
   m_Name: Fade
   m_TagString: Untagged
@@ -322,6 +323,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &91791887
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91791884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 47bd01b70cbaf764ea9def1b68da42e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &455205990
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +698,10 @@ MonoBehaviour:
     symbols: 
   pathPrefab: {fileID: 4603880920107688456, guid: feb9557b382accb44ad76de7df2da246, type: 3}
   currentOasis: {fileID: 0}
+  NEGrandPyramidPlaced: 0
+  SEGrandPyramidPlaced: 0
+  SWGrandPyramidPlaced: 0
+  NWGrandPyramidPlaced: 0
 --- !u!61 &712518798
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -839,6 +863,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatLastDungeon: 0
+  dungeonDistance: 0
+  dungeonVariant: 0
 --- !u!4 &943636244
 Transform:
   m_ObjectHideFlags: 0
