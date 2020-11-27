@@ -20,8 +20,7 @@ public class StoryTeller : MonoBehaviour
             Camera.main.ViewportToWorldPoint(new Vector2(0, 0))).y;
 
         // when is the text off the screen
-        endPosition = (-Text.GetComponent<RectTransform>().rect.y
-            + (Camera.main.ViewportToScreenPoint(new Vector2(1, 1)) - Camera.main.ViewportToScreenPoint(new Vector2(.5f, .5f))).y);
+        endPosition = (1.8f * Text.GetComponent<RectTransform>().rect.y + Camera.main.pixelHeight);
 
         Debug.Log(endPosition);
     }
@@ -33,7 +32,10 @@ public class StoryTeller : MonoBehaviour
         {
             EnterOverworld();
         }
-        Text.transform.position = new Vector2(Text.transform.position.x, Text.transform.position.y + screenScrollSpeed);
+		else
+		{
+            Text.transform.position = new Vector2(Text.transform.position.x, Text.transform.position.y + screenScrollSpeed);
+        }
     }
        
     void EnterOverworld()
