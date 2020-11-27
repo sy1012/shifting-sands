@@ -36,7 +36,6 @@ public static class LootGenerator
     static void Start()
     {
         initialized = 0;
-        Debug.Log("start ran");
 
         /* These variables control what rarity an item is for any tier it is present in, (tier, rarity) */
         List<(int, int)> woodSwords = new List<(int, int)> { (1, 2), (2, 2) };

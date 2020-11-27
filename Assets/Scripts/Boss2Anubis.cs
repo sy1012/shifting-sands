@@ -23,7 +23,7 @@ public class Boss2Anubis : Enemy
     private List<GameObject> bombs;
     private GameObject bossText;
     private bool dying;
-    private float dyingTimer;
+    private float dyingTimer = 2;
 
     protected override void Awake()
     {
@@ -35,8 +35,9 @@ public class Boss2Anubis : Enemy
     void Initialize()
     {
         // let it start path finding
-        this.maxHealth = 50;
+        this.maxHealth = 500;
         teleportTo = Random.Range(1, 5);
+        attackTime = Random.Range(lowerAttackTime, upperAttackTime);
         bombs = new List<GameObject>();
 
         //character awake
@@ -90,7 +91,12 @@ public class Boss2Anubis : Enemy
                     else if (teleportTo == 2) { this.transform.position = GameObject.Find("AnubisPillarTwo").transform.position; }
                     else if (teleportTo == 3) { this.transform.position = GameObject.Find("AnubisPillarThree").transform.position; }
                     else if (teleportTo == 4) { this.transform.position = GameObject.Find("AnubisPillarFour").transform.position; }
-                    teleportTo = Random.Range(0, 5);
+                    int last = teleportTo;
+                    while (teleportTo == last)
+                    {
+                        teleportTo = Random.Range(0, 5);
+                    }
+                    
                 }
 
                 if (attackTime > 0)
@@ -117,12 +123,24 @@ public class Boss2Anubis : Enemy
                     // this is the first frame of the attack so set everything in motion
                     if (attackingTimer <= 0)
                     {
-                        Debug.Log("ATTACKING!");
-                        // the four entrances will always be bombed
+                        // the anubis' current location will always be bombed
                         bomb = Instantiate(bombPrefab);
                         bombs.Add(bomb);
                         bomb.GetComponent<AnubisBombs>().player = Player;
                         bomb.transform.position = this.transform.position;
+
+                        // randomly spread 20 bombs throughout the rest of the room
+                        for (int row = -10; row < 10; row += 2)
+                        {
+                            for (int column = -10; column < 10; column += 2)
+                            {
+                                bomb = Instantiate(bombPrefab);
+                                bombs.Add(bomb);
+                                bomb.GetComponent<AnubisBombs>().player = Player;
+                                bomb.transform.position = (Vector2)this.room.transform.position + 
+                                    new Vector2(Random.Range(row -1f, row + 1f), Random.Range(column - 1f, column + 1f));
+                            }
+                        }
                         attackingTimer = 1.5f;
                         animator.SetBool("Attack", true);
                     }
@@ -142,7 +160,6 @@ public class Boss2Anubis : Enemy
                         attackTime = Random.Range(lowerAttackTime, upperAttackTime);
                         attacking = false;
                         animator.SetBool("Attack", false);
-                        Debug.Log("Explosion noises!");
                     }
                 }
             }
@@ -152,19 +169,12 @@ public class Boss2Anubis : Enemy
             dyingTimer -= Time.deltaTime;
             if (dyingTimer <= 0)
             {
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }
 
-    public override void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.transform == Player)
-        {
-            cooldown = damageSpeed;
-            psm.TakeDamage(0, collision);
-        }
-    }
+    public override void OnCollisionStay2D(Collision2D collision) { }
 
     public override void TakeDamage(int damage)
     {
