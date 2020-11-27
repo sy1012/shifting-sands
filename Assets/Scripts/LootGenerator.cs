@@ -5,10 +5,9 @@ using UnityEngine;
 public static class LootGenerator
 {
     private static int initialized = 1;
-    private static RuneData patheticFire;
-    private static RuneData patheticEarth;
-    private static RuneData patheticWater;
-    private static RuneData patheticAir;
+    private static ItemData smallHealthOrb;
+    private static ItemData mediumHealthOrb;
+    private static ItemData largeHealthOrb;
     private static ItemData silver;
     private static ItemData silverx2;
     private static ItemData silverx3;
@@ -18,76 +17,79 @@ public static class LootGenerator
 
     private static List<float> dropQuality0;
     private static List<float> dropQuality1;
+    private static List<float> dropQuality2;
+    private static List<float> dropQuality3;
 
-    private static List<ItemData> thisTierCommon = new List<ItemData>();
-    private static List<ItemData> thisTierUncommon = new List<ItemData>();
-    private static List<ItemData> thisTierRare = new List<ItemData>();
-    private static List<ItemData> thisTierExotic = new List<ItemData>();
-    private static List<ItemData> firstTierCommon = new List<ItemData>();
-    private static List<ItemData> firstTierUncommon = new List<ItemData>();
-    private static List<ItemData> firstTierRare = new List<ItemData>();
-    private static List<ItemData> firstTierExotic = new List<ItemData>();
+    private static List<ItemData> tier0 = new List<ItemData>();
+    private static List<ItemData> tier1 = new List<ItemData>();
+    private static List<ItemData> tier2 = new List<ItemData>();
+    private static List<ItemData> tier3 = new List<ItemData>();
 
     private static List<float> dropRate0;
     private static List<float> dropRate1;
+    private static List<float> dropRate2;
+    private static List<float> dropRate3;
 
-    private static int dungeonLevel = 0;
+    //private static int dungeonLevel = 0;
 
     static void Start()
     {
         initialized = 0;
 
-        /* These variables control what rarity an item is for any tier it is present in, (tier, rarity) */
-        List<(int, int)> woodSwords = new List<(int, int)> { (1, 2), (2, 2) };
-        List<(int, int)> silver1 = new List<(int, int)> { (1, 1), (2, 1)};
-        List<(int, int)> gold5 = new List<(int, int)> { (1, 2), (2, 1)};
-        List<(int, int)> sticks = new List<(int, int)> { (1, 2), (2, 1) };
-
         /* These variables are used to control drop chances of classes of items for a particular quality */
         dropQuality0 = new List<float> { 0.0f, 0.8f };
         dropQuality1 = new List<float> { 0.0f, 0.2f, 0.7f };
+        dropQuality2 = new List<float> { 0.0f, 0.2f, 0.5f, 0.8f };
+        dropQuality3 = new List<float> { 0.0f, 0.0f, 0.2f, 0.4f };
 
         /* These variables are used to control drop numbers for a particular quality */
         dropRate0 = new List<float> { 0.0f, 0.8f };
         dropRate1 = new List<float> { 0.0f, 0.2f, 0.7f };
+        dropRate2 = new List<float> { 0.0f, 0.1f, 0.5f, 0.8f };
+        dropRate3 = new List<float> { 0.0f, 0.1f, 0.3f, 0.5f, 0.8f };
 
-        EventManager.onEnteringDungeon += (object sender, EventManager.onEnteringDungeonEventArgs e) => {
-            dungeonLevel = e.dungeonLevel;
+        //EventManager.onEnteringDungeon += (object sender, EventManager.onEnteringDungeonEventArgs e) => {
+        //    dungeonLevel = e.dungeonLevel;
 
-            if (dungeonLevel == 1)
-            {
-                thisTierCommon = firstTierCommon;
-                thisTierUncommon = firstTierUncommon;
-                thisTierRare = firstTierRare;
-                thisTierExotic = firstTierExotic;
-            }
-            else { Debug.Log("NOT IMPLEMENTED YET"); }
-        };
-        
+        //    if (dungeonLevel == 1)
+        //    {
+        //        thisTierCommon = firstTierCommon;
+        //        thisTierUncommon = firstTierUncommon;
+        //        thisTierRare = firstTierRare;
+        //        thisTierExotic = firstTierExotic;
+        //    }
+        //    else { Debug.Log("NOT IMPLEMENTED YET"); }
+        //};
+
+        // load in everything we will drop
+        smallHealthOrb = Resources.Load<ConsumableData>("Consumables/SmallHealthOrb");
+        mediumHealthOrb = Resources.Load<ConsumableData>("Consumables/MediumHealthOrb");
+        largeHealthOrb = Resources.Load<ConsumableData>("Consumables/LargeHealthOrb");
         silver = Resources.Load<ItemData>("Items/SilverPiece");
         silverx2 = Resources.Load<ItemData>("Items/SilverPiecex2");
         silverx3 = Resources.Load<ItemData>("Items/SilverPiecex3");
         silverx4 = Resources.Load<ItemData>("Items/SilverPiecex4");
         silverx5 = Resources.Load<ItemData>("Items/SilverPiecex5");
-        silverx10 = Resources.Load<ItemData>("Items/SilverPiecex10");
-        patheticFire = Resources.Load<RuneData>("Runes/patheticFireRune");
-        patheticEarth = Resources.Load<RuneData>("Runes/patheticEarthRune");
-        patheticAir = Resources.Load<RuneData>("Runes/patheticAirRune");
-        patheticWater = Resources.Load<RuneData>("Runes/patheticWaterRune");
+        silverx10 = Resources.Load<ItemData>("Items/SilverPiecex10"); 
+
 
         /* set up the tier Lists */
-        thisTierCommon.Add(silver);
-        thisTierCommon.Add(silverx2);
-        thisTierUncommon.Add(silver);
-        thisTierUncommon.Add(silverx2);
-        thisTierUncommon.Add(silverx3);
-        thisTierUncommon.Add(silverx4);
-        thisTierRare.Add(silverx4);
-        thisTierRare.Add(silverx5);
-        thisTierRare.Add(patheticFire);
-        thisTierRare.Add(patheticEarth);
-        thisTierRare.Add(patheticWater);
-        thisTierRare.Add(patheticAir);
+        tier0.Add(silver);
+        tier0.Add(silverx2);
+        tier0.Add(silverx2);
+        tier0.Add(smallHealthOrb);
+        tier1.Add(silver);
+        tier1.Add(silverx2);
+        tier1.Add(silverx3);
+        tier1.Add(silverx4);
+        tier0.Add(smallHealthOrb);
+        tier0.Add(mediumHealthOrb);
+        tier2.Add(silverx4);
+        tier2.Add(silverx5);
+        tier2.Add(silverx10);
+        tier2.Add(mediumHealthOrb);
+        tier2.Add(largeHealthOrb);
+        tier3.Add(silverx10);
     }
 
     private static List<ItemData> GenerateDropsList(int quality)
@@ -114,10 +116,10 @@ public static class LootGenerator
             int counter = 0;
             while (dropQuality.Count-1 >= counter && qualityReached >= dropQuality[counter]) { counter += 1; }
             ItemData item;
-            if (counter == 1) { item = thisTierCommon[(int)Mathf.Round(Random.Range(0, thisTierCommon.Count - 1))]; }
-            else if (counter == 2) { item = thisTierUncommon[(int)Mathf.Round(Random.Range(0, thisTierUncommon.Count - 1))]; }
-            else if (counter == 3) { item = thisTierRare[(int)Mathf.Round(Random.Range(0, thisTierRare.Count - 1))]; }
-            else { item = thisTierExotic[(int)Mathf.Round(Random.Range(0, thisTierExotic.Count - 1))]; }
+            if (counter == 1) { item = tier0[(int)Mathf.Round(Random.Range(0, tier0.Count - 1))]; }
+            else if (counter == 2) { item = tier1[(int)Mathf.Round(Random.Range(0, tier1.Count - 1))]; }
+            else if (counter == 3) { item = tier2[(int)Mathf.Round(Random.Range(0, tier2.Count - 1))]; }
+            else { item = tier3[(int)Mathf.Round(Random.Range(0, tier3.Count - 1))]; }
             dropped.Add(item);  
         }
         return dropped;
@@ -139,9 +141,13 @@ public static class LootGenerator
             {
                 GameObject drop = new GameObject("lootDrop");
                 DungeonMaster.loot.Add(drop);
-                if (itemData.itemType is ItemTypes.Type.weapon) { drop.AddComponent<ItemArchtype>().data = (ItemData)itemData; drop.GetComponent<ItemArchtype>().Dropped(); }
-                else if (itemData.itemType is ItemTypes.Type.consumable) { } // TODO
-                else if (itemData.itemType is ItemTypes.Type.item) { drop.AddComponent<ItemArchtype>().data = itemData; drop.GetComponent<ItemArchtype>().Dropped(); }
+
+                // health orbs
+                if (itemData.itemType is ItemTypes.Type.consumable) {
+                    drop.AddComponent<ConsumableObject>().data = (ConsumableData)itemData; drop.GetComponent<ConsumableObject>().Dropped(); } // TODO
+
+                // coins
+                else { drop.AddComponent<ItemArchtype>().data = itemData; drop.GetComponent<ItemArchtype>().Dropped(); }
                 drop.transform.position = position;
                 drop.layer = 11;
                 times -= 1;
