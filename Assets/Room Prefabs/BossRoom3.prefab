@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9041841187434490439}
   m_Layer: 0
-  m_Name: AnuibisPillarThree
+  m_Name: AnubisPillarThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666884061769971295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.88, y: -9.94, z: -1.0836042}
+  m_LocalPosition: {x: -9, y: -6.5, z: -1.0836042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3213487464338237205}
   m_Layer: 0
-  m_Name: AnuibisPillarOne
+  m_Name: AnubisPillarOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3813896956076287206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.93, y: 8.05, z: -1.0836042}
+  m_LocalPosition: {x: 9, y: 11.5, z: -1.0836042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7604473785863736710}
   m_Layer: 0
-  m_Name: AnuibisPillarFour
+  m_Name: AnubisPillarFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557124499816065950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.03, y: -9.95, z: -1.0836042}
+  m_LocalPosition: {x: 9, y: -6.5, z: -1.0836042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6429444093301335194}
   m_Layer: 0
-  m_Name: AnuibisPillarTwo
+  m_Name: AnubisPillarTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7289036144018346067}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.01, y: 8.09, z: -1.0836042}
+  m_LocalPosition: {x: -9, y: 11.5, z: -1.0836042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
