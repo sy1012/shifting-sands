@@ -523,21 +523,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "When the pharoh Amun Re called down a curse on his people and the River
-    Athis ceased to flow in response,  the fertile valley dry up. So, too did life
-    in the desert become nearly impossible. Only ruins now remain, bleached bones
-    of great cities awash in shifting sands. \r\n\n\nCenturies have now past. You've
-    just plundered Amun Re's temple looking for treasure. You got your treasure but
-    consequently got Amun Re's curse. You and your camel are alone in the desert
-    with the new oasis that was released upon clearing Amun Re's temple. \r\nEveryday,
-    the shifting sands bury and unearth new ruins, catacombs and temples. Any ruin
-    uncovered today may be buried tomorrow. If you enter, make sure the hour glass
-    doesn't fill.\r\n\n\nYour only choice now is to explore the desert to the furthest
-    extent you can in search of a cure. To travel long distances you will need a
-    caravan, one which will grow as you expand your network of oases.\r\nAt the desert's
-    furthest reaches lies your curse's salvation. With good loot, an oasis network
-    and a strong caravan, perhaps you can travel the furthest reaches of the dessert
-    in search of a cure."
+  m_text: "When the pharaoh Amun Re called down a curse on his people and the River
+    Athis ceased to flow,  the fertile valley dried up. Life in the desert became
+    nearly impossible. Now only ruins remain, bleached bones of great cities awash
+    in shifting sands. \r\n\n\nCenturies have now passed. You've just plundered Amun
+    Re's temple looking for treasure. You got your treasure, but along with it came
+    Amun Re's curse. Now you find yourself alone in the desert at a new oasis that
+    was released as Amun Re's temple sank into the sand. \r\n\n\nYour only choice
+    now is to explore the desert to the furthest extent you can in search of a cure.
+    With good loot, an oasis network and a strong caravan, perhaps you can travel
+    to the furthest reaches of the desert in search of a cure."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
