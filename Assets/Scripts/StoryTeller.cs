@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StoryTeller : MonoBehaviour
 {
     public GameObject Text;
+    public escClick button;
     public float scrollSpeed;  // this is as a percent of screen size
     private float endPosition;
     private float screenScrollSpeed;
@@ -28,7 +30,7 @@ public class StoryTeller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition)
+        if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition || button.clicked)
         {
             EnterOverworld();
         }
@@ -38,6 +40,7 @@ public class StoryTeller : MonoBehaviour
         }
     }
        
+
     void EnterOverworld()
     {
         SceneManager.LoadScene("Overworld_Scot");
