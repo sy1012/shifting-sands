@@ -373,10 +373,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 96976485, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
-      propertyPath: HealthBarTransform
-      value: 
-      objectReference: {fileID: 874975247}
-    - target: {fileID: 96976485, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: equipment
       value: 
       objectReference: {fileID: 1491433330}
@@ -414,7 +410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2022992065126582977, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.54
       objectReference: {fileID: 0}
     - target: {fileID: 2022992065126582977, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: m_LocalPosition.z

@@ -45,7 +45,10 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        LoadOverworld();
+        if (MenuSelection.GetInstance().load)
+        {
+            LoadOverworld();
+        }
     }
 
     private void Update()

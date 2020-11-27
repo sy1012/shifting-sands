@@ -44,7 +44,7 @@ public class MainMenuClickController : MonoBehaviour
                 }
                 else if (result.gameObject.name == "LoadButton")
                 {
-                    if (File.Exists(Application.persistentDataPath + "overworld.sav")){
+                    if (File.Exists(Application.persistentDataPath + "/overworld.sav") || File.Exists(Application.persistentDataPath + "/inventory.sav")){
                         script.load = true;
                         SceneManager.LoadScene("Overworld_Scot");
                     }

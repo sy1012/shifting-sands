@@ -4,7 +4,26 @@ using UnityEngine;
 
 public class MenuSelection : MonoBehaviour
 {
-    public bool load;
+    private static MenuSelection instance = null;
+
+    public bool load = false;
+
+    public static MenuSelection GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new GameObject("MenuSelection").AddComponent<MenuSelection>();
+        }
+        return instance;
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     private void Start()
     {

@@ -60,6 +60,9 @@ public static class EventManager
     public class onRoomFilledArgs : EventArgs{ public Room room; public List<MonoBehaviour> prefabs; }
     public static void TriggerDungeonExit()
     {
+        //Clear the persisting Loot list
+        DungeonMaster.loot = new List<GameObject>();
+
         //Clean the Game Events
         onScarabAgro = null;
         onSkullAgro = null;

@@ -5,10 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class PureAltar : Interactable
 {
+    // Children in hierachry refs
+    [SerializeField]
+    Transform flameRoot;
+    FlameExplosion explosion;
+
     IEnumerator LeaveDungeon()
     {
-        FindObjectOfType<DungeonDataKeeper>().beatLastDungeon = true;
-        yield return new WaitForSeconds(.5f);
+        DungeonDataKeeper.getInstance().beatLastDungeon = true;
+        FadeController.PlayFadeOutText("blessing");
+        explosion.PlayExplosionForTime(3);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Overworld_Scot");
         EventManager.TriggerDungeonExit();
     }
@@ -23,6 +30,13 @@ public class PureAltar : Interactable
             return;
         }
         EventManager.TriggerRelicGathered(this);
+        DungeonDataKeeper.getInstance().blessingValue = DungeonDataKeeper.getInstance().blessingValue * 0.5f;
         StartCoroutine(LeaveDungeon());
+    }
+
+    private void Start()
+    {
+        flameRoot.localScale = DungeonDataKeeper.getInstance().blessingValue * Vector3.one;
+        explosion = GetComponentInChildren<FlameExplosion>();
     }
 }

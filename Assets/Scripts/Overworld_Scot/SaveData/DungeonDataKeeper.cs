@@ -12,6 +12,9 @@ public class DungeonDataKeeper : MonoBehaviour
     public bool beatLastDungeon = false;
     public float dungeonDistance = 0;
     public DungeonVariant dungeonVariant = DungeonVariant.tiny;
+    public float curseValue = 1;
+    public float blessingValue = 1;
+
 
     private void Awake()
     {
