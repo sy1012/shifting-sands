@@ -12,12 +12,14 @@ public class MainMenuClickController : MonoBehaviour
     GraphicRaycaster raycaster;
     PointerEventData pointerData;
     List<RaycastResult> results;
+    blackfade fade;
     
     public MenuSelection script;
 
     private void Start()
     {
         raycaster = GetComponent<GraphicRaycaster>();
+        fade = FindObjectOfType<blackfade>();
     }
 
     // Update is called once per frame
@@ -40,15 +42,26 @@ public class MainMenuClickController : MonoBehaviour
                 if (result.gameObject.name == "NewButton")
                 {
                     script.load = false;
-                    SceneManager.LoadScene("Story");
+                    fade.fadeout = true;
                 }
                 else if (result.gameObject.name == "LoadButton")
                 {
                     if (File.Exists(Application.persistentDataPath + "/overworld.sav") || File.Exists(Application.persistentDataPath + "/inventory.sav")){
                         script.load = true;
-                        SceneManager.LoadScene("Overworld_Scot");
+                        fade.fadeout = true;
                     }
                 }
+            }
+        }
+        if (fade.finished)
+        {
+            if (script.load)
+            {
+                SceneManager.LoadScene("Overworld_Scot");
+            }
+            else
+            {
+                SceneManager.LoadScene("Story");
             }
         }
     }
