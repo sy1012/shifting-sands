@@ -118,8 +118,8 @@ public class Oasis : MonoBehaviour
                 Vector3[] points = new Vector3[2];
                 points[0] = (Vector3)transform.position;
                 points[1] = points[0];
-                pyramidLines[pyramidLines.Count - 1].startWidth = 0.2f;
-                pyramidLines[pyramidLines.Count - 1].endWidth = 0.2f;
+                pyramidLines[pyramidLines.Count - 1].startWidth = 1f;
+                pyramidLines[pyramidLines.Count - 1].endWidth = 1f;
                 pyramidLines[pyramidLines.Count - 1].SetPositions(points);
 
                 mapManager.pyramids.Add(pyramids[pyramids.Count - 1]);
@@ -141,8 +141,8 @@ public class Oasis : MonoBehaviour
             Vector3[] points = new Vector3[2];
             points[0] = (Vector3)transform.position;
             points[1] = points[0];
-            pyramidLines[pyramidLines.Count - 1].startWidth = 0.2f;
-            pyramidLines[pyramidLines.Count - 1].endWidth = 0.2f;
+            pyramidLines[pyramidLines.Count - 1].startWidth = 1f;
+            pyramidLines[pyramidLines.Count - 1].endWidth = 1f;
             pyramidLines[pyramidLines.Count - 1].SetPositions(points);
         }
     }

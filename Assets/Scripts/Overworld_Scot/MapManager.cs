@@ -124,8 +124,8 @@ public class MapManager : MonoBehaviour
             Vector3[] points = new Vector3[2];
             points[0] = (Vector3)((OasisNode)nearbyNode).getOasis().transform.position;
             points[1] = points[0];
-            path.startWidth = 0.2f;
-            path.endWidth = 0.2f;
+            path.startWidth = 1f;
+            path.endWidth = 1f;
             path.SetPositions(points);
             oasis.oasisLines.Add(path);
         }

@@ -52,6 +52,7 @@ public class Caravan : MonoBehaviour
         {
             enterPyramid.transform.localScale = Vector2.Lerp(enterPyramid.transform.localScale, new Vector2(1000, 1000), Time.deltaTime / 8);
             enterPyramid.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+            enterPyramid.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 100;
             time += Time.deltaTime;
             yield return null;
         }
