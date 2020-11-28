@@ -11,6 +11,7 @@ public class StoryTeller : MonoBehaviour
     public float scrollSpeed;  // this is as a percent of screen size
     private float endPosition;
     private float screenScrollSpeed;
+    private blackfade fade;
 
     // Start is called before the first frame update
     void Start()
@@ -24,20 +25,29 @@ public class StoryTeller : MonoBehaviour
         // when is the text off the screen
         endPosition = (1.8f * Text.GetComponent<RectTransform>().rect.y + Camera.main.pixelHeight);
 
-        Debug.Log(endPosition);
+        fade = FindObjectOfType<blackfade>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition || button.clicked)
+        if (!fade.fadein)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition || button.clicked)
+            {
+                fade.fadeout = true;
+            }
+            else
+            {
+                Text.transform.position = new Vector2(Text.transform.position.x, Text.transform.position.y + screenScrollSpeed);
+            }
+        }
+        
+        if (fade.finished)
         {
             EnterOverworld();
         }
-		else
-		{
-            Text.transform.position = new Vector2(Text.transform.position.x, Text.transform.position.y + screenScrollSpeed);
-        }
+
     }
        
 
