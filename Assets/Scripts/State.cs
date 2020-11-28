@@ -253,7 +253,7 @@ public class RollState : State
         psm.animator.SetTrigger("Dash");
         //Change the color for a cool effect
         var spriteRenderer = psm.spriteRenderer;
-        spriteRenderer.color = Color.cyan * new Vector4(0,0.25f,0.25f,0.3f);
+        spriteRenderer.color = Color.cyan/4;
         //Start dash loop. Continue dashing each timestep until we go x dash segments or hit a wall. The advantage of a couroutine is we get behaviour over time
         //and only need to call Enter() once. Once done change state back to Normal 
         while (tick<dashTime)
@@ -311,10 +311,24 @@ public class HitState:State
                 armour += armour * equipment.GetRune().data.effectiveness;
             }
             psm.health = (int)(((psm.health + psm.health * armour) - damageTaking) / (1 + armour));
-            if (psm.health <= 0) { PlayerDeath(); }
         }
         else psm.health -= damageTaking;
-        if (psm.health <= 0) { PlayerDeath(); }
+        if (psm.health <= 0) {
+            //Let Animaiton play
+            psm.animator.Play("Fall");
+
+            yield return new WaitForSeconds(2);
+            FadeController.PlayFadeOut();
+            yield return new WaitForSeconds(1);
+            // clean up the hierarchy
+            GameObject.Destroy(GameObject.Find("Canvas"));
+            GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
+            GameObject.Destroy(GameObject.Find("DungeonData"));
+            GameObject.Destroy(GameObject.Find("Equipment"));
+
+            Debug.Log("Death Noises");
+            SceneManager.LoadScene("MainMenu");
+        }
         var healthbar = psm.GetComponentInChildren<Healthbar>();
         Vector3 dir = hitCollision.transform.position - psm.transform.position;
         dir = dir.normalized;
@@ -327,18 +341,6 @@ public class HitState:State
         psm.SetState(new NormalState(psm));
         yield break;
 
-    }
-
-    public void PlayerDeath()
-    {
-        // clean up the hierarchy
-        GameObject.Destroy(GameObject.Find("Canvas"));
-        GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
-        GameObject.Destroy(GameObject.Find("DungeonData"));
-        GameObject.Destroy(GameObject.Find("Equipment"));
-
-        Debug.Log("Death Noises");
-        SceneManager.LoadScene("MainMenu");
     }
 }
 

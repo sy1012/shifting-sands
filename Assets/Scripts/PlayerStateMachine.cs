@@ -181,11 +181,6 @@ public class PlayerStateMachine : Character
 
         //Global Player State Behaviour. Independant of state player logic goes here!
 
-        //Handle Death
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
 
         //Lower invincibility time
         InvincibleTime -= Time.deltaTime;
