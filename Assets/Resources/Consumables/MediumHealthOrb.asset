@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MediumHealthOrb
   m_EditorClassIdentifier: 
   scrollOffset: {x: 0, y: 0}
-  spriteScaling: {x: 0.3, y: 0.3}
+  spriteScaling: {x: 0.8, y: 0.8}
   relativeWeight: 0
-  sprite: {fileID: 21300000, guid: bacc300cc56bd0943a11acf8ee91ffb0, type: 3}
+  sprite: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   frame: {fileID: 0}
   itemType: 2
   itemName: Medium Health Orb
@@ -23,4 +23,5 @@ MonoBehaviour:
   recipe: []
   scroll: {fileID: 0}
   description: 
+  prefab: {fileID: 8489097714194010760, guid: 9d535fd2aea61df46a0c39f5328cd954, type: 3}
   healAmount: 20
