@@ -242,9 +242,9 @@ public class RollState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
-        float dashAmount = 4f;//in units
+        float dashAmount = 4.5f;//in units
         float dashTime = .2f;//in seconds
-        int segments = 4;//amount of splits for dash
+        int segments = 5;//amount of splits for dash
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
@@ -253,7 +253,7 @@ public class RollState : State
         psm.animator.SetTrigger("Dash");
         //Change the color for a cool effect
         var spriteRenderer = psm.spriteRenderer;
-        spriteRenderer.color = Color.cyan/4;
+        spriteRenderer.color = Color.cyan * new Vector4(0,0.25f,0.25f,0.3f);
         //Start dash loop. Continue dashing each timestep until we go x dash segments or hit a wall. The advantage of a couroutine is we get behaviour over time
         //and only need to call Enter() once. Once done change state back to Normal 
         while (tick<dashTime)
