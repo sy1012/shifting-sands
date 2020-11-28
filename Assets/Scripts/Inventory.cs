@@ -115,6 +115,28 @@ public class Inventory : MonoBehaviour
                 }
             }
 
+
+            // are they right clicking a consumable?
+            if (Input.GetMouseButtonUp(1))
+            {
+                Debug.Log("Trying to heal");
+                if (slotHovered != null)
+                {
+                    Debug.Log("Trying to heal 2");
+                    if (slotHovered.GetComponent<Slot>().RetrieveData() != null)
+                    {
+                        if (slotHovered.GetComponent<Slot>().RetrieveData().itemType == ItemTypes.Type.consumable)
+                        {
+                            if (GameObject.Find("Player") != null)
+                            {
+                                GameObject.Find("Player").GetComponent<PlayerStateMachine>().Heal(((ConsumableData)slotHovered.GetComponent<Slot>().RetrieveData()).healAmount);
+                                slotHovered.AssignData(null);
+                            } 
+                        }
+                    }
+                }
+            }
+
             if (Input.GetMouseButtonUp(0))
             {
                 if (slotHovered != null && held != null)

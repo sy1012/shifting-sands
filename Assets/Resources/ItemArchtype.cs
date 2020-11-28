@@ -39,12 +39,10 @@ public class ItemArchtype : MonoBehaviour, IItem
         //this.gameObject.AddComponent<BoxCollider2D>();
     }
 
-    public virtual void PickedUp()
+    public void PickedUp()
     {
         //if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
         DungeonMaster.loot.Remove(this.gameObject);
-        Debug.Log(this.data.itemName);
-        Debug.Log(this.data.itemName == "Silver");
         if (this.data.itemName != "Silver") GameObject.Find("Inventory").GetComponent<Inventory>().AddToInventory(this.data);
         else GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
 
@@ -53,7 +51,7 @@ public class ItemArchtype : MonoBehaviour, IItem
 
     public void Dropped()
     {
-        Debug.Log("hey");
+        Debug.Log(data.name);
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
         this.sr.sprite = data.sprite;
         this.transform.localScale = this.data.spriteScaling;
