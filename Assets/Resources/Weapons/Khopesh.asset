@@ -25,6 +25,6 @@ MonoBehaviour:
   description: Khopesh
   animationNumber: 0
   speed: 0.2
-  hitBoxSize: {x: 0.5, y: 1.15}
+  hitBoxSize: {x: 0.6, y: 1.15}
   damage: 10
   knockback: 1.2

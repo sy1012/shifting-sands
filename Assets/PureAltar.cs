@@ -14,8 +14,8 @@ public class PureAltar : Interactable
     {
         DungeonDataKeeper.getInstance().beatLastDungeon = true;
         FadeController.PlayFadeOutText("blessing");
-        explosion.PlayExplosionForTime(3);
-        yield return new WaitForSeconds(3f);
+        explosion.PlayExplosionForTime(4);
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("Overworld_Scot");
         EventManager.TriggerDungeonExit();
     }
