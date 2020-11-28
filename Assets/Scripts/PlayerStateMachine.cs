@@ -23,7 +23,7 @@ public class PlayerStateMachine : Character
     private float footstepSoundCooldown = 0;
 
     // Dash Cooldown
-    private float dashCoolDown = 1f;
+    private float dashCoolDown = 0.6f;
     private float nextDashTime = 0f;
 
     //!!The Behavioural State of the Player!!
