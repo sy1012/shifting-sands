@@ -243,13 +243,14 @@ public class RollState : State
     public override IEnumerator Enter()
     {
         float dashAmount = 4f;//in units
-        float dashTime = 0.12f;//in seconds
+        float dashTime = .2f;//in seconds
         int segments = 4;//amount of splits for dash
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
         // trigger on dash event
         EventManager.TriggerOnDash();
+        psm.animator.SetTrigger("Dash");
         //Change the color for a cool effect
         var spriteRenderer = psm.spriteRenderer;
         spriteRenderer.color = Color.cyan/4;
@@ -275,6 +276,7 @@ public class RollState : State
         }
         //reset color back to white
         spriteRenderer.color = new Color(255,255,255,255);
+        psm.animator.SetTrigger("DashOver");
         psm.SetState(new NormalState(psm));
         yield break;
     }
