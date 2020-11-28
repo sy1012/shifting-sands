@@ -78,5 +78,5 @@ MonoBehaviour:
         Count: 3
     - prefab: {fileID: 5967142386578456989, guid: e2899b55f879f0843be7b64b3a9a20fe, type: 3}
       diceRoll:
-        dieSides: 2
+        dieSides: 3
         Count: 3

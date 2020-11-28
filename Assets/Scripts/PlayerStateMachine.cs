@@ -57,7 +57,7 @@ public class PlayerStateMachine : Character
         Room entranceRoom = entrance.GetComponent<Room>();
         entranceRoom.PlaceObject(this);
         //offset down so player is in front of ladder and ZERO Z position
-        transform.position -= Vector3.up;
+        transform.position -= Vector3.up*0.5f;
         //No parent
         transform.SetParent(null);
     }

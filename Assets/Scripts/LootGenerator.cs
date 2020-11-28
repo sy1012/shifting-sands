@@ -99,8 +99,19 @@ public static class LootGenerator
         List<float> dropRate = new List<float>();
 
         // What quality of items will we be pulling from
-        if (quality == 0) { dropQuality = dropQuality0; dropRate = dropRate0; }
-        else if (quality == 1) { dropQuality = dropQuality1; dropRate = dropRate1; }
+        switch (quality)
+        {
+            case 0:
+                dropQuality = dropQuality0; dropRate = dropRate0; break;
+            case 1:
+                dropQuality = dropQuality1; dropRate = dropRate1; break;
+            case 2:
+                dropQuality = dropQuality2; dropRate = dropRate2; break;
+            case 3:
+                dropQuality = dropQuality3; dropRate = dropRate3; break;
+            default:
+                throw new System.ArgumentOutOfRangeException("No item quality of: " + quality);
+        }
 
         // figure out how many items should drop
         float randomNumberOfDrops = Random.Range(0f, 1f);
