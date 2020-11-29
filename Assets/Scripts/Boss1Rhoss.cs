@@ -96,13 +96,13 @@ public class Boss1Rhoss : Enemy
 
                 if (room == null)
                 {
-                    throw new System.Exception("The Boss enemy:" + transform.name + "'s room is Null. Set Mummy's room.");
+                    throw new System.Exception("The Boss enemy:" + transform.name + "'s room is Null. Set its' room.");
                 }
                 if (psm == null)
                 {
                     throw new System.Exception("The Boss enemy:" + transform.name + "'s target player is Null");
                 }
-                //if the player is in the same room as the Mummy, and is within the Mummy's detection radius, pursue the player to attack!
+                //if the player is in the same room as Rhoss, and is within Rhoss's detection radius, pursue the player to attack!
                 if (room.Equals(psm.GetRoom()) && Vector3.Distance(Player.position, transform.position) <= detectionRange && !charging && stunned <= 0 && chargeTimer <= 0)
                 {
                     Debug.Log("Trying to charge");
