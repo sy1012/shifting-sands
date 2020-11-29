@@ -9,6 +9,7 @@ public class ColorToPrefab
 {
     public Color color;
     public TileBase tile;
+    public Color tintColor;
 }
 
 public class ImageToTile : MonoBehaviour
@@ -90,7 +91,9 @@ public class ImageToTile : MonoBehaviour
                 Vector3Int pos = Rotate(x-offset, y-offset);
                 //Match
                 //Debug.Log("Match");
+
                 tilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), colorMap.tile);
+                tilemap.SetColor(new Vector3Int(pos.x, pos.y, 0), colorMap.tintColor);
             }
         }
     }

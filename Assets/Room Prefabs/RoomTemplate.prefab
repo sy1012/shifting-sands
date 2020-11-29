@@ -395,9 +395,12 @@ MonoBehaviour:
   mappings:
   - color: {r: 1, g: 1, b: 1, a: 1}
     tile: {fileID: 11400000, guid: 0bb199b09a3e66a47a389b60deab15c7, type: 2}
+    tintColor: {r: 1, g: 0.9393962, b: 0.86226416, a: 1}
   - color: {r: 0.5254902, g: 0.5254902, b: 0.5254902, a: 0}
     tile: {fileID: 11400000, guid: 68ea6da5124c46f4299a4ed0218fb9e0, type: 2}
+    tintColor: {r: 0.990566, g: 0.84020025, b: 0.80740476, a: 1}
   - color: {r: 0, g: 1, b: 0, a: 1}
     tile: {fileID: 11400000, guid: 508fb8061c583a1418f2f22ebc0a7395, type: 2}
+    tintColor: {r: 1, g: 0.9663466, b: 0.9019608, a: 1}
   tilemap: {fileID: 2690313161345917226}
   rotation: 0
