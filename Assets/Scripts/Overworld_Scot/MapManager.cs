@@ -49,6 +49,7 @@ public class MapManager : MonoBehaviour
         {
             LoadOverworld();
         }
+        FindObjectOfType<MenuSelection>().load = true;
     }
 
     private void Update()
