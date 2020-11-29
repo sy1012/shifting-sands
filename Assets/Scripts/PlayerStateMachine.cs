@@ -23,7 +23,7 @@ public class PlayerStateMachine : Character
     private float footstepSoundCooldown = 0;
 
     // Dash Cooldown
-    private float dashCoolDown = 1f;
+    private float dashCoolDown = 0.6f;
     private float nextDashTime = 0f;
 
     //!!The Behavioural State of the Player!!
@@ -57,7 +57,7 @@ public class PlayerStateMachine : Character
         Room entranceRoom = entrance.GetComponent<Room>();
         entranceRoom.PlaceObject(this);
         //offset down so player is in front of ladder and ZERO Z position
-        transform.position -= Vector3.up;
+        transform.position -= Vector3.up*0.5f;
         //No parent
         transform.SetParent(null);
     }
@@ -181,30 +181,30 @@ public class PlayerStateMachine : Character
 
         //Global Player State Behaviour. Independant of state player logic goes here!
 
-        //Handle Death
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
 
         //Lower invincibility time
         InvincibleTime -= Time.deltaTime;
 
-        //Handle Loot
+        //Handle Loot you can pick up
         if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
         {
             List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 1);
             foreach (GameObject item in loot)
             {
-                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().CreateInfoPopUp();
+                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().PickedUp();
+                if (item.GetComponent<ConsumableObject>() != null) item.GetComponent<ConsumableObject>().PickedUp();
             }
         }
-        if (DungeonMaster.getLootOuttaRange(this.transform.position, 1).Count != 0)
+
+        // start pulling in loot within your magnetic range
+        if (DungeonMaster.getLootInRange(this.transform.position, 5).Count != 0)
         {
-            List<GameObject> loot = DungeonMaster.getLootOuttaRange(this.transform.position, 1);
+            List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 5);
             foreach (GameObject item in loot)
             {
-                if (item.GetComponent<ItemArchtype>() != null) item.GetComponent<ItemArchtype>().DestroyInfoPopUp();
+                Debug.Log("trying to pull");
+                float speed = (5 - Vector2.Distance(this.transform.position, item.transform.position)) /100;
+                item.transform.position = Vector3.Lerp(item.transform.position, this.transform.position, speed);
             }
         }
 

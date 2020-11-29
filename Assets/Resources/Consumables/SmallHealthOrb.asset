@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce710cc39bd48964f82a959e3f2eb783, type: 3}
+  m_Name: SmallHealthOrb
+  m_EditorClassIdentifier: 
+  scrollOffset: {x: 0, y: 0}
+  spriteScaling: {x: 0.6, y: 0.6}
+  relativeWeight: 1000
+  sprite: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
+  frame: {fileID: 0}
+  itemType: 2
+  itemName: Small Health Orb
+  value: 0
+  recipe: []
+  scroll: {fileID: 0}
+  description: 
+  prefab: {fileID: 8489097714194010760, guid: 9d535fd2aea61df46a0c39f5328cd954, type: 3}
+  healAmount: 10

@@ -77,3 +77,8 @@ MonoBehaviour:
       diceRoll:
         dieSides: 2
         Count: 3
+  - EncounterDescription:
+    - prefab: {fileID: 5967142386578456989, guid: e2899b55f879f0843be7b64b3a9a20fe, type: 3}
+      diceRoll:
+        dieSides: 4
+        Count: 2

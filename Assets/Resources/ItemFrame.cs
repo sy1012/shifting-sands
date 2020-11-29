@@ -80,7 +80,7 @@ public class ItemFrame : MonoBehaviour
         // Create the item sprite and the frame for it
         (this.text, this.scroll) = Formatter.CreateAssetsFromScratchUI(this.data.description, this.data.scroll);
         this.frame = Formatter.ScaleSpriteToPercentOfScreenUI(data.frame, slotPercent, 17);
-        this.item = Formatter.ScaleSpriteToPercentOfScreenUI(data.sprite, slotPercent, 18);
+        this.item = Formatter.ScaleSpriteToPercentOfScreenUI(data.sprite, 8*slotPercent, 18);
         this.item.name = ("Item");
         this.frame.name = ("Frame");
 

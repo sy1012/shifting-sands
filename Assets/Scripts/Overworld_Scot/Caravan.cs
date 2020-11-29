@@ -27,6 +27,38 @@ public class Caravan : MonoBehaviour
         fadeRenderer = fade.GetComponent<SpriteRenderer>();
     }
 
+    public void EnterDungeon()
+    {
+        StartCoroutine(EnterDungeonCo());
+    }
+
+    IEnumerator EnterDungeonCo()
+    {
+        bool arrived = false;
+        while (!arrived)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, enterPyramid.transform.position, 10f * Time.deltaTime);
+            if (transform.position == enterPyramid.transform.position)
+            {
+                arrived = true;
+            }
+            yield return null;
+        }
+
+        float time = 0;
+        fadeRenderer.GetComponent<Animator>().SetTrigger("Fade_Out");
+
+        while (time < 1f)
+        {
+            enterPyramid.transform.localScale = Vector2.Lerp(enterPyramid.transform.localScale, new Vector2(1000, 1000), Time.deltaTime / 8);
+            enterPyramid.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+            enterPyramid.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 100;
+            time += Time.deltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene("Dungeon");
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -45,22 +77,6 @@ public class Caravan : MonoBehaviour
 			else
 			{
                 path.RemoveAt(0);
-            }
-        }
-
-        if(entering)
-        {
-            if(fadeRenderer.color.a > 1)
-            {
-                SceneManager.LoadScene("Dungeon");
-                //SceneManager.LoadScene("DemoDungeon");
-            }
-            transform.position = Vector2.MoveTowards(transform.position, enterPyramid.transform.position, 10f * Time.deltaTime);
-            if (transform.position == enterPyramid.transform.position)
-            {
-                enterPyramid.transform.localScale = Vector2.Lerp(enterPyramid.transform.localScale, new Vector2(1000, 1000), Time.deltaTime / 8);
-                enterPyramid.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
-                fadeRenderer.color = new Color(0, 0, 0, fadeRenderer.color.a + 1f * Time.deltaTime);
             }
         }
 

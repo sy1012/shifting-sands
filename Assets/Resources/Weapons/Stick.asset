@@ -15,8 +15,8 @@ MonoBehaviour:
   scrollOffset: {x: 0, y: 0}
   spriteScaling: {x: 1, y: 1}
   relativeWeight: 5
-  sprite: {fileID: 21300000, guid: 8c80cc5d3f2446d41a67f8dee85aa503, type: 3}
-  frame: {fileID: 21300000, guid: a7c4ded6a3bf5de45b975125af3af56a, type: 3}
+  sprite: {fileID: 21300000, guid: 1cbe9008da1bf52479e7d321d1c8a774, type: 3}
+  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 0
   itemName: Stick
   value: 5

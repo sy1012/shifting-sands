@@ -242,14 +242,15 @@ public class RollState : State
     /// <returns></returns>
     public override IEnumerator Enter()
     {
-        float dashAmount = 4f;//in units
-        float dashTime = 0.12f;//in seconds
-        int segments = 4;//amount of splits for dash
+        float dashAmount = 4.5f;//in units
+        float dashTime = .2f;//in seconds
+        int segments = 5;//amount of splits for dash
         float tick = 0;//time tracker
         Vector2 keyInput = psm.GetArrowKeysDirectionalInput();
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
         // trigger on dash event
         EventManager.TriggerOnDash();
+        psm.animator.SetTrigger("Dash");
         //Change the color for a cool effect
         var spriteRenderer = psm.spriteRenderer;
         spriteRenderer.color = Color.cyan/4;
@@ -275,6 +276,7 @@ public class RollState : State
         }
         //reset color back to white
         spriteRenderer.color = new Color(255,255,255,255);
+        psm.animator.SetTrigger("DashOver");
         psm.SetState(new NormalState(psm));
         yield break;
     }
@@ -309,10 +311,24 @@ public class HitState:State
                 armour += armour * equipment.GetRune().data.effectiveness;
             }
             psm.health = (int)(((psm.health + psm.health * armour) - damageTaking) / (1 + armour));
-            if (psm.health <= 0) { PlayerDeath(); }
         }
         else psm.health -= damageTaking;
-        if (psm.health <= 0) { PlayerDeath(); }
+        if (psm.health <= 0) {
+            //Let Animaiton play
+            psm.animator.Play("Fall");
+
+            yield return new WaitForSeconds(2);
+            FadeController.PlayFadeOut();
+            yield return new WaitForSeconds(1);
+            // clean up the hierarchy
+            GameObject.Destroy(GameObject.Find("Canvas"));
+            GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
+            GameObject.Destroy(GameObject.Find("DungeonData"));
+            GameObject.Destroy(GameObject.Find("Equipment"));
+
+            Debug.Log("Death Noises");
+            SceneManager.LoadScene("MainMenu");
+        }
         var healthbar = psm.GetComponentInChildren<Healthbar>();
         Vector3 dir = hitCollision.transform.position - psm.transform.position;
         dir = dir.normalized;
@@ -325,18 +341,6 @@ public class HitState:State
         psm.SetState(new NormalState(psm));
         yield break;
 
-    }
-
-    public void PlayerDeath()
-    {
-        // clean up the hierarchy
-        GameObject.Destroy(GameObject.Find("Canvas"));
-        GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
-        GameObject.Destroy(GameObject.Find("DungeonData"));
-        GameObject.Destroy(GameObject.Find("Equipment"));
-
-        Debug.Log("Death Noises");
-        SceneManager.LoadScene("MainMenu");
     }
 }
 
