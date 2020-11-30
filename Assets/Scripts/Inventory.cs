@@ -6,7 +6,7 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-
+    public bool load = false;
     InventoryState state;
     EquipmentManager equipment;
     private bool inDungeon;
@@ -36,7 +36,10 @@ public class Inventory : MonoBehaviour
 
         state.QuietPickUpCoins(300);
 
-        LoadInventory();
+        if (load)
+        {
+            LoadInventory();
+        }
 
     }
     private void CraftingClicked(object sender, EventArgs e)
@@ -207,6 +210,7 @@ public class Inventory : MonoBehaviour
     public void SaveInventory(object sender, EventArgs e)
 	{
         SaveSystem.SaveInventory(this, FindObjectOfType<EquipmentManager>());
+        SaveSystem.SaveOverworld(FindObjectOfType<MapManager>());
 	}
 
     public void LoadInventory()
