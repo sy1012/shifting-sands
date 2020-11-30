@@ -10,7 +10,7 @@ public class Mummy : Enemy
     public float mvmt_timer = 0.0f; //used to update enemy movement every few seconds.
     public int mvmt_seconds = 0;    //discrete version of the above timer
     public int charge_chance = 0;  //used to store a randomly generated number determining if a charge occurs
-    public int charge_speed = 8;   //the speed of the mummy in its enraged state
+    public int charge_speed = 12;   //the speed of the mummy in its enraged state
     public bool charging = false;  //a flag used to identify whether or not the mummy is charging
 
 
@@ -105,7 +105,7 @@ public class Mummy : Enemy
 
      IEnumerator Charge()
     {
-        //stand still for a moment to indicate that you're about to charge
+        //stand still for a moment to telegraph that you're about to charge
         this.GetComponent<AIPath>().maxSpeed = 0;
         yield return new WaitForSeconds(2.0f);
 
