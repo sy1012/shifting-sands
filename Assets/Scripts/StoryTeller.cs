@@ -23,7 +23,7 @@ public class StoryTeller : MonoBehaviour
             Camera.main.ViewportToWorldPoint(new Vector2(0, 0))).y;
 
         // when is the text off the screen
-        endPosition = (1.8f * Text.GetComponent<RectTransform>().rect.y + Camera.main.pixelHeight);
+        endPosition = (Text.GetComponent<RectTransform>().rect.height + Camera.main.transform.localScale.y);
 
         fade = FindObjectOfType<blackfade>();
     }
@@ -33,6 +33,9 @@ public class StoryTeller : MonoBehaviour
     {
         if (!fade.fadein)
         {
+            Debug.Log(Text.GetComponent<RectTransform>().localPosition.y);
+            Debug.Log(endPosition);
+
             if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition || button.clicked)
             {
                 fade.fadeout = true;

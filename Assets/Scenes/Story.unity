@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 1508046355}
   button: {fileID: 707126203}
-  scrollSpeed: 0.0008
+  scrollSpeed: 0.0005
 --- !u!4 &397214589
 Transform:
   m_ObjectHideFlags: 0
