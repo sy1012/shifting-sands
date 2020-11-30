@@ -33,9 +33,6 @@ public class StoryTeller : MonoBehaviour
     {
         if (!fade.fadein)
         {
-            Debug.Log(Text.GetComponent<RectTransform>().localPosition.y);
-            Debug.Log(endPosition);
-
             if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition || button.clicked)
             {
                 fade.fadeout = true;
