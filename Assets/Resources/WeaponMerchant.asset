@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: WeaponMerchant
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: cba0ead1acc29594d96f4b0c9e1c3156, type: 2}
+  - {fileID: 11400000, guid: 482f8ead639e99d43b692e6b2bd2f216, type: 2}
+  - {fileID: 11400000, guid: 0b46bef87ce8f754fb3521b37cb259a9, type: 2}
   - {fileID: 11400000, guid: 9ae15a27a97098b41b407326ada7a69f, type: 2}
   - {fileID: 11400000, guid: 092d50becde6e64428a7bb68ac57bada, type: 2}
+  - {fileID: 11400000, guid: 4d072338c8893ed48ab575e36cd9fcde, type: 2}
