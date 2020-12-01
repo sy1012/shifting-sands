@@ -50,11 +50,11 @@ public class Mummy : Enemy
             if (room.Equals(psm.GetRoom()) && Vector3.Distance(Player.position, transform.position) <= detectionRange)
             {
                 //if several seconds have passed and the mummy isn't already charging, allow him to attempt a charge.
-                if (mvmt_seconds >= 5 && !charging)
+                if (mvmt_seconds >= 3 && !charging)
                 {
                     charge_chance = UnityEngine.Random.Range(0, 100);
                     //if the randomly generated number is in the acceptable range, perform the charge.
-                    if (charge_chance < 31 )
+                    if (charge_chance <= 60 )
                     {
                         //reset the timer, allowing a gap between charges.
                         mvmt_timer = 0;
