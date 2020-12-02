@@ -111,6 +111,9 @@ public class Mummy : Enemy
 
         //start running
         this.GetComponent<AIPath>().maxSpeed = charge_speed;
+        Debug.Log("Reached animator speed increase.");
+        GetComponentInChildren<Animator>().speed = 3;
+        Debug.Log("Passed animator speed thing.");
 
         //determine the general direction of the player in relation to yourself
         Vector3 playerDirection = Player.position - transform.position;
@@ -133,6 +136,7 @@ public class Mummy : Enemy
         
         //once you have completed your charge, slow to normal speed, reset the charging flag, and resume normal pursuit.
         this.GetComponent<AIPath>().maxSpeed = 0.5f;
+        GetComponentInChildren<Animator>().speed = 1;
         charging = false;
         destination.target = Player;
         StopCoroutine("Charge");
