@@ -991,18 +991,6 @@ PrefabInstance:
       propertyPath: room
       value: 
       objectReference: {fileID: 5371903637446860091}
-    - target: {fileID: 306374203495308842, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
-      propertyPath: m_Color.r
-      value: 0.5660378
-      objectReference: {fileID: 0}
-    - target: {fileID: 306374203495308842, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
-      propertyPath: m_Color.g
-      value: 0.5660378
-      objectReference: {fileID: 0}
-    - target: {fileID: 306374203495308842, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5660378
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
 --- !u!1001 &6976950489584472838

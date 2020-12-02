@@ -219,7 +219,7 @@ public class AttackState : State
     public override void Execute()
     {
         psm.animator.SetFloat("Speed", psm.GetArrowKeysDirectionalInput().sqrMagnitude);
-        psm.MoveCharacter(psm.GetArrowKeysDirectionalInput(), psm.speed/4);
+        psm.MoveCharacter(psm.GetArrowKeysDirectionalInput(), psm.speed/2);
     }
     public override string ToString()
     {

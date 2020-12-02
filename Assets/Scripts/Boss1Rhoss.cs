@@ -18,16 +18,31 @@ public class Boss1Rhoss : Enemy
     private float stunned;
     private float rotatingTime = 1;
     private float chargeTimer;
-
+    [SerializeField]
+    Animator animLegs;
+    [SerializeField]
+    Animator animBody;
+    private bool isDying;
 
     protected override void Awake()
     {
-        AstarData astarData = AstarPath.active.data;
-        GridGraph gg = (GridGraph) astarData.graphs[0];
-        gg.collision.diameter = 1.06f;
-        AstarPath.active.Scan();
+        animLegs.speed = 1;
     }
 
+    IEnumerator Intro()
+    {
+        animBody.SetTrigger("awake");
+        animLegs.SetTrigger("awake");
+        yield return new WaitForSeconds(4);
+        startFight = true;
+    }
+
+    IEnumerator Death()
+    {
+        animBody.SetTrigger("dead");
+        yield return new WaitForSeconds(4.8f);
+        base.TakeDamage(1000);
+    }
 
     // Start is called before the first frame update
     void Initialize()
@@ -71,7 +86,7 @@ public class Boss1Rhoss : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (stunned <= 0)
+        if (stunned <= 0 && !isDying)
         {
             if (startFight)
             {
@@ -79,6 +94,7 @@ public class Boss1Rhoss : Enemy
                 {
                     Initialize();
                 }
+
 
                 if (chargeTimer > 0)
                 {
@@ -116,6 +132,7 @@ public class Boss1Rhoss : Enemy
                         charging = true;
                         rotatingTime = 1;
                         chargeTimer = 1;
+                        animLegs.speed = 4.5f;
                     }
                 }
                 //enter randomly-moving patrol mode if the player isn't nearby.
@@ -129,16 +146,18 @@ public class Boss1Rhoss : Enemy
             }
             else if (Vector3.Distance(Player.transform.position,transform.position)<5)
             {
-                startFight = true;
+                StartCoroutine(Intro());
             }
         }
         else
         {
+            animLegs.speed = 0.24f;
             this.stunned -= Time.deltaTime;
             if (this.stunned <= 0)
             {
                 this.GetComponent<AIPath>().canSearch = true;
                 this.GetComponent<AIPath>().rotationSpeed = 360;
+                animLegs.speed = 1.2f;
             }
         }
     }
@@ -149,6 +168,22 @@ public class Boss1Rhoss : Enemy
         this.GetComponent<AIPath>().maxSpeed = 0;
         this.GetComponent<AIPath>().rotationSpeed = 360;
         this.rotatingTime -= Time.deltaTime;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        if (isDying)
+        {
+            //cant take more damage
+            return;
+        }
+        if (health-damage<0)
+        {
+            isDying = true;
+            StartCoroutine(Death());
+            return;
+        }
+        base.TakeDamage(damage);
     }
 
     public override void OnCollisionStay2D(Collision2D collision)
