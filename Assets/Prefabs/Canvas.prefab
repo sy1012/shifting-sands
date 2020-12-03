@@ -116,3 +116,4 @@ MonoBehaviour:
   weaponMerchantButton: {fileID: 1947308340123864036, guid: 55aebc4f95f61454fa32f0fc010555da, type: 3}
   armourMerchantButton: {fileID: 1563608277483404335, guid: 2844ab9dbedc52045ba7e6c6e96c4fad, type: 3}
   craftingButton: {fileID: 1312593755773734378, guid: 02c5f7e325a48d64c9d5a3dbe1b27c6e, type: 3}
+  exclamationMark: {fileID: 4926324644533327188, guid: 2d23f46015cc6504cac56daf7d8d5193, type: 3}

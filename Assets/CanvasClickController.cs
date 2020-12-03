@@ -15,11 +15,21 @@ public class CanvasClickController : MonoBehaviour
     public GameObject armourMerchantButton;
     public GameObject craftingButton;
 
+    public GameObject exclamationMark;
+
     private GameObject _inventoryButton;
     private GameObject _runeMerchantButton;
     private GameObject _weaponMerchantButton;
     private GameObject _armourMerchantButton;
     private GameObject _craftingButton;
+
+    private GameObject inventoryMark;
+    private GameObject runeMark;
+    private GameObject weaponMark;
+    private GameObject armourMark;
+    private GameObject craftingMark;
+
+
 
     private bool clicked;
 
@@ -28,11 +38,25 @@ public class CanvasClickController : MonoBehaviour
 
     void Awake()
     {
+
+        Inventory inventory = FindObjectOfType<Inventory>();
+        MenuSelection load = FindObjectOfType<MenuSelection>();
+
         _inventoryButton = Instantiate(inventoryButton);
         _inventoryButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
         _inventoryButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _inventoryButton.transform.SetParent(this.transform);
         _inventoryButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.7f, .95f));
+
+        if (!load.loadInventory)
+        {
+            inventoryMark = Instantiate(exclamationMark);
+            inventoryMark.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+            inventoryMark.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f, 0.5f);
+            inventoryMark.transform.SetParent(this.transform);
+            inventoryMark.GetComponent<RectTransform>().position = _inventoryButton.GetComponent<RectTransform>().position + new Vector3(30, -30);
+        }
+        
 
         _craftingButton = Instantiate(craftingButton);
         _craftingButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
@@ -40,11 +64,29 @@ public class CanvasClickController : MonoBehaviour
         _craftingButton.transform.SetParent(this.transform);
         _craftingButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.6f, .95f));
 
+        if (!load.loadInventory)
+        {
+            craftingMark = Instantiate(exclamationMark);
+            craftingMark.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+            craftingMark.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f, 0.5f);
+            craftingMark.transform.SetParent(this.transform);
+            craftingMark.GetComponent<RectTransform>().position = _craftingButton.GetComponent<RectTransform>().position + new Vector3(30, -30);
+        }
+
         _runeMerchantButton = Instantiate(runeMerchantButton);
         _runeMerchantButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
         _runeMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _runeMerchantButton.transform.SetParent(this.transform);
         _runeMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .95f));
+
+        if (!load.loadInventory)
+        {
+            runeMark = Instantiate(exclamationMark);
+            runeMark.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+            runeMark.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f, 0.5f);
+            runeMark.transform.SetParent(this.transform);
+            runeMark.GetComponent<RectTransform>().position = _runeMerchantButton.GetComponent<RectTransform>().position + new Vector3(30, -30);
+        }
 
         _weaponMerchantButton = Instantiate(weaponMerchantButton);
         _weaponMerchantButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
@@ -52,15 +94,37 @@ public class CanvasClickController : MonoBehaviour
         _weaponMerchantButton.transform.SetParent(this.transform);
         _weaponMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.4f, .95f));
 
+        if (!load.loadInventory)
+        {
+            weaponMark = Instantiate(exclamationMark);
+            weaponMark.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+            weaponMark.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f, 0.5f);
+            weaponMark.transform.SetParent(this.transform);
+            weaponMark.GetComponent<RectTransform>().position = _weaponMerchantButton.GetComponent<RectTransform>().position + new Vector3(30, -30);
+        }
+
         _armourMerchantButton = Instantiate(armourMerchantButton);
         _armourMerchantButton.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
         _armourMerchantButton.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
         _armourMerchantButton.transform.SetParent(this.transform);
         _armourMerchantButton.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.3f, .95f));
 
+        if (!load.loadInventory)
+        {
+            armourMark = Instantiate(exclamationMark);
+            armourMark.transform.localScale = (Camera.main.ViewportToScreenPoint(new Vector2(.05f, .1f)));
+            armourMark.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f, 0.5f);
+            armourMark.transform.SetParent(this.transform);
+            armourMark.GetComponent<RectTransform>().position = _armourMerchantButton.GetComponent<RectTransform>().position + new Vector3(30, -30);
+        }
 
         EventManager.onResubscribeOverworld += OverworldSubscribe;
         EventManager.onResubscribeDungeon += DungeonSubscribe;
+        EventManager.onInventoryTrigger += hideInvExclamation;
+        EventManager.onWeaponMerchant += hideWeapExclamation;
+        EventManager.onArmourMerchant += hideArmExclamation;
+        EventManager.onRuneMerchant += hideRuneExclamation;
+        EventManager.onCrafting += hideCraftExclamation;
 
         // Get components we need to do this
         this.raycaster = GetComponent<GraphicRaycaster>();
@@ -83,6 +147,31 @@ public class CanvasClickController : MonoBehaviour
         _craftingButton.SetActive(true);
         _runeMerchantButton.SetActive(true);
         _inventoryButton.SetActive(true);
+    }
+
+    private void hideInvExclamation(object sender, System.EventArgs e)
+    {
+        inventoryMark.SetActive(false);
+    }
+
+    private void hideWeapExclamation(object sender, System.EventArgs e)
+    {
+        weaponMark.SetActive(false);
+    }
+
+    private void hideArmExclamation(object sender, System.EventArgs e)
+    {
+        armourMark.SetActive(false);
+    }
+
+    private void hideRuneExclamation(object sender, System.EventArgs e)
+    {
+        runeMark.SetActive(false);
+    }
+
+    private void hideCraftExclamation(object sender, System.EventArgs e)
+    {
+        craftingMark.SetActive(false);
     }
 
     void Update()

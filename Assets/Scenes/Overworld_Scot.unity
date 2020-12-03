@@ -959,7 +959,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 221e8339318360b4195de44bb3a9bdd9, type: 2}
   - {fileID: 11400000, guid: 11ce4f4d77ead4e4eab01fc593d7b0a8, type: 2}
   - {fileID: 11400000, guid: 0b46bef87ce8f754fb3521b37cb259a9, type: 2}
-  - {fileID: 11400000, guid: cba0ead1acc29594d96f4b0c9e1c3156, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 043b46d23567c5c42b4a42ac8f3e014f, type: 2}
   - {fileID: 11400000, guid: b60fe78d6eceb7a4b9feb3fe61701f6b, type: 2}
 --- !u!4 &1287462257

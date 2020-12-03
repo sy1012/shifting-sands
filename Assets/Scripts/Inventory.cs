@@ -8,6 +8,13 @@ public class Inventory : MonoBehaviour
 {
     InventoryState state;
     EquipmentManager equipment;
+
+    public bool inventoryViewed = false;
+    public bool weaponsViewed = false;
+    public bool armourViewed = false;
+    public bool runesViewed = false;
+    public bool craftingViewed = false;
+
     private bool inDungeon;
     private bool inventoryOpen;
     private bool mouseDown;

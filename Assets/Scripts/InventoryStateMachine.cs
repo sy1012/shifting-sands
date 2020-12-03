@@ -21,6 +21,7 @@ static class PubData
     static public Sprite inventorySlotSprite;
     static public Sprite coinSprite;
     static public Sprite craftSprite;
+    static public Sprite exclamationMark;
 
     // background for everything inventory related
     static public GameObject inventoryBackground;
