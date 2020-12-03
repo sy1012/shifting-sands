@@ -7,6 +7,7 @@ public class MenuSelection : MonoBehaviour
     private static MenuSelection instance = null;
 
     public bool load = false;
+    public bool loadInventory = false;
 
     public static MenuSelection GetInstance()
     {

@@ -6,7 +6,6 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-    public bool load = false;
     InventoryState state;
     EquipmentManager equipment;
     private bool inDungeon;
@@ -36,10 +35,12 @@ public class Inventory : MonoBehaviour
 
         state.QuietPickUpCoins(300);
 
-        if (load)
+        if (FindObjectOfType<MenuSelection>().loadInventory)
         {
             LoadInventory();
         }
+        FindObjectOfType<MenuSelection>().loadInventory = true;
+
 
     }
     private void CraftingClicked(object sender, EventArgs e)
