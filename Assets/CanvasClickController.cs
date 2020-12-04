@@ -138,6 +138,12 @@ public class CanvasClickController : MonoBehaviour
         _craftingButton.SetActive(false);
         _runeMerchantButton.SetActive(false);
         _inventoryButton.SetActive(false);
+        inventoryMark.SetActive(false);
+        weaponMark.SetActive(false);
+        armourMark.SetActive(false);
+        runeMark.SetActive(false);
+        craftingMark.SetActive(false);
+
     }
 
     private void OverworldSubscribe(EventArgs e)
