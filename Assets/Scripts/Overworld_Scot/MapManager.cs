@@ -231,11 +231,12 @@ public class MapManager : MonoBehaviour
                 follower.path.Clear();
             }
 
-            for (int i = 0; i < loadedData.numCamels; i++)
+
+            /*for (int i = 0; i < loadedData.numCamels; i++)
             {
                 Follower camel = Instantiate(player.camelPrefab);
                 camel.transform.position = new Vector2(loadedData.camelPositions[i, 0], loadedData.camelPositions[i, 1]);
-            }
+            }*/
 
             DungeonDataKeeper dungeonData = FindObjectOfType<DungeonDataKeeper>();
             if (dungeonData.beatLastDungeon)
