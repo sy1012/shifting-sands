@@ -120,15 +120,28 @@ public class MapManager : MonoBehaviour
         //create a line between the new oasis and its parent/nearby siblings
         foreach (Node nearbyNode in oasisGraph.GetAdjByNode(oasis.oasisNode).GetAdj())
         {
+            bool pathExists = false;
             oasis.oases.Add(((OasisNode)nearbyNode).getOasis());
-            LineRenderer path = Instantiate(pathPrefab);
-            Vector3[] points = new Vector3[2];
-            points[0] = (Vector3)((OasisNode)nearbyNode).getOasis().transform.position;
-            points[1] = points[0];
-            path.startWidth = 1f;
-            path.endWidth = 1f;
-            path.SetPositions(points);
-            oasis.oasisLines.Add(path);
+            foreach(LineRenderer existingPath in oasis.oases[oasis.oases.Count - 1].oasisLines)
+            {
+                if (existingPath.GetPosition(0) == oasis.transform.position)
+                {
+                    pathExists = true;
+                    break;
+                }
+            }
+            if (!pathExists)
+            {
+                LineRenderer path = Instantiate(pathPrefab);
+                Vector3[] points = new Vector3[2];
+                points[0] = (Vector3)((OasisNode)nearbyNode).getOasis().transform.position;
+                points[1] = points[0];
+                path.startWidth = 1f;
+                path.endWidth = 1f;
+                path.SetPositions(points);
+                oasis.oasisLines.Add(path);
+            }
+
         }
     }
 
