@@ -186,7 +186,7 @@ public class PlayerStateMachine : Character
         InvincibleTime -= Time.deltaTime;
 
         //Handle Loot you can pick up
-        if (DungeonMaster.getLootInRange(this.transform.position, 1).Count != 0)
+        if (DungeonMaster.getLootInRange(this.transform.position, 0.4f).Count != 0)
         {
             List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 1);
             foreach (GameObject item in loot)
@@ -197,13 +197,13 @@ public class PlayerStateMachine : Character
         }
 
         // start pulling in loot within your magnetic range
-        if (DungeonMaster.getLootInRange(this.transform.position, 5).Count != 0)
+        if (DungeonMaster.getLootInRange(this.transform.position, 8).Count != 0)
         {
             List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 5);
             foreach (GameObject item in loot)
             {
                 Debug.Log("trying to pull");
-                float speed = (5 - Vector2.Distance(this.transform.position, item.transform.position)) /100;
+                float speed = (0.08f * 1f / Vector2.Distance(this.transform.position, item.transform.position));
                 item.transform.position = Vector3.Lerp(item.transform.position, this.transform.position, speed);
             }
         }

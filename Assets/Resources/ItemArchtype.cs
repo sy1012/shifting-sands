@@ -62,7 +62,9 @@ public class ItemArchtype : MonoBehaviour, IItem
         this.transform.localScale = this.data.spriteScaling;
         this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
-/*        if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
+        this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+
+        /*if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));
         this.GetComponent<Rigidbody2D>().AddForce(force);
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
