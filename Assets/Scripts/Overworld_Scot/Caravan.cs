@@ -25,6 +25,7 @@ public class Caravan : MonoBehaviour
         traversal = FindObjectOfType<PlayerOverworldTraversal>();
         currentNode = traversal.currentNode;
         fadeRenderer = fade.GetComponent<SpriteRenderer>();
+        Instantiate(camelPrefab);
     }
 
     public void EnterDungeon()

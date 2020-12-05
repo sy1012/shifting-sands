@@ -21,12 +21,26 @@ public class Follower : MonoBehaviour
             next = leader.followers[leader.followers.IndexOf(this) - 1];
             transform.position = next.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         }
+        else
+        {
+            transform.position = leader.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+        }
 
 
     }
 
     void FixedUpdate()
     {
+
+        if(transform.position.y > leader.transform.position.y)
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = 9;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = 11;
+        }
+
         if (next != null)
         {
             if (Vector2.Distance(this.transform.position, next.transform.position) > followDistance)
