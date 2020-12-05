@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4299549031212752271}
   - component: {fileID: 4299549031212752268}
   - component: {fileID: 4299549031212752270}
+  - component: {fileID: 4266872454649072795}
+  - component: {fileID: -756912830066433687}
   m_Layer: 0
   m_Name: Camel
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4299549031212752269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.22, y: 0.35, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,3 +101,36 @@ MonoBehaviour:
   next: {fileID: 0}
   followDistance: 1
   path: []
+--- !u!114 &4266872454649072795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299549031212752269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2bc69abaa165842a2a00e3476f4fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camel: {fileID: 4299549031212752270}
+  animator: {fileID: -756912830066433687}
+--- !u!95 &-756912830066433687
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299549031212752269}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f9bac176ea1e6744875ea89d468c979, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
