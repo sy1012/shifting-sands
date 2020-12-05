@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d31c5164e9240a324082255378b3, type: 3}
   m_Name: ChainArmour
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 0}
+  scrollOffset: {x: 0, y: 100}
   spriteScaling: {x: 0, y: 0}
-  relativeWeight: 0
   sprite: {fileID: 21300000, guid: eb0a916ed9d61dd4a89c8a100584ae43, type: 3}
-  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 4
   itemName: Chain Mail Armour
   value: 50
-  recipe: []
-  scroll: {fileID: 21300000, guid: 9f4c5842872c35e40b50b7e1725f4eb9, type: 3}
-  description: 
+  display: {fileID: 3436628489657920296, guid: 53d72c01bfa505b4d8c0384fcc61ec69, type: 3}
   flatArmour: 0.3

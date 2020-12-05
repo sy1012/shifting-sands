@@ -12,19 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447954128ad0d2e4293a7b01dd2fddf2, type: 3}
   m_Name: Khopesh
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 75.1}
+  scrollOffset: {x: 0, y: 90}
   spriteScaling: {x: 1, y: 1}
-  relativeWeight: 10
   sprite: {fileID: 21300000, guid: 841e743c7badc074c9b2f6aa46a26c40, type: 3}
-  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 1
   itemName: Khopesh
   value: 100
-  recipe: []
-  scroll: {fileID: 21300000, guid: 7bbd6db8e286ad045a390c29308ceb20, type: 3}
-  description: Khopesh
+  display: {fileID: 3886607327211740101, guid: c7df1d0b5f300484aa8f10180e48e2d1, type: 3}
   animationNumber: 0
   speed: 0.2
   hitBoxSize: {x: 0.6, y: 1.15}
-  damage: 10
+  damage: 15
   knockback: 1.2

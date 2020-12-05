@@ -5,27 +5,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public new WeaponData data;
+    public WeaponData data;
     public ItemTypes.Type type;          // What type of item is this (hint its a weapon)
 
-
-    //private Sprite[] spriteAnimation;  // Animation to play when attacking
     private float speed;                 // Speed at which the weapon attacks in seconds
     private Vector2 hitBoxSize;          // The size of the hit box to be created when attacking
     private float coolDown;              // How long before we can swing again after completing a swing
     private int damage;                  // how much damage does it do upon hitting something
     private new BoxCollider2D collider;  // Quick Reference to the collider attached to this object 
     protected Vector2 scrollOffset;
-    protected float relativeWeight;
     protected Sprite sprite;               // This weapons resting sprite
     protected int value;                   // How much could this be sold for
-    protected List<ItemData> recipe;       // List of items that could be put together to make this item
     protected SpriteRenderer sr;           // Quick Reference to the Sprite Renderer attached to this object  
     protected string itemName;             // Name of the item
-    protected GameObject text;
-    protected GameObject background;
-    public string description;             // description of the item
-    public Sprite scroll;
 
     // item needs to be set up but only after the Data has been added
     public void Initialize()
@@ -33,18 +25,13 @@ public class Weapon : MonoBehaviour
         // set up all the initial values for this weapon
         this.scrollOffset = data.scrollOffset;
         this.transform.localScale = data.spriteScaling;
-        this.relativeWeight = data.relativeWeight;
-        this.description = data.description;
-        //this.spriteAnimation = data.spriteAnimation;
         this.sprite = data.sprite;
         this.speed = data.speed;
         this.hitBoxSize = data.hitBoxSize;
         this.value = data.value;
-        this.recipe = data.recipe;
         this.sprite = data.sprite;
         this.damage = data.damage;
         this.itemName = data.name;
-        this.scroll = data.scroll;
         this.coolDown = 0;
         if (this.transform.parent.GetComponent<Animator>() != null)
         {

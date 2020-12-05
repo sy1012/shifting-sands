@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce710cc39bd48964f82a959e3f2eb783, type: 3}
   m_Name: SmallHealthPotion
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 0}
+  scrollOffset: {x: 0, y: 80}
   spriteScaling: {x: 0, y: 0}
-  relativeWeight: 0
   sprite: {fileID: 21300000, guid: 520eb3ab0e3e3ce48916aa213b6aecb0, type: 3}
-  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 2
   itemName: 
   value: 5
-  recipe: []
-  scroll: {fileID: 21300000, guid: 9f4c5842872c35e40b50b7e1725f4eb9, type: 3}
-  description: Heals you a small amount
+  display: {fileID: 3067848336851960219, guid: f40e45dcf042c8247b87886165f62674, type: 3}
   prefab: {fileID: 0}
   healAmount: 20

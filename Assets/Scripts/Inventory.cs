@@ -105,14 +105,14 @@ public class Inventory : MonoBehaviour
         if (slotHovered != null && !displayed && held == null)
         {
             displayed = true;
-            //slotHovered.ShowInfo();
+            slotHovered.ShowInfo();
             hoveredPreviously = slotHovered;
             slotHovered.transform.SetAsLastSibling();
         }
         else if (slotHovered == null && displayed)
         {
             displayed = false;
-            //hoveredPreviously.HideInfo();
+            hoveredPreviously.HideInfo();
         }
 
         if (state.IsOpen())

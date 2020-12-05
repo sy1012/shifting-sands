@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed1ca50124823484e8fd66a18a970233, type: 3}
-  m_Name: PatheticWaterRune
+  m_Name: WeakWaterRune
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 0}
+  scrollOffset: {x: 0, y: 80}
   spriteScaling: {x: 0, y: 0}
-  relativeWeight: 0
   sprite: {fileID: 21300000, guid: fa7b8cd0af6f29c4092e7f92753137e0, type: 3}
-  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 3
   itemName: Pathetic Water Rune
   value: 10
-  recipe: []
-  scroll: {fileID: 21300000, guid: 9f4c5842872c35e40b50b7e1725f4eb9, type: 3}
-  description: 
+  display: {fileID: 971107560928665764, guid: cb92c05f261a2e444b6363eec5286971, type: 3}
   type: 1
   effectiveness: 3

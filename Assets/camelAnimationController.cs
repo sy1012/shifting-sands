@@ -9,6 +9,7 @@ public class camelAnimationController : MonoBehaviour
     public Animator animator;
     private Transform destination;
     private Vector3 prevPosition;
+    Vector2 direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +19,16 @@ public class camelAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        destination = ((OasisNode)camel.path[0]).getOasis().transform;
+        
+        if (camel.path.Count > 0)
+        {
+            destination = ((OasisNode)camel.path[0]).getOasis().transform;
+            direction = destination.position - camel.transform.position;
+        }
+        
 
-        Vector2 direction = destination.position - camel.transform.position;
+
+        
         Debug.Log(direction.x);
         if (camel.next != null)
         {
@@ -65,6 +73,5 @@ public class camelAnimationController : MonoBehaviour
 
 
         prevPosition = camel.transform.position;
-        
     }
 }

@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d31c5164e9240a324082255378b3, type: 3}
   m_Name: LeatherArmour
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 0}
+  scrollOffset: {x: 0, y: 100}
   spriteScaling: {x: 0, y: 0}
-  relativeWeight: 0
   sprite: {fileID: 21300000, guid: 8d5149a67b5fd9942af87424f17579e8, type: 3}
-  frame: {fileID: 21300000, guid: 7198278813670dc4db48d6d6236867d0, type: 3}
   itemType: 4
   itemName: Leather Armour
   value: 15
-  recipe: []
-  scroll: {fileID: 21300000, guid: 9f4c5842872c35e40b50b7e1725f4eb9, type: 3}
-  description: 
+  display: {fileID: 6010979529372341770, guid: dee5cc714ae4edb4d9124109a745f48c, type: 3}
   flatArmour: 0.2

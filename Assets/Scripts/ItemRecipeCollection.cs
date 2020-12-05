@@ -25,7 +25,7 @@ public class CraftingRecipe
             bool has = false;
             for (int j = 0; j < inputs.Length; j++)
             {
-                if (inputs[j] != null && recipeInputs[i].description == inputs[j].description)
+                if (inputs[j] != null && recipeInputs[i].itemName == inputs[j].itemName)
                 {
                     //match
                     has = true;
