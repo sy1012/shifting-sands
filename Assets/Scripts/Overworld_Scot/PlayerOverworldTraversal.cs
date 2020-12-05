@@ -56,6 +56,7 @@ public class PlayerOverworldTraversal : MonoBehaviour
     public void EnterPyramid(Pyramid pyramid)
     {
         caravan.enterPyramid = pyramid;
+        caravan.entering = true;
         caravan.EnterDungeon();
         mapManager.SaveOverworld();
     }

@@ -8,6 +8,7 @@ public class CaravanAnimationController : MonoBehaviour
 {
     public Caravan caravan;
     public Animator animator;
+    private Transform destination;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,18 @@ public class CaravanAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (caravan.entering)
+        {
+            destination = caravan.enterPyramid.transform;
+        }
+        else
+        {
+            destination = caravan.currentNode.getOasis().transform;
+        }
         Vector2 direction = Vector2.zero;
         if (caravan.currentNode != null)
         {
-            direction = caravan.currentNode.getOasis().transform.position - caravan.transform.position;
+            direction = destination.position - caravan.transform.position;
            
         }
         if(direction == Vector2.zero)
