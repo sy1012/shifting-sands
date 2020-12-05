@@ -1030,6 +1030,10 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.9528302
       objectReference: {fileID: 0}
+    - target: {fileID: 4810033738622692090, guid: b70b327684837ee40b989418f977d978, type: 3}
+      propertyPath: collectedCoin
+      value: 
+      objectReference: {fileID: 5660891847278909357, guid: ee27054e845469347a5fc05e889c7f48, type: 3}
     - target: {fileID: 4810033738622692091, guid: b70b327684837ee40b989418f977d978, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 744

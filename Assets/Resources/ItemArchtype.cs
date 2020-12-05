@@ -44,7 +44,12 @@ public class ItemArchtype : MonoBehaviour, IItem
         //if (this.GetComponent<Rigidbody2D>() != null) Destroy(this.GetComponent<Rigidbody2D>());
         DungeonMaster.loot.Remove(this.gameObject);
         if (this.data.itemName != "Silver") GameObject.Find("Inventory").GetComponent<Inventory>().AddToInventory(this.data);
-        else GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
+        else
+        {
+            CoinDisplay coinDisplay = MonoBehaviour.FindObjectOfType<CoinDisplay>();
+            MonoBehaviour.Instantiate(coinDisplay.collectedCoin, coinDisplay.GetComponentInParent<Canvas>().gameObject.transform);
+            GameObject.Find("Inventory").GetComponent<Inventory>().PickUpCoin(this.data.value);
+        }
 
         Destroy(this.gameObject);
     }
@@ -57,11 +62,11 @@ public class ItemArchtype : MonoBehaviour, IItem
         this.transform.localScale = this.data.spriteScaling;
         this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
-        if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
+/*        if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
         Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));
         this.GetComponent<Rigidbody2D>().AddForce(force);
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
-        this.GetComponent<Rigidbody2D>().drag = relativeWeight;
+        this.GetComponent<Rigidbody2D>().drag = relativeWeight;*/
     }
 
     public void Sold()

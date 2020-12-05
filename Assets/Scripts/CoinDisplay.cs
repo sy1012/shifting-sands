@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CoinDisplay : MonoBehaviour
 {
     public Text coinText;
+    public Image collectedCoin;
     private Inventory inventory;
 
     public void Start()
