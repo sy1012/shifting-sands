@@ -177,13 +177,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<u><b>Weak Water Rune</b></u>
+  m_text: '<u><b>Weak Air Rune</b></u>
 
 
     This will increase your
 
-    range
-    a bit
+    attack
+    speed a bit
 
 
     <b>Value: 10</b>

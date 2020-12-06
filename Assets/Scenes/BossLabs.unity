@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossRoom1.0
       objectReference: {fileID: 0}
+    - target: {fileID: 8258062586857101258, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
 --- !u!114 &548155042 stripped
@@ -877,6 +881,65 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 9ae15a27a97098b41b407326ada7a69f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11aa11fc5c440b04bb7f543ebdd02f85, type: 3}
+--- !u!1 &1280927961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280927964}
+  - component: {fileID: 1280927963}
+  - component: {fileID: 1280927962}
+  m_Layer: 0
+  m_Name: InventoryHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1280927962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280927961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b0fa419a4451148b4801d2cc3ffd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1280927963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280927961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9797f7c0fbe8723408af4a3e05c5d3b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentPrefab: {fileID: 2186752933071229218, guid: 11aa11fc5c440b04bb7f543ebdd02f85, type: 3}
+  CanvasPrefab: {fileID: 3994768178738054236, guid: 3251dc0ba37fa324a8c6f8f77b37b065, type: 3}
+  soundPrefab: {fileID: 8096003828929859507, guid: 5646f8b76b6be03499bf553b57601da0, type: 3}
+--- !u!4 &1280927964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280927961}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.52, y: 97, z: 0}
+  m_LocalScale: {x: 4.3166723, y: 3.9437208, z: 4.235424}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1338659348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6191256057271201701, guid: ff207d31234f816418a6c2e3f320f604, type: 3}
@@ -999,7 +1062,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1882890875
 Transform:
   m_ObjectHideFlags: 0
@@ -1154,14 +1217,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1882890875}
     m_Modifications:
-    - target: {fileID: 3180311156893116457, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1474666281}
-    - target: {fileID: 5162391769629974448, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5162391769629974448, guid: ea38faa7ff9dbe84388fb4559942ad4c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.46486205
@@ -1209,6 +1264,14 @@ PrefabInstance:
     - target: {fileID: 8258062586857101258, guid: ea38faa7ff9dbe84388fb4559942ad4c, type: 3}
       propertyPath: m_Name
       value: BossRoom3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180311156893116457, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1474666281}
+    - target: {fileID: 5162391769629974448, guid: 4515953a93715754ebbe36e0ffed5bdd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea38faa7ff9dbe84388fb4559942ad4c, type: 3}

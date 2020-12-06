@@ -15,14 +15,28 @@ public class ItemFrame : MonoBehaviour
     public void HideInfo()
     {
         if (!initialized) { Initialize(); }
-        text.SetActive(false);
+        if (text.GetComponent<Animator>() != null)
+        {
+            text.GetComponent<Animator>().SetBool("Open", false);
+        }
+        else
+        {
+            text.SetActive(false);
+        }
     }
 
     public void ShowInfo()
     {
         if (!initialized) { Initialize(); }
         this.text.GetComponent<RectTransform>().position = (Vector2)this.transform.position + data.scrollOffset;
-        text.SetActive(true);
+        if (text.GetComponent<Animator>() != null)
+        {
+            text.GetComponent<Animator>().SetBool("Open", true);
+        }
+        else
+        {
+            text.SetActive(true);
+        }
     }
 
     public void ShowFrame()
