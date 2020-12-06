@@ -33,7 +33,8 @@ public class Inventory : MonoBehaviour
         EventManager.onArmourMerchant += ArmourMerchantClicked;
         EventManager.onRuneMerchant += RuneMerchantClicked;
         EventManager.onCrafting += CraftingClicked;
-        EventManager.onCloseInventory += SaveInventory;
+        EventManager.onPyramidClicked += SaveInventory;
+        EventManager.OnExitDungeon += SaveInventory;
         
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
@@ -219,7 +220,15 @@ public class Inventory : MonoBehaviour
 	{
         SaveSystem.SaveInventory(this, FindObjectOfType<EquipmentManager>());
         SaveSystem.SaveOverworld(FindObjectOfType<MapManager>());
+        Debug.Log("Inventory Saved");
 	}
+
+    public void SaveInventory(System.EventArgs e)
+    {
+        SaveSystem.SaveInventory(this, FindObjectOfType<EquipmentManager>());
+        Debug.Log("Inventory Saved");
+
+    }
 
     public void LoadInventory()
 	{
