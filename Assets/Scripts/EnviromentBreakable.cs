@@ -24,6 +24,10 @@ public class EnviromentBreakable : MonoBehaviour, IDamagable
         sprite = data.sprite;
         destructionAnimation = data.destructionAnimation;
         beingHitAnimation = data.beingHitAnimation;
+        if (name.Contains("Box"))
+        {
+            GetComponent<Rigidbody2D>().isKinematic = true;
+        }
     }
 
     public virtual void OnDestroy()

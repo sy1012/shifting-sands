@@ -250,7 +250,10 @@ public class RollState : State
         Vector3 keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
         // trigger on dash event
         EventManager.TriggerOnDash();
+
+        //Set psm state
         psm.animator.SetTrigger("Dash");
+        psm.rb.isKinematic = true;
         //Change the color for a cool effect
         var spriteRenderer = psm.spriteRenderer;
         spriteRenderer.color = Color.cyan/4;
@@ -266,8 +269,23 @@ public class RollState : State
                 dashPosition = raycastHit2d.point;
                 dashPosition = new Vector2(dashPosition.x, dashPosition.y - psm.playerRootOffset);
                 psm.rb.MovePosition(dashPosition);
-                // Have hit wall end coroutine
-                break;
+                Debug.Log(Vector3.Dot(keyInputV3.normalized, raycastHit2d.normal.normalized));
+                // Dead on wall ram
+                if (Vector2.Dot(keyInput.normalized,raycastHit2d.normal.normalized)<-0.8f)
+                {
+                    Debug.Log("hit wall");
+                    break;
+                    // Have hit wall end coroutine
+                }
+                //Slide along wall
+                else
+                {
+                    keyInput = keyInput - Vector3.Dot(keyInput.normalized, raycastHit2d.normal.normalized) * raycastHit2d.normal;
+                    keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
+                    // Move away from wall a smidge
+                    dashPosition = dashPosition + new Vector3(raycastHit2d.normal.x, raycastHit2d.normal.y,0) * 0.02f;
+                    Debug.Log(keyInput);
+                }
             }
             psm.rb.MovePosition(dashPosition);
             //wait some time then come back to this line, continue loop
@@ -275,6 +293,7 @@ public class RollState : State
             tick += dashTime / segments;
         }
         //reset color back to white
+        psm.rb.isKinematic = false;
         spriteRenderer.color = new Color(255,255,255,255);
         psm.animator.SetTrigger("DashOver");
         psm.SetState(new NormalState(psm));

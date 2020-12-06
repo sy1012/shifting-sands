@@ -83,7 +83,6 @@ public class PlayerStateMachine : Character
         SetState(new NormalState(this));
 
 
-        dashLayerMask.value = 10;
         triggerCollisions = new List<Collider2D>();
        
     }
