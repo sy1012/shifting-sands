@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FollowPlayer : MonoBehaviour
 {
@@ -18,7 +19,11 @@ public class FollowPlayer : MonoBehaviour
         {
             psm = FindObjectOfType<PlayerStateMachine>();
         }
-        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = psm.transform.position + (mouse - psm.transform.position).normalized * 3;
+        if (SceneManager.GetActiveScene().name == "Dungeon")
+        {
+            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = psm.transform.position + (mouse - psm.transform.position).normalized * 3;
+        }
+        
     }
 }
