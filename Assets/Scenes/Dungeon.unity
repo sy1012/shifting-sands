@@ -909,7 +909,7 @@ MonoBehaviour:
   tinyDungeon: {fileID: 900462496}
   mediumDungeon: {fileID: 1857472663}
   newLevelTrigger: 0
-  currentVariant: 1
+  currentVariant: 0
 --- !u!114 &1857472663 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2510383238531894088, guid: d5cd5ac752552ce41bfd8259bb962ac5, type: 3}

@@ -107,6 +107,10 @@ public class ForceDirectedGraph : MonoBehaviour
         {
             SolveForceDrivenGraph(34f, 0.2f, 2300f);
         }
+        for (int i = 0; i < 10; i++)
+        {
+            SolveForceDrivenGraph(44f, 0.2f, 3600f);
+        }
     }
 
     // Update is called once per frame
