@@ -991,6 +991,10 @@ PrefabInstance:
       propertyPath: room
       value: 
       objectReference: {fileID: 5371903637446860091}
+    - target: {fileID: 306374202410096956, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
 --- !u!1001 &6976950489584472838
