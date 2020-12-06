@@ -138,12 +138,15 @@ public class CanvasClickController : MonoBehaviour
         _craftingButton.SetActive(false);
         _runeMerchantButton.SetActive(false);
         _inventoryButton.SetActive(false);
-        inventoryMark.SetActive(false);
-        weaponMark.SetActive(false);
-        armourMark.SetActive(false);
-        runeMark.SetActive(false);
-        craftingMark.SetActive(false);
 
+        if(inventoryMark != null)
+        {
+            inventoryMark.SetActive(false);
+            weaponMark.SetActive(false);
+            armourMark.SetActive(false);
+            runeMark.SetActive(false);
+            craftingMark.SetActive(false);
+        }
     }
 
     private void OverworldSubscribe(EventArgs e)
@@ -157,27 +160,42 @@ public class CanvasClickController : MonoBehaviour
 
     private void hideInvExclamation(object sender, System.EventArgs e)
     {
-        inventoryMark.SetActive(false);
+        if(inventoryMark != null)
+        {
+            inventoryMark.SetActive(false);
+        }
     }
 
     private void hideWeapExclamation(object sender, System.EventArgs e)
     {
-        weaponMark.SetActive(false);
+        if(weaponMark != null)
+        {
+            weaponMark.SetActive(false);
+        }
     }
 
     private void hideArmExclamation(object sender, System.EventArgs e)
     {
-        armourMark.SetActive(false);
+        if(armourMark != null)
+        {
+            armourMark.SetActive(false);
+        }
     }
 
     private void hideRuneExclamation(object sender, System.EventArgs e)
     {
-        runeMark.SetActive(false);
+        if(runeMark != null)
+        {       
+            runeMark.SetActive(false);
+        }
     }
 
     private void hideCraftExclamation(object sender, System.EventArgs e)
     {
-        craftingMark.SetActive(false);
+        if(craftingMark != null)
+        {
+            craftingMark.SetActive(false);
+        }
     }
 
     void Update()

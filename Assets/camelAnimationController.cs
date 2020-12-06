@@ -26,10 +26,6 @@ public class camelAnimationController : MonoBehaviour
             direction = destination.position - camel.transform.position;
         }
         
-
-
-        
-        Debug.Log(direction.x);
         if (camel.next != null)
         {
             if (direction == Vector2.zero || Vector2.Distance(camel.transform.position, camel.next.transform.position) <= camel.followDistance)

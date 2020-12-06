@@ -314,6 +314,7 @@ public class HitState:State
         }
         else psm.health -= damageTaking;
         if (psm.health <= 0) {
+            GameObject.Destroy(psm.GetComponentInParent<Rigidbody2D>());
             //Let Animaiton play
             psm.animator.Play("Fall");
 
@@ -321,10 +322,12 @@ public class HitState:State
             FadeController.PlayFadeOut();
             yield return new WaitForSeconds(1);
             // clean up the hierarchy
-            GameObject.Destroy(GameObject.Find("Canvas"));
-            GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
+            //GameObject.Destroy(GameObject.Find("Canvas"));
+            //GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
             GameObject.Destroy(GameObject.Find("DungeonData"));
-            GameObject.Destroy(GameObject.Find("Equipment"));
+            GameObject.Destroy(GameObject.Find("TheClickDataSaviour"));
+
+            EventManager.TriggerDungeonExit();
 
             Debug.Log("Death Noises");
             SceneManager.LoadScene("MainMenu");

@@ -38,7 +38,7 @@ public class MainMenuClickController : MonoBehaviour
             foreach (RaycastResult result in results)
             {
                 // trigger sound!
-                EventManager.TriggerOnInventorySwap();
+                //EventManager.TriggerOnInventorySwap();
                 if (result.gameObject.name == "NewButton")
                 {
                     script.load = false;
