@@ -33,9 +33,16 @@ public class Oasis : MonoBehaviour
     private Caravan caravan;
     private MapManager mapManager;
 
+    public bool old = false;
+
 
     private void Start()
     {
+        transform.localScale = new Vector3(0.05f, 0.05f);
+        if(FindObjectsOfType<Oasis>().Length == 1)
+        {
+            old = true;
+        }
         //Create the travel radius visual
         circle = Instantiate(radVisualize, transform);
         circle.oasis = this;
@@ -43,13 +50,38 @@ public class Oasis : MonoBehaviour
         caravan = FindObjectOfType<Caravan>();
         mapManager = FindObjectOfType<MapManager>();
 
+        if (!old)
+        {
+            StartCoroutine(ScaleUp());
+        }
+        else
+        {
+            transform.localScale = new Vector3(0.5f, 0.5f);
+            //create pyramids
+            if (!generated)
+            {
+                generatePyramids();
+            }
+        }
+        
+        
+
+    }
+
+    private IEnumerator ScaleUp()
+    {
+        yield return new WaitForSeconds(1);
+        while (transform.localScale.x < 0.5)
+        {
+            transform.localScale += new Vector3(0.5f, 0.5f) * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
         //create pyramids
         if (!generated)
         {
             generatePyramids();
         }
-        
-
     }
 
     private void Update()

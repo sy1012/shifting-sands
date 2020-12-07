@@ -65,7 +65,7 @@ public class Enemy : Character
         // Create the death effect
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
 
-        // trigger explosion sounds
+        // trigger explosion sounds`
         EventManager.TriggerOnEnemyDeath();
 
         // Destroy Effect
