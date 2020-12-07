@@ -62,12 +62,12 @@ public class MapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadOverworld();
-        }*/
+        }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             SaveSystem.DeleteOverworld();
-        }
+        }*/
 
         if(needToSave && !player.waiting)
         {
