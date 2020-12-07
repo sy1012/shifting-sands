@@ -655,7 +655,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlayBreak(System.EventArgs e)
     {
-        float volume = 0.2f;
+        float volume = 0.15f;
         int x = Random.Range(0, 5);
         if (x == 0){
             SoundPlayer.PlayOneShot(Break1, volume);

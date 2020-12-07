@@ -71,7 +71,7 @@ public class Boss1Rhoss : Enemy
         bossTextUI.fontSize = 25;
         bossTextUI.color = Color.white;
         bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;
-        bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
+        bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .1f));
         healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .80f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
 
@@ -211,7 +211,7 @@ public class Boss1Rhoss : Enemy
         }
         else if (collision.collider.name == "Pillar" && this.charging)
         {
-            this.TakeDamage(200);
+            this.TakeDamage(150);
             this.stunned = 4;
             this.charging = false;
             EventManager.TriggerOnRossHitPillar();
