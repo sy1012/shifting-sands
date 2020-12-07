@@ -39,6 +39,7 @@ public class Boss1Rhoss : Enemy
 
     IEnumerator Death()
     {
+        this.GetComponent<AIPath>().maxSpeed = 0;
         EventManager.TriggerOnRossEnd();
         animBody.SetTrigger("dead");
         DungeonDataKeeper.getInstance().beatRhoss = true;
@@ -71,7 +72,7 @@ public class Boss1Rhoss : Enemy
         bossTextUI.color = Color.white;
         bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
-        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .80f));
+        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .89f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
 
         destination.target = Player;
@@ -210,7 +211,7 @@ public class Boss1Rhoss : Enemy
         }
         else if (collision.collider.name == "Pillar" && this.charging)
         {
-            this.TakeDamage(200);
+            this.TakeDamage(150);
             this.stunned = 4;
             this.charging = false;
             EventManager.TriggerOnRossHitPillar();

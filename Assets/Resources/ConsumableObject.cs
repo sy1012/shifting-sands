@@ -44,11 +44,5 @@ public class ConsumableObject : MonoBehaviour
         this.sr.sortingLayerName = "Player";
         this.gameObject.AddComponent<BoxCollider2D>();
         this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-        /*if (this.GetComponent<Rigidbody2D>() == null) this.gameObject.AddComponent<Rigidbody2D>();
-        Vector2 force = new Vector2(Random.Range(0, 100), Random.Range(0, 100));
-        this.GetComponent<Rigidbody2D>().freezeRotation = true;
-        this.GetComponent<Rigidbody2D>().AddForce(force);
-        this.GetComponent<Rigidbody2D>().gravityScale = 0;
-        this.GetComponent<Rigidbody2D>().drag = data.relativeWeight;*/
     }
 }
