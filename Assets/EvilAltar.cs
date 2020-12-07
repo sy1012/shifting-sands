@@ -35,6 +35,8 @@ public class EvilAltar : Interactable
         }
         EventManager.TriggerRelicGathered(this);
 
+        EventManager.TriggerOnEvilAltar();
+
         player.animator.Play("Fall");
 
         DungeonDataKeeper.getInstance().curseValue = DungeonDataKeeper.getInstance().curseValue * 0.5f;

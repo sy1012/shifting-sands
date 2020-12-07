@@ -58,6 +58,8 @@ public static class EventManager
     public static event GameEvent onAnubisAttack;
     public static event GameEvent onAnubisAttackExplosion;
     public static event GameEvent onAnubisTeleport;
+    public static event GameEvent onEvilAltar;
+    public static event GameEvent onPureAltar;
     public static event GameEvent onResubscribeOverworld;  // DO NOT CLEAN THESE
     public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING 
     public static event GameEvent onResubscribeMainMenu;   // AND ARE FOR PERMANANT OBJS ONLY
@@ -77,6 +79,8 @@ public static class EventManager
         DungeonMaster.loot = new List<GameObject>();
 
         //Clean the Game Events
+        onEvilAltar = null;
+        onPureAltar = null;
         onAnubisStart = null;
         onAnubisEnd = null;
         onAnubisAttack = null;
@@ -121,6 +125,16 @@ public static class EventManager
         onEnemyDeath = null;
         onPlayerDeath = null;
         onBreakBox = null;
+    }
+
+    public static void TriggerOnEvilAltar()
+    {
+        onEvilAltar?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnPureAltar()
+    {
+        onPureAltar?.Invoke(EventArgs.Empty);
     }
 
     public static void TriggerOnAnubisStart()

@@ -538,9 +538,21 @@ public class SoundManager : MonoBehaviour
         EventManager.onAnubisAttackExplosion += PlayAnubisExplosion;
         EventManager.onAnubisTeleport += PlayDash;
         EventManager.onAnubisTeleport += PlayDash;
+        EventManager.onEvilAltar += PlayEvilAltar;
+        EventManager.onPureAltar += PlayPureAltar;
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
+    }
+
+    private void PlayEvilAltar(System.EventArgs e)
+    {
+        SoundPlayer.PlayOneShot(Endfire1, 0.9f);
+    }
+
+    private void PlayPureAltar(System.EventArgs e)
+    {
+        SoundPlayer.PlayOneShot(Endfire2, 0.9f);
     }
 
     private void PlayAnubisExplosion(System.EventArgs e)
