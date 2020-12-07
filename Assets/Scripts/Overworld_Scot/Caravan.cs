@@ -84,9 +84,9 @@ public class Caravan : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.E)){
+/*        if(Input.GetKeyDown(KeyCode.E)){
             Instantiate(camelPrefab);
-        }
+        }*/
 
     }
 }

@@ -21,6 +21,6 @@ MonoBehaviour:
   display: {fileID: 6255422298402181259, guid: f7ab8deb650922241bc59a30dab0860f, type: 3}
   animationNumber: 4
   speed: 0.3
-  hitBoxSize: {x: 0.6, y: 1.15}
+  hitBoxSize: {x: 0.6, y: 1.3}
   damage: 10
   knockback: 1.2
