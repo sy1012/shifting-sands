@@ -39,6 +39,7 @@ public class Boss1Rhoss : Enemy
 
     IEnumerator Death()
     {
+        this.GetComponent<AIPath>().maxSpeed = 0;
         EventManager.TriggerOnRossEnd();
         animBody.SetTrigger("dead");
         DungeonDataKeeper.getInstance().beatRhoss = true;

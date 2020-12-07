@@ -14,7 +14,7 @@ public class Skull : Enemy
     {
         base.Start();
         damageSpeed = 1;
-        damage = 10;
+        damage = 20;
         detectionRange = 5;
         randTarget = new GameObject().transform;
         //move healthbar to a more suitable position
