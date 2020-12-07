@@ -9,6 +9,30 @@ public class SoundManager : MonoBehaviour
     private AudioSource SoundPlayer;
     // make a clip for each sound effect
 
+    // anubis 
+    private AudioClip AnubisAttack;
+    private AudioClip AnubisDeath;
+    private AudioClip AnubisMusic;
+
+    // ross
+    private AudioClip RossAttack1;
+    private AudioClip RossAttack2;
+    private AudioClip RossAttack3;
+    private AudioClip RossDeath;
+    private AudioClip RossMusic;
+
+    // reveal overworld
+    private AudioClip Reveal;
+
+    // end shrine fire
+    private AudioClip Endfire1;
+    private AudioClip Endfire2;
+
+    // column destruction
+    private AudioClip Crumble1;
+    private AudioClip Crumble2;
+    private AudioClip Crumble3;
+
     // caravan hub music
     private AudioClip CaravanHub;
 
@@ -163,6 +187,18 @@ public class SoundManager : MonoBehaviour
 
     // player hit
     private AudioClip PlayerHit1;
+    private AudioClip PlayerPain1;
+    private AudioClip PlayerPain2;
+    private AudioClip PlayerPain3;
+    private AudioClip PlayerPain4;
+    private AudioClip PlayerPain5;
+    private AudioClip PlayerPain6;
+    private AudioClip PlayerPain7;
+    private AudioClip PlayerPain8;
+
+    // player death
+    private AudioClip PlayerDeath1;
+    private AudioClip PlayerDeath2;
 
     // footsteps
     private AudioClip Footstep1;
@@ -212,6 +248,30 @@ public class SoundManager : MonoBehaviour
         GameObject.DontDestroyOnLoad(this.gameObject);
 
         // initialize every audio clip
+
+        // anubis
+        AnubisAttack = Resources.Load<AudioClip>("SFX/Boss/anubis-attack");
+        AnubisDeath = Resources.Load<AudioClip>("SFX/Boss/anubis-death");
+        AnubisMusic = Resources.Load<AudioClip>("SFX/Boss/anubis-music");
+
+        // ross
+        RossAttack1 = Resources.Load<AudioClip>("SFX/Boss/ross-attack1");
+        RossAttack2 = Resources.Load<AudioClip>("SFX/Boss/ross-attack2");
+        RossAttack3 = Resources.Load<AudioClip>("SFX/Boss/ross-attack3");
+        RossDeath = Resources.Load<AudioClip>("SFX/Boss/ross-start-death");
+        RossMusic = Resources.Load<AudioClip>("SFX/Boss/ross-music");
+
+        // reveal overworld
+        Reveal = Resources.Load<AudioClip>("SFX/Overworld/reveal-oasis");
+
+        // end shrine fire
+        Endfire1 = Resources.Load<AudioClip>("SFX/Dungeon/endfire1");
+        Endfire2 = Resources.Load<AudioClip>("SFX/Dungeon/endfire2");
+
+        // column destruction
+        Crumble1 = Resources.Load<AudioClip>("SFX/Dungeon/crumble1");
+        Crumble2 = Resources.Load<AudioClip>("SFX/Dungeon/crumble2");
+        Crumble3 = Resources.Load<AudioClip>("SFX/Dungeon/crumble3");
 
         // caravan hub music
         CaravanHub = Resources.Load<AudioClip>("SFX/Caravan/CaravanHub");
@@ -367,6 +427,18 @@ public class SoundManager : MonoBehaviour
 
         // player hit
         PlayerHit1 = Resources.Load<AudioClip>("SFX/Player/playerHit1");
+        PlayerPain1 = Resources.Load<AudioClip>("SFX/Player/pain1");
+        PlayerPain2 = Resources.Load<AudioClip>("SFX/Player/pain2");
+        PlayerPain3 = Resources.Load<AudioClip>("SFX/Player/pain3");
+        PlayerPain4 = Resources.Load<AudioClip>("SFX/Player/pain4");
+        PlayerPain5 = Resources.Load<AudioClip>("SFX/Player/pain5");
+        PlayerPain6 = Resources.Load<AudioClip>("SFX/Player/pain6");
+        PlayerPain7 = Resources.Load<AudioClip>("SFX/Player/pain7");
+        PlayerPain8 = Resources.Load<AudioClip>("SFX/Player/pain8");
+
+        // player death
+        PlayerDeath1 = Resources.Load<AudioClip>("SFX/Player/die1");
+        PlayerDeath2 = Resources.Load<AudioClip>("SFX/Player/die2");
 
         // footsteps
         Footstep1 = Resources.Load<AudioClip>("SFX/Player/footstep00");
