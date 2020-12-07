@@ -12,6 +12,7 @@ public class StoryTeller : MonoBehaviour
     private float endPosition;
     private float screenScrollSpeed;
     private blackfade fade;
+    private int clicked = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,10 @@ public class StoryTeller : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Text.GetComponent<RectTransform>().localPosition.y >= endPosition || button.clicked)
             {
+                if (clicked == 0){
+                    EventManager.TriggerOnInventorySwap();
+                    clicked += 1;
+                }
                 fade.fadeout = true;
             }
             else

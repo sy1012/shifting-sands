@@ -71,6 +71,8 @@ public class Enemy : Character
         // Destroy Effect
         Destroy(effect, 1f);
 
+        EventManager.TriggerOnEnemyDeath();
+
         // Destroy The game object
         Destroy(this.gameObject);
 
