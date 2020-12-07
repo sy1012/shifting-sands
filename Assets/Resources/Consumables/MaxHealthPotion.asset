@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce710cc39bd48964f82a959e3f2eb783, type: 3}
   m_Name: MaxHealthPotion
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 80}
+  scrollOffset: {x: 0, y: 0.2}
   spriteScaling: {x: 0, y: 0}
   sprite: {fileID: 21300000, guid: 9ae17b568de1e204ebdad07fdeb7c4e7, type: 3}
   itemType: 2
-  itemName: 
+  itemName: Max Potion
   value: 50
   display: {fileID: 631875022815454478, guid: 8978831107f9b3546a8b988f68ed55df, type: 3}
   prefab: {fileID: 0}

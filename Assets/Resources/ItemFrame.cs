@@ -28,7 +28,14 @@ public class ItemFrame : MonoBehaviour
     public void ShowInfo()
     {
         if (!initialized) { Initialize(); }
-        this.text.GetComponent<RectTransform>().position = (Vector2)this.transform.position + data.scrollOffset;
+        if (this.transform.parent.name == "Merchant Slot" && (this.data.itemName == "Max Potion" || (this.data.itemName == "Large Potion"))) {
+            this.text.GetComponent<RectTransform>().position = (Vector2)this.transform.position - (Vector2)Camera.main.ViewportToScreenPoint(data.scrollOffset);
+        }
+        else
+        {
+            this.text.GetComponent<RectTransform>().position = (Vector2)this.transform.position + (Vector2)Camera.main.ViewportToScreenPoint(data.scrollOffset);
+        }
+        this.text.SetActive(true);
         if (text.GetComponent<Animator>() != null)
         {
             text.GetComponent<Animator>().SetBool("Open", true);
@@ -78,6 +85,7 @@ public class ItemFrame : MonoBehaviour
         this.item = new GameObject();
         this.frame = new GameObject();
         this.text = Instantiate(data.display);
+        this.text.SetActive(false);
 
         // the size the frame should be
         Vector2 slotPercent = Camera.main.WorldToViewportPoint(new Vector2(this.transform.parent.GetComponent<Slot>().slotWorldUnits / 3,
@@ -96,17 +104,18 @@ public class ItemFrame : MonoBehaviour
         //if (scroll.GetComponent<RectTransform>() == null) { scroll.AddComponent<RectTransform>(); }
         if (item.GetComponent<RectTransform>() == null) { item.AddComponent<RectTransform>(); }
         //if (frame.GetComponent<RectTransform>() == null) { frame.AddComponent<RectTransform>(); }
-        this.text.GetComponent<RectTransform>().position = (Vector2)this.transform.position + data.scrollOffset * 1000;
         //this.scroll.GetComponent<RectTransform>().position = (Vector2)this.transform.position + data.scrollOffset * 1000;
         this.item.GetComponent<RectTransform>().position = (Vector2)this.transform.position;
         //this.frame.GetComponent<RectTransform>().position = (Vector2)this.transform.position;
-
-        text.transform.position = (Vector2)this.transform.position + data.scrollOffset;
+        text.transform.SetParent(this.transform);
+        
+        Vector2 scaler = (Vector2)Camera.main.ViewportToScreenPoint(new Vector2(.002f, .002f));
+        this.text.GetComponent<RectTransform>().localScale *= new Vector2(scaler.y, scaler.y);
         //scroll.transform.position = (Vector2)this.transform.position + data.scrollOffset;
 
         // Parent everything so that it is neat and tidy and the rect transforms function appriatley
         //scroll.transform.SetParent(this.transform);
-        text.transform.SetParent(this.transform);
+
         //frame.transform.SetParent(this.transform);
         item.transform.SetParent(this.transform);
 

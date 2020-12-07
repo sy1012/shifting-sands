@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d31c5164e9240a324082255378b3, type: 3}
   m_Name: GoldPlateArmour
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 100}
+  scrollOffset: {x: 0, y: 0.25}
   spriteScaling: {x: 0, y: 0}
   sprite: {fileID: 21300000, guid: 893f59c82febc284888c8a1c58233f7b, type: 3}
   itemType: 4

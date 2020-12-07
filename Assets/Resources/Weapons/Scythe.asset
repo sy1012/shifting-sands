@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447954128ad0d2e4293a7b01dd2fddf2, type: 3}
   m_Name: Scythe
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 80}
+  scrollOffset: {x: 0, y: 0.2}
   spriteScaling: {x: 1, y: 1}
   sprite: {fileID: 21300000, guid: 496f39ff9a934a641b60f7bfb39e5c3f, type: 3}
   itemType: 1
