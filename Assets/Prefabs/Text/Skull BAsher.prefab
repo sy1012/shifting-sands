@@ -267,13 +267,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Skull Basher</b>
+  m_text: '
+
+    <b>Skull Basher</b>
 
 
     Crushes anything you hit,
 
-    if you can lift
-    it that is.
+    if you
+    can lift it that is.
 
 
     <b>Damage: 15</b>
@@ -436,7 +438,7 @@ GameObject:
   - component: {fileID: 5550012738044629840}
   - component: {fileID: 6166411917619656316}
   m_Layer: 0
-  m_Name: Skull Basher
+  m_Name: Skull BAsher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
