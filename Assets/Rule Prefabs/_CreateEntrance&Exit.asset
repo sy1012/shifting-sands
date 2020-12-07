@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d55c0ed7c9584c49a9632c9fb4dcddd, type: 3}
-  m_Name: MediumLevel
+  m_Name: _CreateEntrance&Exit
   m_EditorClassIdentifier: 
   instructions:
   - 0
-  - 1
-  - 2
   rules:
-  - {fileID: 8655079614676926978, guid: 624eb853e997ba64499b3b539e161589, type: 3}
-  - {fileID: 1094846854199330344, guid: b02718590a5be83478c22ceb4520f3a2, type: 3}
-  - {fileID: 7478871445448567255, guid: c85332eecf761514ea4aaa15599283d2, type: 3}
+  - {fileID: 4092953863104125146, guid: eec1df0c88001a74591cff190baa2cff, type: 3}
+  - {fileID: 4427367866438481794, guid: 13733d48b16b6754c86fb7e0bbc4219e, type: 3}

@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4786746697163729272}
   - component: {fileID: 4786746697163729273}
   m_Layer: 0
-  m_Name: TinyLevelGenerator (1)
+  m_Name: TinyLevelGenerator-NoBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4786746697163729272
 Transform:
   m_ObjectHideFlags: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gc: {fileID: 4786746698423871291}
   roomPicker: {fileID: 11400000, guid: 569d3105165e7c84f921949138e4113c, type: 2}
-  roomPickerGoal: {fileID: 11400000, guid: fb5e3aad6a9903f4b8c76ea265d55429, type: 2}
+  roomPickerGoal: {fileID: 11400000, guid: e9f4b4a5b07ca88498375583d2d92455, type: 2}
   rooms: []
   doors: []
 --- !u!1 &4786746698423871288

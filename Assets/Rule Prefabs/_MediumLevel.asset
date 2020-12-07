@@ -10,19 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d55c0ed7c9584c49a9632c9fb4dcddd, type: 3}
-  m_Name: MonstersLoot
+  m_Name: _MediumLevel
   m_EditorClassIdentifier: 
   instructions:
+  - 0
   - 1
   - 1
-  - 1
-  - 1
-  - 1
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
   rules:
-  - {fileID: 3983469168727463413, guid: 9be07338e831abf4ab61fee15efd95c8, type: 3}
-  - {fileID: 1506098518068900745, guid: fa3e754e4cfb8b6418bc2661fc20441e, type: 3}
+  - {fileID: 8655079614676926978, guid: 624eb853e997ba64499b3b539e161589, type: 3}
+  - {fileID: 626720014850435450, guid: 2bd5e9e990c88384e894f034614670d7, type: 3}

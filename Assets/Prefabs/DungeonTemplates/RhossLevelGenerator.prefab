@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 2510383238531894089}
   - component: {fileID: 2510383238531894088}
   m_Layer: 0
-  m_Name: SmalLevelGenerator
+  m_Name: RhossLevelGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
