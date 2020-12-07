@@ -29,14 +29,22 @@ public class Pyramid : MonoBehaviour
 
         var dungData = DungeonDataKeeper.getInstance();
 
+        if (dungData.beatAnubis && dungData.beatRhoss)
+        {
+            dungData.beatRhoss = false;
+            dungData.beatAnubis = false;
+            pyramidManager.RhossLevelPlaced = false;
+            pyramidManager.AnubisLevelPlaced = false;
+        }
+
         if (!old)
         {
-            if (dungData.levelsBeat >=1  && !pyramidManager.RhossLevelPlaced)
+            if (dungData.levelsBeat >=1  && !pyramidManager.RhossLevelPlaced && !dungData.beatRhoss)
             {
                 pyramidManager.RhossLevelPlaced = true;
                 dungeonVarient = DungeonVariant.rhoss;
             }
-            else if (dungData.levelsBeat >=2  && !pyramidManager.AnubisLevelPlaced)
+            else if (dungData.levelsBeat >=2  && !pyramidManager.AnubisLevelPlaced && !dungData.beatAnubis)
             {
                 pyramidManager.AnubisLevelPlaced = true;
                 dungeonVarient = DungeonVariant.anubis;
