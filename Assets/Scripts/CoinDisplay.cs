@@ -11,10 +11,15 @@ public class CoinDisplay : MonoBehaviour
 
     public void Start()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        try
+        {
+            inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-        EventManager.onCoinPickedUp += CoinPickedUp;
-        CoinPickedUp(null);
+            EventManager.onCoinPickedUp += CoinPickedUp;
+            CoinPickedUp(null);
+        }
+        catch { }
+
     }
 
     private void CoinPickedUp(System.EventArgs e)
