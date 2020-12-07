@@ -185,6 +185,7 @@ public class AttackState : State
             EventManager.TriggerOnAttack();
             Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 atkHeading = (mouse - psm.transform.position);
+            atkHeading = new Vector3(atkHeading.x, atkHeading.y, 0).normalized;
             float angle = Mathf.Rad2Deg * Mathf.Atan((psm.transform.position.y - mouse.y) / (psm.transform.position.x - mouse.x));
 
             // now convert the angle into a degrees cw of up(north) based on the current value of direction and what quadrant it is in
@@ -203,7 +204,7 @@ public class AttackState : State
             if (psm.GetWeapon != null)
             {
                 psm.GetWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
-                psm.GetWeapon.transform.position = psm.transform.position+(mouse - psm.transform.position).normalized*3;
+                psm.GetWeapon.transform.position = (psm.transform.position + new Vector3(psm.GetRoot().x, psm.GetRoot().y,0))/2 +atkHeading*0.7f;
                 psm.GetWeapon.Attack();
                 //Set player to look in the direction attacking
                 psm.animator.SetFloat("PrevVertical", atkHeading.y);

@@ -7,7 +7,7 @@ using System;
 public class RefreshPathfinder : MonoBehaviour
 {
     int tick = 0;
-    int max = 60;
+    int max = 5;
     // Start is called before the first frame update
     void Awake()
     {

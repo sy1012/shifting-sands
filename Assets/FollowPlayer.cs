@@ -22,7 +22,9 @@ public class FollowPlayer : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Dungeon")
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = psm.transform.position + (mouse - psm.transform.position).normalized * 3;
+            Vector3 atkHeading = (mouse - psm.transform.position);
+            atkHeading = new Vector3(atkHeading.x, atkHeading.y, 0).normalized;
+            transform.position = (psm.transform.position + new Vector3(psm.GetRoot().x, psm.GetRoot().y, 0)) / 2 + atkHeading * 0.7f;
         }
         
     }
