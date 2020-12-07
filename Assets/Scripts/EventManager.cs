@@ -53,6 +53,11 @@ public static class EventManager
     public static event GameEvent onRossEnd;
     public static event GameEvent onRossCharge;
     public static event GameEvent onRossHitPillar;
+    public static event GameEvent onAnubisStart;
+    public static event GameEvent onAnubisEnd;
+    public static event GameEvent onAnubisAttack;
+    public static event GameEvent onAnubisAttackExplosion;
+    public static event GameEvent onAnubisTeleport;
     public static event GameEvent onResubscribeOverworld;  // DO NOT CLEAN THESE
     public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING 
     public static event GameEvent onResubscribeMainMenu;   // AND ARE FOR PERMANANT OBJS ONLY
@@ -72,6 +77,12 @@ public static class EventManager
         DungeonMaster.loot = new List<GameObject>();
 
         //Clean the Game Events
+        onAnubisStart = null;
+        onAnubisEnd = null;
+        onAnubisAttack = null;
+        onAnubisAttackExplosion = null;
+        onAnubisTeleport = null;
+        onAnubisEnd = null;
         onRossStart = null;
         onRossEnd = null;
         onRossCharge = null;
@@ -110,6 +121,31 @@ public static class EventManager
         onEnemyDeath = null;
         onPlayerDeath = null;
         onBreakBox = null;
+    }
+
+    public static void TriggerOnAnubisStart()
+    {
+        onAnubisStart?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnAnubisEnd()
+    {
+        onAnubisEnd?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnAnubisAttack()
+    {
+        onAnubisAttack?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnAnubisAttackExplosion()
+    {
+        onAnubisAttackExplosion?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnAnubisTeleport()
+    {
+        onAnubisTeleport?.Invoke(EventArgs.Empty);
     }
 
     public static void TriggerOnRossStart()

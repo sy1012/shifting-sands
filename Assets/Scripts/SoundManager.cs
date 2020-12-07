@@ -532,9 +532,41 @@ public class SoundManager : MonoBehaviour
         EventManager.onRossEnd += PlayRossEnd;
         EventManager.onRossCharge += PlayRossCharge;
         EventManager.onRossHitPillar += PlayRossHitPillar;
+        EventManager.onAnubisStart += PlayAnubisStart;
+        EventManager.onAnubisEnd += PlayAnubisEnd;
+        EventManager.onAnubisAttack += PlayAnubisAttack;
+        EventManager.onAnubisAttackExplosion += PlayFireExplosion;
+        EventManager.onAnubisTeleport += PlayDash;
+        EventManager.onAnubisTeleport += PlayDash;
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
+    }
+
+    private void PlayAnubisStart(System.EventArgs e)
+    {
+        SoundPlayer.Stop();
+        SoundPlayer.clip = AnubisMusic;
+        SoundPlayer.Play();
+    }
+
+    private void PlayAnubisEnd(System.EventArgs e)
+    {
+        SoundPlayer.Stop();
+        SoundPlayer.PlayOneShot(AnubisDeath, 0.6f);
+        StartCoroutine(anubisEnd());
+    }
+
+    IEnumerator anubisEnd()
+    {
+        yield return new WaitForSeconds(4.0f);
+        SoundPlayer.clip = DungeonMusic;
+        SoundPlayer.Play();
+    }
+
+    private void PlayAnubisAttack(System.EventArgs e)
+    {
+        SoundPlayer.PlayOneShot(AnubisAttack, 1.0f);
     }
 
     private void PlayRossStart(System.EventArgs e)

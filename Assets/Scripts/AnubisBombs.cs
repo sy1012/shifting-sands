@@ -41,6 +41,7 @@ public class AnubisBombs : MonoBehaviour
     {
         this.gameObject.AddComponent<CircleCollider2D>();
         detonating = true;
+        EventManager.TriggerOnAnubisAttackExplosion();
         this.GetComponent<SpriteRenderer>().sprite = explosion[explosionFrame];
         timeSinceFrameChanged = timePerFrame;
     }

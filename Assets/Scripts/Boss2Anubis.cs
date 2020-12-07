@@ -35,6 +35,7 @@ public class Boss2Anubis : Enemy
     // Start is called before the first frame update
     void Initialize()
     {
+        EventManager.TriggerOnAnubisStart();
         // let it start path finding
         this.maxHealth = 500;
         teleportTo = Random.Range(1, 5);
@@ -147,6 +148,7 @@ public class Boss2Anubis : Enemy
                         }
                         attackingTimer = 1.5f;
                         animator.SetBool("Attack", true);
+                        EventManager.TriggerOnAnubisAttack();
                     }
 
                     attackingTimer -= Time.deltaTime;
@@ -190,6 +192,7 @@ public class Boss2Anubis : Enemy
         else if (teleportTo == 2) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarTwo").transform.position; }
         else if (teleportTo == 3) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarThree").transform.position; }
         else if (teleportTo == 4) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarFour").transform.position; }
+        EventManager.TriggerOnAnubisTeleport();
         temp.transform.position = this.transform.position;
     }
 
@@ -212,6 +215,7 @@ public class Boss2Anubis : Enemy
 
     public void Die()
     {
+        EventManager.TriggerOnAnubisEnd();
         dying = true;
         animator.SetBool("Dying", true);
         animator.speed = .5f;
