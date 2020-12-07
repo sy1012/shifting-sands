@@ -71,8 +71,8 @@ public class Boss1Rhoss : Enemy
         bossTextUI.fontSize = 25;
         bossTextUI.color = Color.white;
         bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;
-        bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .1f));
-        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .80f));
+        bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
+        healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .89f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
 
         destination.target = Player;
