@@ -192,6 +192,7 @@ public class Boss2Anubis : Enemy
 
     public override void TakeDamage(int damage)
     {
+        if (!startFight) { return; }
         this.health -= damage;
         if (this.health <= 0)
         {
