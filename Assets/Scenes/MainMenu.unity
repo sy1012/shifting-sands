@@ -132,8 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 151375404}
-  - component: {fileID: 151375402}
   - component: {fileID: 151375403}
+  - component: {fileID: 151375402}
   m_Layer: 0
   m_Name: SoundHelper
   m_TagString: Untagged
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 151375401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99b0fa419a4451148b4801d2cc3ffd5a, type: 3}
+  m_Script: {fileID: 11500000, guid: b73a40ec50ba0a94ea24d39f771448e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &151375403
