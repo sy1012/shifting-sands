@@ -200,6 +200,7 @@ public class MapManager : MonoBehaviour
             {
                 oases.Add(Instantiate(oasisPrefab, new Vector2(loadedData.oasisPositions[i, 0], loadedData.oasisPositions[i, 1]), Quaternion.identity));
                 oases[oases.Count - 1].generated = true;
+                oases[oases.Count - 1].old = true;
                 OasisNode node = new OasisNode(oases[oases.Count - 1].transform.name + oases.Count, oases[oases.Count - 1]);
                 oasisGraph.AddNode(node);
                 oases[oases.Count - 1].oasisNode = node;

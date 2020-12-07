@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8857799296077590688}
   - component: {fileID: 9084898400967632550}
   - component: {fileID: 3465174865291364896}
+  - component: {fileID: 1146950127367064157}
   m_Layer: 0
   m_Name: pyramid
   m_TagString: Untagged
@@ -97,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28db4a7902bb29478fa0abff837c10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  old: 0
+  dungeonVarient: 0
 --- !u!114 &9084898400967632550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +139,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 2.56}
   m_EdgeRadius: 0
+--- !u!95 &1146950127367064157
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947233375297821395}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b2cc192c55edbe45874c8dd311477e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

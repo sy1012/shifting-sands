@@ -42,6 +42,10 @@ public class Pyramid : MonoBehaviour
                 dungeonVarient = DungeonVariant.anubis;
             }
         }
+        else
+        {
+            GetComponent<Animator>().Play("normal");
+        }
 
 
         // Handle dungeon varients
@@ -89,9 +93,18 @@ public class Pyramid : MonoBehaviour
             }
             
         }
-        
-        Destroy(gameObject);
+
+        StartCoroutine(Crumble());
+
         return newOasis;
+    }
+
+    private IEnumerator Crumble()
+    {
+        yield return new WaitForSeconds(1);
+        GetComponent<Animator>().Play("crumble");
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 
     private void Update()
