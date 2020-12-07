@@ -167,6 +167,11 @@ public class Boss2Anubis : Enemy
                     }
                 }
             }
+
+            else if (Vector3.Distance(Player.transform.position, transform.position) < 5)
+            {
+                startFight = true;
+            }
         }
         else
         {
