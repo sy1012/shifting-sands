@@ -201,6 +201,7 @@ public class SoundManager : MonoBehaviour
     void Start(){
         EventManager.onResubscribeOverworld += EnteringOverworld;
         EventManager.onResubscribeDungeon += EnteringDungeon;
+        EventManager.onResubscribeMainMenu += EnteringMainMenu;
 
         // initialize sound manager
         current = this;
@@ -399,7 +400,14 @@ public class SoundManager : MonoBehaviour
         EnemyHit1 = Resources.Load<AudioClip>("SFX/Enemy/enemyHit1");
 
         // play overworld start
-        SoundPlayer.clip = OverworldMusic;
+        SoundPlayer.clip = CaravanHub;
+        SoundPlayer.Play();
+    }
+
+    private void EnteringMainMenu(System.EventArgs e)
+    {
+        SoundPlayer.Stop();
+        SoundPlayer.clip = CaravanHub;
         SoundPlayer.Play();
     }
 

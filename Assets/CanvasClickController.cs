@@ -125,10 +125,17 @@ public class CanvasClickController : MonoBehaviour
         EventManager.onArmourMerchant += hideArmExclamation;
         EventManager.onRuneMerchant += hideRuneExclamation;
         EventManager.onCrafting += hideCraftExclamation;
+        EventManager.onPlayerDeath += playerDeath;
 
         // Get components we need to do this
         this.raycaster = GetComponent<GraphicRaycaster>();
         GameObject.DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void playerDeath(System.EventArgs e)
+    {
+        EventManager.onResubscribeOverworld -= OverworldSubscribe;
+        EventManager.onResubscribeDungeon -= DungeonSubscribe;
     }
 
     private void DungeonSubscribe(EventArgs e)
