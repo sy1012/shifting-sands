@@ -46,7 +46,6 @@ public static class EventManager
     public static event GameEvent onScarabAgro;
     public static event GameEvent onSkullAgro;
     public static event GameEvent onMummyAgro;
-    public static event GameEvent onEnemyDeath;
     public static event GameEvent onPlayerDeath;
     public static event GameEvent onBreakBox;
     public static event GameEvent onRossStart;
@@ -60,6 +59,12 @@ public static class EventManager
     public static event GameEvent onAnubisTeleport;
     public static event GameEvent onEvilAltar;
     public static event GameEvent onPureAltar;
+    public static event GameEvent onOverworldMovement;
+    public static event GameEvent onPyramidCrumbleRise;
+    public static event GameEvent onOasisReveal;
+    public static event GameEvent onEnemyDeath;
+    public static event GameEvent onDrinkPotion;
+    public static event GameEvent onHealthPickup;
     public static event GameEvent onResubscribeOverworld;  // DO NOT CLEAN THESE
     public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING 
     public static event GameEvent onResubscribeMainMenu;   // AND ARE FOR PERMANANT OBJS ONLY
@@ -79,6 +84,12 @@ public static class EventManager
         DungeonMaster.loot = new List<GameObject>();
 
         //Clean the Game Events
+        onEnemyDeath = null;
+        onDrinkPotion = null;
+        onHealthPickup = null;
+        onOverworldMovement = null;
+        onPyramidCrumbleRise = null;
+        onOasisReveal = null;
         onEvilAltar = null;
         onPureAltar = null;
         onAnubisStart = null;
@@ -125,6 +136,36 @@ public static class EventManager
         onEnemyDeath = null;
         onPlayerDeath = null;
         onBreakBox = null;
+    }
+
+    public static void TriggerOnHealthPickup()
+    {
+        onHealthPickup?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnDrinkPotion()
+    {
+        onDrinkPotion?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnEnemyDeath()
+    {
+        onEnemyDeath?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnOasisReveal()
+    {
+        onOasisReveal?.Invoke(EventArgs.Empty);
+    }
+    
+    public static void TriggerOnPyramidCrumbleRise()
+    {
+        onPyramidCrumbleRise?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnOverworldMovement()
+    {
+        onOverworldMovement?.Invoke(EventArgs.Empty);
     }
 
     public static void TriggerOnEvilAltar()
@@ -410,11 +451,6 @@ public static class EventManager
     public static void TriggerOnMummyAgro()
     {
         onMummyAgro?.Invoke(EventArgs.Empty);
-    }
-
-    public static void TriggerOnEnemyDeath()
-    {
-        onEnemyDeath?.Invoke(EventArgs.Empty);
     }
 
     public static void TriggerOnPlayerDeath()

@@ -31,6 +31,7 @@ public class ConsumableObject : MonoBehaviour
             }
             yield return null;
         }
+        EventManager.TriggerOnHealthPickup();
         GameObject.Find("Player").GetComponent<PlayerStateMachine>().Heal(data.healAmount);
         Destroy(this.gameObject);
     }

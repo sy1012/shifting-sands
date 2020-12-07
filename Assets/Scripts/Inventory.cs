@@ -154,6 +154,7 @@ public class Inventory : MonoBehaviour
                             if (GameObject.Find("Player") != null)
                             {
                                 GameObject.Find("Player").GetComponent<PlayerStateMachine>().Heal(((ConsumableData)slotHovered.GetComponent<Slot>().RetrieveData()).healAmount);
+                                EventManager.TriggerOnDrinkPotion();
                                 slotHovered.AssignData(null);
                             } 
                         }
