@@ -47,8 +47,10 @@ public static class EventManager
     public static event GameEvent onSkullAgro;
     public static event GameEvent onMummyAgro;
     public static event GameEvent onEnemyDeath;
+    public static event GameEvent onPlayerDeath;
     public static event GameEvent onResubscribeOverworld;  // DO NOT CLEAN THESE
-    public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING AND ARE FOR PERMANANT OBJS ONLY
+    public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING 
+    public static event GameEvent onResubscribeMainMenu;   // AND ARE FOR PERMANANT OBJS ONLY
     // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public static event GameEvent onSell;
     // IF YOU ARE MAKING A NEW GAMEEVENT,MAKE SURE YOU CLEAN IT IN TRIGGERDUNGEONEXIT
@@ -97,6 +99,7 @@ public static class EventManager
         onRuneChange = null;
         OnExitDungeon = null;
         onEnemyDeath = null;
+        onPlayerDeath = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -115,6 +118,11 @@ public static class EventManager
     public static void TriggerOnResubscribeOverworld(DungeonGenArgs e)
     {
         onResubscribeOverworld?.Invoke(e);
+    }
+
+    public static void TriggerOnResubscribeMainMenu(DungeonGenArgs e)
+    {
+        onResubscribeMainMenu?.Invoke(e);
     }
 
     public static void TriggerDungeonGenerated(DungeonGenArgs e)
@@ -322,6 +330,11 @@ public static class EventManager
     public static void TriggerOnEnemyDeath()
     {
         onEnemyDeath?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnPlayerDeath()
+    {
+        onPlayerDeath?.Invoke(EventArgs.Empty);
     }
 }
 
