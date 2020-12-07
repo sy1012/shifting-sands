@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubbleSprite: {fileID: 0}
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &739788139448946256
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubbleSprite: {fileID: 0}
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &1112362204817678369
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubbleSprite: {fileID: 0}
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &714907791478226360
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubbleSprite: {fileID: 0}
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &3181787958920159837
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubbleSprite: {fileID: 0}
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &3745673892203248246
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubbleSprite: {fileID: 0}
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &1389088992278354176
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -849,11 +849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7273963258188965664, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.472406
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273963258188965664, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -88.74659
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273963258188965664, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_LocalPosition.z
