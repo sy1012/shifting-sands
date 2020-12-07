@@ -6,6 +6,7 @@ using TMPro;
 
 public class Boss2Anubis : Enemy
 {
+    public GameObject anubisReflection;
     public GameObject bombPrefab;
     public Animator animator;
     private float upperTeleportTime = 10;
@@ -34,9 +35,11 @@ public class Boss2Anubis : Enemy
     // Start is called before the first frame update
     void Initialize()
     {
+        EventManager.TriggerOnAnubisStart();
         // let it start path finding
         this.maxHealth = 500;
         teleportTo = Random.Range(1, 5);
+        teleportTime = 1;
         attackTime = Random.Range(lowerAttackTime, upperAttackTime);
         bombs = new List<GameObject>();
 
@@ -86,6 +89,7 @@ public class Boss2Anubis : Enemy
                 }
                 else
                 {
+                    Teleporting();
                     teleportTime = Random.Range(lowerTeleportTime, upperTeleportTime);
                     if (teleportTo == 1) { this.transform.position = GameObject.Find("AnubisPillarOne").transform.position; }
                     else if (teleportTo == 2) { this.transform.position = GameObject.Find("AnubisPillarTwo").transform.position; }
@@ -94,6 +98,7 @@ public class Boss2Anubis : Enemy
                     int last = teleportTo;
                     while (teleportTo == last)
                     {
+                        Debug.Log("What?");
                         teleportTo = Random.Range(0, 5);
                     }
                     
@@ -138,11 +143,12 @@ public class Boss2Anubis : Enemy
                                 bombs.Add(bomb);
                                 bomb.GetComponent<AnubisBombs>().player = Player;
                                 bomb.transform.position = (Vector2)this.room.transform.position + 
-                                    new Vector2(Random.Range(row -1f, row + 1f), Random.Range(column - 1f, column + 1f));
+                                new Vector2(Random.Range(row -1f, row + 1f), Random.Range(column - 1f, column + 1f));
                             }
                         }
                         attackingTimer = 1.5f;
                         animator.SetBool("Attack", true);
+                        EventManager.TriggerOnAnubisAttack();
                     }
 
                     attackingTimer -= Time.deltaTime;
@@ -163,6 +169,11 @@ public class Boss2Anubis : Enemy
                     }
                 }
             }
+
+            else if (Vector3.Distance(Player.transform.position, transform.position) < 5)
+            {
+                startFight = true;
+            }
         }
         else
         {
@@ -174,10 +185,22 @@ public class Boss2Anubis : Enemy
         }
     }
 
+    private void Teleporting()
+    {
+        GameObject temp = Instantiate(anubisReflection);
+        if (teleportTo == 1) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarOne").transform.position; }
+        else if (teleportTo == 2) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarTwo").transform.position; }
+        else if (teleportTo == 3) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarThree").transform.position; }
+        else if (teleportTo == 4) { temp.GetComponent<AnubisReflection>().target = GameObject.Find("AnubisPillarFour").transform.position; }
+        EventManager.TriggerOnAnubisTeleport();
+        temp.transform.position = this.transform.position;
+    }
+
     public override void OnCollisionStay2D(Collision2D collision) { }
 
     public override void TakeDamage(int damage)
     {
+        if (!startFight) { return; }
         this.health -= damage;
         if (this.health <= 0)
         {
@@ -192,9 +215,13 @@ public class Boss2Anubis : Enemy
 
     public void Die()
     {
+        EventManager.TriggerOnAnubisEnd();
         dying = true;
         animator.SetBool("Dying", true);
         animator.speed = .5f;
+
+        // Tell data keeper anubis was beat
+        DungeonDataKeeper.getInstance().beatAnubis = true;
 
         // Get rid of health bar and name
         Destroy(bossText);

@@ -13,6 +13,7 @@ public class Pyramid : MonoBehaviour
     bool mousedOver = false;
     private PlayerOverworldTraversal overworldTraversal;
     float localScale = 0.45f;
+    public bool old = false;
 
     // Default size of dungeon
     public DungeonVariant dungeonVarient = DungeonVariant.tiny;
@@ -25,34 +26,27 @@ public class Pyramid : MonoBehaviour
 
 
         // Asssign dungeon varients if applicable
-        float distOfBigPyramid = 10;
-        float dist = transform.position.magnitude;
-        float angle = Utilities.PositiveCWAngleBetween(Vector3.up, transform.position);
 
-        if (dist>distOfBigPyramid)
+        var dungData = DungeonDataKeeper.getInstance();
+
+        if (!old)
         {
-            if ( (int)angle/90 == 0 && !pyramidManager.NEGrandPyramidPlaced)
+            if (dungData.levelsBeat >=1  && !pyramidManager.RhossLevelPlaced)
             {
-                dungeonVarient = DungeonVariant.medium;
-                pyramidManager.NEGrandPyramidPlaced = true;
+                pyramidManager.RhossLevelPlaced = true;
+                dungeonVarient = DungeonVariant.rhoss;
             }
-            else if ((int)angle/90 == 1 && !pyramidManager.SEGrandPyramidPlaced)
+            else if (dungData.levelsBeat >=2  && !pyramidManager.AnubisLevelPlaced)
             {
-                dungeonVarient = DungeonVariant.medium;
-                pyramidManager.SEGrandPyramidPlaced = true;
+                pyramidManager.AnubisLevelPlaced = true;
+                dungeonVarient = DungeonVariant.anubis;
             }
-            else if ((int)angle/90 == 2 && !pyramidManager.SWGrandPyramidPlaced)
-            {
-                dungeonVarient = DungeonVariant.medium;
-                pyramidManager.SWGrandPyramidPlaced = true;
-            }
-            else if ((int)angle/90 == 3 && !pyramidManager.NWGrandPyramidPlaced)
-            {
-                dungeonVarient = DungeonVariant.medium;
-                pyramidManager.NWGrandPyramidPlaced = true;
-            }
-
         }
+        else
+        {
+            GetComponent<Animator>().Play("normal");
+        }
+
 
         // Handle dungeon varients
         switch (dungeonVarient)
@@ -60,7 +54,10 @@ public class Pyramid : MonoBehaviour
             case DungeonVariant.tiny:
                 //Do nothing
                 break;
-            case DungeonVariant.medium:
+            case DungeonVariant.rhoss:
+                localScale = 0.9f;
+                break;
+            case DungeonVariant.anubis:
                 localScale = 0.9f;
                 break;
             case DungeonVariant.none:
@@ -96,9 +93,18 @@ public class Pyramid : MonoBehaviour
             }
             
         }
-        
-        Destroy(gameObject);
+
+        StartCoroutine(Crumble());
+
         return newOasis;
+    }
+
+    private IEnumerator Crumble()
+    {
+        yield return new WaitForSeconds(1);
+        GetComponent<Animator>().Play("crumble");
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -120,7 +126,6 @@ public class Pyramid : MonoBehaviour
                             FindObjectOfType<DungeonDataKeeper>().dungeonDistance = Vector2.Distance(this.transform.position, pyramidManager.oases[0].transform.position);
                             FindObjectOfType<DungeonDataKeeper>().dungeonVariant = dungeonVarient;
                             overworldTraversal.EnterPyramid(this);
-                            Debug.Log(FindObjectOfType<DungeonDataKeeper>().dungeonDistance);
                         }
                         else if (Input.GetMouseButtonDown(1))
                         {

@@ -23,10 +23,15 @@ public class Follower : MonoBehaviour
         }
         else
         {
-            transform.position = leader.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            if(leader.path.Count > 0)
+            {
+                transform.position = ((OasisNode)(leader.path[0])).getOasis().transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            }
+            else
+            {
+                transform.position = leader.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            }
         }
-
-
     }
 
     void FixedUpdate()

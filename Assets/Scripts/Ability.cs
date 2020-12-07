@@ -106,7 +106,7 @@ public class Ability : MonoBehaviour
         EventManager.TriggerOnCastFireball();
 
         // Get Mouse Position
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         Vector3 firePos = firePoint.position;
         firePos.z = 0;

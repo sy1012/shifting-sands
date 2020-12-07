@@ -35,7 +35,8 @@ public class Inventory : MonoBehaviour
         EventManager.onCrafting += CraftingClicked;
         EventManager.onPyramidClicked += SaveInventory;
         EventManager.OnExitDungeon += SaveInventory;
-        
+        EventManager.onPlayerDeath += PlayerDeath;
+
         // Set up initial state of the Inventory
         state = new InitialInventoryState();
         state.Enter();
@@ -51,6 +52,17 @@ public class Inventory : MonoBehaviour
 
 
     }
+
+    private void PlayerDeath(EventArgs e)
+    {
+        EventManager.onInventoryTrigger -= TriggerInventory;
+        EventManager.onWeaponMerchant -= WeaponMerchantClicked;
+        EventManager.onArmourMerchant -= ArmourMerchantClicked;
+        EventManager.onRuneMerchant -= RuneMerchantClicked;
+        EventManager.onCrafting -= CraftingClicked;
+        EventManager.onPlayerDeath -= PlayerDeath;
+    }
+
     private void CraftingClicked(object sender, EventArgs e)
     {
         ChangeState(new OverworldCraftingState());

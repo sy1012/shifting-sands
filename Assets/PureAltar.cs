@@ -13,6 +13,8 @@ public class PureAltar : Interactable
     IEnumerator LeaveDungeon()
     {
         DungeonDataKeeper.getInstance().beatLastDungeon = true;
+        DungeonDataKeeper.getInstance().levelsBeat += 1;
+
         FadeController.PlayFadeOutText("blessing");
         explosion.PlayExplosionForTime(4);
         yield return new WaitForSeconds(4f);
@@ -30,6 +32,7 @@ public class PureAltar : Interactable
             return;
         }
         EventManager.TriggerRelicGathered(this);
+        EventManager.TriggerOnPureAltar();
         DungeonDataKeeper.getInstance().blessingValue = DungeonDataKeeper.getInstance().blessingValue * 0.5f;
         StartCoroutine(LeaveDungeon());
     }

@@ -201,7 +201,6 @@ public class PlayerStateMachine : Character
             List<GameObject> loot = DungeonMaster.getLootInRange(this.transform.position, 5);
             foreach (GameObject item in loot)
             {
-                Debug.Log("trying to pull");
                 float speed = (0.08f * 1f / Vector2.Distance(this.transform.position, item.transform.position));
                 item.transform.position = Vector3.Lerp(item.transform.position, this.transform.position, speed);
             }

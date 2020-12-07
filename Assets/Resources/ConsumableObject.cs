@@ -37,7 +37,6 @@ public class ConsumableObject : MonoBehaviour
 
     public void Dropped()
     {
-        Debug.Log(data.name);
         Instantiate(data.prefab,this.transform);
         this.sr = this.gameObject.AddComponent<SpriteRenderer>();
         this.sr.sprite = data.sprite;

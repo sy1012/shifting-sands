@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d55c0ed7c9584c49a9632c9fb4dcddd, type: 3}
+  m_Name: _GrowRecipe
+  m_EditorClassIdentifier: 
+  instructions:
+  - 2
+  - ???
+  - 0
+  - 1
+  - ???
+  - ???
+  rules:
+  - {fileID: 7013628851617556116, guid: 1a5d4ac37d235734f934a2c6c6c7202f, type: 3}
+  - {fileID: 7478871445448567255, guid: c85332eecf761514ea4aaa15599283d2, type: 3}
+  - {fileID: 5573573091537014006, guid: efaad926644c9eb4ab3f17c25b87b729, type: 3}
+  - {fileID: 1094846854199330344, guid: b02718590a5be83478c22ceb4520f3a2, type: 3}

@@ -19,10 +19,9 @@ public class MapManager : MonoBehaviour
 
     private bool needToSave;
 
-    public bool NEGrandPyramidPlaced = false;
-    public bool SEGrandPyramidPlaced = false;
-    public bool SWGrandPyramidPlaced = false;
-    public bool NWGrandPyramidPlaced = false;
+
+    public bool RhossLevelPlaced = false;
+    public bool AnubisLevelPlaced = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,12 +61,12 @@ public class MapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadOverworld();
-        }*/
+        }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             SaveSystem.DeleteOverworld();
-        }
+        }*/
 
         if(needToSave && !player.waiting)
         {
@@ -201,6 +200,7 @@ public class MapManager : MonoBehaviour
             {
                 oases.Add(Instantiate(oasisPrefab, new Vector2(loadedData.oasisPositions[i, 0], loadedData.oasisPositions[i, 1]), Quaternion.identity));
                 oases[oases.Count - 1].generated = true;
+                oases[oases.Count - 1].old = true;
                 OasisNode node = new OasisNode(oases[oases.Count - 1].transform.name + oases.Count, oases[oases.Count - 1]);
                 oasisGraph.AddNode(node);
                 oases[oases.Count - 1].oasisNode = node;
@@ -217,6 +217,25 @@ public class MapManager : MonoBehaviour
             for (int i = 0; i < loadedData.numPyramids; i++)
             {
                 pyramids.Add(Instantiate(pyramidPrefab, new Vector2(loadedData.pyramidPositions[i, 0], loadedData.pyramidPositions[i, 1]), Quaternion.identity));
+                pyramids[pyramids.Count - 1].old = true;
+                switch (loadedData.pyramidSize[i])
+                {
+                    case "tiny":
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.tiny;
+                        break;
+                    case "rhoss":
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.rhoss;
+                        pyramids[pyramids.Count - 1].transform.localScale = new Vector2(0.9f, 0.9f);
+                        break;
+                    case "anubis":
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.anubis;
+                        pyramids[pyramids.Count - 1].transform.localScale = new Vector2(0.9f, 0.9f);
+                        break;
+                    default:
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.tiny;
+                        break;
+                }
+                
                 if (i == loadedData.pyramidEnteredIndex)
                 {
                     entered = pyramids[pyramids.Count - 1];
@@ -252,6 +271,10 @@ public class MapManager : MonoBehaviour
             }*/
 
             DungeonDataKeeper dungeonData = FindObjectOfType<DungeonDataKeeper>();
+            if (dungeonData.levelsBeat < loadedData.levelsBeat) 
+            {
+                dungeonData.levelsBeat = loadedData.levelsBeat;
+            }
             if (dungeonData.beatLastDungeon)
             {
                 StartCoroutine(waitToTransformPyramid(entered, dungeonData));

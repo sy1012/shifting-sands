@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 6191256057271201703}
   - component: {fileID: 6191256057271201707}
   - component: {fileID: 6191256057271201704}
+  - component: {fileID: 8441999412542160754}
   m_Layer: 15
   m_Name: Anubis
   m_TagString: Untagged
@@ -442,9 +443,10 @@ MonoBehaviour:
   room: {fileID: 0}
   randTarget: {fileID: 0}
   deathEffect: {fileID: 3545522220261749504, guid: 452a79352fab7aa4c9a8eb3380a699cb, type: 3}
+  anubisReflection: {fileID: 0}
   bombPrefab: {fileID: 2831055827006103816, guid: 4f243d37938b6f044bbbbbc7d7967054, type: 3}
   animator: {fileID: 6191256056824234845}
-  startFight: 0
+  startFight: 1
 --- !u!70 &6191256057271201707
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -458,7 +460,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022523046, y: -2.5909622}
+  m_Offset: {x: 0.22, y: -0.77}
   m_Size: {x: 2.1667492, y: 3.2980733}
   m_Direction: 0
 --- !u!50 &6191256057271201704
@@ -482,6 +484,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &8441999412542160754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191256057271201699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bdda3be06b963478e2c17cd8a296f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6191256057387998350
 GameObject:
   m_ObjectHideFlags: 0

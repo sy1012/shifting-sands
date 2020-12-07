@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &739788139448946256
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -110,9 +111,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.09280205}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.092802
+  m_Radius: 1.07
 --- !u!114 &3683615851641997565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &1112362204817678369
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -235,9 +237,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.005261898}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.9947381
+  m_Radius: 1.07
 --- !u!114 &6660954547373147849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &714907791478226360
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -360,9 +363,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.05066824}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.0506682
+  m_Radius: 1.07
 --- !u!114 &1950856786802765590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5214446561621300978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.88987, y: 8, z: 0}
+  m_LocalPosition: {x: 7, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
@@ -472,6 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &3181787958920159837
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -485,9 +489,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.046699524}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.9533005
+  m_Radius: 1.07
 --- !u!114 &1076541998239937841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6399703098381658206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.3087025, y: 0, z: 0}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
@@ -597,6 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &3745673892203248246
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -610,9 +615,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0035874844}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.0035875
+  m_Radius: 1.07
 --- !u!114 &8428915434522642641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6719729962339197709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.555128, y: -8, z: 0}
+  m_LocalPosition: {x: 7, y: -8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5162391769629974448}
@@ -722,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ca5fdd8f427d43a0610e867381e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbleSprite: {fileID: 21300000, guid: 067635e002a7a8e45971c05ae4cc310f, type: 3}
 --- !u!58 &1389088992278354176
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -735,9 +741,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.046699047}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.95330095
+  m_Radius: 1.07
 --- !u!114 &5970480475486476235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +827,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 53f023c95365cc14dbd0dec1f324ae97, type: 3}
+    - target: {fileID: 3172103245951217335, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5493810267570589119, guid: f5088941868c9f44bb4c316aee793bcb, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -945,7 +955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 306374202410096955, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306374202410096955, guid: 32fa7863d5929cc4b8ec1780829b5cd9, type: 3}
       propertyPath: m_LocalPosition.y

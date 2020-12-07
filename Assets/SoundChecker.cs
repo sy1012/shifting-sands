@@ -20,6 +20,10 @@ public class SoundChecker : MonoBehaviour
         {
             GameObject.Destroy(GameObject.Find("Canvas"));
         }
+        if (GameObject.Find("Equipment") != null)
+        {
+            GameObject.Destroy(GameObject.Find("Equipment"));
+        }
     }
 
 }

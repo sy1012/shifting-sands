@@ -6,7 +6,8 @@ using UnityEngine;
 public enum DungeonVariant
 {
     tiny,
-    medium,
+    rhoss,
+    anubis,
     none
 }
 
@@ -15,7 +16,9 @@ public class DungeonGeneratorSelector : MonoBehaviour
     [SerializeField]
     LevelGenerator tinyDungeon;
     [SerializeField]
-    LevelGenerator mediumDungeon;
+    LevelGenerator rhossDungeon;
+    [SerializeField]
+    LevelGenerator anubisDungeon;
     [SerializeField]
     bool newLevelTrigger = false;
 
@@ -37,8 +40,11 @@ public class DungeonGeneratorSelector : MonoBehaviour
             case DungeonVariant.tiny:
                 tinyDungeon.gameObject.SetActive(true);
                 break;
-            case DungeonVariant.medium:
-                mediumDungeon.gameObject.SetActive(true);
+            case DungeonVariant.rhoss:
+                rhossDungeon.gameObject.SetActive(true);
+                break;
+            case DungeonVariant.anubis:
+                anubisDungeon.gameObject.SetActive(true);
                 break;
             case DungeonVariant.none:
                 break;
@@ -53,7 +59,8 @@ public class DungeonGeneratorSelector : MonoBehaviour
             newLevelTrigger = false;
 
             tinyDungeon.gameObject.SetActive(false);
-            mediumDungeon.gameObject.SetActive(false);
+            rhossDungeon.gameObject.SetActive(false);
+            anubisDungeon.gameObject.SetActive(false);
 
             switch (currentVariant)
             {
@@ -61,9 +68,13 @@ public class DungeonGeneratorSelector : MonoBehaviour
                     tinyDungeon.gameObject.SetActive(true);
                     tinyDungeon.MakeNewDungeon();
                     break;
-                case DungeonVariant.medium:
-                    mediumDungeon.gameObject.SetActive(true);
-                    mediumDungeon.MakeNewDungeon();
+                case DungeonVariant.rhoss:
+                    rhossDungeon.gameObject.SetActive(true);
+                    rhossDungeon.MakeNewDungeon();
+                    break;
+                case DungeonVariant.anubis:
+                    anubisDungeon.gameObject.SetActive(true);
+                    anubisDungeon.MakeNewDungeon();
                     break;
                 case DungeonVariant.none:
                     break;

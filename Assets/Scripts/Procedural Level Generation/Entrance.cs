@@ -60,7 +60,7 @@ public class Entrance : Interactable
     {
         if (isGoalExit)
         {
-            FindObjectOfType<DungeonDataKeeper>().beatLastDungeon = true;
+            FindObjectOfType<DungeonDataKeeper>().beatLastDungeon = false;
         }
         FadeController.PlayFadeOut();
         yield return new WaitForSeconds(1f);

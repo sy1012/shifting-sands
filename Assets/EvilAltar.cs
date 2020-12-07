@@ -13,6 +13,7 @@ public class EvilAltar : Interactable
     IEnumerator LeaveDungeon()
     {
         DungeonDataKeeper.getInstance().beatLastDungeon = true;
+        DungeonDataKeeper.getInstance().levelsBeat += 1;
 
         FadeController.PlayFadeOutText("curse");
 
@@ -33,6 +34,8 @@ public class EvilAltar : Interactable
             return;
         }
         EventManager.TriggerRelicGathered(this);
+
+        EventManager.TriggerOnEvilAltar();
 
         player.animator.Play("Fall");
 

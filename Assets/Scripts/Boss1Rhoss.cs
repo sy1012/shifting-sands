@@ -39,7 +39,9 @@ public class Boss1Rhoss : Enemy
 
     IEnumerator Death()
     {
+        EventManager.TriggerOnRossEnd();
         animBody.SetTrigger("dead");
+        DungeonDataKeeper.getInstance().beatRhoss = true;
         yield return new WaitForSeconds(4.8f);
         base.Die();
     }
@@ -47,6 +49,7 @@ public class Boss1Rhoss : Enemy
     // Start is called before the first frame update
     void Initialize()
     {
+        EventManager.TriggerOnRossStart();
         // let it start path finding
         this.GetComponent<IAstarAI>().canMove = true;
         this.maxHealth = 1000;
@@ -95,11 +98,11 @@ public class Boss1Rhoss : Enemy
                     Initialize();
                 }
 
-
                 if (chargeTimer > 0)
                 {
                     chargeTimer -= Time.deltaTime;
                 }
+
                 // he failed to connect stop the charge
                 if (charging && chargeTimer <= 0)
                 {
@@ -126,9 +129,11 @@ public class Boss1Rhoss : Enemy
                     if (rotatingTime >= 0) { Rotate(); }
                     else
                     {
+                        EventManager.TriggerOnRossCharge();
+                        this.GetComponent<Seeker>().graphMask = 1 << 1;
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
-                        this.GetComponent<AIPath>().rotationSpeed = 250;
+                        this.GetComponent<AIPath>().rotationSpeed = 10;
                         charging = true;
                         rotatingTime = 1;
                         chargeTimer = 1;
@@ -164,8 +169,9 @@ public class Boss1Rhoss : Enemy
 
     public void Rotate()
     {
+        this.GetComponent<Seeker>().graphMask = 1 << 2;
         this.GetComponent<AIPath>().canSearch = true;
-        this.GetComponent<AIPath>().maxSpeed = 0;
+        this.GetComponent<AIPath>().maxSpeed = 0.0001f;
         this.GetComponent<AIPath>().rotationSpeed = 360;
         this.rotatingTime -= Time.deltaTime;
     }
@@ -181,13 +187,23 @@ public class Boss1Rhoss : Enemy
         isDying = true;
         StartCoroutine(Death());
         return;
-        
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        if (startFight)
+        {
+            base.TakeDamage(damage);
+        } 
     }
 
     public override void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.transform == Player && cooldown <= 0 && stunned <= 0)
+        
+
+        if (collision.collider.transform == Player && cooldown <= 0 && stunned <= 0 && health > 0)
         {
+            
             cooldown = damageSpeed;
             psm.TakeDamage(damage, collision);
             stunned = 1;
@@ -197,7 +213,17 @@ public class Boss1Rhoss : Enemy
             this.TakeDamage(200);
             this.stunned = 4;
             this.charging = false;
-            Destroy(collision.collider.gameObject);
+            EventManager.TriggerOnRossHitPillar();
+            collision.gameObject.GetComponent<DestructablePillar>().TurnToRubble();
+            collision.gameObject.name = "BrokenPil";
+            this.GetComponent<AIPath>().maxSpeed = 0;
+            this.GetComponent<AIPath>().canMove = true;
+        }
+        else if (collision.collider.name == "BrokenPil" && this.charging)
+        {
+            this.stunned = 4;
+            this.charging = false;
+            EventManager.TriggerOnRossHitPillar();
             this.GetComponent<AIPath>().maxSpeed = 0;
             this.GetComponent<AIPath>().canMove = true;
         }
