@@ -40,6 +40,7 @@ public class Boss1Rhoss : Enemy
     IEnumerator Death()
     {
         animBody.SetTrigger("dead");
+        DungeonDataKeeper.getInstance().beatRhoss = true;
         yield return new WaitForSeconds(4.8f);
         base.Die();
     }
@@ -86,7 +87,6 @@ public class Boss1Rhoss : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(this.GetComponent<Rigidbody2D>().velocity);
         if (stunned <= 0 && !isDying)
         {
             if (startFight)

@@ -52,7 +52,6 @@ public class Enemy : Character
         this.health -= damage;
         if (this.health <= 0)
         {
-            Debug.Log("overide successful");
             Die();
         }
         healthbar.SetHealth(health);

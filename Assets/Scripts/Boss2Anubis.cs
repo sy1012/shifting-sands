@@ -211,6 +211,9 @@ public class Boss2Anubis : Enemy
         animator.SetBool("Dying", true);
         animator.speed = .5f;
 
+        // Tell data keeper anubis was beat
+        DungeonDataKeeper.getInstance().beatAnubis = true;
+
         // Get rid of health bar and name
         Destroy(bossText);
         Destroy(healthbar);

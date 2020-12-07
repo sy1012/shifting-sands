@@ -10,6 +10,9 @@ public class DungeonDataKeeper : MonoBehaviour
 
 
     public bool beatLastDungeon = false;
+    public int levelsBeat = 0;
+    public bool beatRhoss = false;
+    public bool beatAnubis = false;
     public float dungeonDistance = 0;
     public DungeonVariant dungeonVariant = DungeonVariant.tiny;
     public float curseValue = 1;

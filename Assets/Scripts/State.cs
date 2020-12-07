@@ -270,7 +270,6 @@ public class RollState : State
                 dashPosition = raycastHit2d.point;
                 dashPosition = new Vector2(dashPosition.x, dashPosition.y - psm.playerRootOffset);
                 psm.rb.MovePosition(dashPosition);
-                Debug.Log(Vector3.Dot(keyInputV3.normalized, raycastHit2d.normal.normalized));
                 // Dead on wall ram
                 if (Vector2.Dot(keyInput.normalized,raycastHit2d.normal.normalized)<-0.8f)
                 {
@@ -285,7 +284,6 @@ public class RollState : State
                     keyInputV3 = new Vector3(keyInput.x, keyInput.y, 0);
                     // Move away from wall a smidge
                     dashPosition = dashPosition + new Vector3(raycastHit2d.normal.x, raycastHit2d.normal.y,0) * 0.02f;
-                    Debug.Log(keyInput);
                 }
             }
             psm.rb.MovePosition(dashPosition);

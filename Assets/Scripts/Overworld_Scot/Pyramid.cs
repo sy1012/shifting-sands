@@ -25,33 +25,20 @@ public class Pyramid : MonoBehaviour
 
 
         // Asssign dungeon varients if applicable
-        float distOfBigPyramid = 10;
-        float dist = transform.position.magnitude;
-        float angle = Utilities.PositiveCWAngleBetween(Vector3.up, transform.position);
 
-        if (dist>distOfBigPyramid)
+        var dungData = DungeonDataKeeper.getInstance();
+
+        dungeonVarient = DungeonVariant.tiny;
+
+        if (dungData.levelsBeat >=1  && !pyramidManager.RhossLevelPlaced)
         {
-            if ( (int)angle/90 == 0 && !pyramidManager.NEGrandPyramidPlaced)
-            {
-                dungeonVarient = DungeonVariant.rhoss;
-                pyramidManager.NEGrandPyramidPlaced = true;
-            }
-            else if ((int)angle/90 == 1 && !pyramidManager.SEGrandPyramidPlaced)
-            {
-                dungeonVarient = DungeonVariant.rhoss;
-                pyramidManager.SEGrandPyramidPlaced = true;
-            }
-            else if ((int)angle/90 == 2 && !pyramidManager.SWGrandPyramidPlaced)
-            {
-                dungeonVarient = DungeonVariant.rhoss;
-                pyramidManager.SWGrandPyramidPlaced = true;
-            }
-            else if ((int)angle/90 == 3 && !pyramidManager.NWGrandPyramidPlaced)
-            {
-                dungeonVarient = DungeonVariant.rhoss;
-                pyramidManager.NWGrandPyramidPlaced = true;
-            }
-
+            pyramidManager.RhossLevelPlaced = true;
+            dungeonVarient = DungeonVariant.rhoss;
+        }
+        else if (dungData.levelsBeat >=2  && !pyramidManager.AnubisLevelPlaced)
+        {
+            pyramidManager.AnubisLevelPlaced = true;
+            dungeonVarient = DungeonVariant.anubis;
         }
 
         // Handle dungeon varients
@@ -61,6 +48,9 @@ public class Pyramid : MonoBehaviour
                 //Do nothing
                 break;
             case DungeonVariant.rhoss:
+                localScale = 0.9f;
+                break;
+            case DungeonVariant.anubis:
                 localScale = 0.9f;
                 break;
             case DungeonVariant.none:
@@ -120,7 +110,6 @@ public class Pyramid : MonoBehaviour
                             FindObjectOfType<DungeonDataKeeper>().dungeonDistance = Vector2.Distance(this.transform.position, pyramidManager.oases[0].transform.position);
                             FindObjectOfType<DungeonDataKeeper>().dungeonVariant = dungeonVarient;
                             overworldTraversal.EnterPyramid(this);
-                            Debug.Log(FindObjectOfType<DungeonDataKeeper>().dungeonDistance);
                         }
                         else if (Input.GetMouseButtonDown(1))
                         {

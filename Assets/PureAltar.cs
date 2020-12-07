@@ -13,6 +13,8 @@ public class PureAltar : Interactable
     IEnumerator LeaveDungeon()
     {
         DungeonDataKeeper.getInstance().beatLastDungeon = true;
+        DungeonDataKeeper.getInstance().levelsBeat += 1;
+
         FadeController.PlayFadeOutText("blessing");
         explosion.PlayExplosionForTime(4);
         yield return new WaitForSeconds(4f);
