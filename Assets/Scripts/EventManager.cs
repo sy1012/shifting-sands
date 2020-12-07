@@ -122,6 +122,11 @@ public static class EventManager
 
     public static void TriggerOnResubscribeMainMenu(DungeonGenArgs e)
     {
+        onWeaponMerchant = null;
+        onArmorChange = null;
+        onRuneChange = null;
+        onCrafting = null;
+        onInventoryTrigger = null;
         onResubscribeMainMenu?.Invoke(e);
     }
 
