@@ -8,12 +8,14 @@ public class OverworldData
     public int numOases;
     public int numPyramids;
     public int numCamels;
+    public string[] pyramidSize;
     public float[,] oasisPositions;
     public float[,] pyramidPositions;
     public float[] playerPosition;
     public float[,] camelPositions;
     public int currentOasisIndex;
     public int pyramidEnteredIndex = -1;
+    public int levelsBeat = 0;
 
     public OverworldData(MapManager mapManager)
     {
@@ -23,6 +25,7 @@ public class OverworldData
 
         oasisPositions = new float[numOases, 2];
         pyramidPositions = new float[numPyramids, 2];
+        pyramidSize = new string[numPyramids];
 
         playerPosition = new float[2];
         playerPosition[0] = mapManager.player.transform.position.x;
@@ -58,7 +61,11 @@ public class OverworldData
             }
             pyramidPositions[i, 0] = mapManager.pyramids[i].transform.position.x;
             pyramidPositions[i, 1] = mapManager.pyramids[i].transform.position.y;
+
+            pyramidSize[i] = mapManager.pyramids[i].dungeonVarient.ToString();
         }
+
+        levelsBeat = DungeonDataKeeper.getInstance().levelsBeat;
     }
 
 }

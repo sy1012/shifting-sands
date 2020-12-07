@@ -216,6 +216,25 @@ public class MapManager : MonoBehaviour
             for (int i = 0; i < loadedData.numPyramids; i++)
             {
                 pyramids.Add(Instantiate(pyramidPrefab, new Vector2(loadedData.pyramidPositions[i, 0], loadedData.pyramidPositions[i, 1]), Quaternion.identity));
+                pyramids[pyramids.Count - 1].old = true;
+                switch (loadedData.pyramidSize[i])
+                {
+                    case "tiny":
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.tiny;
+                        break;
+                    case "rhoss":
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.rhoss;
+                        pyramids[pyramids.Count - 1].transform.localScale = new Vector2(0.9f, 0.9f);
+                        break;
+                    case "anubis":
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.anubis;
+                        pyramids[pyramids.Count - 1].transform.localScale = new Vector2(0.9f, 0.9f);
+                        break;
+                    default:
+                        pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.tiny;
+                        break;
+                }
+                
                 if (i == loadedData.pyramidEnteredIndex)
                 {
                     entered = pyramids[pyramids.Count - 1];
@@ -251,6 +270,10 @@ public class MapManager : MonoBehaviour
             }*/
 
             DungeonDataKeeper dungeonData = FindObjectOfType<DungeonDataKeeper>();
+            if (dungeonData.levelsBeat < loadedData.levelsBeat) 
+            {
+                dungeonData.levelsBeat = loadedData.levelsBeat;
+            }
             if (dungeonData.beatLastDungeon)
             {
                 StartCoroutine(waitToTransformPyramid(entered, dungeonData));

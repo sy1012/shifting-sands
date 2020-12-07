@@ -13,6 +13,7 @@ public class Pyramid : MonoBehaviour
     bool mousedOver = false;
     private PlayerOverworldTraversal overworldTraversal;
     float localScale = 0.45f;
+    public bool old = false;
 
     // Default size of dungeon
     public DungeonVariant dungeonVarient = DungeonVariant.tiny;
@@ -28,18 +29,20 @@ public class Pyramid : MonoBehaviour
 
         var dungData = DungeonDataKeeper.getInstance();
 
-        dungeonVarient = DungeonVariant.tiny;
+        if (!old)
+        {
+            if (dungData.levelsBeat >=1  && !pyramidManager.RhossLevelPlaced)
+            {
+                pyramidManager.RhossLevelPlaced = true;
+                dungeonVarient = DungeonVariant.rhoss;
+            }
+            else if (dungData.levelsBeat >=2  && !pyramidManager.AnubisLevelPlaced)
+            {
+                pyramidManager.AnubisLevelPlaced = true;
+                dungeonVarient = DungeonVariant.anubis;
+            }
+        }
 
-        if (dungData.levelsBeat >=1  && !pyramidManager.RhossLevelPlaced)
-        {
-            pyramidManager.RhossLevelPlaced = true;
-            dungeonVarient = DungeonVariant.rhoss;
-        }
-        else if (dungData.levelsBeat >=2  && !pyramidManager.AnubisLevelPlaced)
-        {
-            pyramidManager.AnubisLevelPlaced = true;
-            dungeonVarient = DungeonVariant.anubis;
-        }
 
         // Handle dungeon varients
         switch (dungeonVarient)
