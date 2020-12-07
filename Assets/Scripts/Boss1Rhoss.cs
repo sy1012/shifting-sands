@@ -219,6 +219,14 @@ public class Boss1Rhoss : Enemy
             this.GetComponent<AIPath>().maxSpeed = 0;
             this.GetComponent<AIPath>().canMove = true;
         }
+        else if (collision.collider.name == "BrokenPil" && this.charging)
+        {
+            this.stunned = 4;
+            this.charging = false;
+            EventManager.TriggerOnRossHitPillar();
+            this.GetComponent<AIPath>().maxSpeed = 0;
+            this.GetComponent<AIPath>().canMove = true;
+        }
         this.GetComponent<AIPath>().rotationSpeed = 360;
         this.GetComponent<AIPath>().maxSpeed = 0;
         this.charging = false;

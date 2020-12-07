@@ -535,12 +535,17 @@ public class SoundManager : MonoBehaviour
         EventManager.onAnubisStart += PlayAnubisStart;
         EventManager.onAnubisEnd += PlayAnubisEnd;
         EventManager.onAnubisAttack += PlayAnubisAttack;
-        EventManager.onAnubisAttackExplosion += PlayFireExplosion;
+        EventManager.onAnubisAttackExplosion += PlayAnubisExplosion;
         EventManager.onAnubisTeleport += PlayDash;
         EventManager.onAnubisTeleport += PlayDash;
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
+    }
+
+    private void PlayAnubisExplosion(System.EventArgs e)
+    {
+        SoundPlayer.PlayOneShot(FireExplosion, 0.1f);
     }
 
     private void PlayAnubisStart(System.EventArgs e)
@@ -553,6 +558,8 @@ public class SoundManager : MonoBehaviour
     private void PlayAnubisEnd(System.EventArgs e)
     {
         SoundPlayer.Stop();
+        // stop bug (multiple death sounds on swings)
+        EventManager.onAnubisEnd -= PlayAnubisEnd;
         SoundPlayer.PlayOneShot(AnubisDeath, 0.6f);
         StartCoroutine(anubisEnd());
     }
