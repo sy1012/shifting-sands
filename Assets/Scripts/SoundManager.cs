@@ -100,6 +100,13 @@ public class SoundManager : MonoBehaviour
     private AudioClip Metal3;
     private AudioClip Wood1;
 
+    // breakable
+    private AudioClip Break1;
+    private AudioClip Break2;
+    private AudioClip Break3;
+    private AudioClip Break4;
+    private AudioClip Break5;
+
     // swings
     private AudioClip Swing1;
     private AudioClip Swing2;
@@ -340,6 +347,13 @@ public class SoundManager : MonoBehaviour
         Metal3 = Resources.Load<AudioClip>("SFX/Inventory/metal-small3");
         Wood1 = Resources.Load<AudioClip>("SFX/Inventory/wood-small");
 
+        // breakable
+        Break1 = Resources.Load<AudioClip>("SFX/Object/break1");
+        Break2 = Resources.Load<AudioClip>("SFX/Object/break2");
+        Break3 = Resources.Load<AudioClip>("SFX/Object/break3");
+        Break4 = Resources.Load<AudioClip>("SFX/Object/break4");
+        Break5 = Resources.Load<AudioClip>("SFX/Object/break5");
+
         // swings
         Swing1 = Resources.Load<AudioClip>("SFX/Player/swing");
         Swing2 = Resources.Load<AudioClip>("SFX/Player/swing2");
@@ -512,9 +526,97 @@ public class SoundManager : MonoBehaviour
         EventManager.onScarabAgro += PlayEnemyBite;
         EventManager.onSkullAgro += PlayEnemyShade;
         EventManager.onMummyAgro += PlayEnemyMonster;
+        EventManager.onPlayerDeath += PlayPlayerDeath;
+        EventManager.onBreakBox += PlayBreak;
+        EventManager.onRossStart += PlayRossStart;
+        EventManager.onRossEnd += PlayRossEnd;
+        EventManager.onRossCharge += PlayRossCharge;
+        EventManager.onRossHitPillar += PlayRossHitPillar;
         SoundPlayer.Stop();
         SoundPlayer.clip = OverworldMusic;
         SoundPlayer.Play();
+    }
+
+    private void PlayRossStart(System.EventArgs e)
+    {
+        SoundPlayer.Stop();
+        SoundPlayer.PlayOneShot(RossDeath, 0.4f);
+        StartCoroutine(rossStart());
+    }
+
+    IEnumerator rossStart()
+    {
+        yield return new WaitForSeconds(8.0f);
+        SoundPlayer.clip = RossMusic;
+        SoundPlayer.Play();
+    }
+
+    private void PlayRossEnd(System.EventArgs e)
+    {
+        SoundPlayer.Stop();
+        SoundPlayer.PlayOneShot(RossDeath, 0.4f);
+        StartCoroutine(rossEnd());
+    }
+
+    IEnumerator rossEnd()
+    {
+        yield return new WaitForSeconds(11.0f);
+        SoundPlayer.clip = DungeonMusic;
+        SoundPlayer.Play();
+    }
+
+    private void PlayRossCharge(System.EventArgs e)
+    {
+        float volume = 1.0f;
+        int x = Random.Range(0, 3);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(RossAttack1, volume);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(RossAttack2, volume);
+        } else if (x == 2){
+            SoundPlayer.PlayOneShot(RossAttack3, volume);
+        }
+    }
+
+    private void PlayRossHitPillar(System.EventArgs e)
+    {
+        float volume = 0.5f;
+        int x = Random.Range(0, 3);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(Crumble1, volume);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(Crumble2, volume);
+        } else if (x == 2){
+            SoundPlayer.PlayOneShot(Crumble3, volume);
+        }
+    }
+
+    private void PlayPlayerDeath(System.EventArgs e)
+    {
+        float volume = 1.0f;
+        int x = Random.Range(0, 2);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(PlayerDeath1, volume);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(PlayerDeath2, volume);
+        }
+    }
+
+    private void PlayBreak(System.EventArgs e)
+    {
+        float volume = 0.2f;
+        int x = Random.Range(0, 5);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(Break1, volume);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(Break2, volume);
+        } else if (x == 2){
+            SoundPlayer.PlayOneShot(Break3, volume);
+        } else if (x == 3){
+            SoundPlayer.PlayOneShot(Break4, volume);
+        } else if (x == 4){
+            SoundPlayer.PlayOneShot(Break5, volume);
+        }
     }
 
     private void EnteringDungeon(System.EventArgs e)
@@ -535,9 +637,9 @@ public class SoundManager : MonoBehaviour
     //}
     
     // play caravan music
-    private void PlayCaravan(System.EventArgs e){
-        SoundPlayer.PlayOneShot(CaravanHub);
-    }
+    //private void PlayCaravan(System.EventArgs e){
+    //    SoundPlayer.PlayOneShot(CaravanHub);
+    //}
 
     // play any one of enemy movement sound effects
     private void PlayEnemyMovement(System.EventArgs e){
@@ -594,7 +696,7 @@ public class SoundManager : MonoBehaviour
 
     // play any one of shrine sound effects
     private void PlayShrine(System.EventArgs e){
-        SoundPlayer.PlayOneShot(Shrine1, 0.4f);
+        SoundPlayer.PlayOneShot(Shrine1, 0.3f);
     }
 
     // play any one of dash sound effects
@@ -632,7 +734,31 @@ public class SoundManager : MonoBehaviour
 
     // play any one of player hit sound effects
     private void PlayPlayerHit(System.EventArgs e){
-        SoundPlayer.PlayOneShot(PlayerHit1, 0.6f);
+        SoundPlayer.PlayOneShot(PlayerHit1, 0.4f);
+        StartCoroutine(playerhit());
+    }
+
+    IEnumerator playerhit(){
+        float volume = 0.6f;
+        int x = Random.Range(0, 8);
+        yield return new WaitForSeconds(0.2f);
+        if (x == 0){
+            SoundPlayer.PlayOneShot(PlayerPain1, volume);
+        } else if (x == 1){
+            SoundPlayer.PlayOneShot(PlayerPain2, volume);
+        } else if (x == 2){
+            SoundPlayer.PlayOneShot(PlayerPain3, volume);
+        } else if (x == 3){
+            SoundPlayer.PlayOneShot(PlayerPain4, volume);
+        } else if (x == 4){
+            SoundPlayer.PlayOneShot(PlayerPain5, volume);
+        } else if (x == 5){
+            SoundPlayer.PlayOneShot(PlayerPain6, volume);
+        } else if (x == 6){
+            SoundPlayer.PlayOneShot(PlayerPain7, volume);
+        } else if (x == 7){
+            SoundPlayer.PlayOneShot(PlayerPain8, volume);
+        }
     }
 
     // play any one of swing sound effects

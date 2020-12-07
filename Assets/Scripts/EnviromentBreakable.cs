@@ -51,6 +51,7 @@ public class EnviromentBreakable : MonoBehaviour, IDamagable
             Destroy(this.GetComponent<Rigidbody2D>());
             Destroy(this.GetComponent<BoxCollider2D>());
             animator.enabled = true;
+            EventManager.TriggerOnBreakBox();
             yield return new WaitForSeconds(0.2f);
             LootGenerator.Generate(this.transform.position, quality);
             yield return new WaitForSeconds(1);

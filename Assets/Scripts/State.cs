@@ -332,11 +332,10 @@ public class HitState:State
         }
         else psm.health -= damageTaking;
         if (psm.health <= 0) {
-            EventManager.TriggerOnPlayerDeath();
             GameObject.Destroy(psm.GetComponentInParent<Rigidbody2D>());
             //Let Animaiton play
             psm.animator.Play("Fall");
-
+            EventManager.TriggerOnPlayerDeath();
             yield return new WaitForSeconds(2);
             FadeController.PlayFadeOut();
             yield return new WaitForSeconds(1);

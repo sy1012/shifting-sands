@@ -39,6 +39,7 @@ public class Boss1Rhoss : Enemy
 
     IEnumerator Death()
     {
+        EventManager.TriggerOnRossEnd();
         animBody.SetTrigger("dead");
         DungeonDataKeeper.getInstance().beatRhoss = true;
         yield return new WaitForSeconds(4.8f);
@@ -48,6 +49,7 @@ public class Boss1Rhoss : Enemy
     // Start is called before the first frame update
     void Initialize()
     {
+        EventManager.TriggerOnRossStart();
         // let it start path finding
         this.GetComponent<IAstarAI>().canMove = true;
         this.maxHealth = 1000;
@@ -127,6 +129,7 @@ public class Boss1Rhoss : Enemy
                     if (rotatingTime >= 0) { Rotate(); }
                     else
                     {
+                        EventManager.TriggerOnRossCharge();
                         this.GetComponent<Seeker>().graphMask = 2;
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
@@ -210,6 +213,7 @@ public class Boss1Rhoss : Enemy
             this.TakeDamage(200);
             this.stunned = 4;
             this.charging = false;
+            EventManager.TriggerOnRossHitPillar();
             Destroy(collision.collider.gameObject);
             this.GetComponent<AIPath>().maxSpeed = 0;
             this.GetComponent<AIPath>().canMove = true;
