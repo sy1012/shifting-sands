@@ -86,6 +86,7 @@ public class Boss1Rhoss : Enemy
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(this.GetComponent<Rigidbody2D>().velocity);
         if (stunned <= 0 && !isDying)
         {
             if (startFight)
@@ -95,11 +96,11 @@ public class Boss1Rhoss : Enemy
                     Initialize();
                 }
 
-
                 if (chargeTimer > 0)
                 {
                     chargeTimer -= Time.deltaTime;
                 }
+
                 // he failed to connect stop the charge
                 if (charging && chargeTimer <= 0)
                 {
@@ -126,9 +127,10 @@ public class Boss1Rhoss : Enemy
                     if (rotatingTime >= 0) { Rotate(); }
                     else
                     {
+                        this.GetComponent<Seeker>().graphMask = 2;
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
-                        this.GetComponent<AIPath>().rotationSpeed = 250;
+                        this.GetComponent<AIPath>().rotationSpeed = 10;
                         charging = true;
                         rotatingTime = 1;
                         chargeTimer = 1;
@@ -164,8 +166,9 @@ public class Boss1Rhoss : Enemy
 
     public void Rotate()
     {
+        this.GetComponent<Seeker>().graphMask = 3;
         this.GetComponent<AIPath>().canSearch = true;
-        this.GetComponent<AIPath>().maxSpeed = 0;
+        this.GetComponent<AIPath>().maxSpeed = 0.0001f;
         this.GetComponent<AIPath>().rotationSpeed = 360;
         this.rotatingTime -= Time.deltaTime;
     }
@@ -181,13 +184,23 @@ public class Boss1Rhoss : Enemy
         isDying = true;
         StartCoroutine(Death());
         return;
-        
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        if (startFight)
+        {
+            base.TakeDamage(damage);
+        } 
     }
 
     public override void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.transform == Player && cooldown <= 0 && stunned <= 0)
+        
+
+        if (collision.collider.transform == Player && cooldown <= 0 && stunned <= 0 && health > 0)
         {
+            
             cooldown = damageSpeed;
             psm.TakeDamage(damage, collision);
             stunned = 1;
