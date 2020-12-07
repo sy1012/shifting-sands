@@ -13,7 +13,7 @@ public class Snake : Enemy
     void Start()
     {
         damageSpeed = 1;
-        damage = 10;
+        damage = 15;
         detectionRange = 7;
         randTarget = new GameObject().transform;
         //move healthbar to a more suitable position

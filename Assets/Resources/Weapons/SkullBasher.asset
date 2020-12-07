@@ -23,4 +23,4 @@ MonoBehaviour:
   speed: 0.55
   hitBoxSize: {x: 0.5, y: 1.4}
   damage: 15
-  knockback: 4
+  knockback: 2
