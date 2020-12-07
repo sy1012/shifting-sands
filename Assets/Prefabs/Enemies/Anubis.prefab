@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 6191256057271201703}
   - component: {fileID: 6191256057271201707}
   - component: {fileID: 6191256057271201704}
+  - component: {fileID: 8441999412542160754}
   m_Layer: 15
   m_Name: Anubis
   m_TagString: Untagged
@@ -459,7 +460,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022523046, y: -2.5909622}
+  m_Offset: {x: 0.22, y: -0.77}
   m_Size: {x: 2.1667492, y: 3.2980733}
   m_Direction: 0
 --- !u!50 &6191256057271201704
@@ -483,6 +484,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &8441999412542160754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191256057271201699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bdda3be06b963478e2c17cd8a296f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6191256057387998350
 GameObject:
   m_ObjectHideFlags: 0

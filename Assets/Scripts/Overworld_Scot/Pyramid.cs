@@ -33,22 +33,22 @@ public class Pyramid : MonoBehaviour
         {
             if ( (int)angle/90 == 0 && !pyramidManager.NEGrandPyramidPlaced)
             {
-                dungeonVarient = DungeonVariant.medium;
+                dungeonVarient = DungeonVariant.rhoss;
                 pyramidManager.NEGrandPyramidPlaced = true;
             }
             else if ((int)angle/90 == 1 && !pyramidManager.SEGrandPyramidPlaced)
             {
-                dungeonVarient = DungeonVariant.medium;
+                dungeonVarient = DungeonVariant.rhoss;
                 pyramidManager.SEGrandPyramidPlaced = true;
             }
             else if ((int)angle/90 == 2 && !pyramidManager.SWGrandPyramidPlaced)
             {
-                dungeonVarient = DungeonVariant.medium;
+                dungeonVarient = DungeonVariant.rhoss;
                 pyramidManager.SWGrandPyramidPlaced = true;
             }
             else if ((int)angle/90 == 3 && !pyramidManager.NWGrandPyramidPlaced)
             {
-                dungeonVarient = DungeonVariant.medium;
+                dungeonVarient = DungeonVariant.rhoss;
                 pyramidManager.NWGrandPyramidPlaced = true;
             }
 
@@ -60,7 +60,7 @@ public class Pyramid : MonoBehaviour
             case DungeonVariant.tiny:
                 //Do nothing
                 break;
-            case DungeonVariant.medium:
+            case DungeonVariant.rhoss:
                 localScale = 0.9f;
                 break;
             case DungeonVariant.none:
