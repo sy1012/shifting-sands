@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1ca50124823484e8fd66a18a970233, type: 3}
   m_Name: FireRune
   m_EditorClassIdentifier: 
-  scrollOffset: {x: 0, y: 0.2}
+  scrollOffset: {x: 0, y: 0.215}
   spriteScaling: {x: 0, y: 0}
   sprite: {fileID: 21300000, guid: d2b0ce5aecc813945b496cdd4b1e8669, type: 3}
   itemType: 3

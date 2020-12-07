@@ -161,6 +161,14 @@ abstract class InventoryState
 
         return items;
     }
+
+    protected void ResetInventory()
+    {
+        foreach (GameObject slot in PubData.slots)
+        {
+            slot.GetComponent<Slot>().AssignData(slot.GetComponent<Slot>().RetrieveData());
+        }
+    }
 }
 
 // This will prepare all the initial views and is only used at the start of the application.
@@ -470,7 +478,10 @@ class InitialInventoryState : InventoryState
 class OverworldInventoryState : InventoryState
 {
     public override void Enter()
-    {        
+    {
+        // reset the items
+        ResetInventory();
+
         // Fire the event
         EventManager.TriggerOnOpenInventory();
         
@@ -590,6 +601,9 @@ class OverworldCraftingState : InventoryState
 {
     public override void Enter()
     {
+        // reset the items
+        ResetInventory();
+
         // Fire the event
         EventManager.TriggerOnOpenInventory();
 
@@ -712,6 +726,9 @@ class OverworldRuneState : InventoryState
 {
     public override void Enter()
     {
+        // reset the items
+        ResetInventory();
+
         // Fire the event
         EventManager.TriggerOnOpenInventory();
 
@@ -812,6 +829,9 @@ class OverworldWeaponState : InventoryState
 {
     public override void Enter()
     {
+        // reset the items
+        ResetInventory();
+
         // Fire the event
         EventManager.TriggerOnOpenInventory();
 
@@ -912,6 +932,9 @@ class OverworldArmourState : InventoryState
 {
     public override void Enter()
     {
+        // reset the items
+        ResetInventory();
+
         // Fire the event
         EventManager.TriggerOnOpenInventory();
 
