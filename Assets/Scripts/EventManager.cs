@@ -46,6 +46,7 @@ public static class EventManager
     public static event GameEvent onScarabAgro;
     public static event GameEvent onSkullAgro;
     public static event GameEvent onMummyAgro;
+    public static event GameEvent onEnemyDeath;
     public static event GameEvent onResubscribeOverworld;  // DO NOT CLEAN THESE
     public static event GameEvent onResubscribeDungeon;    // THEY SET UP RESUBSCIBING AND ARE FOR PERMANANT OBJS ONLY
     // !!!!!!!!!!!!!!!!!! BENNNN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -95,6 +96,7 @@ public static class EventManager
         onCraftingMade = null;
         onRuneChange = null;
         OnExitDungeon = null;
+        onEnemyDeath = null;
     }
 
     public static void TriggerDoorEntered(DoorComponent door)
@@ -315,6 +317,11 @@ public static class EventManager
     public static void TriggerOnMummyAgro()
     {
         onMummyAgro?.Invoke(EventArgs.Empty);
+    }
+
+    public static void TriggerOnEnemyDeath()
+    {
+        onEnemyDeath?.Invoke(EventArgs.Empty);
     }
 }
 

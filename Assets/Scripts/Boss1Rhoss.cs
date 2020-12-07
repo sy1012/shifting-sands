@@ -41,7 +41,7 @@ public class Boss1Rhoss : Enemy
     {
         animBody.SetTrigger("dead");
         yield return new WaitForSeconds(4.8f);
-        base.TakeDamage(1000);
+        base.Die();
     }
 
     // Start is called before the first frame update
@@ -170,20 +170,18 @@ public class Boss1Rhoss : Enemy
         this.rotatingTime -= Time.deltaTime;
     }
 
-    public override void TakeDamage(int damage)
+    public override void Die()
     {
         if (isDying)
         {
             //cant take more damage
             return;
         }
-        if (health-damage<0)
-        {
-            isDying = true;
-            StartCoroutine(Death());
-            return;
-        }
-        base.TakeDamage(damage);
+        
+        isDying = true;
+        StartCoroutine(Death());
+        return;
+        
     }
 
     public override void OnCollisionStay2D(Collision2D collision)

@@ -54,6 +54,7 @@ public class Character : MonoBehaviour, IHealable, IDamagable
         {
             if(gameObject.GetComponent<Enemy>() != null)
 			{
+                Debug.Log("Char 111");
                 gameObject.GetComponent<Enemy>().generateLoot();
 
             }

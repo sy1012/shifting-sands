@@ -25,6 +25,7 @@ public class Enemy : Character
     public float detectionRange; //the distance at which the enemy can spot the player
     public Room room;
     public Transform randTarget; //an invisible gameobject used to implement random patrol behaviour
+    public GameObject deathEffect;  // Smoke when they die
 
     public void Start()
     {
@@ -46,6 +47,35 @@ public class Enemy : Character
         }
     }
 
+    public override void TakeDamage(int damage)
+    {
+        this.health -= damage;
+        if (this.health <= 0)
+        {
+            Debug.Log("overide successful");
+            Die();
+        }
+        healthbar.SetHealth(health);
+    }
+
+    public virtual void Die()
+    {
+        // Loot Drops
+        gameObject.GetComponent<Enemy>().generateLoot();
+
+        // Create the death effect
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+
+        // trigger explosion sounds
+        EventManager.TriggerOnEnemyDeath();
+
+        // Destroy Effect
+        Destroy(effect, 1f);
+
+        // Destroy The game object
+        Destroy(this.gameObject);
+
+    }
     public void generateLoot()
 	{
         LootGenerator.Generate(this.transform.position, quality);

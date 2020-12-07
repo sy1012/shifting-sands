@@ -3,7 +3,13 @@ guid: 9e5e2db6484c6fe4b9f9ea4b97edcedf
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthCanvasPrefab: {instanceID: 0}
+  - destination: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - room: {instanceID: 0}
+  - randTarget: {instanceID: 0}
+  - deathEffect: {fileID: 3545522220261749504, guid: 452a79352fab7aa4c9a8eb3380a699cb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
