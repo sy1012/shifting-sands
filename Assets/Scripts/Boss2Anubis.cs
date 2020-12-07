@@ -76,6 +76,17 @@ public class Boss2Anubis : Enemy
         {
             if (startFight)
             {
+                // handle the Anuibis layers
+                if (this.transform.position.y - 1.5f >= Player.transform.position.y)
+                {
+                    this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("Default"); ;
+                }
+                else
+                {
+                    this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("Player");
+                }
+
+
                 if (!initialized)
                 {
                     Initialize();
@@ -101,7 +112,6 @@ public class Boss2Anubis : Enemy
                         Debug.Log("What?");
                         teleportTo = Random.Range(0, 5);
                     }
-                    
                 }
 
                 if (attackTime > 0)
