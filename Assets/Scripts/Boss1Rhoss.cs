@@ -130,7 +130,7 @@ public class Boss1Rhoss : Enemy
                     else
                     {
                         EventManager.TriggerOnRossCharge();
-                        this.GetComponent<Seeker>().graphMask = 2;
+                        this.GetComponent<Seeker>().graphMask = 1 << 1;
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
                         this.GetComponent<AIPath>().rotationSpeed = 10;
@@ -169,7 +169,7 @@ public class Boss1Rhoss : Enemy
 
     public void Rotate()
     {
-        this.GetComponent<Seeker>().graphMask = 3;
+        this.GetComponent<Seeker>().graphMask = 1 << 2;
         this.GetComponent<AIPath>().canSearch = true;
         this.GetComponent<AIPath>().maxSpeed = 0.0001f;
         this.GetComponent<AIPath>().rotationSpeed = 360;
@@ -214,7 +214,8 @@ public class Boss1Rhoss : Enemy
             this.stunned = 4;
             this.charging = false;
             EventManager.TriggerOnRossHitPillar();
-            Destroy(collision.collider.gameObject);
+            collision.gameObject.GetComponent<DestructablePillar>().TurnToRubble();
+            collision.gameObject.name = "BrokenPil";
             this.GetComponent<AIPath>().maxSpeed = 0;
             this.GetComponent<AIPath>().canMove = true;
         }
