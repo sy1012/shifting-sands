@@ -238,6 +238,12 @@ public class Boss2Anubis : Enemy
         // Tell data keeper anubis was beat
         DungeonDataKeeper.getInstance().beatAnubis = true;
 
+        //Destroy enemies in room
+        foreach (var mob in room.enemies)
+        {
+            Destroy(mob);
+        }
+
         // Get rid of health bar and name
         Destroy(bossText);
         Destroy(healthbar);

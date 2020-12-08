@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
         state.Enter();
         state = new OverworldInventoryState();
 
-        state.QuietPickUpCoins(10);
+        state.QuietPickUpCoins(12);
 
         if (FindObjectOfType<MenuSelection>().loadInventory)
         {
