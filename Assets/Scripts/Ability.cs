@@ -11,7 +11,7 @@ public class Ability : MonoBehaviour
     public Transform firePoint;
     public GameObject fireballPrefab;
     public GameObject snowballPrefab;
-    public float speed = 5f;
+    public float speed = 6f;
     public Camera cam;
     public Vector3 mousePos;
     private Vector3 dir;
