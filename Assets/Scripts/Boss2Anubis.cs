@@ -239,10 +239,6 @@ public class Boss2Anubis : Enemy
         DungeonDataKeeper.getInstance().beatAnubis = true;
 
         //Destroy enemies in room
-        foreach (MonoBehaviour mob in room.enemies)
-        {
-            mob.GetComponent<Enemy>().TakeDamage(1000);
-        }
 
         // Get rid of health bar and name
         Destroy(bossText);
