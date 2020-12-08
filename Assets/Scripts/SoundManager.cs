@@ -591,7 +591,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlayPyramidCrumbleRise(System.EventArgs e)
     {
-        float volume = 0.2f;
+        float volume = 0.1f;
         int x = Random.Range(0, 3);
         if (x == 0){
             SoundPlayer.PlayOneShot(Crumble1, volume);
@@ -604,7 +604,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlayOasisReveal(System.EventArgs e)
     {
-        SoundPlayer.PlayOneShot(Reveal, 0.8f);
+        SoundPlayer.PlayOneShot(Reveal, 0.4f);
     }
 
     private void PlayEvilAltar(System.EventArgs e)
