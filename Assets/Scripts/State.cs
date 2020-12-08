@@ -226,6 +226,12 @@ public class AttackState : State
     {
         return base.ToString() + " Attack";
     }
+
+    public override IEnumerator OnHit(int damage, Collision2D collision)
+    {
+        psm.SetState(new HitState(psm, damage, collision));
+        yield break;
+    }
 }
 
 public class RollState : State

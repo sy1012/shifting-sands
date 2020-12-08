@@ -27,7 +27,7 @@ public class Enemy : Character
     public Transform randTarget; //an invisible gameobject used to implement random patrol behaviour
     public GameObject deathEffect;  // Smoke when they die
 
-    public void Start()
+    public virtual void Start()
     {
         psm = FindObjectOfType<PlayerStateMachine>();
         Player = psm.transform;
@@ -70,8 +70,6 @@ public class Enemy : Character
 
         // Destroy Effect
         Destroy(effect, 1f);
-
-        EventManager.TriggerOnEnemyDeath();
 
         // Destroy The game object
         Destroy(this.gameObject);

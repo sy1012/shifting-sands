@@ -29,6 +29,13 @@ public class Boss1Rhoss : Enemy
         animLegs.speed = 1;
     }
 
+    public override void Start()
+    {
+        base.Start();
+        room.enemies.Add(this);
+    }
+
+
     IEnumerator Intro()
     {
         animBody.SetTrigger("awake");
@@ -67,14 +74,13 @@ public class Boss1Rhoss : Enemy
         bossText.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         TextMeshProUGUI bossTextUI = bossText.AddComponent<TextMeshProUGUI>();
         bossTextUI.font = Resources.Load("CASTELAR SDF", typeof(TMP_FontAsset)) as TMP_FontAsset;
-        bossTextUI.text = "Rhoss the Rammy";
+        bossTextUI.text = "\nRhoss the Rammy";
         bossTextUI.fontSize = 25;
         bossTextUI.color = Color.white;
         bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
         healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .89f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
-        room.enemies.Add(this);
 
         destination.target = Player;
 
