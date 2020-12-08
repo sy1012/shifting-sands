@@ -7,8 +7,8 @@ public class SnowBall : MonoBehaviour
 {
     // Hit effect for later
     public GameObject hitEffect;
-    public int damage = 40;
-    private int speed = 4;
+    public int damage = 20;
+    private int speed = 5;
     public AIPath AI;
     //public float timerSecond;
     GameObject target;
@@ -59,7 +59,7 @@ public class SnowBall : MonoBehaviour
         if (target.GetComponent<IAstarAI>() != null)
         {
             normalSpeed = target.GetComponent<IAstarAI>().maxSpeed;
-            target.GetComponent<IAstarAI>().maxSpeed = normalSpeed * 0.6f;
+            target.GetComponent<IAstarAI>().maxSpeed = normalSpeed * 0.4f;
             onHitAI = true;
         }
 
