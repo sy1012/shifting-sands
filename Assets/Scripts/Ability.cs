@@ -20,7 +20,7 @@ public class Ability : MonoBehaviour
     // Ability 1
     [Header("Ability 1")]
     public Image abilityImage1;
-    private float coolDown1 = 13f;
+    private float coolDown1 = 9f;
     private bool isCoolDown1;
     private KeyCode abilitybutton1 = KeyCode.Q;
 

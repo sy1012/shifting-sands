@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour, IHealable, IDamagable
 {
     public bool isMousedOver = false;
-    public int maxHealth = 100;
+    public int maxHealth = 150;
     public int health;
     public int weight = 3;
     //below are used to instantiate and manage the healthbar
