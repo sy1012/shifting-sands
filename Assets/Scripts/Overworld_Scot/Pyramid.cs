@@ -48,7 +48,6 @@ public class Pyramid : MonoBehaviour
                 pyramidManager.AnubisLevelPlaced = true;
                 dungeonVarient = DungeonVariant.anubis;
             }
-            EventManager.TriggerOnPyramidCrumbleRise();
         }
         else
         {
@@ -74,8 +73,6 @@ public class Pyramid : MonoBehaviour
             default:
                 break;
         }
-
-        pyramidManager.SaveOverworld();
     }
 
     public void SetParentOasis(Oasis parent)

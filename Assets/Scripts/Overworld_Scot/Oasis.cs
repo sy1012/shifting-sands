@@ -162,7 +162,12 @@ public class Oasis : MonoBehaviour
             
 
         }
-        EventManager.TriggerOnPyramidCrumbleRise();
+        if (!old)
+        {
+            EventManager.TriggerOnPyramidCrumbleRise();
+            mapManager.SaveOverworld();
+        }
+
     }
 
     //add pyramids from other oases to this oasis
