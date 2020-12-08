@@ -17,6 +17,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: a02716daf9dc94944ac32a58f0fde10e, type: 3}
   itemType: 4
   itemName: Gold Armour
-  value: 100
+  value: 80
   display: {fileID: 3732385600231531293, guid: 1240652ac88813045988ed89f6766a2c, type: 3}
   flatArmour: 0.5

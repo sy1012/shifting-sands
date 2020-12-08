@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: bf80b972f59b52a4d974ad05317d74fe, type: 3}
   itemType: 1
   itemName: Spear
-  value: 35
+  value: 30
   display: {fileID: 5695948757014849757, guid: d354099e7c19b6347ac20e2e5ac9a46a, type: 3}
   animationNumber: 6
   speed: 0.5
