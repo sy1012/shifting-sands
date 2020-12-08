@@ -6,7 +6,7 @@ public class fireball : MonoBehaviour
 {
     // Hit effect for later
     public GameObject hitEffect;
-    public int fireballDamage = 70;
+    private int fireballDamage = 70;
     private int speed = 8;
     public Animator animator;
 

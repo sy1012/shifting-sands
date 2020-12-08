@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 1cbe9008da1bf52479e7d321d1c8a774, type: 3}
   itemType: 1
   itemName: Wooden Stick
-  value: 10
+  value: 1
   display: {fileID: 6321886678000124453, guid: 0fafdc0b9b016d34a906fbff2f4d81b3, type: 3}
   animationNumber: 1
   speed: 0.2

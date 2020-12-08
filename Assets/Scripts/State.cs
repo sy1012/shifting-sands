@@ -344,6 +344,7 @@ public class HitState:State
             //GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
             GameObject.Destroy(GameObject.Find("DungeonData"));
             GameObject.Destroy(GameObject.Find("TheClickDataSaviour"));
+            GameObject.Destroy(GameObject.Find("Equipment"));
 
             EventManager.TriggerDungeonExit();
 

@@ -20,6 +20,7 @@ public static class SaveSystem
     public static OverworldData LoadOverworld()
     {
         string path = Application.persistentDataPath + "/overworld.sav";
+        Debug.Log(path);
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
