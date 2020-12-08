@@ -75,6 +75,7 @@ public class Caravan : MonoBehaviour
                 if (!waiting)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, ((OasisNode)path[0]).getOasis().transform.position, 10f * Time.deltaTime);
+                    EventManager.TriggerOnOverworldMovement();
                 }
                 
             }
