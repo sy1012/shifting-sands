@@ -221,17 +221,21 @@ public class MapManager : MonoBehaviour
                 switch (loadedData.pyramidSize[i])
                 {
                     case "tiny":
+                        Debug.Log("tiny");
                         pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.tiny;
                         break;
                     case "rhoss":
+                        Debug.Log("rhoss");
                         pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.rhoss;
                         pyramids[pyramids.Count - 1].transform.localScale = new Vector2(0.9f, 0.9f);
                         break;
                     case "anubis":
+                        Debug.Log("anubis");
                         pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.anubis;
                         pyramids[pyramids.Count - 1].transform.localScale = new Vector2(0.9f, 0.9f);
                         break;
                     default:
+                        Debug.Log("oops");
                         pyramids[pyramids.Count - 1].dungeonVarient = DungeonVariant.tiny;
                         break;
                 }
@@ -271,6 +275,8 @@ public class MapManager : MonoBehaviour
             }*/
 
             DungeonDataKeeper dungeonData = FindObjectOfType<DungeonDataKeeper>();
+            dungeonData.beatAnubis = loadedData.anubis;
+            dungeonData.beatRhoss = loadedData.rhoss;
             if (dungeonData.levelsBeat < loadedData.levelsBeat) 
             {
                 dungeonData.levelsBeat = loadedData.levelsBeat;
