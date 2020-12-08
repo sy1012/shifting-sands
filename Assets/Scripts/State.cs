@@ -339,16 +339,14 @@ public class HitState:State
             yield return new WaitForSeconds(2);
             FadeController.PlayFadeOut();
             yield return new WaitForSeconds(1);
+
             // clean up the hierarchy
-            //GameObject.Destroy(GameObject.Find("Canvas"));
-            //GameObject.Destroy(GameObject.Find("SoundManager(Clone)"));
             GameObject.Destroy(GameObject.Find("DungeonData"));
             GameObject.Destroy(GameObject.Find("TheClickDataSaviour"));
             GameObject.Destroy(GameObject.Find("Equipment"));
 
             EventManager.TriggerDungeonExit();
-
-            Debug.Log("Death Noises");
+            
             SceneManager.LoadScene("MainMenu");
         }
         var healthbar = psm.GetComponentInChildren<Healthbar>();
