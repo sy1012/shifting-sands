@@ -74,7 +74,7 @@ public class Boss1Rhoss : Enemy
         bossText.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         TextMeshProUGUI bossTextUI = bossText.AddComponent<TextMeshProUGUI>();
         bossTextUI.font = Resources.Load("CASTELAR SDF", typeof(TMP_FontAsset)) as TMP_FontAsset;
-        bossTextUI.text = "\nRhoss the Rammy";
+        bossTextUI.text = "Rhoss the Rammy";
         bossTextUI.fontSize = 25;
         bossTextUI.color = Color.white;
         bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;
