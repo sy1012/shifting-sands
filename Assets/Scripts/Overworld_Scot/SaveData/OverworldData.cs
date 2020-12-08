@@ -16,8 +16,6 @@ public class OverworldData
     public int currentOasisIndex;
     public int pyramidEnteredIndex = -1;
     public int levelsBeat = 0;
-    public bool rhoss;
-    public bool anubis;
 
     public OverworldData(MapManager mapManager)
     {
@@ -70,8 +68,6 @@ public class OverworldData
 
         DungeonDataKeeper data = DungeonDataKeeper.getInstance();
         levelsBeat = data.levelsBeat;
-        rhoss = data.beatRhoss;
-        anubis = data.beatAnubis;
     }
 
 }
