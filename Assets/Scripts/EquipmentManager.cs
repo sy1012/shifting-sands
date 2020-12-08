@@ -26,6 +26,7 @@ public class EquipmentManager : MonoBehaviour
 
     public Weapon GetWeapon()
     {
+        Debug.Log(weaponObject);
         return weaponObject.GetComponent<Weapon>();
     }
 

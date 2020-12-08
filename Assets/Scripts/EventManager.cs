@@ -127,8 +127,6 @@ public static class EventManager
         onBuy = null;
         onCraftingMade = null;
         onSell = null;
-        onOpenInventory = null;
-        onCloseInventory = null;
         onCoinPickedUp = null;
         onCraftingMade = null;
         onRuneChange = null;
@@ -136,6 +134,15 @@ public static class EventManager
         onEnemyDeath = null;
         onPlayerDeath = null;
         onBreakBox = null;
+    }
+
+    public static void ClearButtons()
+    {
+        onInventoryTrigger = null;
+        onWeaponMerchant = null;
+        onArmourMerchant = null;
+        onRuneMerchant = null;
+        onCrafting = null;
     }
 
     public static void TriggerOnHealthPickup()
@@ -243,12 +250,12 @@ public static class EventManager
 
     public static void TriggerOnResubscribeMainMenu(DungeonGenArgs e)
     {
-        onWeaponMerchant = null;
-        onArmorChange = null;
-        onRuneChange = null;
-        onCrafting = null;
-        onInventoryTrigger = null;
-        onResubscribeMainMenu?.Invoke(e);
+        //onWeaponMerchant = null;
+        //onArmorChange = null;
+        //onRuneChange = null;
+        //onCrafting = null;
+        //onInventoryTrigger = null;
+        //onResubscribeMainMenu?.Invoke(e);
     }
 
     public static void TriggerDungeonGenerated(DungeonGenArgs e)

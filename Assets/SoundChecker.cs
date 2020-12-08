@@ -16,14 +16,15 @@ public class SoundChecker : MonoBehaviour
             GameObject temp = Instantiate(soundPrefab);
             temp.name = "SoundManager";
         }
-        if (GameObject.Find("Canvas") != null)
+        if (GameObject.Find("Inventory") != null)
         {
-            GameObject.Destroy(GameObject.Find("Canvas"));
+            Debug.Log("Calling");
+            GameObject.Find("Inventory").GetComponent<Inventory>().SubscribeButtons();
         }
-        if (GameObject.Find("Equipment") != null)
-        {
-            GameObject.Destroy(GameObject.Find("Equipment"));
-        }
+        //if (GameObject.Find("Equipment") != null)
+        //{
+        //    GameObject.Destroy(GameObject.Find("Equipment"));
+        //}
     }
 
 }

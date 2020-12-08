@@ -134,8 +134,8 @@ public class CanvasClickController : MonoBehaviour
 
     private void PlayerDeath(EventArgs e)
     {
-        EventManager.onResubscribeOverworld -= OverworldSubscribe;
-        EventManager.onResubscribeDungeon -= DungeonSubscribe;
+        //EventManager.onResubscribeOverworld -= OverworldSubscribe;
+        //EventManager.onResubscribeDungeon -= DungeonSubscribe;
         EventManager.onInventoryTrigger -= hideInvExclamation;
         EventManager.onWeaponMerchant -= hideWeapExclamation;
         EventManager.onArmourMerchant -= hideArmExclamation;
@@ -164,6 +164,30 @@ public class CanvasClickController : MonoBehaviour
 
     private void OverworldSubscribe(EventArgs e)
     {
+        _armourMerchantButton.SetActive(true);
+        _weaponMerchantButton.SetActive(true);
+        _craftingButton.SetActive(true);
+        _runeMerchantButton.SetActive(true);
+        _inventoryButton.SetActive(true);
+    }
+
+    public void HideIcons()
+    {
+        _armourMerchantButton.SetActive(false);
+        _weaponMerchantButton.SetActive(false);
+        _craftingButton.SetActive(false);
+        _runeMerchantButton.SetActive(false);
+        _inventoryButton.SetActive(false);
+    }
+
+    public void ShowIcons()
+    {
+        EventManager.onInventoryTrigger += hideInvExclamation;
+        EventManager.onWeaponMerchant += hideWeapExclamation;
+        EventManager.onArmourMerchant += hideArmExclamation;
+        EventManager.onRuneMerchant += hideRuneExclamation;
+        EventManager.onCrafting += hideCraftExclamation;
+        EventManager.onPlayerDeath += PlayerDeath;
         _armourMerchantButton.SetActive(true);
         _weaponMerchantButton.SetActive(true);
         _craftingButton.SetActive(true);
@@ -254,6 +278,7 @@ public class CanvasClickController : MonoBehaviour
             {
                 if (result.gameObject.name == "Inventory Button(Clone)")
                 {
+                    Debug.Log("HADJBDJKBSADKJBASKJDBAS");
                     EventManager.TriggerOnInventoryTrigger();
                 }
                 else if (result.gameObject.name == "Crafting Button(Clone)")

@@ -487,8 +487,9 @@ class OverworldInventoryState : InventoryState
         
         // put the equipped item in the weapon and armour slots
         PubData.open = true;
-
-        if (PubData.equipment.GetWeapon() != null){
+        Debug.Log("THIS ONE");
+        Debug.Log(PubData.equipment);
+        if (PubData.equipment.GetWeapon().data != null){
             PubData.weaponSlot.GetComponent<Slot>().AssignData(PubData.equipment.GetWeapon().data);
         }
 
@@ -526,21 +527,21 @@ class OverworldInventoryState : InventoryState
         PubData.open = false;
 
         // assign the rune data
-        if (PubData.runeSlot.GetComponent<Slot>().occupied)
+        if (PubData.runeSlot.GetComponent<Slot>().RetrieveData() != null)
         {
             PubData.equipment.SetRune((RuneData)PubData.runeSlot.GetComponent<Slot>().RetrieveData());
         }
         else PubData.equipment.SetRune(null);
 
         // assign the weapon data
-        if (PubData.weaponSlot.GetComponent<Slot>().occupied)
+        if (PubData.weaponSlot.GetComponent<Slot>().RetrieveData() != null)
         {
             PubData.equipment.SetWeapon((WeaponData)PubData.weaponSlot.GetComponent<Slot>().RetrieveData());
         }
         else PubData.equipment.SetWeapon(null);
 
         // assign the armour data
-        if (PubData.armourSlot.GetComponent<Slot>().occupied)
+        if (PubData.armourSlot.GetComponent<Slot>().RetrieveData() != null)
         {
             PubData.equipment.SetArmour((ArmourData)PubData.armourSlot.GetComponent<Slot>().RetrieveData());
         }

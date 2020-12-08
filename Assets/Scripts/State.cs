@@ -349,7 +349,7 @@ public class HitState:State
             // clean up the hierarchy
             GameObject.Destroy(GameObject.Find("DungeonData"));
             GameObject.Destroy(GameObject.Find("TheClickDataSaviour"));
-            GameObject.Destroy(GameObject.Find("Equipment"));
+            //GameObject.Destroy(GameObject.Find("Equipment"));
 
             EventManager.TriggerDungeonExit();
             
@@ -366,7 +366,6 @@ public class HitState:State
         psm.InvincibleTime = invincibleTime;
         psm.SetState(new NormalState(psm));
         yield break;
-
     }
 }
 

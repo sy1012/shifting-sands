@@ -192,6 +192,7 @@ public class Inventory : MonoBehaviour
 
     private void TriggerInventory(object sender, EventArgs e)
     {
+        Debug.Log("Clicked");
         ChangeState(new OverworldInventoryState());
     }
 
@@ -316,5 +317,15 @@ public class Inventory : MonoBehaviour
 
             state.QuietPickUpCoins(data.gold - GetCoinAmount());
         }
+    }
+
+    public void SubscribeButtons()
+    {
+        EventManager.ClearButtons();
+        EventManager.onInventoryTrigger += TriggerInventory;
+        EventManager.onWeaponMerchant += WeaponMerchantClicked;
+        EventManager.onArmourMerchant += ArmourMerchantClicked;
+        EventManager.onRuneMerchant += RuneMerchantClicked;
+        EventManager.onCrafting += CraftingClicked;
     }
 }

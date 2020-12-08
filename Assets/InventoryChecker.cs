@@ -22,5 +22,10 @@ public class InventoryChecker : MonoBehaviour
             temp = Instantiate(equipmentPrefab);
             temp.name = "Equipment";
         }
+        else
+        {
+            //GameObject.Find("Inventory").GetComponent<Inventory>().SubscribeButtons();
+            GameObject.Find("Canvas").GetComponent<CanvasClickController>().ShowIcons();
+        }
     }
 }
