@@ -48,6 +48,7 @@ public class Pyramid : MonoBehaviour
                 pyramidManager.AnubisLevelPlaced = true;
                 dungeonVarient = DungeonVariant.anubis;
             }
+            EventManager.TriggerOnPyramidCrumbleRise();
         }
         else
         {
@@ -111,6 +112,7 @@ public class Pyramid : MonoBehaviour
     private IEnumerator Crumble()
     {
         yield return new WaitForSeconds(1);
+        EventManager.TriggerOnPyramidCrumbleRise();
         GetComponent<Animator>().Play("crumble");
         yield return new WaitForSeconds(1);
         Destroy(gameObject);

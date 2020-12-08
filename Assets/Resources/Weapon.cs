@@ -101,7 +101,7 @@ public class Weapon : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<IDamagable>() != null && collision.gameObject.GetComponent<PlayerStateMachine>() == null)
         {
-            collision.gameObject.GetComponent<IDamagable>().TakeDamage(this.damage);
+            collision.gameObject.GetComponent<IDamagable>().TakeDamage((int)(this.damage * Mathf.Pow((1.1f), 1/(GameObject.Find("DungeonData").GetComponent<DungeonDataKeeper>().curseValue))));
             Vector2 normalizedAngle = (collision.transform.position - this.transform.position);
             normalizedAngle.Normalize();
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(normalizedAngle * 1000 * this.data.knockback);
