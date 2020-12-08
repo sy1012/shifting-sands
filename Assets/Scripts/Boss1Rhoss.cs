@@ -74,6 +74,7 @@ public class Boss1Rhoss : Enemy
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
         healthbar.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .89f));
         healthCanvas.transform.position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .9f));
+        room.enemies.Add(this);
 
         destination.target = Player;
 
@@ -109,6 +110,7 @@ public class Boss1Rhoss : Enemy
                 {
                     charging = false;
                     chargeTimer = Random.Range(lowerChargeTime, upperChargeTime);
+                    animLegs.speed = 1.2f;
                 }
 
                 //update the timer and number of seconds passed since last movement
@@ -131,14 +133,14 @@ public class Boss1Rhoss : Enemy
                     else
                     {
                         EventManager.TriggerOnRossCharge();
-                        this.GetComponent<Seeker>().graphMask = 1 << 1;
+                        this.GetComponent<Seeker>().graphMask = 2;
                         this.GetComponent<AIPath>().maxSpeed = chargeSpeed;
                         this.GetComponent<AIPath>().canSearch = true;
                         this.GetComponent<AIPath>().rotationSpeed = 10;
                         charging = true;
                         rotatingTime = 1;
                         chargeTimer = 1;
-                        animLegs.speed = 4.5f;
+                        animLegs.speed = 4f;
                     }
                 }
                 //enter randomly-moving patrol mode if the player isn't nearby.
@@ -170,7 +172,7 @@ public class Boss1Rhoss : Enemy
 
     public void Rotate()
     {
-        this.GetComponent<Seeker>().graphMask = 1 << 2;
+        this.GetComponent<Seeker>().graphMask = 4;
         this.GetComponent<AIPath>().canSearch = true;
         this.GetComponent<AIPath>().maxSpeed = 0.0001f;
         this.GetComponent<AIPath>().rotationSpeed = 360;
@@ -222,16 +224,17 @@ public class Boss1Rhoss : Enemy
         }
         else if (collision.collider.name == "BrokenPil" && this.charging)
         {
-            this.stunned = 4;
             this.charging = false;
             EventManager.TriggerOnRossHitPillar();
             this.GetComponent<AIPath>().maxSpeed = 0;
             this.GetComponent<AIPath>().canMove = true;
+            animLegs.speed = 1.2f;
         }
         this.GetComponent<AIPath>().rotationSpeed = 360;
         this.GetComponent<AIPath>().maxSpeed = 0;
         this.charging = false;
         chargeTimer = Random.Range(lowerChargeTime, upperChargeTime);
+        animLegs.speed = 1.2f;
     }
 
 }
