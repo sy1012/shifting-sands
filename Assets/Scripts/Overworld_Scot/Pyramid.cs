@@ -24,7 +24,6 @@ public class Pyramid : MonoBehaviour
         pyramidManager = FindObjectOfType<MapManager>();
         overworldTraversal = FindObjectOfType<PlayerOverworldTraversal>();
 
-
         // Asssign dungeon varients if applicable
 
         var dungData = DungeonDataKeeper.getInstance();
@@ -74,6 +73,8 @@ public class Pyramid : MonoBehaviour
             default:
                 break;
         }
+
+        pyramidManager.SaveOverworld();
     }
 
     public void SetParentOasis(Oasis parent)
