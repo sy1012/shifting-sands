@@ -50,6 +50,10 @@ public class Boss1Rhoss : Enemy
         EventManager.TriggerOnRossEnd();
         animBody.SetTrigger("dead");
         DungeonDataKeeper.getInstance().beatRhoss = true;
+        foreach (MonoBehaviour mob in room.enemies)
+        {
+            mob.GetComponent<Enemy>().TakeDamage(1000);
+        }
         yield return new WaitForSeconds(4.8f);
         base.Die();
     }
@@ -74,7 +78,7 @@ public class Boss1Rhoss : Enemy
         bossText.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         TextMeshProUGUI bossTextUI = bossText.AddComponent<TextMeshProUGUI>();
         bossTextUI.font = Resources.Load("CASTELAR SDF", typeof(TMP_FontAsset)) as TMP_FontAsset;
-        bossTextUI.text = "Rhoss the Rammy";
+        bossTextUI.text = "\nRhoss the Rammy";
         bossTextUI.fontSize = 25;
         bossTextUI.color = Color.white;
         bossTextUI.alignment = TextAlignmentOptions.TopGeoAligned;

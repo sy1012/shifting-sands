@@ -746,6 +746,14 @@ PrefabInstance:
       propertyPath: HealthBarTransform
       value: 
       objectReference: {fileID: 139178770}
+    - target: {fileID: 96976485, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 96976485, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
+      propertyPath: health
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 1746857441, guid: 29154e92899118c429e55fb5adf420c0, type: 3}
       propertyPath: m_Name
       value: Ability Manager

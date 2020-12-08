@@ -58,7 +58,7 @@ public class Boss2Anubis : Enemy
         bossText = new GameObject("boss text");
         bossText.transform.SetParent(this.transform);
         bossText.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-        bossText.AddComponent<TextMeshProUGUI>().text = "Anubis The Wise";
+        bossText.AddComponent<TextMeshProUGUI>().text = "\nAnubis The Wise";
         bossText.GetComponent<TextMeshProUGUI>().fontSize = 25;
         bossText.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.TopGeoAligned;
         bossText.GetComponent<RectTransform>().position = Camera.main.ViewportToScreenPoint(new Vector2(.5f, .895f));
@@ -237,6 +237,12 @@ public class Boss2Anubis : Enemy
 
         // Tell data keeper anubis was beat
         DungeonDataKeeper.getInstance().beatAnubis = true;
+
+        //Destroy enemies in room
+        foreach (MonoBehaviour mob in room.enemies)
+        {
+            mob.GetComponent<Enemy>().TakeDamage(1000);
+        }
 
         // Get rid of health bar and name
         Destroy(bossText);

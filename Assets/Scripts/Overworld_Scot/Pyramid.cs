@@ -146,10 +146,10 @@ public class Pyramid : MonoBehaviour
                             FindObjectOfType<DungeonDataKeeper>().dungeonVariant = dungeonVarient;
                             overworldTraversal.EnterPyramid(this);
                         }
-                        else if (Input.GetMouseButtonDown(1))
+                        /*else if (Input.GetMouseButtonDown(1))
                         {
                             TransformToOasis();
-                        }
+                        }*/
                         
                     }
                     mousedOver = true;

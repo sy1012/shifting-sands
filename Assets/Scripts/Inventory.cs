@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
     public Slot slotHovered;
     private Slot hoveredPreviously;
     private bool displayed;  // is the info for the current item hovered displayed already
+    private bool addDagger = false;
   
     // Start is called before the first frame update
     public void Start()
@@ -42,7 +43,7 @@ public class Inventory : MonoBehaviour
         state.Enter();
         state = new OverworldInventoryState();
 
-        state.QuietPickUpCoins(10);
+        state.QuietPickUpCoins(12);
 
         if (FindObjectOfType<MenuSelection>().loadInventory)
         {
@@ -50,7 +51,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<EquipmentManager>().SetWeapon((WeaponData)FindObjectOfType<ItemAccess>().items[13]);
+            addDagger = true;
         }
         FindObjectOfType<MenuSelection>().loadInventory = true;
 
@@ -119,6 +120,13 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
+
+        if (addDagger)
+        {
+            FindObjectOfType<EquipmentManager>().SetWeapon((WeaponData)FindObjectOfType<ItemAccess>().items[13]);
+            addDagger = false;
+        }
+
         if (slotHovered != null && !displayed && held == null)
         {
             displayed = true;
