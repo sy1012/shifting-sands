@@ -275,8 +275,7 @@ public class MapManager : MonoBehaviour
             }*/
 
             DungeonDataKeeper dungeonData = FindObjectOfType<DungeonDataKeeper>();
-            dungeonData.beatAnubis = loadedData.anubis;
-            dungeonData.beatRhoss = loadedData.rhoss;
+
             if (dungeonData.levelsBeat < loadedData.levelsBeat) 
             {
                 dungeonData.levelsBeat = loadedData.levelsBeat;
