@@ -20,4 +20,4 @@ MonoBehaviour:
   value: 10
   display: {fileID: 6012880944383042246, guid: fca7555ff61cfd843ab3d674569e755e, type: 3}
   type: 2
-  effectiveness: 10
+  effectiveness: 0.1

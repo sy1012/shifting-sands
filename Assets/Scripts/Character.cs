@@ -17,6 +17,8 @@ public class Character : MonoBehaviour, IHealable, IDamagable
     protected virtual void Awake()
     {
         healthCanvas = Instantiate(healthCanvasPrefab, transform.position, transform.rotation, gameObject.transform);
+        maxHealth = (int)(maxHealth * Mathf.Pow((1.1f), 1/(GameObject.Find("DungeonData").GetComponent<DungeonDataKeeper>().blessingValue)));
+        Debug.Log(maxHealth);
         health = maxHealth;
         healthbar = healthCanvas.GetComponentInChildren<Healthbar>();
         healthbar.SetMaxHealth(maxHealth);
