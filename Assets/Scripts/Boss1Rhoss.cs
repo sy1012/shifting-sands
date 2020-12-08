@@ -50,9 +50,9 @@ public class Boss1Rhoss : Enemy
         EventManager.TriggerOnRossEnd();
         animBody.SetTrigger("dead");
         DungeonDataKeeper.getInstance().beatRhoss = true;
-        foreach (var mob in room.enemies)
+        foreach (MonoBehaviour mob in room.enemies)
         {
-            Destroy(mob);
+            mob.GetComponent<Enemy>().TakeDamage(1000);
         }
         yield return new WaitForSeconds(4.8f);
         base.Die();
