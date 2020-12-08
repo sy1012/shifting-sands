@@ -50,7 +50,7 @@ public class AnubisBombs : MonoBehaviour
     {
         if (collision.collider.transform == player)
         {
-            player.GetComponent<PlayerStateMachine>().TakeDamage(10, collision);
+            player.GetComponent<PlayerStateMachine>().TakeDamage(30, collision);
         }
     }
 }

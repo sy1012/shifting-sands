@@ -37,7 +37,7 @@ public class Boss2Anubis : Enemy
     {
         EventManager.TriggerOnAnubisStart();
         // let it start path finding
-        this.maxHealth = 500;
+        this.maxHealth = 750;
         teleportTo = Random.Range(1, 5);
         teleportTime = 1;
         attackTime = Random.Range(lowerAttackTime, upperAttackTime);
