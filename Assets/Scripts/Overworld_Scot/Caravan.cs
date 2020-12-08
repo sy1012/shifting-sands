@@ -84,6 +84,10 @@ public class Caravan : MonoBehaviour
                 path.RemoveAt(0);
             }
         }
+        if (entering && transform.position != enterPyramid.transform.position)
+        {
+            EventManager.TriggerOnOverworldMovement();
+        }
 
 /*        if(Input.GetKeyDown(KeyCode.E)){
             Instantiate(camelPrefab);

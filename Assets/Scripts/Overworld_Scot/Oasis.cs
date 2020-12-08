@@ -165,7 +165,6 @@ public class Oasis : MonoBehaviour
         if (!old)
         {
             EventManager.TriggerOnPyramidCrumbleRise();
-            mapManager.SaveOverworld();
         }
 
     }

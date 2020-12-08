@@ -48,6 +48,10 @@ public class Inventory : MonoBehaviour
         {
             LoadInventory();
         }
+        else
+        {
+            FindObjectOfType<EquipmentManager>().SetWeapon((WeaponData)FindObjectOfType<ItemAccess>().items[13]);
+        }
         FindObjectOfType<MenuSelection>().loadInventory = true;
 
 

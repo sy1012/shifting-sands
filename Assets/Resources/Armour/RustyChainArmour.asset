@@ -17,6 +17,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 781a807a323f56640ae6b0015fe867c3, type: 3}
   itemType: 4
   itemName: Rusty Chain Mail Armour
-  value: 30
+  value: 20
   display: {fileID: 4626337027104316852, guid: f065f981af552b94ba8be85777ff8e69, type: 3}
   flatArmour: 0.25

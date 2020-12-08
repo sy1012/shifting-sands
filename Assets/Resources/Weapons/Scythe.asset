@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 496f39ff9a934a641b60f7bfb39e5c3f, type: 3}
   itemType: 1
   itemName: Scythe
-  value: 150
+  value: 70
   display: {fileID: 5538553818296487140, guid: e067dc010303d544998cc6d6a84f7b5b, type: 3}
   animationNumber: 5
   speed: 0.4

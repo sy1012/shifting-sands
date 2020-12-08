@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 460bc5cb9c7ea684c8ab251ae79d2342, type: 3}
   itemType: 1
   itemName: Dagger
-  value: 35
+  value: 5
   display: {fileID: 1636855759915542583, guid: 2795b857c27db2441a88f800598116ac, type: 3}
   animationNumber: 7
   speed: 0.2
