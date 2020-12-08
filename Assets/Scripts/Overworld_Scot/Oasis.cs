@@ -71,6 +71,9 @@ public class Oasis : MonoBehaviour
     private IEnumerator ScaleUp()
     {
         yield return new WaitForSeconds(1);
+
+        EventManager.TriggerOnOasisReveal();
+
         while (transform.localScale.x < 0.5)
         {
             transform.localScale += new Vector3(0.5f, 0.5f) * Time.deltaTime;
@@ -159,6 +162,7 @@ public class Oasis : MonoBehaviour
             
 
         }
+        EventManager.TriggerOnPyramidCrumbleRise();
     }
 
     //add pyramids from other oases to this oasis

@@ -24,7 +24,6 @@ public class Pyramid : MonoBehaviour
         pyramidManager = FindObjectOfType<MapManager>();
         overworldTraversal = FindObjectOfType<PlayerOverworldTraversal>();
 
-
         // Asssign dungeon varients if applicable
 
         var dungData = DungeonDataKeeper.getInstance();
@@ -49,6 +48,7 @@ public class Pyramid : MonoBehaviour
                 pyramidManager.AnubisLevelPlaced = true;
                 dungeonVarient = DungeonVariant.anubis;
             }
+            EventManager.TriggerOnPyramidCrumbleRise();
         }
         else
         {
@@ -74,6 +74,8 @@ public class Pyramid : MonoBehaviour
             default:
                 break;
         }
+
+        pyramidManager.SaveOverworld();
     }
 
     public void SetParentOasis(Oasis parent)
@@ -110,6 +112,7 @@ public class Pyramid : MonoBehaviour
     private IEnumerator Crumble()
     {
         yield return new WaitForSeconds(1);
+        EventManager.TriggerOnPyramidCrumbleRise();
         GetComponent<Animator>().Play("crumble");
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
