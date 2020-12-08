@@ -22,6 +22,17 @@ public class PureAltar : Interactable
         EventManager.TriggerDungeonExit();
     }
 
+    IEnumerator LockPlayer(Transform player, Vector3 LockPosition)
+    {
+        float tick = 0;
+        while (tick < 3.6f)
+        {
+            tick += Time.deltaTime;
+            player.position = LockPosition;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     public override void Interact(GameObject interactor)
     {
         //  Validate interactor. Sanity check
@@ -35,6 +46,7 @@ public class PureAltar : Interactable
         EventManager.TriggerOnPureAltar();
         DungeonDataKeeper.getInstance().blessingValue = DungeonDataKeeper.getInstance().blessingValue * 0.5f;
         StartCoroutine(LeaveDungeon());
+        StartCoroutine(LockPlayer(player.transform, player.transform.position));
     }
 
     private void Start()
