@@ -73,7 +73,18 @@ public class Pyramid : MonoBehaviour
             default:
                 break;
         }
+        if(FindObjectsOfType<Oasis>().Length <= 1)
+        {
+            old = true;
+        }
+        if (!old)
+        {
+            pyramidManager.SaveOverworld();
+        }
+
+
     }
+
 
     public void SetParentOasis(Oasis parent)
     {
