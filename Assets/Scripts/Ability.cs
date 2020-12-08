@@ -11,23 +11,23 @@ public class Ability : MonoBehaviour
     public Transform firePoint;
     public GameObject fireballPrefab;
     public GameObject snowballPrefab;
-    public float speed = 6f;
+    private float speed = 6f;
     public Camera cam;
-    public Vector3 mousePos;
+    private Vector3 mousePos;
     private Vector3 dir;
     
 
     // Ability 1
     [Header("Ability 1")]
     public Image abilityImage1;
-    public float coolDown1 = 5f;
+    private float coolDown1 = 13f;
     private bool isCoolDown1;
     private KeyCode abilitybutton1 = KeyCode.Q;
 
     // Ability 2
     [Header("Ability 2")]
     public Image abilityImage2;
-    public float coolDown2 = 3f;
+    private float coolDown2 = 4f;
     private bool isCoolDown2;
     private KeyCode abilitybutton2 = KeyCode.E;
 
